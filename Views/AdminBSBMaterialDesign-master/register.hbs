@@ -1,0 +1,89 @@
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta tags -->
+	<title>Katify Registration Portal</title>
+	<meta name="keywords" content="Winter Login Form Responsive widget, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="/css/font-awesome.css">
+	<link rel="stylesheet" href="/css/stylez.css">
+	<!-- google fonts  -->
+	<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+	<script>
+		$(document).ready(function(){
+			setTimeout(function(){
+    	$('.notice_wrapper').slideUp('slow', function(){
+        	$(this).remove();
+          })
+        }, 2000);
+});
+</script>
+</head>
+
+<body>
+	 {{#if message.success}}
+   <div class="notice_wrapper">		  	
+	<p class="alert">{{message.success}}</p>				
+	</div>
+	{{else if message.error}}
+	<div class="notice_wrapper_error">			
+		<p class="alert">{{message.error}}</p>
+	</div>
+    {{/if}}
+	<div class="agile-login">
+		<h1>Katify</h1>
+		<div class="wrapper">
+			<h2>Register</h2>
+			<div class="w3ls-form">
+				<form id="myform" action="/admin/registration" method="post" >
+					<label>First name</label>
+					<input type="text" name="first_name" placeholder="First name" id="first_name" required/>
+					
+                    <label>Last name </label>
+					<input type="text" name="last_name" placeholder="Last name" id="last_name" required/>
+					
+                    <label>Middle Name </label>
+					<input type="text" name="middle_name" placeholder="Middle Name" id="middle_name" required/>
+					{{!-- first_name:,middle_name,last_name,company_name,email,	phone,username,password,registration_date --}}
+                    <label>Company's Name</label>
+					<input type="text" name="company_name" placeholder="company_name" id="company_name" required/>
+					
+                    <label>Company's Email</label>
+					<input type="email" name="email" placeholder="email" id="email" required/>
+					
+                    <label>Company's Phone Number</label>
+					<input type="text" name="phone" placeholder="phone" id="phone" required/>
+                    
+                    <label>Desired Username</label>
+					<input type="text" name="username" placeholder="username" id="username" required/>
+					
+                    <label>Password</label>
+					<input type="password" name="password" placeholder="Password" id="password" required />
+					
+                    <label>Confirm Password</label>
+					<input type="password" name="password2" placeholder="Confirm password" id="password2" required />
+					
+					<input type="submit" value="Register" />
+				</form>
+			</div>
+
+		</div>
+		<br>
+		<div class="copyright">
+		<p>© 2017 Tech Overflow | Design by <a href="https://www.techoverflow.com/">Tech Overflow</a></p>
+	</div>
+	</div>
+	
+</body>
+</html>

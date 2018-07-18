@@ -1,0 +1,761 @@
+{{!-- start of index which will contain the carousel and product listing --}}
+{{!-- start of carousel --}}
+{{>carousel}}
+	
+	<!-- Banner -->
+	<style>
+		div.fixed {
+   position: fixed;    
+    top: 80%;
+	left: 90%;
+	cursor: pointer;
+    
+}
+	</style>
+	<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+	setInterval(function(){$('#carty').toggleClass('animated pulse')}, 2000);
+	setInterval(function(){$('#checkout_itemz').toggleClass('animated flip')}, 2000);
+
+	
+</script>
+<div class="fixed">
+	<img src="images/cart11.png" alt="" width="150" height="150" id="carty" data-toggle="modal" data-target="#myModal">
+	
+	<span id="checkout_itemz" class="checkout_itemz"></span>
+</div>
+<!-- Trigger the modal with a button -->
+
+<!-- Modal -->
+<div id="myLogin" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+		  
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login</h4>
+      </div>      
+	  
+	<div class="modal-body">
+
+       <p>  <img src="images/preloader.gif" id="login_preloader"> <button type="button" class="btn btn-default" id="checkOutBtn">checkOut</button></p>
+	   <form class="login_form" method="post">
+		   <div class="form-group">
+			   <input type="text" name="username" class="form-control" placeholder="Username" required />
+			   <br>
+			   <input type="password" name="password" class="form-control" placeholder="Password" required />
+			   <br>
+			   <input type="submit" class="btn btn-primary" value="Login" />
+		   </div>
+	   </form>
+
+    </div>
+      <div class="modal-footer">
+		  <center> </center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Modal -->
+<div id="myRegisteration" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+		  
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Register</h4>
+      </div>      
+	  
+	<div class="modal-body">
+
+       <form class="registeration_form" action="/user/registration" method="post">
+		   <div class="form-group">
+			   <input type="text" name="username" class="form-control" placeholder="First Name" required />
+			   <br>
+			   <input type="text" name="phone" class="form-control" placeholder="Phone Number" required />
+			   <br>
+			   <input type="email" name="email" class="form-control" placeholder="email" required />
+			   <br>
+			    <input type="address" name="address" class="form-control" placeholder="desired Shipping Address" required />
+			   <br>
+			   <input type="password" name="password" class="form-control" placeholder="Password" required />
+			   <br>
+			   <input type="submit" class="btn btn-primary" value="Register" />
+		   </div>
+	   </form>
+
+    </div>
+      <div class="modal-footer">
+		  <center> </center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+		  
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cart</h4>
+      </div>      
+	  
+	<div class="modal-body">
+       <p>  <img src="images/preloader.gif" id="preloader"> <button type="button" class="btn btn-default" id="checkOutBtn">checkOut</button></p>
+    </div>
+      <div class="modal-footer">
+		  <center> </center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="banner_item align-items-center" style="background-image:url(images/banner_1.jpg)">
+						<div class="banner_category">
+							<a href="categories.html">women's</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="banner_item align-items-center" style="background-image:url(images/banner_2.jpg)">
+						<div class="banner_category">
+							<a href="categories.html">accessories's</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="banner_item align-items-center" style="background-image:url(images/banner_3.jpg)">
+						<div class="banner_category">
+							<a href="categories.html">men's</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- New Arrivals -->
+
+	<div class="new_arrivals">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2 class="animated bounce">New Arrivals</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row align-items-center">
+				<div class="col text-center">
+					<div class="new_arrivals_sorting">
+						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+							{{#each category}}
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".{{this._id}}">{{this.name}}</li>
+							{{/each}}
+							{{!-- <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">accessories</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li> --}}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+<input type="hidden" name="shop_id" value="{{shop_id}}" id="shop_id" />
+<input type="hidden" name="shop_id" value="{{normal_shop_id}}" id="normal_shop_id" />
+						<!-- Product 1 -->
+{{#each products}}
+<form class="cart_form" method="post">
+	
+		<input type="hidden" name="name" value="{{this.name}}" />
+		<input type="hidden" name="quantity" value="1" />
+		<input type="hidden" name="price" value="{{this.price}}" />
+		<input type="hidden" name="image" value="{{this.image}}" />
+		<input type="hidden" name="id" value="{{this._id}} " />
+		<input type="hidden" name="stock" value="{{this.stock}} " />
+		{{!-- <input type="submit" name="submit" value="Add to cart" class="button" />	 --}}
+		
+
+						<div class="product-item {{this.category_id}}">
+							<div class="product discount product_filter">
+								<div class="product_image">
+									
+									
+									{{!-- <div class="css3"><img src="uploads/{{this.image}}" height="200px" alt=""/></div> --}}
+									<img src="uploads/{{this.image}}" alt="" data-image="{{this.image}}">
+								</div>
+								<div class="favorite favorite_left"></div>
+								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+								<div class="product_info">
+									<h6 class="product_name"><a data-name="{{this.name}}" href="single.html">{{this.name}}</a></h6>
+									<div class="product_price" data-price="{{this.price}}">${{this.price}}<span>${{this.price}}</span></div>
+								</div>
+							</div>
+							<input type="submit" name="submit" value="Add to cart" class="red_button add_to_cart_button" />	
+							{{!-- <div class="red_button add_to_cart_button">add to cart</div> --}}
+						</div>
+	</form>
+{{/each}}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Deal of the week -->
+
+	<div class="deal_ofthe_week">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="deal_ofthe_week_img">
+						<img src="images/deal_ofthe_week.png" alt="">
+					</div>
+				</div>
+				<div class="col-lg-6 text-right deal_ofthe_week_col">
+					<div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
+						<div class="section_title">
+							<h2>Deal Of The Week</h2>
+						</div>
+						<ul class="timer">
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="day" class="timer_num">03</div>
+								<div class="timer_unit">Day</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="hour" class="timer_num">15</div>
+								<div class="timer_unit">Hours</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="minute" class="timer_num">45</div>
+								<div class="timer_unit">Mins</div>
+							</li>
+							<li class="d-inline-flex flex-column justify-content-center align-items-center">
+								<div id="second" class="timer_num">23</div>
+								<div class="timer_unit">Sec</div>
+							</li>
+						</ul>
+						<div class="red_button deal_ofthe_week_button"><a href="#">shop now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Best Sellers -->
+
+	<div class="best_sellers">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2>Best Sellers</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="product_slider_container">
+						<div class="owl-carousel owl-theme product_slider">
+
+							<!-- Slide 1 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item">
+									<div class="product discount">
+										<div class="product_image">
+											<img src="images/product_1.png" alt="">
+										</div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+											<div class="product_price">$520.00<span>$590.00</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 2 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_2.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
+											<div class="product_price">$610.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 3 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_3.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
+											<div class="product_price">$120.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 4 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_4.png" alt="">
+										</div>
+										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
+											<div class="product_price">$410.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 5 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women men">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_5.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
+											<div class="product_price">$180.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 6 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product discount">
+										<div class="product_image">
+											<img src="images/product_6.png" alt="">
+										</div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+											<div class="product_price">$520.00<span>$590.00</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 7 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item women">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_7.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
+											<div class="product_price">$610.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 8 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item accessories">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_8.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
+											<div class="product_price">$120.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 9 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item men">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_9.png" alt="">
+										</div>
+										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+										<div class="favorite favorite_left"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
+											<div class="product_price">$410.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Slide 10 -->
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item men">
+									<div class="product">
+										<div class="product_image">
+											<img src="images/product_10.png" alt="">
+										</div>
+										<div class="favorite"></div>
+										<div class="product_info">
+											<h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
+											<div class="product_price">$180.00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Slider Navigation -->
+
+						<div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</div>
+						<div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	//$(document).ready( function() {
+		$(window).load(function(){
+		var shop_id = $('#shop_id').val();
+		var normal_shop_id = $('#normal_shop_id').val();
+		console.log(shop_id);
+		$("#preloader").hide();
+/*		 $(document).ajaxStart(function () {
+			alert("ajax started")
+		});
+		  $(document).ajaxStop(function () {
+        $('#wait').hide();
+    });
+    $(document).ajaxError(function () {
+        $('#wait').hide();
+    });   
+		*/
+		if(shop_id in localStorage){
+			retrievedObject = JSON.parse(localStorage.getItem(shop_id));
+			console.log(retrievedObject);
+			var cart = [];
+			cart = retrievedObject;
+		}
+		
+		else {
+			var cart = [];
+		}
+		function quantities(item) {
+			return parseInt(item.quantity);
+		}
+
+		function amount(item){
+			return parseInt(item.price) * parseInt(item.quantity);
+		}
+
+		function sum(prev, next){
+			return parseInt(prev) + parseInt(next);
+		}
+		if(cart.length >0){
+			var total = cart.map(amount).reduce(sum);
+		var totalquantity = cart.map(quantities).reduce(sum);
+		$('#checkout_items').text(totalquantity);
+		$('#checkout_itemz').text(totalquantity);
+		$("#myModal").find(".modal-footer").text(total);
+
+	//<input type="hidden" name="name" value="{{this.name}}" />	
+		for (var i in cart) {			
+			console.log(cart[i]);
+			console.log(cart[i].name)
+			$("#myModal").find(".modal-body").append("<p id="+ cart[i].id +">"+"<form class="+"modalForm"+" id="+ cart[i].id+">" +"<p>" + cart[i].name +"&emsp;"+"<strong id="+cart[i].id+">"+ cart[i].quantity +"</strong>" + "&emsp;"+ '<input type="hidden" name="idval" size="3" class="modalid" value=' + cart[i].id + '>'+'<input type="submit" min="1" size="3" style="text-align:center; width:60px;" class="submitqty" value=' + "+" + '>' + "&emsp;"+'<input type="number" style="width: 45px;" name="reducer" size="3" class="selecter" value=' + cart[i].quantity + '>' + "&emsp;"+'<input type="button" style="width: 45px;" name="deleter" size="3" class="deleter" value="X"'+ '>'+"</p>"+"</form>"  + "</p>");
+		}
+
+		} //do this when it increases
+		//var identification= "5b40d19d4038341cf07b5058";
+		$(".modalForm").submit(function(e) {
+			e.preventDefault();			
+			var identification = this['idval'].value;
+			
+			//var vbals = $(".modalForm").find(identification).text('id');
+			//console.log("tisi",vbals);
+
+			var id = $("#"+identification).text();
+			//$(".modalForm").find(identification).text(id);
+			console.log(id);
+			console.log(identification);
+			
+			for(i in cart){
+			//var	trimed_value = $.trim(cart[i]);
+				if ($.trim(cart[i].id) == identification) {
+					//$("#myModal").find(".modal-body").text("");
+					console.log("its working");
+					cart[i].quantity = parseInt(cart[i].quantity)+ 1;			
+					localStorage.setItem(shop_id, JSON.stringify(cart));
+					 $(".modalForm").find("#"+identification).text(cart[i].quantity);
+					//var li = $(".modalForm").find("#"+identification).text();
+					//console.log(li)
+					//$("#myModal").find(".modal-body").append("<p>" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" +"</p>");
+					break; //Stop this loop, we found it!					
+    			}
+			}
+			function quantities(item) {
+					return parseInt(item.quantity);
+				}
+
+				function amount(item){
+					return parseInt(item.price) * parseInt(item.quantity);
+				}
+
+				function sum(prev, next){
+					return parseInt(prev) + parseInt(next);
+				}
+
+				var total = cart.map(amount).reduce(sum);
+				var totalquantity = cart.map(quantities).reduce(sum);
+				$('#checkout_items').text(totalquantity);
+				$('#checkout_itemz').text(totalquantity);
+				$("#myModal").find(".modal-footer").text( total);	
+
+	});
+	$("#checkOutBtn").click(function(){
+		//alert(normal_shop_id);
+		if(shop_id in localStorage){
+			retrievedObject = JSON.parse(localStorage.getItem(shop_id));
+			console.log(retrievedObject);
+			var cart = [];
+			cart = retrievedObject;	
+			console.log(cart);
+			$("#preloader").show();
+		$.ajax({
+			type: "POST",
+			url: "/checkout/"+normal_shop_id,
+			data: {cart:JSON.stringify(cart)},
+			success: function(message){
+				console.log(message);
+				$("#preloader").hide();
+			},
+			error: function(error){
+				console.log(error);
+			}
+
+		})
+		}
+	});
+
+
+		$('.deleter').click(function(){
+			var identification = $(this).parent().parent().attr('id');	
+			console.log(identification);
+			//$(this).fadeOut('slow');
+			//($.trim(cart[i].id) == identification
+				cart = cart.filter(function( obj ) {
+    				return $.trim(obj.id) !== identification;
+				});
+				localStorage.setItem(shop_id, JSON.stringify(cart));	
+				$(this).parent().parent().fadeOut('slow');//dusted
+
+				function quantities(item) {
+					return parseInt(item.quantity);
+				}
+
+				function amount(item){
+					return parseInt(item.price) * parseInt(item.quantity);
+				}
+
+				function sum(prev, next){
+					return parseInt(prev) + parseInt(next);
+				}
+
+				var total = cart.map(amount).reduce(sum);
+				var totalquantity = cart.map(quantities).reduce(sum);
+				$('#checkout_items').text(totalquantity);
+				$('#checkout_itemz').text(totalquantity);
+				$("#myModal").find(".modal-footer").text( total);	
+
+		});
+
+
+		$('.selecter').on("change", function () {
+		//	alert($(this).val());
+			var selected_value = $(this).val();
+			console.log(selected_value);
+			var identification = $(this).parent().parent().attr('id');	
+			console.log(identification);
+
+			for(i in cart){
+			//var	trimed_value = $.trim(cart[i]);
+				if ($.trim(cart[i].id) == identification) {
+					//$("#myModal").find(".modal-body").text("");
+					console.log("its working");
+					cart[i].quantity = parseInt(selected_value);			
+					localStorage.setItem(shop_id, JSON.stringify(cart));
+					 $(".modalForm").find("#"+identification).text(cart[i].quantity);
+					//var li = $(".modalForm").find("#"+identification).text();
+					//console.log(li)
+					//$("#myModal").find(".modal-body").append("<p>" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" +"</p>");
+					break; //Stop this loop, we found it!					
+    			}
+			}
+			function quantities(item) {
+					return parseInt(item.quantity);
+				}
+
+				function amount(item){
+					return parseInt(item.price) * parseInt(item.quantity);
+				}
+
+				function sum(prev, next){
+					return parseInt(prev) + parseInt(next);
+				}
+
+				var total = cart.map(amount).reduce(sum);
+				var totalquantity = cart.map(quantities).reduce(sum);
+				$('#checkout_items').text(totalquantity);
+				$('#checkout_itemz').text(totalquantity);
+				$("#myModal").find(".modal-footer").text( total);	
+
+		});
+
+
+		$(".cart_form").submit(function(e) {			
+			e.preventDefault();	
+			$('#checkout_itemz').addClass('animated bounce');//using animate.css library
+			$('#carty').addClass('animated shake');//using animate.css library
+			setTimeout(function(){ $("#carty").removeClass("animated shake");},1000);
+			setTimeout(function(){ $("#checkout_itemz").removeClass("animated bounce");},1000)
+
+			setTimeout(function(){ $("#checkout_itemz").addClass("animated pulse");},5000)
+			setTimeout(function(){ $("#carty").addClass("animated pulse");},5000)
+			
+			var myObject = new Object();
+				//var name = this['name'].value;
+				myObject.name = this['name'].value;
+				myObject.quantity = this['quantity'].value;
+				myObject.price = this['price'].value;
+				myObject.image = this['image'].value;
+				myObject.stock = this['stock'].value;
+				myObject.id = this['id'].value;
+				function productExists(id) {
+					return cart.some(function(el) {
+					return el.id === id;
+				}); 
+				}				
+				//console.log(productExists(myObject.id));
+				var exists = productExists(myObject.id);
+				if(exists == false) {
+					//console.log(myObject);	
+					cart.push(myObject);	
+					$("#myModal").find(".modal-body").append("<p id="+  myObject.id +">"+"<form class="+"modalForm"+" id="+  myObject.id+">" +"<p>" +  myObject.name +"&emsp;"+"<strong id="+ myObject.id+">"+ myObject.quantity +"</strong>" + "&emsp;"+ '<input type="hidden" name="idval" size="3" class="modalid" value=' + myObject.id + '>'+'<input type="submit" min="1" size="3" style="text-align:center; width:60px;" class="submitqty" value=' + "+" + '>' + "&emsp;"+'<input type="number" style="width: 45px;" name="reducer" size="3" class="selecter" value=' +  myObject.quantity + '>' + "&emsp;"+'<input type="button" style="width: 45px;" name="deleter" size="3" class="deleter" value="X"'+ '>'+"</p>"+"</form>"  + "</p>");
+					//$(".modal-body").append("<p id="+ myObject.id +">" +  myObject.name +"&emsp;"+"<strong id="+ myObject.id+">"+ myObject.quantity +"</strong>" +"</p>");	
+				//			$("#myModal").find(".modal-body").append("<form class="+"modalForm"+">" +"<p id="+ cart[i].id +">" + cart[i].name +"&emsp;"+"<strong id="+cart[i].id+">"+ cart[i].quantity +"</strong>" + "&emsp;"+ '<input type="hidden" name="idval" size="3" class="modalid" value=' + cart[i].id + '>'+'<input type="submit" min="1" size="3" style="text-align:center; width:60px;" class="submitqty" value=' + "+" + '>' +"</p>"+"</form>");			
+					
+					
+					localStorage.setItem(shop_id, JSON.stringify(cart));
+				} else if(exists == true){
+					for (var i in cart) {
+     					if (cart[i].id == myObject.id) {
+							$("#myModal").find(".modal-body").text("");
+        					cart[i].quantity = parseInt(cart[i].quantity)+ 1;			
+							localStorage.setItem(shop_id, JSON.stringify(cart));
+							//$("#myModal").find(".modal-body").append("<p>" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" +"</p>");
+					break; //Stop this loop, we found it!					
+    				}
+					
+   				}	
+		
+		for (var i in cart) {			
+			console.log(cart[i]);
+			console.log(cart[i].name);
+			//$("#myModal").find(".modal-body").append("<p id="+ cart[i].id +">" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" + "&emsp;"+ '<input type="text" size="3" style="text-align: center" class="modalInput" value=' + cart[i].quantity + '>' +"</p>");
+				//$("#myModal").find(".modal-body").append("<form class"+"modalForm"+">" +"<p id="+ cart[i].id +">" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" + "&emsp;"+ '<input type="hidden" name="idval" size="3" class="modalid" value=' + cart[i].id + '>'+'<input type="submit" min="1" name="pin" size="3" style="text-align:center; width:60px;" class="submitqty" value=' + "+" + '>' +"</p>"+"</form>");
+				$("#myModal").find(".modal-body").append("<p id="+ cart[i].id +">"+"<form class="+"modalForm"+" id="+ cart[i].id+">" +"<p>" + cart[i].name +"&emsp;"+"<strong id="+cart[i].id+">"+ cart[i].quantity +"</strong>" + "&emsp;"+ '<input type="hidden" name="idval" size="3" class="modalid" value=' + cart[i].id + '>'+'<input type="submit" min="1" size="3" style="text-align:center; width:60px;" class="submitqty" value=' + "+" + '>' + "&emsp;"+'<input type="number" style="width: 45px;" name="reducer" size="3" class="selecter" value=' + cart[i].quantity + '>' + "&emsp;"+'<input type="button" style="width: 45px;" name="deleter" size="3" class="deleter" value="X"'+ '>'+"</p>"+"</form>"  + "</p>");
+				 
+		}
+					
+			}
+				function quantities(item) {
+					return parseInt(item.quantity);
+				}
+
+				function amount(item){
+					return parseInt(item.price) * parseInt(item.quantity);
+				}
+
+				function sum(prev, next){
+					return parseInt(prev) + parseInt(next);
+				}
+
+				var total = cart.map(amount).reduce(sum);
+				var totalquantity = cart.map(quantities).reduce(sum);
+				$('#checkout_items').text(totalquantity);
+				$('#checkout_itemz').text(totalquantity);
+				$("#myModal").find(".modal-footer").text( total);	
+
+				console.log(total);		//to display the total price of items in the cart
+				console.log(totalquantity);//to display the total quantities of item in the cart
+			console.log(cart);
+			console.log(JSON.stringify(cart));
+
+		
+
+		});
+	});
+</script>
+
+{{!-- <input type="hidden" name="name" value="{{this.name}}" />
+		<input type="hidden" name="quantity" value="1" />
+		<input type="hidden" name="price" value="{{this.price}}" />
+		<input type="hidden" name="image" value="{{this.image}}" />
+		<input type="hidden" name="id" value="{{this._id}} " /> --}}
