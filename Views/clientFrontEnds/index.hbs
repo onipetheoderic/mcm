@@ -39,9 +39,8 @@
       </div>      
 	  
 	<div class="modal-body">
-
-       <p>  <img src="images/preloader.gif" id="login_preloader"> <button type="button" class="btn btn-default" id="checkOutBtn">checkOut</button></p>
-	   <form class="login_form" method="post">
+	
+<form class="login_form" action="/user/{{normal_shop_id}}/login"  method="post">
 		   <div class="form-group">
 			   <input type="text" name="username" class="form-control" placeholder="Username" required />
 			   <br>
@@ -74,9 +73,9 @@
 	  
 	<div class="modal-body">
 
-       <form class="registeration_form" action="/user/registration" method="post">
+       <form class="registeration_form" action="/user/{{normal_shop_id}}/registration" method="post">
 		   <div class="form-group">
-			   <input type="text" name="username" class="form-control" placeholder="First Name" required />
+			   <input type="text" name="username" class="form-control" placeholder="Username" required />
 			   <br>
 			   <input type="text" name="phone" class="form-control" placeholder="Phone Number" required />
 			   <br>
@@ -643,6 +642,7 @@
 					localStorage.setItem(shop_id, JSON.stringify(cart));
 					 $(".modalForm").find("#"+identification).text(cart[i].quantity);
 					//var li = $(".modalForm").find("#"+identification).text();
+					//console.log(li)//var li = $(".modalForm").find("#"+identification).text();
 					//console.log(li)
 					//$("#myModal").find(".modal-body").append("<p>" + cart[i].name +"&emsp;"+"<strong>"+ cart[i].quantity +"</strong>" +"</p>");
 					break; //Stop this loop, we found it!					

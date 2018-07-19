@@ -23,7 +23,8 @@ import index from './routes/index';
 import admin from './routes/admin';
 import category from './routes/category';
 import product from './routes/product';
-import carousel from './routes/carousel'
+import carousel from './routes/carousel';
+import user from './routes/user';
 // import add from './routes/add';
 // import getters from './routes/getters';
 // import company from './routes/company';
@@ -92,6 +93,7 @@ app.use(expressValidator({
 }));
 
 app.use('/', index);
+app.use('/user', user);
 app.use('/admin', admin);
 app.use('/category', category);
 app.use('/product', product);

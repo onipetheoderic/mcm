@@ -6,8 +6,8 @@ import User from '../models/user';
 const router = express.Router();
 
 
-router.post('/registration', (req, res, next) => {
- User.register(new user({ username: req.body.username,
+router.post('/:id/registration', (req, res, next) => {
+ User.register(new User({ username: req.body.username,
     first_name: req.body.first_name,
     company_name: req.body.company_name,
     company_logo: req.body.company_logo,
@@ -15,12 +15,13 @@ router.post('/registration', (req, res, next) => {
   address: req.body.address,
 	phone: req.body.phone,
   email: req.body.email,
-  shop_number: req.params.id,
+  shop_number: req.params.id,  
 	middle_name: req.body.middle_name,
 }), req.body.password, (err, user) => {
                      if (err) {
                         console.log(err)											 
-                        res.render('register', { error: err.message });
+                        res.send({error: err.message})
+                        res.render('clientFrontEnds/index', {message:{error: err.message}});  
                      }
                      passport.authenticate('local')(req, res, () => {											 
                        req.session.save((err) => {												
@@ -41,7 +42,7 @@ router.get('/login', (req, res) => {
                         error: req.flash('error')});
 });
 
-router.post('/login', passport.authenticate('local',
+router.post('/:id/login', passport.authenticate('local',
                                             { failureRedirect: 'login',
                                               failureFlash: true,
                                               failureMessage: "Invalid username or password" }),
@@ -54,7 +55,7 @@ router.post('/login', passport.authenticate('local',
         }
      
 				console.log(req.user);//to get the current session saved
-                res.redirect('/dashboard');
+                res.redirect('/'+req.params.id);
               });
         });
 
@@ -78,20 +79,20 @@ router.get('/doctor', (req, res) => {
 
 
 
-router.post('/login', function(req, res, next){
-	var username = req.body.username;
-	var password = req.body.password;
+// router.post('/login/:id', function(req, res, next){
+// 	var username = req.body.username;
+// 	var password = req.body.password;
+//   let shop_id = req.params.id;
+// 	req.checkBody('username', 'Username field is required').notEmpty();
+// 	req.checkBody('password', 'Password field is required').notEmpty();
   
-	req.checkBody('username', 'Username field is required').notEmpty();
-	req.checkBody('password', 'Password field is required').notEmpty();
+// 	passport.authenticate('local-login', {
+// 	  successRedirect: "/"+shop_id,
+// 	  failureRedirect: '/',
+// 	  failureFlash: true,
+// 	})(req, res, next);
   
-	passport.authenticate('local-login', {
-	  successRedirect: '/dashboard',
-	  failureRedirect: '/',
-	  failureFlash: true,
-	})(req, res, next);
-  
-  });
+//   });
 
 //LogOut function
 router.get('/logout', function(req, res){
