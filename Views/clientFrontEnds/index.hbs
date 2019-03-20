@@ -11,18 +11,30 @@
 	cursor: pointer;
     
 }
+#openCart {
+   position: fixed;    
+    top: 80%;
+	left: 50%;
+	cursor: pointer;
+    
+}
 	</style>
 	<script src="js/jquery-1.11.1.min.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+
 <script>
 	setInterval(function(){$('#carty').toggleClass('animated pulse')}, 2000);
 	setInterval(function(){$('#checkout_itemz').toggleClass('animated flip')}, 2000);
-
-	
 </script>
+
 <div class="fixed">
 	<img src="images/cart11.png" alt="" width="150" height="150" id="carty" data-toggle="modal" data-target="#myModal">
 	
 	<span id="checkout_itemz" class="checkout_itemz"></span>
+</div>
+
+<div id="openCart">
+	<img src="images/69.png" alt="" width="150" height="150" id="carty" data-toggle="modal" data-target="#myModal">
 </div>
 <!-- Trigger the modal with a button -->
 
@@ -107,17 +119,23 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-		  
+		  <p>  <img src="images/preloader.gif" id="preloader"><button type="button" class="btn btn-success" id="paymentBtn">Proceed With Payment</button> <button type="button" class="btn btn-default" id="checkOutBtn">checkOut</button></p>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Cart</h4>
       </div>      
-	  
+	  <style>
+		  .errMsg {
+			  color: red;
+		  }
+	  </style>
 	<div class="modal-body">
-       <p>  <img src="images/preloader.gif" id="preloader"> <button type="button" class="btn btn-default" id="checkOutBtn">checkOut</button></p>
+		<p id="errorMsg" class="errMsg"></p>
+       
     </div>
       <div class="modal-footer">
 		  <center> </center>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  
+        {{!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
       </div>
     </div>
 
@@ -208,7 +226,7 @@
 								<div class="favorite favorite_left"></div>
 								<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
 								<div class="product_info">
-									<h6 class="product_name"><a data-name="{{this.name}}" href="single.html">{{this.name}}</a></h6>
+									<h6 class="product_name"><a data-name="{{this.name}}" href="single.html">{{this.name}}({{this.stock}})</a></h6>
 									<div class="product_price" data-price="{{this.price}}">${{this.price}}<span>${{this.price}}</span></div>
 								</div>
 							</div>
@@ -476,6 +494,8 @@
 		var normal_shop_id = $('#normal_shop_id').val();
 		console.log(shop_id);
 		$("#preloader").hide();
+		$(".chatContainer").hide()
+		$("#paymentBtn").hide();
 /*		 $(document).ajaxStart(function () {
 			alert("ajax started")
 		});
@@ -581,14 +601,35 @@
 			type: "POST",
 			url: "/checkout/"+normal_shop_id,
 			data: {cart:JSON.stringify(cart)},
+			cache: false,
 			success: function(message){
-				console.log(message);
-				$("#preloader").hide();
-			},
-			error: function(error){
-				console.log(error);
-			}
+				//console.log(message);
+				if(message.success){
+					var success = message.success
+					for(i in success){
+						if(parseInt(success[i].remain) < 1){
+							$("#errorMsg").text(success[i].name + " is more than the quantity in the stock");
+							$("#preloader").hide();
+							console.log("not in order")
+							break;
+						}
+						else if(success[i].remain > 1) {
+							$("#errorMsg").text("everything is in order")
+							$("#preloader").hide();
+							$("#paymentBtn").show();
+							$("#checkOutBtn").hide()
+							console.log("it is in order")
+						}
+					}
+				
+				}else if(message.error){
+					$("#errorMsg").text(message.error);
+					$("#preloader").hide();
+				}					
 
+				
+			},
+			
 		})
 		}
 	});
@@ -753,9 +794,3 @@
 		});
 	});
 </script>
-
-{{!-- <input type="hidden" name="name" value="{{this.name}}" />
-		<input type="hidden" name="quantity" value="1" />
-		<input type="hidden" name="price" value="{{this.price}}" />
-		<input type="hidden" name="image" value="{{this.image}}" />
-		<input type="hidden" name="id" value="{{this._id}} " /> --}}

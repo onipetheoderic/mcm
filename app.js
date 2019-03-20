@@ -14,9 +14,6 @@ import { Strategy } from 'passport-local';
 import flash from 'connect-flash';
 import hbs from 'hbs';
 
-
-
-
 // routes are imported here, note any auth or init middleware are to be placed
 // above this line.
 import index from './routes/index';
@@ -33,6 +30,13 @@ import user from './routes/user';
 
 const app = express();
 
+var debug = require('debug');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+const port = process.env.PORT || '3000';
+
+
+
 // export locals ato template
 hbs.localsAsTemplateData(app);
 app.locals.defaultPageTitle = 'Katify';
@@ -46,7 +50,7 @@ app.set('view options', { layout: 'layout/main' });
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 // app.use(session({cookie: { maxAge: 60000 }}));
 app.use(lessMiddleware(path.join(__dirname, 'public')));
@@ -161,4 +165,21 @@ hbs.registerHelper('link', function(text, options) {
     `<a ${attrs.join(' ')}>${hbs.handlebars.escapeExpression(text)}</a>`
   );
 });
+//to emit an event for everyOne we say: io.emit('some event', { for: 'everyone' });
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('chat message', function(msg){
+    console.log('message: ', msg)
+    io.emit('chat message', msg);//with these method we wills end the message to everyone including the sender
+  })
+  //each socket also fires a special disconnect method;
+  socket.on('disconnect', function(){
+    console.log("User disconnected")
+  });
+});
+
+http.listen(port, function(){//this takes a callback, that is if we want to run something when we start listening to the port
+	console.log("Listening on Port:", port);
+});
+
 module.exports = app;

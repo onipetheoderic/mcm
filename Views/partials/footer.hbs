@@ -1,4 +1,3 @@
-<!-- Benefit -->
 
 	<div class="benefit">
 		<div class="container">
@@ -88,6 +87,186 @@
 			</div>
 		</div>
 	</div>
+	<style>
+		div.fixed2 {
+   position: fixed;    
+    top: 96%;
+	left:50%;
+	cursor: pointer;    
+}
+.chatbtn {
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px 20px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width: 400px;
+	border-radius: 15px 15px 1px 1px;
+}
+#chatbox {
+	width: 400px; 
+	height: 250px;
+	max-height: 250px; 
+	overflow-y: scroll;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+	position: fixed;
+	top: 56%;
+	left: 50%;
+	background:white;
+	
+}
+.roundImage {
+	float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.roundImageAdmin{
+	float: right;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.top1-header {
+	position: fixed;  
+	top: 60%;
+	left: 50%;
+}
+.container-admin {
+	background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.container-user {
+	background-color: #eee789;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.form-stuffs {
+	padding: 10px;
+	margin-bottom: 60px;
+	width: 400px; 
+	max-height: 300px; 
+	position: fixed;
+	top: 90%;
+	left: 50%;
+	background:white;
+}
+.msg {
+	color: black;
+	font-size: 14px;
+}
+.time-right {
+	font-size: 12px;
+	color: gray;
+}
+#chatsubmitbtn {
+	padding: 20px 14px;
+	border-radius: 24px;
+	
+}
+
+#chatsubmitbtn:active, #chatsubmitbtn.active {
+	background: darkgreen;
+	box-shadow: none;
+	margin-bottom: -3px;
+	margin-top: 3px;
+}
+</style>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<script>
+	$(document).ready( function(){
+		$(".chatContainer").hide()
+	})
+</script>
+<div class="chatContainer">
+	<div class="top1-header">
+		<button class="chatbtn">Chat with the Admin	<i class="fa fa-angle-down"></i><span>&nbsp;</span></button>
+	</div>
+	<div id="chatbox">		
+		{{!-- <div class="container-admin" id="container-admin">
+			<img src="/images/admin.png" alt="Avatar"  height="50" width="50" class="roundImageAdmin">
+			<p>Hello. How are you today?</p>
+			<span class="time-right">11:00</span>
+		</div> --}}
+
+		<div class="container-user">
+			<img src="/images/user-icon.png" alt="Avatar" height="50" width="50" class="roundImage">
+			<p>Hey! I'm fine. Thanks for asking!</p>
+			<span class="time-left">11:01</span>
+		</div>
+	</div>	
+		
+	<div class="form-stuffs">
+		<div class="row">
+			<form class="chat_form" method="post">
+				<div class="col-sm-8">
+					<div class="input-group">
+						<textarea maxlength="10000" row="3" class="text" cols="30" id="chatMsg" name="chatMsg">
+						</textarea>
+						{{!-- <button class="btn btn-default input-group-addon" :disabled="!notes">Save</button> --}}
+					</div>
+				</div>
+					<button class="btn btn-success" id="chatsubmitbtn">Send</button>		
+			</form>
+		</div>
+	</div>
+
+<script>
+	$('#chatMsg').keypress(function (e) {
+		if (e.which == 13) {
+			$('.chat_form').submit();
+		return false;    //<---- Add this line
+		}
+	});
+	//now thate we have connected the socket they should start emitting and recieving events
+	$(function(){
+		var dt = new Date();
+		var time = dt.getHours() + ":" + dt.getMinutes();
+		$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+		//var time = $.now();
+		//var time = "tiemInwo";
+
+		var socket = io();
+		$('.chat_form').submit(function(e){
+			e.preventDefault();
+			//we are emitting an event called chat message, to the server, we are going to pick it up in the server side
+			socket.emit('chat message', $('#chatMsg').val());
+			$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+			$('#chatMsg').val('');
+			return false
+		});
+		socket.on('chat message', function(msg){
+			$('#chatbox').append('<div class="container-admin">'+'<p class="msg">'+msg+"</p>"+ '<span class="time-right">'+time +"</span>"+"</div>")
+		//	$('.container-admin').append($('<li>').text(msg));
+			$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+		});
+	});
+ /* <div class="container-admin" id="container-admin">
+			<img src="/images/admin.png" alt="Avatar"  height="50" width="50" class="roundImageAdmin">
+			<p>Hello. How are you today?</p>
+			<span class="time-right">11:00</span>
+		</div>*/
+</script>
+{{!-- <div class="form-stuffs">
+	<form class="chat_form" method="post">		
+			<input type="text">
+			<input type="submit" value="Send"/>
+	</form>
+</div> --}}
+
+	</div>
+</div>
+	
 
 	<!-- Newsletter -->
 
@@ -141,7 +320,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="footer_nav_container">
-						<div class="cr">©2018 All Rights Reserverd. This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a></div>
+						<div class="cr">©2018 Tech Over Flow <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a></div>
 					</div>
 				</div>
 			</div>
@@ -150,13 +329,7 @@
 
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="js/custom.js"></script>
+
 </body>
 
 </html>

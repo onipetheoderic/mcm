@@ -6,6 +6,7 @@ var settingSchema = new mongoose.Schema({
     isFree : {type: Boolean, default:true},
     isPremiumTemplate: {type: Boolean, default:false},
     isFreeTemplate: {type:Boolean, default:true},        
+    enable_rating: {type: Boolean, default: true},
 },
 {
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
