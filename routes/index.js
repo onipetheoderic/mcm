@@ -45,38 +45,6 @@ router.post('/checkout/:id/', function(req,res){
 });
 
 router.get('/:id', (req, res) => {
-   // console.log("the is the id", req.params.id)
-        if(!req.params.id || req.params.id===null) {
-            res.redirect('/error');
-        }
-
-        User.findOne({shop_id: req.params.id}, function(err, user){
-            if(err || user===null){
-                res.redirect('/error')
-            }
-            const shop_id = "shop_id_"+ req.params.id;
-            const normal_shop_id = req.params.id;
-            console.log(shop_id);
-           // console.log("HIS IS THE USER ID WHICH IS THE OWNER OF THE SHOP",user._id);
-           
-           const user_id = user._id;
-           
-            // console.log("this is the user/shop_id: ", user._id);
-
-            Category.find({creator_id: user_id}, function(err, category){       
-               // console.log("this is the category listings: ", category)           
-                       
-            Product.find({creator_id: user_id}, function(err, products){
-                //console.log("this is the product listing for this admin user",products )
-            
-            Carousel.find({creator_id: user_id}, function(err, carousels){
-               // console.log("this is the product listing for this admin user",carousels )
-                        
-            res.render('clientFrontEnds/index', {category: category, normal_shop_id: normal_shop_id, products: products, carousels: carousels, shop_id: shop_id});  
-        })
-    });       
-});       
-});       
     
 });
 //this is the shop details 5b3dcf81de387222e4110915

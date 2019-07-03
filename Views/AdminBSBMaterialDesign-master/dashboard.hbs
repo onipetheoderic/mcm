@@ -5,27 +5,89 @@
                 <h2>DASHBOARD</h2>
             </div>
 
-        <!-- Widgets -->
+
+{{#if user.isSchool}}
+   
+
+        <!-- Widgets for the school environment -->
+
             <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
                     <div class="info-box bg-pink hover-expand-effect">
                         <div class="icon">
-                          <a href="admin/add_staff"><i class="material-icons">person_add</i></a>
+                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
                         </div>
                         <div class="content">
-                            <div class="text">CREATE STAFF</div>
-                            <div class="number count-to" data-from="0" data-to={{patient_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                            <div class="text">Create a Staff</div>
+                            <div class="number count-to" data-from="0" data-to={{staff_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">New Staff Type </div>  
+                            <div class="number count-to" data-from="0" data-to={{stafftype_count}}    data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_pupil"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">New Student/Pupil</div>
+                            <div class="number count-to" data-from="0" data-to={{category_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">New Subject</div>
+                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/create_class"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">New Class</div>
+                            <div class="number count-to" data-from="0" data-to={{class_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-cyan hover-expand-effect">
                         <div class="icon">
-                            <a href="admin/edit_products"><i class="material-icons">https</i></a>
+                            <a href="/admin/create_parent"><i class="material-icons">https</i></a>
                         </div>
                        
                         <div class="content">
-                          <div class="text">Edit/Remove Products </div>  
+                          <div class="text">New Parent</div>  
                             <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -36,7 +98,7 @@
                             <a href="admin/add_category"><i class="material-icons">create</i></a>
                         </div>
                         <div class="content">
-                            <div class="text">CREATE CATEGORY</div>
+                            <div class="text">Pay Salary</div>
                             <div class="number count-to" data-from="0" data-to={{category_count}} data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -47,11 +109,122 @@
                         <a href="admin/add"> <i class="material-icons">add_shopping_cart</i></a>   
                         </div>
                          <div class="content">
-                            <div class="text">ADD PRODUCT</div>
+                            <div class="text">Pay School fees</div>
                             <div class="number count-to" data-from="0" data-to={{product_count}} data-speed="15" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- #END# Widgets -->
+
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/register_school"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">View Staff record</div>
+                            <div class="number count-to" data-from="0" data-to={{patient_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="admin/edit_School"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">View pupils record</div>  
+                            <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="admin/add_category"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Check Uploaded result</div>
+                            <div class="number count-to" data-from="0" data-to={{category_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="admin/add"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">Messages from Staff</div>
+                            <div class="number count-to" data-from="0" data-to={{product_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+ {{/if}}
+
+        <!-- Widgets for Super User -->
+{{#if user.isSuperUser}}
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/create_school"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">CREATE SCHOOL</div>
+                            <div class="number count-to" data-from="0" data-to={{patient_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                             <a href="/admin/edit_created_school"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">EDIT SCHOOL </div>  
+                            <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="admin/edit_School"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">ADD A SCHOOL TYPE </div>  
+                            <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="admin/add_category"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">CREATE SCHOOL CATEGORY</div>
+                            <div class="number count-to" data-from="0" data-to={{category_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+               
             </div>
             <!-- #END# Widgets -->
             
@@ -63,7 +236,7 @@
                             <i class="material-icons">email</i>
                         </div>
                         <div class="content">
-                            <div class="text">MESSAGES FROM USERS</div>
+                            <div class="text">MESSAGES FROM SCHOOL TO BISHOP</div>
                             <div class="number count-to" data-from="0" data-to="100" data-speed="15" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -74,7 +247,7 @@
                             <i class="material-icons">email</i>
                         </div>
                         <div class="content">
-                            <div class="text">MESSAGES FROM STAFF</div>
+                            <div class="text">MESSAGES FROM SCHOOL TO US</div>
                             <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -82,7 +255,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-light-green hover-expand-effect">
                         <div class="icon">
-                            <a href="admin/add_carousel"><i class="material-icons">https</i></a>
+                            <a href="admin/add_carousel"><i class="material-icons">announcement</i></a>
                         </div>
                         <div class="content">
                             <div class="text">CAROUSEL/ADVERTISEMENT</div>
@@ -93,10 +266,10 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-orange hover-expand-effect">
                         <div class="icon">
-                            <i class="material-icons">markunread</i>
+                            <i class="material-icons">account_balance_wallet</i>
                         </div>
                         <div class="content">
-                            <div class="text">MESSAGE TO STAFFS</div>
+                            <div class="text">VIEW ACCOUNT DETAILS</div>
                             <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -109,10 +282,10 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-pink hover-expand-effect">
                         <div class="icon">
-                            <i class="material-icons">build</i>
+                            <i class="material-icons">face</i>
                         </div>
                         <div class="content">
-                            <div class="text">PAGE SETTINGS</div>
+                            <div class="text">VIEW ALL SCHOOLS</div>
                             <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -140,19 +313,20 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
+                    <div class="info-box bg-deep-orange hover-expand-effect">
                         <div class="icon">
                             <i class="material-icons">person_add</i>
                         </div>
                         <div class="content">
-                            <div class="text">ACCOUNTANT</div>
+                            <div class="text">DELETE SCHOOL</div>
                             <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
             </div>
-       
+    {{/if}}
             <!-- #END# Widgets -->
+
             <div class="row clearfix">
                 <!-- Visitors -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">

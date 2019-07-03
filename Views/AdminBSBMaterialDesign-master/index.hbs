@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 	Author: W3layouts
 	Author URL: http://w3layouts.com
 	License: Creative Commons Attribution 3.0 Unported
@@ -8,8 +8,8 @@
 <html lang="en">
 <head>
 	<!-- Meta tags -->
-	<title>Katify</title>
-	<meta name="keywords" content="Katify, buy goods online, shoppingCart, Online shopping cart Engine, TechOverflow design, shoppingCart, Oluwaseun stores" />
+	<title>{{loginToolbarText}}</title>
+	<meta name="keywords" content={{loginToolbarText}}, buy goods online, shoppingCart, Online shopping cart Engine, TechOverflow design, shoppingCart, Oluwaseun stores" />
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,9 +41,14 @@
 		<p class="alert">{{message.error}}</p>
 	</div>
     {{/if}}
+    <div>
+	<form action="/admin/reg_superuser" method="post" >
+		<input type="submit" value="Register SuperUser" />
+	</form>
+    </div>
 	<div class="agile-login">
 
-		<h1>Katify </h1>
+		<h1>{{title}} </h1>
 		<div class="wrapper">
 			<h3>Admin Login Page</h3>
 			<div class="w3ls-form">

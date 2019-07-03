@@ -106,12 +106,16 @@ app.use('/carousel', carousel);
 // passport account auth
 
 import User from './models/user';
+import School from './models/school';
+
+
 passport.use(new Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
 // mongoose
-mongoose.connect('mongodb://localhost/katifier');
+mongoose.connect('mongodb://localhost/mcsm');
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
