@@ -627,7 +627,81 @@ router.post('/create_parent', (req, res, next) => {
                     parent.church_attended = req.body.church_attended;
                     parent.marital_status = req.body.marital_status
                     parent.school_id = current_id;
+                    parent.phone = req.body.phone
+                    parent.lga_of_origin = req.body.lga_of_origin;
                     parent.save(function(err, doc){       
+                        if(err){
+                            console.log("error durring saving",err);
+                            return;
+                        } else {                    
+                            console.log(doc, "successfully save, redirecting now..........")
+                      
+                        }
+                    });
+    //rd ends here           
+                    console.log("successfully saved to the role db")
+                }
+            });
+
+                if (err) {
+                    return next(err);
+                }                
+                res.render('AdminBSBMaterialDesign-master/login', {layout: false, message:{success: "successfully registered, now login"}})
+                });
+            });
+     });
+
+});
+
+
+
+
+
+router.post('/create_pupil', (req, res, next) => {
+    let current_id = req.user._id
+    let pupil = new Pupil();  
+    User.register(new User({ username: req.body.username,
+       user_name: req.body.user_name,
+       isPupil: true,
+       sex: req.body.sex,
+       first_name: req.body.first_name,
+       last_name: req.body.last_name,
+       sex: req.body.sex,
+       phone: req.body.phone,
+       email: req.body.email,      
+   }), req.body.password, (err, user) => {
+
+            if (err) {
+                console.log(err)                                             
+                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: false, message:{error:err}})
+                }
+            let role = new Role();
+            passport.authenticate('local')(req, res, () => {                                             
+                req.session.save((err) => {
+                console.log("this is the current user_id", req.user._id)
+                role.user_id = req.user._id//session comes from d db
+                 console.log("this is the current user_id", req.user._id)
+                role.save(function(err, doc){
+                    console.log("successfully saved")
+                    let current_school_id = doc._id;
+                if(err){
+                    console.log(err);
+                    return;
+                } 
+                
+                else {   
+                 console.log("this is the current user_id", current_id)  
+                    pupil.parent_id = req.body.parent_id;
+                    pupil.sex = req.body.sex;
+                    pupil.state_of_origin = req.body.state_of_origin;
+                    pupil.religion = req.body.religion;
+                    pupil.church_attended = req.body.church_attended;
+                    pupil.school_id = current_id;
+                    pupil.phone = req.body.phone
+                    pupil.lga_of_origin = req.body.lga_of_origin;
+                    pupil.place_of_birth = req.body.place_of_birth;
+                    pupil.dob = req.body.dob;
+                    pupil.save(function(err, doc){       
                         if(err){
                             console.log("error durring saving",err);
                             return;
