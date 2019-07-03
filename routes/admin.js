@@ -8,6 +8,8 @@ import multer from 'multer';
 
 var imageName;
 import User from '../models/user';
+import Parent from '../models/user';
+import Pupil from '../models/pupil';
 import Role from '../models/role';
 import Product from '../models/product';
 import Setting from '../models/setting';
@@ -18,6 +20,7 @@ import Staff from '../models/staff';
 import Subject from '../models/subject';
 import Category from '../models/category';
 import Class from '../models/class';
+const state = require('../models/state.json');
 
 const router = express.Router();
 
@@ -148,7 +151,7 @@ router.get('/create_school', (req, res) => {
 });
 
 router.get('/register_pupil', (req, res) => {    
-    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user})
+    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, state: state})
 });
 router.get('/register_parent', (req, res) => {    
     res.render('AdminBSBMaterialDesign-master/parent_form', {layout: 'layout/admin.hbs', user: req.user})
@@ -198,8 +201,8 @@ router.get('/create_parent', (req, res, next) => {
 })
 
 router.get('/create_pupil', (req, res, next) => {
- console.log("this is the user id that mad e", req.user._id)
-    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user})
+ console.log("this is the user id that mad e", state)
+    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, state:state})
 })
 
 
@@ -555,6 +558,76 @@ router.post('/create_staff', (req, res, next) => {
                     staff.staffType_id = req.body.staffType_id;
                     staff.school_id = current_id;
                     staff.save(function(err, doc){       
+                        if(err){
+                            console.log("error durring saving",err);
+                            return;
+                        } else {                    
+                            console.log(doc, "successfully save, redirecting now..........")
+                      
+                        }
+                    });
+    //rd ends here           
+                    console.log("successfully saved to the role db")
+                }
+            });
+
+                if (err) {
+                    return next(err);
+                }                
+                res.render('AdminBSBMaterialDesign-master/login', {layout: false, message:{success: "successfully registered, now login"}})
+                });
+            });
+     });
+
+});
+
+
+
+router.post('/create_parent', (req, res, next) => {
+    let current_id = req.user._id
+    let parent = new Parent();  
+    User.register(new User({ username: req.body.username,
+       user_name: req.body.user_name,
+       isParent: true,
+       sex: req.body.sex,
+       first_name: req.body.first_name,
+       last_name: req.body.last_name,
+       sex: req.body.sex,
+       phone: req.body.phone,
+       email: req.body.email,      
+   }), req.body.password, (err, user) => {
+
+            if (err) {
+                console.log(err)                                             
+                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: false, message:{error:err}})
+                }
+            let role = new Role();
+            passport.authenticate('local')(req, res, () => {                                             
+                req.session.save((err) => {
+                console.log("this is the current user_id", req.user._id)
+                role.user_id = req.user._id//session comes from d db
+                 console.log("this is the current user_id", req.user._id)
+                role.save(function(err, doc){
+                    console.log("successfully saved")
+                    let current_school_id = doc._id;
+                if(err){
+                    console.log(err);
+                    return;
+                } 
+                
+                else {   
+                 console.log("this is the current user_id", current_id)  
+                    parent.creator_id = req.user._id; 
+                    parent.sex = req.body.sex;
+                    parent.state_of_origin = req.body.state_of_origin;
+                    parent.occupation = req.body.occupation;
+                    parent.home_address = req.body.home_address;
+                    parent.office_address = req.body.office_address;
+                    parent.religion = req.body.religion;
+                    parent.church_attended = req.body.church_attended;
+                    parent.marital_status = req.body.marital_status
+                    parent.school_id = current_id;
+                    parent.save(function(err, doc){       
                         if(err){
                             console.log("error durring saving",err);
                             return;

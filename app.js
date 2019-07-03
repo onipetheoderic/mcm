@@ -156,6 +156,10 @@ hbs.registerPartial('footer', fs.readFileSync(__dirname + '/Views/partials/foote
 
 hbs.registerPartial('header', fs.readFileSync(__dirname + '/Views/partials/header.hbs', 'utf8'));
 // hbs helpers
+hbs.registerHelper('json', function (content) {
+    return JSON.stringify(content);
+});
+
 hbs.registerHelper('link', function(text, options) {
   var attrs = [];
 

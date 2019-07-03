@@ -1,85 +1,11 @@
         <div class="container-fluid">
-            <div class="block-header">
-                <h2>
-                    FORM VALIDATION
-                    <small>Taken from <a href="https://jqueryvalidation.org/" target="_blank">jqueryvalidation.org</a></small>
-                </h2>
-            </div>
-            <!-- Basic Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>BASIC VALIDATION</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <form id="form_validation" method="POST">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="name" required>
-                                        <label class="form-label">Name</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="surname" required>
-                                        <label class="form-label">Surname</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="email" class="form-control" name="email" required>
-                                        <label class="form-label">Email</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="radio" name="gender" id="male" class="with-gap">
-                                    <label for="male">Male</label>
-
-                                    <input type="radio" name="gender" id="female" class="with-gap">
-                                    <label for="female" class="m-l-20">Female</label>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <textarea name="description" cols="30" rows="5" class="form-control no-resize" required></textarea>
-                                        <label class="form-label">Description</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="password" class="form-control" name="password" required>
-                                        <label class="form-label">Password</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" id="checkbox" name="checkbox">
-                                    <label for="checkbox">I have read and accept the terms</label>
-                                </div>
-                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Basic Validation -->
+           
             <!-- Advanced Validation -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>ADVANCED VALIDATION</h2>
+                            <h2>Create A Pupil</h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -93,50 +19,152 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="body">
-                            <form id="form_advanced_validation" method="POST">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="minmaxlength" maxlength="10" minlength="3" required>
-                                        <label class="form-label">Min/Max Length</label>
-                                    </div>
-                                    <div class="help-info">Min. 3, Max. 10 characters</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="minmaxvalue" min="10" max="200" required>
-                                        <label class="form-label">Min/Max Value</label>
-                                    </div>
-                                    <div class="help-info">Min. Value: 10, Max. Value: 200</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="url" class="form-control" name="url" required>
-                                        <label class="form-label">Url</label>
-                                    </div>
-                                    <div class="help-info">Starts with http://, https://, ftp:// etc</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="date" required>
-                                        <label class="form-label">Date</label>
-                                    </div>
-                                    <div class="help-info">YYYY-MM-DD format</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="number" class="form-control" name="number" required>
-                                        <label class="form-label">Number</label>
-                                    </div>
-                                    <div class="help-info">Numbers only</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="creditcard" pattern="[0-9]{13,16}" required>
-                                        <label class="form-label">Credit Card</label>
-                                    </div>
-                                    <div class="help-info">Ex: 1234-5678-9012-3456</div>
-                                </div>
+
+                <div class="body">
+                    <form id="form_advanced_validation" action="/admin/create_staff"method="POST">
+
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="first_name" maxlength="10" minlength="3" required>
+                                <label class="form-label">First Name</label>
+                            </div>
+                            <div class="help-info">First name required</div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="last_name" maxlength="10" minlength="3" required>
+                                <label class="form-label">Last Name</label>
+                            </div>
+                            <div class="help-info">Last Name required</div>
+                        </div>
+                         <div class="form-group">
+                            <input type="radio" name="sex" value="male" class="with-gap">
+                            <label for="male">Male</label>
+
+                            <input type="radio" name="sex" value="female" class="with-gap">
+                            <label for="female" class="m-l-20">Female</label>
+                             <div class="help-info">Sex is required</div>
+                        </div>
+                                    
+                            <select id="selectNumber" name="state_of_origin" onchange="myFunction()">
+                                <option>State of Origin</option>
+                            </select>
+                            <select id="selectLga" name="lga_of_origin" onchange="myFunction()">
+                                <option>LGA</option>
+                            </select>
+                  
+                            <script>
+                            var state_list = {{{json state}}}
+                            console.log(state_list)
+                                var select = document.getElementById("selectNumber");
+                                    
+                                    for(var i = 0; i < state_list.length; i++) {
+                                    var opt = state_list[i];
+                                    var state = opt.state;
+                                    var lgas = opt.lgas
+                                    var el = document.createElement("option");
+                                    el.textContent = state;
+                                    el.value = lgas;
+                                    var stata = {stateName:state, lgas:lgas};
+                                    select.appendChild(el);
+                                }
+
+                        function myFunction() {
+                        
+                         var x = document.getElementById("selectNumber").value;
+
+                          var destination = document.getElementById("selectLga");
+                          destination.length = 0; //to prevent appendation
+                          var res = x.split(",");
+                          console.log("You selected: ", res)
+                            for(var i = 0; i < res.length; i++) {
+                                var lg = res[i];
+                                var la = document.createElement("option");
+                                la.textContent = lg;
+                                la.value = lg;
+                                destination.appendChild(la);
+                            }
+
+                        }
+
+                            </script>
+
+                        <div class="form-group">
+
+                            {{#each subject}}
+                            <br/>                                       
+                            <input type="radio" value={{this._id}} name="subject_id" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             <div class="help-info">Class, Created in the Dashboard</div>
+                        </div>  
+
+      
+                        
+                        <div class="form-group">
+
+                            {{#each myClass}}
+
+                                       
+                            <input type="radio" value={{this._id}} name="class_id" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             <div class="help-info">Class, Created in the Dashboard</div>
+                        </div>    
+
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="email" class="form-control" name="email" maxlength="100" minlength="3" required>
+                                <label class="form-label">Email Address</label>
+                            </div>
+                            <div class="help-info">example: theoderic@gmail.com</div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="phone" maxlength="14" minlength="11" required>
+                                <label class="form-label">Phone Number</label>
+                            </div>
+                            <div class="help-info">A Valid phone number 07039148866</div>
+                        </div>
+                       
+                         <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="number" class="form-control" name="salary" maxlength="10" minlength="3" required>
+                                <label class="form-label">Staff Salary</label>
+                            </div>
+                            <div class="help-info">Staff's monthly salary, example 30000</div>
+                        </div>
+
+
+      
+
+                                
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                             <br/>
+                            
+                                <input type="date" class="form-control" name="dob" required>
+
+                                <label class="form-label">Date of Birth</label>
+                            </div>
+
+                            <div class="help-info">MM-DD-YYYY format</div>
+                        </div>
+
+                         <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="username" min="6" max="20" required>
+                                <label class="form-label">Desired Username</label>
+                            </div>
+                            <div class="help-info">Min. Value: 10, Max. Value: 200</div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="password" class="form-control" name="password" min="6" max="20" required>
+                                <label class="form-label">Desired Password</label>
+                            </div>
+                            <div class="help-info">Alpha-numeric characters should be embeded</div>
+                        </div>
                                 <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
                             </form>
                         </div>
@@ -144,52 +172,6 @@
                 </div>
             </div>
             <!-- #END# Advanced Validation -->
-            <!-- Validation Stats -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                VALIDATION STATS
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <form id="form_validation_stats">
-                                <div class="form-group form-float">
-                                    <div class="form-line focused warning">
-                                        <input type="text" class="form-control" name="warning" value="Warning" required>
-                                        <label class="form-label">Form Validation - Warning</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line focused error">
-                                        <input type="text" class="form-control" name="error" value="Error" required>
-                                        <label class="form-label">Form Validation - Error</label>
-                                    </div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line focused success">
-                                        <input type="email" class="form-control" name="success" value="Success" required>
-                                        <label class="form-label">Form Validation - Success</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Validation Stats -->
+
         </div>
 
