@@ -6,48 +6,33 @@ import User from '../models/user'
 import Category from '../models/category';
 import Product from '../models/product';
 
+import School from '../models/school';
+
 const router = express.Router();
+// foo${n}bar`
+router.get('/:school_name', (req, res) => {
+    let name = req.params.school_name;
+   // Now lets query the school table to get all the school datas
+ School.findOne({name: name}, function(err, school_data){
+    console.log(school_data)
+    var name = school_data.name;
+    var bigSlogan = school_data.bigSlogan;
+    let bigImage = school_data.bigImage;
+    let mediumImage= school_data.mediumImage
+    let small_historic_quote= school_data.small_historic_quote
+    let advertisement_text_header= school_data.advertisement_text_header
+    let advertisement_text_description= school_data.advertisement_text_description
+    let advertisement_text_header1= school_data.advertisement_text_header1
+    let advertisement_text_description1= school_data.advertisement_text_description1
+    let logo = school_data.logo
+    let visionStatement = school_data.visionStatement
+    let missionStatement = school_data.missionStatement
 
-router.post('/checkout/:id/', function(req,res){   
-    if(!req.user){     
-      //  res.send({success: "this is the good one"})   
-        res.send({error: "Unable to CheckOut, Please Login"})
-    }
-    else if(req.user){
-        let cart = req.body.cart;   
-       // console.log(cart)
-        const vcart = JSON.parse(cart);   
-      //  res.send({success: "You are logged In"});
-
-        var orders = [];
-        User.findOne({shop_id: req.params.id}, function(err, user){       
-        const user_id = user._id;         
-        Product.find({creator_id: user_id}, function(err, products){           
-        for(var i in vcart){
-            for(var p in products){
-                if(vcart[i].id.trim() == products[p].id.trim()){
-                    console.log("it is the same");
-                    var stock_remain = parseInt(products[p].stock - vcart[i].quantity)
-                    // if(stock_remain > 0)
-                    // {
-                    //     res.send({success: "true"})
-                    // }
-                    orders.push({id: vcart[i].id.trim(), remain: stock_remain, name: vcart[i].name})
-                    // orders.push(vcart[i].id.trim() + ":"+ stock_remain);                  
-                }
-            }
-        }
-        console.log(orders);
-        res.send({success: orders})
-        });
-    });            
-    }    
+    res.render('clientFrontEnds/index', {layout: false, name: name, missionStatement:missionStatement, visionStatement: visionStatement, advertisement_text_description1: advertisement_text_description1, advertisement_text_header1: advertisement_text_header1, advertisement_text_description: advertisement_text_description, advertisement_text_header: advertisement_text_header, mediumImage:mediumImage, bigImage: bigImage, bigSlogan: bigSlogan, small_historic_quote: small_historic_quote})
 });
-
-router.get('/:id', (req, res) => {
-    
 });
 //this is the shop details 5b3dcf81de387222e4110915
 
 export default router;
 
+// 5d1bfff4aaca805f29d10806

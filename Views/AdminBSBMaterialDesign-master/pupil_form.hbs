@@ -5,7 +5,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Create A Pupil</h2>
+                            <h2>Create A New Pupil/Student</h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -21,30 +21,33 @@
                         </div>
 
                 <div class="body">
-                    <form id="form_advanced_validation" action="/admin/create_staff"method="POST">
+                    <form id="form_advanced_validation" action="/admin/create_pupil" method="POST">
+
 
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="first_name" maxlength="10" minlength="3" required>
+                                <input type="text" id="n1" class="form-control" name="first_name" maxlength="121" minlength="3" required>
                                 <label class="form-label">First Name</label>
                             </div>
                             <div class="help-info">First name required</div>
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="last_name" maxlength="10" minlength="3" required>
+                                <input type="text" id="n2" onkeyup="sync()" class="form-control" name="last_name" maxlength="121" minlength="3" required>
                                 <label class="form-label">Last Name</label>
                             </div>
                             <div class="help-info">Last Name required</div>
                         </div>
-                         <div class="form-group">
-                            <input type="radio" name="sex" value="male" class="with-gap">
-                            <label for="male">Male</label>
+                          <div class="form-group">
+                                    <input type="radio" value="male" name="sex" id="male" class="with-gap">
+                                    <label for="male">Male</label>
 
-                            <input type="radio" name="sex" value="female" class="with-gap">
-                            <label for="female" class="m-l-20">Female</label>
-                             <div class="help-info">Sex is required</div>
+                                    <input type="radio" value="female" name="sex" id="female" class="with-gap">
+                                    <label for="female" class="m-l-20">Female</label>
                         </div>
+                            <select id="selectParent" name="parent_id">
+                                <option> All School Parents</option>
+                            </select>
                                     
                             <select id="selectNumber" name="state_of_origin" onchange="myFunction()">
                                 <option>State of Origin</option>
@@ -54,7 +57,31 @@
                             </select>
                   
                             <script>
+
+function sync(){
+    var n1 = document.getElementById('n1');
+    var n2 = document.getElementById('n2');
+    var n3 = document.getElementById('n3')
+    var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+    n3.value = n2.value + "_" + n1.value + seq;
+
+   console.log("typing", n2.value)
+}
+
                             var state_list = {{{json state}}}
+                            var parentList = {{{json parent}}}
+
+                           console.log(parentList);
+                           var select = document.getElementById("selectParent");
+                           for(var i = 0; i < parentList.length; i++) {
+                                    var opt = parentList[i];
+                                    var state = opt.fullName;
+                                    var parent_id = opt._id
+                                    var pel = document.createElement("option");
+                                    pel.textContent = state;
+                                    pel.value = parent_id;
+                                    select.appendChild(pel);
+                                }
                             console.log(state_list)
                                 var select = document.getElementById("selectNumber");
                                     
@@ -74,7 +101,7 @@
                          var x = document.getElementById("selectNumber").value;
 
                           var destination = document.getElementById("selectLga");
-                          destination.length = 0; //to prevent appendation
+                         // destination.length = 0; //to prevent appendation
                           var res = x.split(",");
                           console.log("You selected: ", res)
                             for(var i = 0; i < res.length; i++) {
@@ -86,31 +113,9 @@
                             }
 
                         }
+                        
 
                             </script>
-
-                        <div class="form-group">
-
-                            {{#each subject}}
-                            <br/>                                       
-                            <input type="radio" value={{this._id}} name="subject_id" id={{this._id}} class="with-gap">
-                            <label for={{this._id}}>{{this.name}}</label>
-                            {{/each}}
-                             <div class="help-info">Class, Created in the Dashboard</div>
-                        </div>  
-
-      
-                        
-                        <div class="form-group">
-
-                            {{#each myClass}}
-
-                                       
-                            <input type="radio" value={{this._id}} name="class_id" id={{this._id}} class="with-gap">
-                            <label for={{this._id}}>{{this.name}}</label>
-                            {{/each}}
-                             <div class="help-info">Class, Created in the Dashboard</div>
-                        </div>    
 
                         <div class="form-group form-float">
                             <div class="form-line">
@@ -121,24 +126,12 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="phone" maxlength="14" minlength="11" required>
+                                <input type="text" class="form-control" name="phone" maxlength="149" minlength="11" required>
                                 <label class="form-label">Phone Number</label>
                             </div>
                             <div class="help-info">A Valid phone number 07039148866</div>
                         </div>
-                       
-                         <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="number" class="form-control" name="salary" maxlength="10" minlength="3" required>
-                                <label class="form-label">Staff Salary</label>
-                            </div>
-                            <div class="help-info">Staff's monthly salary, example 30000</div>
-                        </div>
-
-
-      
-
-                                
+                        
                         <div class="form-group form-float">
                             <div class="form-line">
                              <br/>
@@ -151,9 +144,62 @@
                             <div class="help-info">MM-DD-YYYY format</div>
                         </div>
 
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="home_address" maxlength="194" minlength="3" required>
+                                <label class="form-label">Home Address</label>
+                            </div>
+                            <div class="help-info">example: Number 12 ilorin street</div>
+                        </div>
+
                          <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="username" min="6" max="20" required>
+                                <input type="text" class="form-control" name="church_attended" maxlength="194" minlength="1" required>
+                                <label class="form-label">Church Attended</label>
+                            </div>
+                            <div class="help-info">example: Catholic Cathedral, pentecostal, others</div>
+                        </div>
+
+                         
+                        <div class="form-group">
+                        <p>Favourite Subject</p>
+                            {{#each subject}}
+                            <br/>                                       
+                            <input type="radio" value={{this._id}} name="favourite_subject" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             
+                        </div>  
+
+      
+                        
+                        <div class="form-group">
+                        <p>Current Class</p>
+                            {{#each myClass}}
+                                       
+                            <input type="radio" value={{this._id}} name="current_class" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             
+                        </div>    
+
+                        <div class="form-group">
+                            <input type="radio" id="christain" name="religion"  value="christain" class="with-gap">
+                            <label for="christain">Christainity</label>
+
+                            <input type="radio" id="muslim" name="religion" value="muslim" class="with-gap">
+                            <label for="muslim" class="m-l-20">Muslim</label>
+
+                            <input type="radio" name="religion"  id="hinduism" value="hinduism" class="with-gap">
+                            <label for="hinduism" class="m-l-20">Hindu</label>
+                            <input type="radio" name="religion" value="atheist" class="with-gap">
+                            <label for="atheist" id="atheist"  class="m-l-20">Atheist</label>
+                            <div class="help-info">Christain, Muslim, Hinduism, Atheist</div>
+                        </div>
+
+                         <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" id="n3" class="form-control" name="username" min="6" max="20" required>
                                 <label class="form-label">Desired Username</label>
                             </div>
                             <div class="help-info">Min. Value: 10, Max. Value: 200</div>

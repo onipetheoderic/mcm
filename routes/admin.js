@@ -8,7 +8,7 @@ import multer from 'multer';
 
 var imageName;
 import User from '../models/user';
-import Parent from '../models/user';
+import Parent from '../models/parent';
 import Pupil from '../models/pupil';
 import Role from '../models/role';
 import Product from '../models/product';
@@ -58,6 +58,19 @@ router.get('/home', (req, res) => {
         var subject_count = subjects.length;
         console.log("this is the carousel count", subject_count);
     
+    Parent.find({school_id: req.user._id}).exec(function (err, parents){
+        if(err) {
+            console.log(err)
+        }
+        var parent_count = parents.length;
+        console.log("this is the carousel count", parent_count);
+
+    Pupil.find({school_id: req.user._id}).exec(function (err, pupils){
+        if(err) {
+            console.log(err)
+        }
+        var pupil_count = pupils.length;
+        console.log("this is the carousel count", pupil_count);
     Stafftype.find({school_id: req.user._id}).exec(function (err, staffType){
         if(err) {
             console.log(err)
@@ -79,6 +92,13 @@ router.get('/home', (req, res) => {
         var subject_count = subject.length;
         console.log("this is the carousel count", subject_count);
 
+    School.find({}).exec(function (err, skool){
+        if(err) {
+            console.log(err)
+        }
+        var skool_count = skool.length;
+        console.log("this is the carousel count", skool_count);
+
     Class.find({school_id: req.user._id}).exec(function (err, my_class){
         if(err) {
             console.log(err)
@@ -87,12 +107,15 @@ router.get('/home', (req, res) => {
         console.log("this is the carousel count", class_count);
     
     
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', user: req.user, product_count: product_count, category_count: category_count, carousel_count: carousel_count, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', user: req.user, product_count: product_count, category_count: category_count, carousel_count: carousel_count, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count})
         });
         });
+    });
     });
 });
+});
     });
+});
 });
 });
 });
@@ -174,37 +197,60 @@ router.get('/register_staff', (req, res) => {
 });
 
 
-
+function redirector(req, res){
+ if(!req.user){
+        // res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Please Login"}})                
+        res.redirect('/admin/login');
+    }   
+}
 
 router.get('/register_new_staff_type', (req, res) => {
+    redirector(req, res)
     console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_staff_type', {layout: 'layout/admin.hbs', user: req.user})
 })
 
 router.get('/register_new_subject', (req, res) => {
+    redirector(req, res)
     console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', user: req.user})
 })
 
 router.get('/create_class', (req, res, next) => {
+    redirector(req, res)
  console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_class', {layout: 'layout/admin.hbs', user: req.user})
 })
 router.get('/create_subject', (req, res, next) => {
+    redirector(req, res)
  console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', user: req.user})
 })
 
 router.get('/create_parent', (req, res, next) => {
+   redirector(req, res)
  console.log("this is the user id that mad e", req.user._id)
-    res.render('AdminBSBMaterialDesign-master/parent_form', {layout: 'layout/admin.hbs', user: req.user})
+    res.render('AdminBSBMaterialDesign-master/parent_form', {layout: 'layout/admin.hbs', user: req.user, state:state})
 })
 
 router.get('/create_pupil', (req, res, next) => {
- console.log("this is the user id that mad e", state)
-    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, state:state})
-})
-
+    redirector(req, res)
+    Subject.find({school_id: req.user._id}, function(err, subject){      
+        console.log("this is the categories",subject)
+        if (err) throw err; 
+    Parent.find({school_id: req.user._id}, function(err, parent){      
+        console.log("this is the categories",parent)
+        if (err) throw err; 
+    
+    Class.find({school_id: req.user._id}, function(err, myClass){      
+        console.log("this is the categories",myClass)
+        if (err) throw err;  
+        console.log("this is the user id that mad e", state)
+    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, state:state, myClass:myClass, subject:subject, parent:parent})
+});
+});
+});
+});
 
 router.post('/registration', (req, res, next) => {
     User.countDocuments({}, function(err, count) {
@@ -308,6 +354,12 @@ router.get('/get_all_stafftypes', (req, res, next) => {
     });
 
 })
+router.get('/get_all_parents', (req, res, next) => {
+    Parent.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
 router.get('/get_all_staffs', (req, res, next) => {
     Staff.find({}, function(err, users) {
      console.log(users)
@@ -390,7 +442,27 @@ router.post('/register_new_class', (req, res, next) => {
     });
 
 });
-
+/*majorColor: String,
+    minorColor: String,
+    thirdColor: String,
+    fourthColor: String,
+    latitude: String,
+    longitude: String,
+    schoolDescription: String,
+    proprietorName: String,
+    schoolType: String,
+    hmName: String,
+    bigSlogan: 
+    bigImage: String,
+    mediumImage: String,
+    small_historic_quote: {type: String, default: "In the history of modern school, there is probably no greater leap forward than building the future of your child with us"},
+    advertisement_text_header: {type: String, default: "Over 20 First-Class Graduates produced every year, are former students of "},
+    advertisement_text_description: {type: String, default: "Yearly more than 20 First-Class graduates in Universities across Nigeria and the Whole world, are former student/pupils of our Great School. So therefore the best asset you can give your Child is proper foundation, which is what we give our pupils/students"},
+    advertisement_text_header1: {type: String, default: "is not just a School, but an EDUCATION itself"},
+    advertisement_text_description1: {type: String, default: " Albert Einstein: Education is what remains after one has forgotten what one has learned in school. We believe Education is not just about going to school and getting a degree. It's about widening your knowledge and absorbing the truth about life."},
+    logo: {type: String, default: "logo.png"},
+    visionStatement: String,
+    missionStatement: String,*/
 
 router.post('/create_school', (req, res, next) => {
     let school = new School();  
@@ -428,6 +500,22 @@ router.post('/create_school', (req, res, next) => {
                     school.creator_id = req.user._id; 
                     school.schoolID = current_school_id;
                     school.name = req.body.name;
+                    school.majorColor = req.body.majorColor;
+                    school.minorColor = req.body.minorColor;
+                    school.thirdColor = req.body.thirdColor;
+
+                    school.fourthColor = req.body.fourthColor;
+                    school.latitude = req.body.latitude;
+                    school.longitude = req.body.longitude
+                    school.schoolDescription = req.body.schoolDescription;
+                    school.proprietorName = req.body.proprietorName;
+                    school.schoolType = req.body.schoolType;
+                    school.hmName = req.body.hmName;
+                    school.bigSlogan = req.body.bigSlogan;
+                    school.bigImage = req.body.bigImage;
+                    school.mediumImage = req.body.mediumImage;
+                    school.visionStatement = req.body.visionStatement;
+                    school.missionStatement = req.body.missionStatement;
                     school.save(function(err, doc){       
                         if(err){
                             console.log("error durring saving",err);
@@ -451,6 +539,7 @@ router.post('/create_school', (req, res, next) => {
      });
 
      });
+
 
 router.post('/create_school', (req, res, next) => {
     let school = new School();  
@@ -486,7 +575,7 @@ router.post('/create_school', (req, res, next) => {
                
                 else {     
                     school.creator_id = req.user._id; 
-                    school.schoolID = current_school_id;
+                    school.schoolID = req.user._id;
                     school.name = req.body.name;
                     school.save(function(err, doc){       
                         if(err){
@@ -616,9 +705,9 @@ router.post('/create_parent', (req, res, next) => {
                 } 
                 
                 else {   
-                 console.log("this is the current user_id", current_id)  
-                    parent.creator_id = req.user._id; 
+                 console.log("this is the current user_id", current_id)                    
                     parent.sex = req.body.sex;
+                    parent.fullName = req.body.last_name + " " + req.body.first_name;
                     parent.state_of_origin = req.body.state_of_origin;
                     parent.occupation = req.body.occupation;
                     parent.home_address = req.body.home_address;
@@ -693,10 +782,12 @@ router.post('/create_pupil', (req, res, next) => {
                  console.log("this is the current user_id", current_id)  
                     pupil.parent_id = req.body.parent_id;
                     pupil.sex = req.body.sex;
+                    pupil.favourite_subject = req.body.favourite_subject;
                     pupil.state_of_origin = req.body.state_of_origin;
                     pupil.religion = req.body.religion;
                     pupil.church_attended = req.body.church_attended;
                     pupil.school_id = current_id;
+                    pupil.current_class = req.body.current_class;
                     pupil.phone = req.body.phone
                     pupil.lga_of_origin = req.body.lga_of_origin;
                     pupil.place_of_birth = req.body.place_of_birth;

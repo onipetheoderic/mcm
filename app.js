@@ -150,14 +150,31 @@ app.use(function (req, res, next) {
 
 
 
-hbs.registerPartial('carousel', fs.readFileSync(__dirname + '/Views/partials/carousel.hbs', 'utf8'));
+hbs.registerPartial('banner', fs.readFileSync(__dirname + '/Views/partials/banner.hbs', 'utf8'));
+
+hbs.registerPartial('about', fs.readFileSync(__dirname + '/Views/partials/about.hbs', 'utf8'));
+
+hbs.registerPartial('course_area', fs.readFileSync(__dirname + '/Views/partials/course_area.hbs', 'utf8'));
+
+hbs.registerPartial('faculty_area', fs.readFileSync(__dirname + '/Views/partials/faculty_area.hbs', 'utf8'));
+
+hbs.registerPartial('feature_area', fs.readFileSync(__dirname + '/Views/partials/feature_area.hbs', 'utf8'));
 
 hbs.registerPartial('footer', fs.readFileSync(__dirname + '/Views/partials/footer.hbs', 'utf8'));
 
 hbs.registerPartial('header', fs.readFileSync(__dirname + '/Views/partials/header.hbs', 'utf8'));
+
+hbs.registerPartial('testimony_area', fs.readFileSync(__dirname + '/Views/partials/testimony_area.hbs', 'utf8'));
 // hbs helpers
 hbs.registerHelper('json', function (content) {
     return JSON.stringify(content);
+});
+
+hbs.registerHelper('uppercase', function (str) {
+  if(str && typeof str === "string") {
+    return str.toUpperCase();
+  }
+  return '';
 });
 
 hbs.registerHelper('link', function(text, options) {

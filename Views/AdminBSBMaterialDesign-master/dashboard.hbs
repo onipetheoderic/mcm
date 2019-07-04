@@ -5,6 +5,233 @@
                 <h2>DASHBOARD</h2>
             </div>
 
+{{#if user.isStaff}}
+   
+
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Create Report Sheet</div>
+                            <div class="number count-to" data-from="0" data-to={{staff_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">Update report Sheet </div>  
+                            <div class="number count-to" data-from="0" data-to={{stafftype_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_pupil"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Pupils Remark</div>
+                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">Message from Admin</div>
+                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+
+{{/if}}
+{{#if user.isParent}}
+   
+
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">View Child report Sheet</div>
+                            <div class="number count-to" data-from="0" data-to={{staff_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">Pay Child School Fees</div>  
+                            <div class="number count-to" data-from="0" data-to={{stafftype_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_pupil"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">View Teachers Remark</div>
+                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">Message To School</div>
+                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">View Personal details</div>
+                            <div class="number count-to" data-from="0" data-to={{staff_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">Latest Annoucement</div>  
+                            <div class="number count-to" data-from="0" data-to={{stafftype_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_pupil"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Current School Fees</div>
+                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">Message From School</div>
+                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{{/if}}
+{{#if user.isPupil}}
+   
+
+        <!-- Widgets for the school environment -->
+
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">View Report Sheets</div>
+                            <div class="number count-to" data-from="0" data-to={{staff_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">View parent details</div>  
+                            <div class="number count-to" data-from="0" data-to={{stafftype_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_pupil"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Message To Admin</div>
+                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">Message from Admin</div>
+                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+
+{{/if}}
+
 
 {{#if user.isSchool}}
    
@@ -45,7 +272,7 @@
                         </div>
                         <div class="content">
                             <div class="text">New Student/Pupil</div>
-                            <div class="number count-to" data-from="0" data-to={{category_count}} data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +315,7 @@
                        
                         <div class="content">
                           <div class="text">New Parent</div>  
-                            <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to={{parent_count}}    data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
@@ -183,7 +410,7 @@
                         </div>
                         <div class="content">
                             <div class="text">CREATE SCHOOL</div>
-                            <div class="number count-to" data-from="0" data-to={{patient_count}} data-speed="1000" data-fresh-interval="20"></div>  
+                            <div class="number count-to" data-from="0" data-to={{skool_count}} data-speed="1000" data-fresh-interval="20"></div>  
                         </div>
      
                     </div>
@@ -197,7 +424,7 @@
                        
                         <div class="content">
                           <div class="text">EDIT SCHOOL </div>  
-                            <div class="number count-to" data-from="0" data-to={{doctor_count}}    data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to={{skool_count}}    data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>

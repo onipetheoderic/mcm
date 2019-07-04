@@ -6,11 +6,12 @@ autoIncrement.initialize(connection);
 
 
 var Parent = new mongoose.Schema({
+	fullName: String,
 	school_id: String,	
 	state_of_origin: String,
 	lga_of_origin: String,
 	sex: String,
-	occupation: String,
+	occupation: String,	
 	office_address: String,
 	phone: String,
 	home_address: String,

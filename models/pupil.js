@@ -11,6 +11,8 @@ var Pupil = new mongoose.Schema({
 	dob: String,	
 	state_of_origin: String,
 	sex: String,
+	favourite_subject: String,
+	current_class: String,
 	home_address: String,
 	lga_of_origin: String,
 	place_of_birth: String,
