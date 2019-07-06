@@ -158,7 +158,7 @@ function sync(){
                         <p>Favourite Subject</p>
                             {{#each subject}}
                             <br/>                                       
-                            <input type="radio" value={{this._id}} name="favourite_subject" id={{this._id}} class="with-gap">
+                            <input type="radio" value={{this.name}} name="favourite_subject" id={{this._id}} class="with-gap">
                             <label for={{this._id}}>{{this.name}}</label>
                             {{/each}}
                              
@@ -170,7 +170,7 @@ function sync(){
                         <p>Current Class</p>
                             {{#each myClass}}
                                        
-                            <input type="radio" value={{this._id}} name="current_class" id={{this._id}} class="with-gap">
+                            <input type="radio" value={{this.name}} name="current_class" id={{this._id}} class="with-gap">
                             <label for={{this._id}}>{{this.name}}</label>
                             {{/each}}
                              
