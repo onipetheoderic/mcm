@@ -39,20 +39,18 @@
                             <div class="help-info">Last Name required</div>
                         </div>
                           <div class="form-group">
-                                    <input type="radio" name="sex" id="male" class="with-gap">
-                                    <label for="male">Male</label>
+                            <input type="radio" value="Male" name="sex" id="male" class="with-gap">
+                            <label for="male">Male</label>
 
-                                    <input type="radio" name="sex" id="female" class="with-gap">
-                                    <label for="female" class="m-l-20">Female</label>
+                            <input type="radio" value="Female" name="sex" id="female" class="with-gap">
+                            <label for="female" class="m-l-20">Female</label>
                         </div>
              
                                     
-                            <select id="selectNumber" name="state_of_origin" onchange="myFunction()">
+                            <select id="selectNumber" name="state_of_origin" >
                                 <option>State of Origin</option>
                             </select>
-                            <select id="selectLga" name="lga_of_origin" onchange="myFunction()">
-                                <option>LGA</option>
-                            </select>
+                            
 
                   
                             <script>
@@ -77,28 +75,12 @@ function sync(){
                                     var lgas = opt.lgas
                                     var el = document.createElement("option");
                                     el.textContent = state;
-                                    el.value = lgas;
+                                    el.value = state;
                                     var stata = {stateName:state, lgas:lgas};
                                     select.appendChild(el);
                                 }
 
-                        function myFunction() {
                         
-                         var x = document.getElementById("selectNumber").value;
-
-                          var destination = document.getElementById("selectLga");
-                         // destination.length = 0; //to prevent appendation
-                          var res = x.split(",");
-                          console.log("You selected: ", res)
-                            for(var i = 0; i < res.length; i++) {
-                                var lg = res[i];
-                                var la = document.createElement("option");
-                                la.textContent = lg;
-                                la.value = lg;
-                                destination.appendChild(la);
-                            }
-
-                        }
 
                             </script>
 
@@ -149,6 +131,13 @@ function sync(){
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" class="form-control" name="home_address" maxlength="194" minlength="3" required>
+                                <label class="form-label">Home Address</label>
+                            </div>
+                            <div class="help-info">example: Number 12 ilorin street</div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="office_address" maxlength="194" minlength="3" required>
                                 <label class="form-label">Home Address</label>
                             </div>
                             <div class="help-info">example: Number 12 ilorin street</div>

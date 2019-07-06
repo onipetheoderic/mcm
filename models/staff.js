@@ -6,8 +6,16 @@ autoIncrement.initialize(connection);
 
 
 var Staff = new mongoose.Schema({
+	address: String,
+	first_name: String,
+	middle_name: String,
+	last_name: String,
+	school_name: String,
+	phone: String,
 	school_id: String,	
 	dob: String,
+	user_id: String,
+	role_id: String,
 	sex: String,
 	staffType_id: String,
 	salary: Number,

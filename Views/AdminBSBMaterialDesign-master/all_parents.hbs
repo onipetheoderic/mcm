@@ -1,0 +1,88 @@
+Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Parent List
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+                                       
+  
+                                            <th>Full Name</th>
+                                            <th>State of Ilorin</th>
+                                            <th>sex</th>
+                                            <th>occupation</th>
+                                            <th>Office address</th>
+                                            <th>Phone Number</th>
+                                            <th>Home Address</th>
+                                            <th>Religion</th>
+                                            <th>Church Attended</th>
+                                            <th>Marital Status</th>
+                                            <th>Suspended</th>
+                                             <th>Complete Details</th>
+                                        </tr>
+                                    </thead>
+                                   
+
+                                  <tfoot>
+                                        <tr>
+                                          <th>Full Name</th>
+                                            <th>State of Ilorin</th>
+                                            <th>sex</th>
+                                            <th>occupation</th>
+                                            <th>Office address</th>
+                                            <th>Phone Number</th>
+                                            <th>Home Address</th>
+                                            <th>Religion</th>
+                                            <th>Church Attended</th>
+                                            <th>Marital Status</th>
+                                            <th>Suspended</th>
+                                          
+
+                                            <th>Complete Details</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {{#each all_staffs}}
+                                        <tr>  
+
+                                            <td>{{this.fullName}}</td>
+                                            <td>{{this.state_of_origin}}</td>                         
+                                            <td>{{this.sex}}</td>
+                                             <td>{{this.occupation}}</td>
+                                            <td>{{this.office_address}}</td>
+                                            <td>{{this.phone}}</td>
+                                            <td>{{this.home_address}}</td>
+                                            <td>{{this.religion}}</td>
+                                            <td>{{this.church_attended}}</td>
+                                            <td>{{this.marital_status}}</td>
+                                            <td>{{this.suspended}}</td>
+                                            <td><a href="/get/{{this._id}}">View Full Profile</a></td>
+                                        </tr>
+                                        {{/each}}                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->

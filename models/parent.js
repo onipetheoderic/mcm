@@ -6,6 +6,8 @@ autoIncrement.initialize(connection);
 
 
 var Parent = new mongoose.Schema({
+	user_id: String,
+	role_id: String,
 	fullName: String,
 	school_id: String,	
 	state_of_origin: String,

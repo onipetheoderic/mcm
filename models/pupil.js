@@ -6,7 +6,15 @@ autoIncrement.initialize(connection);
 
 
 var Pupil = new mongoose.Schema({
+	user_id: String,
+	role_id: String,
 	parent_id: String,
+	school_id: String,
+	address: String,
+	first_name: String,
+	middle_name: String,
+	last_name: String,
+	phone: String,
 	school_id: String,	
 	dob: String,	
 	state_of_origin: String,

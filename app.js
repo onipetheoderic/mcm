@@ -95,13 +95,9 @@ app.use(expressValidator({
     };
   }
 }));
-
-app.use('/', index);
-app.use('/user', user);
 app.use('/admin', admin);
-app.use('/category', category);
-app.use('/product', product);
-app.use('/carousel', carousel);
+app.use('/school', index);
+app.use('/user', user);
 
 // passport account auth
 
