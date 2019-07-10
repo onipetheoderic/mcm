@@ -11,6 +11,7 @@ var ReportCard = new mongoose.Schema({
 	class_name: String,
 	staff_id: String,
 	school_id: String,
+	pupil_id: String,
 
 },
 {

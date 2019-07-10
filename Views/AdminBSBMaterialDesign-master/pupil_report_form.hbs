@@ -1,0 +1,138 @@
+        <div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Create A New Report Sheet</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                <div class="body">
+                    <form id="form_advanced_validation" action="/admin/new_report_subject"method="POST">
+
+<input type="hidden" class="form-control" name="staff_id" value={{staff_id}}>
+<input type="hidden" class="form-control" name="pupil_id" value={{pupil_id}}>
+<input type="hidden" class="form-control" name="school_id" value={{school_id}}>
+
+                        
+
+                        <div class="form-group">
+                            <input type="radio" value="First term" name="term_name" id="first_term" class="with-gap">
+                            <label for="first_term">First Term</label>
+
+                            <input type="radio" value="Second Term" name="term_name" id="second_term" class="with-gap">
+                            <label for="second_term" class="m-l-20">Second Term</label>
+
+                            <input type="radio" value="Third Term" name="term_name" id="third_term" class="with-gap">
+                            <label for="third_term" class="m-l-20">Third Term</label>
+                        </div>
+
+
+                        <div class="form-group">
+                        <p>Created Subjects</p>
+                            {{#each subjects}}
+                                       
+                            <input type="radio" value={{this.name}} name="subject" id={{this.name}} class="with-gap">
+                            <label for={{this.name}}>{{this.name}}</label>
+                            {{/each}}
+                             
+                        </div> 
+                        <div class="form-group">
+                        <p>All Report Cards</p>
+                            {{#each reportCards}}
+                                       
+                            <input type="radio" value={{this._id}} name="reportCard" id={{this.name}} class="with-gap">
+                            <label for={{this.name}}>{{this.name}}</label>
+                            {{/each}}
+                             
+                        </div> 
+
+
+                                    <div class="col-md-3">
+                                        <b>Test 1</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">note_add</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input name="subject_test1" onkeypress="allowNumbersOnly(event)" id="n1" type="Number" class="form-control date" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Test 2</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">note_add</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input name="subject_test2" onkeypress="allowNumbersOnly(event)" id="n2" type="Number" class="form-control time24" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Test 3</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">note_add</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input name="subject_test3" onkeypress="allowNumbersOnly(event)" id="n3" type="Number" class="form-control time12" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Exam</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">note_add</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input name="subject_test4" onkeypress="allowNumbersOnly(event)" onchange="sync()" onkeyup="sync()" type="Number" id="n4" class="form-control datetime" placeholder="0">
+                                            </div>
+
+                                            <p id="targ"></p>
+                                        </div>
+                                    </div> 
+
+   <script>
+function sync(){
+    var n1 = document.getElementById('n1');
+    var n2 = document.getElementById('n2');
+    var n3 = document.getElementById('n3');
+    var n4 = document.getElementById('n4');
+    var total = parseInt(n1.value) + parseInt(n2.value) + parseInt(n3.value) + parseInt(n4.value)
+    console.log(total);
+    document.getElementById("targ").innerHTML = total + "/"+"100";
+   
+}
+function allowNumbersOnly(e) {
+    var code = (e.which) ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+        e.preventDefault();
+    }
+}
+</script>
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
+

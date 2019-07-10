@@ -173,6 +173,40 @@ hbs.registerHelper('uppercase', function (str) {
   return '';
 });
 
+hbs.registerHelper('grader', function (val) {
+
+  if(val && parseInt(val) < 40) {
+    return "V.Poor"
+  }
+  if(parseInt(val)>60) {
+    return "V.Good"
+  } 
+  if(parseInt(val)>=70) {
+    return "Excellent"
+  } 
+  else if(val && parseInt(val) <= 20) {
+    return "V.Poor"
+  }
+  else if(val && val>=40 && val < 45) {
+    return "Poor"
+  }
+  else if(val && val>=45 && val < 50) {
+    return "Fair"
+  }
+  else if(val && val>=50 && val < 60) {
+    return "Good"
+  }
+  
+  
+  
+});
+
+hbs.registerHelper('remark', function(val){
+  if(val && val === 5){
+    return "✓"
+  }
+});
+
 hbs.registerHelper('link', function(text, options) {
   var attrs = [];
 

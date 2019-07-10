@@ -1,0 +1,1340 @@
+<script>
+
+function allowNumbersOnly(e) {
+    var code = (e.which) ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+        e.preventDefault();
+    }
+}
+
+</script>
+            <!-- Masked Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            Report Card for: {{pupil.first_name}} {{pupil.middle_name}} {{pupil.last_name}}
+                               
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="body">
+                            <div class="demo-masked-input">
+                                <div class="row clearfix">
+<form id="form_advanced_validation" action="/admin/pupils_report_edit/{{pupil_class._id}}"method="POST">
+     
+                   
+        <input type="radio" value="first_term" name="result_type" id="first_term" class="with-gap">
+        <label for="first_term">First Term</label>
+
+        <input type="radio" value="second_term" name="result_type" id="second_term" class="with-gap">
+        <label for="first_term">Second Term</label>
+
+        <input type="radio" value="third_term" name="result_type" id="third_term" class="with-gap">
+        <label for="first_term">Third Term</label>
+        
+        
+    </div>
+                   
+                                    <div class="col-md-3">
+                                        <b>Mathematics</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">date_range</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.maths_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="maths_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.maths_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="maths_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">date_range</i>
+                                            </span>
+                                            <div class="form-line">
+                                            <input value ="{{pupil_class.maths_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="maths_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.maths_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="maths_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+       {{!-- English --}}
+                                    <div class="col-md-3">
+                                        <b>English Language</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.english_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="english_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.english_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="english_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.english_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="english_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value ="{{pupil_class.english_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="english_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+    {{!--  --}}
+{{!-- yoruba --}}
+                                    <div class="col-md-3">
+                                        <b>Yoruba </b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.yoruba_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="yoruba_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.yoruba_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="yoruba_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.yoruba_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="yoruba_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.yoruba_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="yoruba_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                            {{!--basic_science  --}}
+                                    <div class="col-md-3">
+                                        <b>Basic Science </b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.basic_science_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="basic_science_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.basic_science_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="basic_science_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.basic_science_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="basic_science_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.basic_science_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="basic_science_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+{{!--basic_science  --}}
+                                    <div class="col-md-3">
+                                        <b>Social Studies</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.social_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="social_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.social_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="social_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.social_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="social_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.social_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="social_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+{{!--fine art  --}}
+                                    <div class="col-md-3">
+                                        <b>Fine Art</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.arts_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="arts_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.arts_test2}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="arts_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.arts_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="arts_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.arts_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="arts_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+{{!--agric  --}}
+                                    <div class="col-md-3">
+                                        <b>Agricultural Science </b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                          
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.agric_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="agric_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.agric_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="agric_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.agric_test3}}"onkeypress="allowNumbersOnly(event)"  type="text"name="agric_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.agric_exam}}"onkeypress="allowNumbersOnly(event)"  type="text"name="agric_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+{{!--Civic  --}}
+                                    <div class="col-md-3">
+                                        <b>Civic Education</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input onkeypress="allowNumbersOnly(event)" value="{{pupil_class.civic_test1}}" type="text" class="form-control time24" name="civic_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.civic_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="civic_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.civic_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="civic_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.civic_exam}}"onkeypress="allowNumbersOnly(event)"  type="text"name="civic_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{!--CRS  --}}
+                                    <div class="col-md-3">
+                                        <b>Christian Religious Knowledge</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.crs_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="crs_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.crs_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="crs_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.crs_test3}}"onkeypress="allowNumbersOnly(event)"  type="text"name="crs_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.crs_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="crs_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+{{!--PHE  --}}
+                                    <div class="col-md-3">
+                                        <b>Physical Health Education</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phe_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="phe_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phe_test2}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="phe_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phe_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="phe_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phe_exam}}"   onkeypress="allowNumbersOnly(event)"  type="text"name="phe_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+{{!--business  --}}
+                                    <div class="col-md-3">
+                                        <b>Business Studies</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.business_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="business_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.business_test2}}"onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="business_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.business_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="business_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.business_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="business_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+{{!--French  --}}
+                                    <div class="col-md-3">
+                                        <b>French Education</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.french_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="french_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.french_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="french_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.french_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="french_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.french_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="french_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{!--computer_name  --}}
+                                    <div class="col-md-3">
+                                        <b>Computer Studies</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.computer_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="computer_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.computer_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="computer_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.computer_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="computer_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.computer_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="computer_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{!--home_econs_test1  --}}
+                                    <div class="col-md-3">
+                                        <b>Home Economics</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.home_econs_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="home_econs_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.home_econs_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="home_econs_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.home_econs_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="home_econs_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.home_econs_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="home_econs_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{!--music  --}}
+                                    <div class="col-md-3">
+                                        <b>Music</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.music_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="music_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.music_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="music_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.musci_test3}}"onkeypress="allowNumbersOnly(event)"  type="text" name="music_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.music_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="music_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            {{!--home_econs_test1  --}}
+                                    <div class="col-md-3">
+                                        <b>Basic Technology</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.basic_tech_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="basic_tech_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.basic_tech_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="basic_tech_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.basic_tech_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="basic_tech_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.basic_tech_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="basic_tech_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                            {{!--Writing  --}}
+                                    <div class="col-md-3">
+                                        <b>Writing</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.writing_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="writing_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.writing_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="writing_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.writing_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="writing_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.writing_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="writing_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            {{!--Phonics --}}
+                                    <div class="col-md-3">
+                                        <b>Phonics</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phonics_test1}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="phonics_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phonics_test2}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="phonics_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phonics_test3}}"  onkeypress="allowNumbersOnly(event)"  type="text"name="phonics_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.phonics_exam}}"  onkeypress="allowNumbersOnly(event)"  type="text"name="phonics_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+{{!--quantitative --}}
+                                    <div class="col-md-3">
+                                        <b>Quantitative Reasoning</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.quantitative_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="quantitative_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.quantitative_test2}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="quantitative_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.quantitative_test3}}"  onkeypress="allowNumbersOnly(event)"  type="text"name="quantitative_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.quantitative_exam}}"  onkeypress="allowNumbersOnly(event)"  type="text"name="quantitative_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+{{!--quantitative --}}
+                                    <div class="col-md-3">
+                                        <b>Verbal Reasoning</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <b>First C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.verbal_test1}}"  onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time24" name="verbal_test1" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Second C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input value="{{pupil_class.verbal_test2}}" onkeypress="allowNumbersOnly(event)"  type="text" class="form-control time12" name="verbal_test2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Third C.A Test</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.verbal_test3}}" onkeypress="allowNumbersOnly(event)"  type="text"name="verbal_test3" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Examination</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="material-icons">book</i>
+                                            </span>
+                                            <div class="form-line">
+                                                <input  value="{{pupil_class.verbal_exam}}" onkeypress="allowNumbersOnly(event)"  type="text"name="verbal_exam" class="form-control datetime" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+        <div class="col-md-8">
+            <b>Teachers remark</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.teachers_remark}}"  type="text"name="teachers_remark" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <b>Head masters remark</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.head_master_remark}}"  type="text"name="teachers_remark" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Handwritting grade</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.handwritting_remark}}" onkeypress="allowNumbersOnly(event)"  type="text"name="handwritting_remark" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Drawing grade</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.drawing_remark}}" onkeypress="allowNumbersOnly(event)"  type="text"name="drawing_remark" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Games and Sport</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.games_sport}}" onkeypress="allowNumbersOnly(event)"  type="text"name="games_sport" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+         <div class="col-md-2">
+            <b>Punctuality</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.punctuality}}" onkeypress="allowNumbersOnly(event)"  type="text"name="punctuality" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+
+         <div class="col-md-2">
+            <b>Attendance</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.attendance}}" onkeypress="allowNumbersOnly(event)"  type="text"name="attendance" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Hygiene</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.hygiene}}" onkeypress="allowNumbersOnly(event)"  type="text"name="hygiene" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Attentiveness</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.attentiveness}}" onkeypress="allowNumbersOnly(event)"  type="text"name="attentiveness" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Honesty</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.honesty}}" onkeypress="allowNumbersOnly(event)"  type="text"name="honesty" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+         <div class="col-md-2">
+            <b>Neatness</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.neatness}}" onkeypress="allowNumbersOnly(event)"  type="text"name="neatness" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <b>Participation</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input  value="{{pupil_class.participation}}" onkeypress="allowNumbersOnly(event)"  type="text"name="participation" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+
+                                  
+
+        <button id="submitter" class="btn btn-primary waves-effect" type="submit">Submit Scores</button>
+
+                                </form>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Masked Input -->

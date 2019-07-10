@@ -7,6 +7,7 @@ autoIncrement.initialize(connection);
 
 
 const User = new Schema({
+	pic: String,
 	address: String,
 	first_name: String,
 	middle_name: String,

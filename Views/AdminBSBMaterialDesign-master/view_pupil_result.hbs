@@ -1,0 +1,732 @@
+<link href="/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+  
+     <script src="/plugins/jquery/jquery.min.js"></script>
+<style type="text/css">
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+th {
+    vertical-align: bottom;
+    border-bottom: 1px solid black!important;
+}
+
+th.rotates {
+  /* Something you can count on */
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotates > div {
+  transform: 
+    /* Magic Numbers */
+    translate(12px, 51px)
+    /* 45 is really 360 - 45 */
+    rotate(270deg);
+  width: 15px;
+}
+th.rotates > div > span {
+  
+  padding: 5px 5px;
+}
+th, td {
+  padding: 10px;
+}
+
+
+
+
+th.rotate {
+  /* Something you can count on */
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    translate(12px, 51px)
+    /* 45 is really 360 - 45 */
+    rotate(270deg);
+  width: 15px;
+}
+th.rotate > div > span {
+  
+  padding: 5px 58px;
+}
+th, td {
+  padding: 10px;
+}
+</style>
+    <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+        <h2>1ST TERM PROGRESS REPORT</h2>
+
+        </div>
+            <div class="body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ACADEMIC</th>
+                            <th  colspan="2" width="40px">1st Summary 20% Date</th>
+                            <th  colspan="2" width="30px">2nd Summary 20% Date</th>
+                            <th  colspan="2" width="30px">3rd Summary 20% Date</th>
+                            <th  colspan="2" width="40px">End of Term's Exam 40% Date</th>
+                            <th  colspan="2" width="30px"><div><span> Summary for The Term </span></div></th>
+                            <th rowspan="2" id="class_avg" class="rotates"><div><span> CLASS AVERAGE</span></div></th>
+                            <th rowspan="2" class="rotates"><div><span> POSITION</span></div></th>
+                            <th rowspan="2" class="rotates"><div><span> REMARKS</span></div></th>
+                           
+                        </tr>
+                        <thead>
+                                    <tr>
+                                        <th>A. SUBJECTS</th>
+                                        <th class="rotate"><div><span> Marks Obtainable</span></div></th>
+                                        <th class="rotate"><div><span> Marks Obtained</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtainable</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtained</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtainable</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtained</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtainable</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtained</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtainable</span></div></th>
+                                         <th class="rotate"><div><span> Marks Obtained</span></div></th>
+
+                                         <th class="rotate"><div><span></span></div></th>
+                                         <th class="rotate"><div><span></span></div></th>
+                                         <th class="rotate"><div><span></span></div></th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>English Language</td>
+                                      <td>20</td>
+                                    <td><strong>{{pupil_class.english_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.english_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.english_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.english_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.english_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.maths_total}}</strong></td>
+
+                                    </tr>
+                                <tr>
+                                    <td>Mathematics</td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.maths_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.maths_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.maths_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.maths_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.maths_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.maths_total}}</strong></td>
+                                </tr>
+                                    <tr>
+                                       <td class="uneditable">Nigerian Language(Yoruba)</td>
+                                        <td>20</td>
+                                    <td><strong>{{pupil_class.yoruba_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.yoruba_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.yoruba_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.yoruba_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.yoruba_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.yoruba_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Basic Science</td>
+                                             <td>20</td>
+                                    <td><strong>{{pupil_class.basic_science_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_science_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_science_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_science_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_science_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.basic_science_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Basic Technology</td>
+                                         <td>20</td>
+                                    <td><strong>{{pupil_class.basic_tech_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_tech_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_tech_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_tech_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.basic_tech_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.basic_science_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fine Arts</td>
+                                         <td>20</td>
+                                    <td><strong>{{pupil_class.arts_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.arts_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.arts_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.arts_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.arts_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.arts_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agricultural Science</td>
+                                       <td>20</td>
+                                    <td><strong>{{pupil_class.agric_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.agric_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.agric_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.agric_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.agric_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.agric_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Civic Education</td>
+                                         <td>20</td>
+                                    <td><strong>{{pupil_class.civic_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.civic_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.civic_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.civic_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.civic_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.civic_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Christian Religious Knowledge</td>
+                                        <td>20</td>
+                                    <td><strong>{{pupil_class.crs_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.crs_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.crs_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.crs_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.crs_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.crs_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Physical Health Education</td>
+                                       <td>20</td>
+                                    <td><strong>{{pupil_class.phe_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.phe_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.phe_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.phe_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.phe_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.phe_total}}</strong></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Business_Studies</td>
+                                       <td>20</td>
+                                    <td><strong>{{pupil_class.business_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.business_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.business_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.business_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.business_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.business_total}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>French</td>
+                                        <td>20</td>
+                                    <td><strong>{{pupil_class.french_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.french_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.french_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.french_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.french_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.french_total}}</strong></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Computer_Studies</td>
+                                        <td>20</td>
+                                        <td><strong>{{pupil_class.computer_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.computer_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.computer_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.computer_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.computer_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.computer_total}}</strong></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Home_Economics</td>
+                                        <td>20</td>
+                                         <td><strong>{{pupil_class.home_econs_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.home_econs_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.home_econs_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.home_econs_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.home_econs_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.home_econs_total}}</strong></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Music</td>
+                                        <td>20</td>
+                                        <td><strong>{{pupil_class.music_test1}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.music_test2}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.musci_test3}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.music_exam}}</strong></td>
+                                    <td>20</td>
+                                    <td><strong>{{pupil_class.music_total}}</strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>{{grader pupil_class.music_total}}</strong></td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <br>
+        <br>
+ <table class="table table-striped">
+<thead>
+    <tr>
+        <th>B. SKILLS</th>
+        <th  colspan="5">1st Summary</th>
+        <th  colspan="5">2nd Summary</th>
+       <th  colspan="5">3rd Summary</th>
+        <th  colspan="5">TERM'S SUMMARY</th>                                      
+    </tr>
+<thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>HANDWRITING</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                    </tr>
+                                     <tr>
+                                    <td>DRAWING/PAINTING</td>
+                                     <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                     <tr>
+                                        <td>GAMES AND SPORTS</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                     </tr>
+                                     <tr>
+                                        <td>READING FLUENCY</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                        
+                                </tbody>
+                                
+                            </table>
+
+
+ <br>
+        <br>
+ <table class="table table-striped">
+<thead>
+    <tr>
+        <th>B. SKILLS</th>
+        <th  colspan="5">1st Summary</th>
+        <th  colspan="5">2nd Summary</th>
+       <th  colspan="5">3rd Summary</th>
+        <th  colspan="5">TERM'S SUMMARY</th>                                      
+    </tr>
+<thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        <th>5</th>
+                                        <th>4</th>
+                                        <th>3</th>
+                                        <th>2</th>
+                                        <th>1</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>PUNCTUALITY</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                    </tr>
+                                     <tr>
+                                    <td>CLASS ATTENDANCE</td>
+                                     <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                     <tr>
+                                        <td>PERSONAL HYGIENE</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                     </tr>
+                                     <tr>
+                                        <td>ATTENTIVENESS</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>HONESTY</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEATNESS</td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>PARTICIPATION AT WORK</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                         <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                        
+                                </tbody>
+                                
+                            </table>
+
+<center><div class="tick">TICK RATING: KEY: 5 EXCELLENT; 4 GOOD; 3 FAIR; 2POOR; 1 VERY POOR</div></center>
+
+<p>
+    <strong>COMMENTS</strong>
+
+<p>(i) CLASS TEACHER</p>
+<p>(ii) HEADMASTER/HEADMISTRESS</p>
+<p>(iii) NEXT TERM BEGINS </p>
+</p>
+
+
+
+<style>
+.tick {
+ 
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+</style>
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="/plugins/bootstrap/js/bootstrap.js"></script>
+

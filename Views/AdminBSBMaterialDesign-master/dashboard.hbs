@@ -27,11 +27,11 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-cyan hover-expand-effect">
                         <div class="icon">
-                            <a href="/admin/all_pupils"><i class="material-icons">https</i></a>
+                            <a href="/admin/create_report_card"><i class="material-icons">https</i></a>
                         </div>
                        
                         <div class="content">
-                          <div class="text">All Pupils</div>  
+                          <div class="text">Record Report Sheet</div>  
                             <div class="number count-to" data-from="0" data-to={{pupilss_count}}    data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -39,11 +39,11 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-light-green hover-expand-effect">
                         <div class="icon">
-                            <a href="/admin/all_subjects"><i class="material-icons">create</i></a>
+                            <a href="/admin/all_pupils_scores"><i class="material-icons">create</i></a>
                         </div>
                         <div class="content">
-                            <div class="text">All Subject</div>
-                            <div class="number count-to" data-from="0" data-to={{subs_count}} data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="text">My Report Sheet</div>
+                            <div class="number count-to" data-from="0" data-to={{people_counter}} data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <a href="/admin/all_class"> <i class="material-icons">add_shopping_cart</i></a>   
                         </div>
                          <div class="content">
-                            <div class="text">All Class</div>
+                            <div class="text">All Parents</div>
                             <div class="number count-to" data-from="0" data-to={{class_counters}} data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
@@ -62,60 +62,7 @@
             <!-- #END# Widgets -->
 
 
-        <!-- Widgets for the school environment -->
-
-            <div class="row clearfix">
-             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            
-                    <div class="info-box bg-pink hover-expand-effect">
-                        <div class="icon">
-                          <a href="/admin/register_staff"><i class="material-icons">person_add</i></a>
-                        </div>
-                        <div class="content">
-                            <div class="text">All Parent</div>
-                            <div class="number count-to" data-from="0" data-to={{parent_counters}} data-speed="1000" data-fresh-interval="20"></div>  
-                        </div>
-     
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <a href="/admin/create_report_card"><i class="material-icons">https</i></a>
-                        </div>
-                       
-                        <div class="content">
-                          <div class="text">Create Report Sheet </div>  
-                            <div class="number count-to" data-from="0" data-to={{report_counter}}    data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <a href="/admin/create_report_card"><i class="material-icons">create</i></a>
-                        </div>
-                        <div class="content">
-                            <div class="text">Pupils Report</div>
-                            <div class="number count-to" data-from="0" data-to={{pupil_count}} data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
-                        <div class="icon">
-                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
-                        </div>
-                         <div class="content">
-                            <div class="text">Message from Admin</div>
-                            <div class="number count-to" data-from="0" data-to={{subject_count}} data-speed="15" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Widgets -->
+        
 
 {{/if}}
 {{#if user.isParent}}

@@ -3,12 +3,15 @@ const Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
 var connection = mongoose.createConnection("mongodb://localhost/mcsm");
 autoIncrement.initialize(connection);
-
+//my beautiful database structure for the report sheet
 
 var ReportSubject = new mongoose.Schema({
+	reportCard_id: String,
 	subject_name: String,
 	subject_id: String,
 	pupil_id: String,
+	school_id: String,
+	teacher_id: String,
 	subject_test1: {type: Number, default: 0},
 	subject_test2: {type: Number, default: 0},
 	subject_test3: {type: Number, default: 0},

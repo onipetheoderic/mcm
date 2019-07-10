@@ -54,9 +54,13 @@
 					<input type="password" name="password" placeholder="Password" id="password" required />
 					<a href="#" class="pass">Forgot Password ?</a>					
 					<input type="submit" value="Log In" />
+					{{#if all_users_count}}
 					<a href="/admin/register">
+						
 						<input type="button" value="Register" />
+						}
 					</a>
+					{{/if}}
 				</form>
 			</div>
 

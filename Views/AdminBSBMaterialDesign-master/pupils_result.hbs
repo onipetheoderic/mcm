@@ -21,27 +21,23 @@
                         </div>
                         <div class="body">
                             <div class="row">
-                                {{#each pupils}}
+                                {{#each pupil_class_results}}
                                  <div class="col-sm-6 col-md-4">
                                     <div class="thumbnail">
                                         <img src="http://placehold.it/500x300">
                                         <div class="caption">
                                             <center>
-                                            <h3>{{this.first_name}}{{this.middle_name}} {{this.last_name}}</h3>
+                                            <h3>{{this.pupil_name}}</h3>
                                         </center>
                                             <p>
                                                 <ul>
-                                                    <li>{{this.current_class}}</li>
-                                                    <li>{{this.state_of_origin}}</li>
-                                                     <li>{{this.address}}</li>
-                                                    <li>{{this.phone}}</li>
-                                                    <li>{{this.dob}}</li>
-                                                    <li>{{this.sex}}</li>
-                                                    <li>{{this.religion}}</li>
-                                                <ul>
+                                                    <li>{{this.maths_name}} <strong>{{this.maths_total}}</strong></li>
+                                                     <li>{{this.english_name}} <strong>{{this.english_total}}</strong></li>
+                                                </ul>
                                             </p>
                                            
-                                        <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Create Report</a>
+                                        <a href="/admin/pupils_report_edit/{{this._id}}" class="btn btn-primary waves-effect" role="button">Edit</a>
+                                        <a href="/admin/pupils_report_view/{{this._id}}" class="btn btn-primary waves-effect" role="button">View</a>
                                            
                                         </div>
                                     </div>

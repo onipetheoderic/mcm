@@ -12,9 +12,12 @@ import multer from 'multer';
 var imageName;
 import User from '../models/user';
 import Parent from '../models/parent';
+import PupilClass from '../models/pupilClass';
 import Pupil from '../models/pupil';
 import Role from '../models/role';
 import ReportCard from '../models/reportCard';
+import JssClass from '../models/jssClass';
+import ReportSubject from '../models/reportSubject';
 import Product from '../models/product';
 import Setting from '../models/setting';
 import Carousel from '../models/carousel';
@@ -77,7 +80,9 @@ router.get('/home', (req, res) => {
         var subs_count;
         var class_counters;
         var parent_counters;
+        var report_subjecter;
         var report_counter;
+        var people_counter;
         User.findOne({_id: req.user._id}, function(err, user){
             if(user.isStaff === true){
                 console.log("staff_pupils", staff_pupils.school_id)
@@ -103,6 +108,12 @@ router.get('/home', (req, res) => {
             }
         subs_count = subs.length;            
         })
+        PupilClass.find({staff_id: req.user._id}).exec(function (err, pupil_class_count){
+            if(err) {
+                console.log(err)
+            }
+            people_counter = pupil_class_count.length;
+        });
         Class.find({school_id: staff_pupils_school_id}).exec(function (err, class_counter){
             if(err) {
                 console.log(err)
@@ -116,6 +127,13 @@ router.get('/home', (req, res) => {
             }
         report_counter = report_count.length; 
         console.log("this is from the class ocunter", report_count) 
+        })
+        ReportSubject.find({teacher_id: req.user._id}).exec(function (err, report_subject){
+            if(err) {
+                console.log(err)
+            }
+        report_subjecter = report_subject.length; 
+        console.log("this is from the class ocunter", report_subjecter) 
         })
         Parent.find({school_id: staff_pupils_school_id}).exec(function (err, parent_counter){
             if(err) {
@@ -222,7 +240,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
         console.log("this is the carousel count", class_count);
     
     
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', user: req.user, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', user: req.user, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
         });
         });
     });
@@ -242,6 +260,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 router.get('/admin/add', (req, res) => {
     if(!req.user){
         res.redirect('/admin/login');
+
     }
     Category.find({creator_id: req.user._id}, function(err, category){      
         console.log("this is the categories",category)
@@ -276,8 +295,22 @@ router.get('/page_settings', (req, res) => {
     res.render('');
 });
 router.get('/login', (req, res) => {
-    res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error:"Please Login"}})
+    User.find({}).exec(function (err, user_all){
+        if(err) {
+            console.log(err)
+        }
+        var user_all_count = user_all.length;
+        var all_users_count;
+        if(user_all_count>=2){   
+            all_users_count = false           
+        }
+        else{   
+            all_users_count = true          
+        }
+        console.log("this is the list of users counts", all_users_count )
+    res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error:"Please Login"}, all_users_count: all_users_count })
   
+    });
 });
 router.get('/register', (req, res) => {
     
@@ -320,6 +353,31 @@ router.get('/create_report_card', (req, res) => {
     });
 });
 
+router.get('/create_report_c', (req, res) => {  
+    // to get the school id using the staff_id
+    redirector(req, res);
+    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+        var staff_id = req.user._id;
+        var staff_pupilss_count;
+        var myClassess;
+        User.findOne({_id: req.user._id}, function(err, user){
+            if(user.isStaff === true){
+                console.log("staff_pupils", staff_pupils.school_id)
+                //to get a the staff from the staff table using its user_id
+                let staff_pupils_school_id = staff_pupils.school_id    
+            Class.find({school_id: staff_pupils_school_id}, function(err, myClass){ 
+                myClassess = myClass;
+              
+         
+            Pupil.find({school_id: staff_pupils_school_id}, function(err, pupils){ 
+                res.render('AdminBSBMaterialDesign-master/create_report_card', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
+            })
+               })
+            }
+        });
+    });
+});
+
 
 
 router.get('/register_pupil', (req, res) => {    
@@ -335,7 +393,12 @@ function redirector(req, res){
         res.redirect('/admin/login');
     }   
 }
-// List/View Routes Below
+
+function additioner(param1, param2, param3, param4){
+    let total = parseInt(param1) + parseInt(param2) + parseInt(param3) + parseInt(param4)
+    return total;
+}
+
 
 
 
@@ -512,6 +575,18 @@ router.get('/get_all_stafftypes', (req, res, next) => {
     });
 
 })
+router.get('/get_all_results', (req, res, next) => {
+    PupilClass.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+router.get('/get_all_rs', (req, res, next) => {
+    ReportSubject.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
 router.get('/get_all_reports', (req, res, next) => {
     ReportCard.find({}, function(err, users) {
      console.log(users)
@@ -548,6 +623,8 @@ router.get('/get_all_schools', (req, res, next) => {
     });
 
 })
+
+
 
 
 
@@ -629,27 +706,33 @@ router.post('/register_new_class', (req, res, next) => {
     });
 
 });
-/*majorColor: String,
-    minorColor: String,
-    thirdColor: String,
-    fourthColor: String,
-    latitude: String,
-    longitude: String,
-    schoolDescription: String,
-    proprietorName: String,
-    schoolType: String,
-    hmName: String,
-    bigSlogan: 
-    bigImage: String,
-    mediumImage: String,
-    small_historic_quote: {type: String, default: "In the history of modern school, there is probably no greater leap forward than building the future of your child with us"},
-    advertisement_text_header: {type: String, default: "Over 20 First-Class Graduates produced every year, are former students of "},
-    advertisement_text_description: {type: String, default: "Yearly more than 20 First-Class graduates in Universities across Nigeria and the Whole world, are former student/pupils of our Great School. So therefore the best asset you can give your Child is proper foundation, which is what we give our pupils/students"},
-    advertisement_text_header1: {type: String, default: "is not just a School, but an EDUCATION itself"},
-    advertisement_text_description1: {type: String, default: " Albert Einstein: Education is what remains after one has forgotten what one has learned in school. We believe Education is not just about going to school and getting a degree. It's about widening your knowledge and absorbing the truth about life."},
-    logo: {type: String, default: "logo.png"},
-    visionStatement: String,
-    missionStatement: String,*/
+
+router.post('/new_report_subject', (req, res, next) => {
+    let reportSubject = new ReportSubject(); 
+
+    // my_class.school_id = req.user._id; 
+    reportSubject.teacher_id = req.user._id;
+    reportSubject.subject_name = req.body.subject_name;
+    reportSubject.pupil_id = req.body.pupil_id;
+    reportSubject.school_id = req.body.school_id;
+    reportSubject.subject_test1 = req.body.subject_test1
+    reportSubject.subject_test2 = req.body.subject_test2
+    reportSubject.subject_test3 = req.body.subject_test3
+    reportSubject.subject_test4 = req.body.subject_test4
+    
+    reportSubject.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+
 
 router.post('/create_school', (req, res, next) => {
     let school = new School();  
@@ -887,6 +970,568 @@ router.post('/create_parent', (req, res, next) => {
             });
      });
 
+});
+
+
+// record_scores
+/*  school_id: String,
+    subject_name: String,
+    subject_id: String,
+    pupil_id: String,
+    subject_test1: {type: Number, default: 0},
+    subject_test2: {type: Number, default: 0},
+    subject_test3: {type: Number, default: 0},
+    subject_test4: {type: Number, default: 0}, */
+router.get('/all_pupils_scores', (req, res, next) => {
+     redirector(req, res)
+    let current_staff_id = req.user._id
+    PupilClass.find({staff_id: current_staff_id}).exec(function (err, pupil_class){
+        if(err) {
+            console.log(err)
+        }
+
+        let pupil_class_results = pupil_class
+        console.log("these are the user details: ",pupil_class_results)
+    // lets use pupil's id within the db to get the pupils details 
+    // Pupils.findOne({user_id: pupil_class_results.})
+        res.render('AdminBSBMaterialDesign-master/pupils_result', {layout: 'layout/admin.hbs', pupil_class_results: pupil_class})
+    });
+})
+
+router.get('/pupils_report_edit/:id', (req, res) => {
+    redirector(req, res)
+    // let result_id = req.params.id;
+    PupilClass.findOne({_id: req.params.id}, function(err, pupilClass){
+        // console.log("this is the pupils class",pupilClass)
+        let pupil_class = pupilClass
+        res.render('AdminBSBMaterialDesign-master/report_edit', {layout: 'layout/admin.hbs', pupil_class: pupil_class})
+    })
+})
+
+router.get('/pupils_report_view/:id', (req, res) => {
+    PupilClass.findOne({_id: req.params.id}, function(err, pupilClass){
+        // console.log("this is the pupils class",pupilClass)
+        let pupil_class = pupilClass
+        // lets calculate the class average
+        
+        res.render('AdminBSBMaterialDesign-master/view_pupil_result', {layout: false, pupil_class: pupil_class})
+    })
+})
+
+router.get('/pupils_report_view/:id', (req, res) => {
+    redirector(req, res)
+    // let result_id = req.params.id;
+    PupilClass.findOne({_id: req.params.id}, function(err, pupilResult){
+        // console.log("this is the pupils class",pupilClass)
+        let pupil_result = pupilResult
+        let pupil_id = pupil_class.pupil_id
+    // lets query the pupils table to get the pupils details
+    Pupil.findOne({user_id: pupil_id}, function(err, pups){
+        let pups_details = pups;    
+        res.render('AdminBSBMaterialDesign-master/report_edit', {layout: 'layout/admin.hbs', pups_details: pups_details, pupil_result: pupil_result})
+    })
+})
+})
+
+/* school.schoolID = req.user._id;
+                    school.name = req.body.name;
+                    school.majorColor = req.body.majorColor;
+                    school.minorColor = req.body.minorColor;
+                    school.thirdColor = req.body.thirdColor;
+
+                    school.fourthColor = req.body.fourthColor;
+                    school.latitude = req.body.latitude;
+                    school.longitude = req.body.longitude
+                    school.schoolDescription = req.body.schoolDescription;
+                    school.proprietorName = req.body.proprietorName;
+                    school.schoolType = req.body.schoolType;
+                    school.hmName = req.body.hmName;
+                    school.bigSlogan = req.body.bigSlogan;
+                    school.bigImage = req.body.bigImage;
+                    school.mediumImage = req.body.mediumImage;
+                    school.visionStatement = req.body.visionStatement;
+                    school.missionStatement = req.body.missionStatement;*/
+router.post('/pupils_report_edit/:id', (req, res, next) => {
+    redirector(req, res)
+    let result_id = req.params.id;
+    console.log(req.body)
+    PupilClass.findByIdAndUpdate(result_id,
+    { 
+        "maths_test1": parseInt(req.body.maths_test1),
+       "maths_test2": parseInt(req.body.maths_test2),
+       "maths_test3": parseInt(req.body.maths_test3),
+       "maths_exam": parseInt(req.body.maths_exam),
+       "maths_total": parseInt(additioner(req.body.maths_test1, req.body.maths_test2, req.body.maths_test3, req.body.maths_exam)),       
+
+       "english_test1": parseInt( req.body.english_test1),
+       "english_test2": parseInt( req.body.english_test2),
+       "english_test3": parseInt( req.body.english_test3),
+       "english_exam": parseInt( req.body.english_exam),
+       "english_total": parseInt( additioner(req.body.english_test1, req.body.english_test2, req.body.english_test3, req.body.english_exam)),        
+      
+       "yoruba_test1": parseInt( req.body.yoruba_test1),
+       "yoruba_test2": parseInt( req.body.yoruba_test2),
+       "yoruba_test3": parseInt( req.body.yoruba_test3),
+       "yoruba_exam": parseInt( req.body.yoruba_exam),
+       "yoruba_total": parseInt( additioner(req.body.yoruba_test1, req.body.yoruba_test2, req.body.yoruba_test3, req.body.yoruba_exam)),
+
+       "basic_science_test1": parseInt( req.body.basic_science_test1),
+       "basic_science_test2": parseInt( req.body.basic_science_test2),
+       "basic_science_test3": parseInt( req.body.basic_science_test3),
+       "basic_science_exam": parseInt( req.body.basic_science_exam),
+       "basic_science_total": parseInt( additioner(req.body.basic_science_test1, req.body.basic_science_test2, req.body.basic_science_test3, req.body.basic_science_exam)),
+        
+       "social_test1": parseInt(req.body.social_test1),
+       "social_test2": parseInt(req.body.social_test2),
+       "social_test3": parseInt(req.body.social_test3),
+       "social_exam": parseInt(req.body.social_exam),
+       "social_total": parseInt(additioner(req.body.social_test1, req.body.social_test2, req.body.social_test3, req.body.social_exam)),        
+       "arts_test1": parseInt( req.body.arts_test1),
+       "arts_test2": parseInt( req.body.arts_test2),
+       "arts_test3": parseInt( req.body.arts_test3),
+       "arts_exam": parseInt( req.body.arts_exam),
+       "arts_total": parseInt( additioner(req.body.arts_test1, req.body.arts_test2, req.body.arts_test3, req.body.arts_exam)),
+       
+       "agric_test1": parseInt( req.body.agric_test1),
+       "agric_test2": parseInt( req.body.agric_test2),
+       "agric_test3": parseInt( req.body.agric_test3),
+       "agric_exam": parseInt( req.body.agric_exam),
+       "agric_total": parseInt(additioner(req.body.agric_test1, req.body.agric_test2, req.body.agric_test3, req.body.agric_exam)),
+       
+       "civic_test1": parseInt( req.body.civic_test1),
+       "civic_test2": parseInt( req.body.civic_test2),
+       "civic_test3": parseInt( req.body.civic_test3),
+       "civic_exam": parseInt( req.body.civic_exam),
+       "civic_total": parseInt( additioner(req.body.civic_test1, req.body.civic_test2, req.body.civic_test3, req.body.civic_exam)),
+       
+       "crs_test1": parseInt( req.body.crs_test1),
+       "crs_test2": parseInt( req.body.crs_test2),
+       "crs_test3": parseInt( req.body.crs_test3),
+       "crs_exam": parseInt( req.body.crs_exam),
+       "crs_total": parseInt( additioner(req.body.crs_test1, req.body.crs_test2, req.body.crs_test3, req.body.crs_exam)),
+       
+       "phe_name": parseInt( req.body.phe_name),
+       "phe_test1": parseInt( req.body.phe_test1),
+       "phe_test2": parseInt( req.body.phe_test2),
+       "phe_test3": parseInt( req.body.phe_test3),
+       "phe_exam": parseInt( req.body.phe_exam),
+       "phe_total": parseInt( additioner(req.body.phe_test1, req.body.phe_test2, req.body.phe_test3, req.body.phe_exam)),
+       
+       "business_test1": parseInt( req.body.business_test1),
+       "business_test2": parseInt( req.body.business_test2),
+       "business_test3": parseInt( req.body.business_test3),
+       "business_exam": parseInt( req.body.business_exam),
+       "business_total": parseInt( additioner(req.body.business_test1, req.body.business_test2, req.body.business_test3, req.body.business_exam)),
+        
+       "french_test1": parseInt( req.body.french_test1),
+       "french_test2": parseInt( req.body.french_test2),
+       "french_test3": parseInt( req.body.french_test3),
+       "french_exam": parseInt( req.body.french_exam),
+       "french_total": parseInt( additioner(req.body.french_test1, req.body.french_test2, req.body.french_test3, req.body.french_exam)),
+        
+       "computer_test1": parseInt( req.body.computer_test1),
+       "computer_test2": parseInt( req.body.computer_test2),
+       "computer_test3": parseInt( req.body.computer_test3),
+       "computer_exam": parseInt( req.body.computer_exam),
+       "computer_total": parseInt( additioner(req.body.computer_test1, req.body.computer_test2, req.body.computer_test3, req.body.computer_exam)),
+        
+       "home_econs_test1": parseInt( req.body.home_econs_test1),
+       "home_econs_test2": parseInt( req.body.home_econs_test2),
+       "home_econs_test3": parseInt( req.body.home_econs_test3),
+       "home_econs_exam": parseInt( req.body.home_econs_exam),
+       "home_econs_total": parseInt( additioner(req.body.home_econs_test1, req.body.home_econs_test2, req.body.home_econs_test3, req.body.home_econs_exam)),
+        
+       "music_test1": parseInt( req.body.music_test1),
+       "music_test2": parseInt( req.body.music_test2),
+       "musci_test3": parseInt( req.body.music_test3),
+       "music_exam": parseInt( req.body.music_exam),
+       "music_total": parseInt( additioner(req.body.music_test1, req.body.music_test2, req.body.music_test3, req.body.music_exam)),
+               
+       "basic_tech_test1": parseInt( req.body.basic_tech_test1),
+       "basic_tech_test2": parseInt( req.body.basic_science_test2),
+       "basic_tech_test3": parseInt( req.body.basic_science_test3),
+       "basic_tech_exam": parseInt( req.body.basic_tech_exam),
+       "basic_tech_total": parseInt( additioner(req.body.basic_tech_test1, req.body.basic_tech_test2, req.body.basic_tech_test3, req.body.basic_tech_exam)),
+        
+       "writing_test1": parseInt( req.body.writing_test1),
+       "writing_test2": parseInt( req.body.writing_test2),
+       "writing_test3": parseInt( req.body.writing_test3),
+       "writing_exam": parseInt( req.body.writing_exam),
+       "writing_total": parseInt( additioner(req.body.writing_test1, req.body.writing_test2, req.body.writing_test3, req.body.writing_exam)), 
+        
+       "phonics_test1": parseInt( req.body.phonics_test1),
+       "phonics_test2": parseInt( req.body.phonics_test2),
+       "phonics_test3": parseInt( req.body.phonics_test3),
+       "phonics_exam": parseInt(  req.body.phonics_exam),
+       "phonics_total": parseInt( additioner(req.body.phonics_test1, req.body.phonics_test2, req.body.phonics_test3, req.body.phonics_exam)),
+        
+        "quantitative_test1": parseInt( req.body.quantitative_test1),
+        "quantitative_test2": parseInt( req.body.quantitative_test2),
+        "quantitative_test3": parseInt(req.body.quantitative_test3),
+        "quantitative_exam": parseInt( req.body.quantitative_exam),
+        "quantitative_total": parseInt( additioner(req.body.quantitative_test1, req.body.quantitative_test2, req.body.quantitative_test3, req.body.quantitative_exam)),
+
+        "verbal_test1": parseInt( req.body.verbal_test1),
+        "verbal_test2": parseInt( req.body.verbal_test2),
+        "verbal_test3": parseInt(req.body.verbal_test3),
+        "verbal_exam": parseInt( req.body.verbal_exam),
+        "verbal_total": parseInt( additioner(req.body.verbal_test1, req.body.verbal_test2, req.body.verbal_test3, req.body.verbal_exam)),
+        
+        "teachers_remark": req.body.teachers_remark,
+        "head_master_remark": req.body.head_master_remark,
+        "handwritting": parseInt(req.body.handwritting),
+        "drawing": parseInt(req.body.drawing),
+        "games_sport": parseInt(req.body.games_sport),
+        "reading": parseInt(req.body.reading),
+        "punctuality": parseInt(req.body.punctuality),
+        "attendance": parseInt(req.body.attendance),
+        "hygiene": parseInt(req.body.hygiene),
+        "attentiveness": parseInt(req.body.attentiveness),
+        "honesty": parseInt(req.body.honesty),
+        "neatness": parseInt(req.body.neatness),
+        "participation": parseInt(req.body.participation),
+
+
+
+    }).exec(function(err, updated_pupil){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        
+        res.redirect("/admin/all_pupils_scores")
+    }
+    });
+
+})
+
+
+
+
+router.post('/edit_school/:id', (req, res, next) => {
+    redirector(req, res)
+    let result_id = req.params.id;
+    console.log(req.body)
+    School.findByIdAndUpdate(result_id,
+    { 
+        "maths_test1": parseInt(req.body.maths_test1),
+        "neatness": parseInt(req.body.neatness),
+        "participation": parseInt(req.body.participation),
+
+    }).exec(function(err, updated_pupil){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        
+        res.redirect("/admin/all_schools")
+    }
+    });
+})
+
+
+router.post('/submitScore/:id', (req, res, next) => {
+    redirector(req, res)
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+
+
+    let primaryClass = new PupilClass();
+        primaryClass.pupil_id = pupil_id;  
+        primaryClass.staff_id = staff_id;
+        primaryClass.pupil_name = req.body.pupil_name;
+        primaryClass.result_type = req.body.result_type;
+        primaryClass.pic = req.body.pupil_pic;
+        if(req.body.maths_test1){ 
+        primaryClass.maths_name = req.body.maths_name;
+        primaryClass.maths_test1= req.body.maths_test1;
+        primaryClass.maths_test2= req.body.maths_test2;
+        primaryClass.maths_test3=req.body.maths_test3;
+        primaryClass.maths_exam = req.body.maths_exam;
+        primaryClass.maths_total = additioner(req.body.maths_test1, req.body.maths_test2, req.body.maths_test3, req.body.maths_exam) 
+        }
+        if(req.body.english_test1){ 
+        primaryClass.english_name= req.body.english_name;
+        primaryClass.english_test1= req.body.english_test1;
+        primaryClass.english_test2= req.body.english_test2;
+        primaryClass.english_test3= req.body.english_test3;
+        primaryClass.english_exam= req.body.english_exam;
+        primaryClass.english_total = additioner(req.body.english_test1, req.body.english_test2, req.body.english_test3, req.body.english_exam) 
+        }
+        if(req.body.yoruba_test1){   
+        primaryClass.yoruba_test1= req.body.yoruba_test1;
+        primaryClass.yoruba_test2= req.body.yoruba_test2;
+        primaryClass.yoruba_test3= req.body.yoruba_test3;
+        primaryClass.yoruba_exam= req.body.yoruba_exam;
+        primaryClass.yoruba_total= additioner(req.body.yoruba_test1, req.body.yoruba_test2, req.body.yoruba_test3, req.body.yoruba_exam) 
+        }
+        if(req.body.basic_science_test1){
+        primaryClass.basic_science_test1= req.body.basic_science_test1;
+        primaryClass.basic_science_test2= req.body.basic_science_test2;
+        primaryClass.basic_science_test3= req.body.basic_science_test3;
+        primaryClass.basic_science_exam= req.body.basic_science_exam;
+        primaryClass.basic_science_total= additioner(req.body.basic_science_test1, req.body.basic_science_test2, req.body.basic_science_test3, req.body.basic_science_exam) 
+        }
+        if(req.body.social_test1){
+        primaryClass.social_test1= req.body.social_test1;
+        primaryClass.social_test2= req.body.social_test2;
+        primaryClass.social_test3= req.body.social_test3;
+        primaryClass.social_exam= req.body.social_exam;
+        primaryClass.social_total= additioner(req.body.social_test1, req.body.social_test2, req.body.social_test3, req.body.social_exam) 
+        }
+        if(req.body.arts_test1){
+        primaryClass.arts_test1= req.body.arts_test1;
+        primaryClass.arts_test2= req.body.arts_test2;
+        primaryClass.arts_test3= req.body.arts_test3;
+        primaryClass.arts_exam= req.body.arts_exam;
+        primaryClass.arts_total= additioner(req.body.arts_test1, req.body.arts_test2, req.body.arts_test3, req.body.arts_exam) 
+        }
+
+        if(req.body.agric_test1){
+        primaryClass.agric_test1= req.body.agric_test1;
+        primaryClass.agric_test2= req.body.agric_test2;
+        primaryClass.agric_test3= req.body.agric_test3;
+        primaryClass.agric_exam= req.body.agric_exam;
+        primaryClass.agric_total= additioner(req.body.agric_test1, req.body.agric_test2, req.body.agric_test3, req.body.agric_exam) 
+        }
+        if(req.body.civic_test1){
+        primaryClass.civic_test1= req.body.civic_test1;
+        primaryClass.civic_test2= req.body.civic_test2;
+        primaryClass.civic_test3= req.body.civic_test3;
+        primaryClass.civic_exam= req.body.civic_exam;
+        primaryClass.civic_total= additioner(req.body.civic_test1, req.body.civic_test2, req.body.civic_test3, req.body.civic_exam)
+        }
+
+        if(req.body.crs_test1){
+        primaryClass.crs_test1= req.body.crs_test1;
+        primaryClass.crs_test2= req.body.crs_test2;
+        primaryClass.crs_test3= req.body.crs_test3;
+        primaryClass.crs_exam= req.body.crs_exam;
+        primaryClass.crs_total= additioner(req.body.crs_test1, req.body.crs_test2, req.body.crs_test3, req.body.crs_exam)
+        }
+        if(req.body.phe_test1){
+        primaryClass.phe_name= req.body.phe_name;
+        primaryClass.phe_test1= req.body.phe_test1;
+        primaryClass.phe_test2= req.body.phe_test2;
+        primaryClass.phe_test3= req.body.phe_test3;
+        primaryClass.phe_exam= req.body.phe_exam;
+        primaryClass.phe_total= additioner(req.body.phe_test1, req.body.phe_test2, req.body.phe_test3, req.body.phe_exam)
+        }
+
+        if(req.body.business_test1){
+        primaryClass.business_test1= req.body.business_test1;
+        primaryClass.business_test2= req.body.business_test2;
+        primaryClass.business_test3= req.body.business_test3;
+        primaryClass.business_exam= req.body.business_exam;
+        primaryClass.business_total= additioner(req.body.business_test1, req.body.business_test2, req.body.business_test3, req.body.business_exam) 
+        }
+        if(req.body.french_test1){
+        primaryClass.french_test1= req.body.french_test1;
+        primaryClass.french_test2= req.body.french_test2;
+        primaryClass.french_test3= req.body.french_test3;
+        primaryClass.french_exam= req.body.french_exam;
+        primaryClass.french_total= additioner(req.body.french_test1, req.body.french_test2, req.body.french_test3, req.body.french_exam) 
+        }
+
+       if(req.body.computer_test1){
+        primaryClass.computer_test1= req.body.computer_test1;
+        primaryClass.computer_test2= req.body.computer_test2;
+        primaryClass.computer_test3= req.body.computer_test3;
+        primaryClass.computer_exam= req.body.computer_exam;
+        primaryClass.computer_total= additioner(req.body.computer_test1, req.body.computer_test2, req.body.computer_test3, req.body.computer_exam) 
+        }
+        if(req.body.home_econs_test1){
+        primaryClass.home_econs_test1= req.body.home_econs_test1;
+        primaryClass.home_econs_test2= req.body.home_econs_test2;
+        primaryClass.home_econs_test3= req.body.home_econs_test3;
+        primaryClass.home_econs_exam= req.body.home_econs_exam;
+        primaryClass.home_econs_total= additioner(req.body.home_econs_test1, req.body.home_econs_test2, req.body.home_econs_test3, req.body.home_econs_exam) 
+        }
+
+        if(req.body.music_test1){
+        primaryClass.music_test1= req.body.music_test1;
+        primaryClass.music_test2= req.body.music_test2;
+        primaryClass.musci_test3= req.body.music_test3;
+        primaryClass.music_exam= req.body.music_exam;
+        primaryClass.music_total= additioner(req.body.music_test1, req.body.music_test2, req.body.music_test3, req.body.music_exam) 
+        }
+        if(req.body.basic_tech_test1){        
+        primaryClass.basic_tech_test1= req.body.basic_tech_test1;
+        primaryClass.basic_tech_test2= req.body.basic_science_test2;
+        primaryClass.basic_tech_test3= req.body.basic_science_test3;
+        primaryClass.basic_tech_exam= req.body.basic_tech_exam;
+        primaryClass.basic_tech_total= additioner(req.body.basic_tech_test1, req.body.basic_tech_test2, req.body.basic_tech_test3, req.body.basic_tech_exam) 
+        }
+        if(req.body.writing_test1){
+        primaryClass.writing_test1 = req.body.writing_test1;
+        primaryClass.writing_test2 = req.body.writing_test2;
+        primaryClass.writing_test3 = req.body.writing_test3;
+        primaryClass.writing_exam = req.body.writing_exam;
+        primaryClass.writing_total = additioner(req.body.writing_test1, req.body.writing_test2, req.body.writing_test3, req.body.writing_exam) 
+        }
+        if(req.body.phonics_test1){
+        primaryClass.phonics_test1 = req.body.phonics_test1;
+        primaryClass.phonics_test2 = req.body.phonics_test2;
+        primaryClass.phonics_test3 = req.body.phonics_test3;
+        primaryClass.phonics_exam =  req.body.phonics_exam;
+        primaryClass.phonics_total = additioner(req.body.phonics_test1, req.body.phonics_test2, req.body.phonics_test3, req.body.phonics_exam) 
+        }
+        if(req.body.quantitative_test1){
+        primaryClass.quantitative_test1 = req.body.quantitative_test1;
+        primaryClass.quantitative_test2 = req.body.quantitative_test2;
+        primaryClass.quantitative_test3 =req.body.quantitative_test3;
+        primaryClass.quantitative_exam = req.body.quantitative_exam;
+        primaryClass.quantitative_total = additioner(req.body.quantitative_test1, req.body.quantitative_test2, req.body.quantitative_test3, req.body.quantitative_exam) 
+        }
+        if(req.body.verbal_test1){
+        primaryClass.verbal_test1 = req.body.verbal_test1;
+        primaryClass.verbal_test2 = req.body.verbal_test2;
+        primaryClass.verbal_test3 =req.body.verbal_test3;
+        primaryClass.verbal_exam = req.body.verbal_exam;
+        primaryClass.verbal_total = additioner(req.body.verbal_test1, req.body.verbal_test2, req.body.verbal_test3, req.body.verbal_exam) 
+        }
+        primaryClass.teachers_remark = req.body.teachers_remark;
+        primaryClass.head_master_remark = req.body.head_master_remark;
+        primaryClass.handwritting= parseInt(req.body.handwritting);
+        primaryClass.drawing= parseInt(req.body.drawing);
+        primaryClass.games_sport= parseInt(req.body.games_sport);
+        primaryClass.reading= parseInt(req.body.reading);
+        primaryClass.punctuality=parseInt(req.body.punctuality);
+        primaryClass.attendance= parseInt(req.body.attendance);
+        primaryClass.hygiene=parseInt(req.body.hygiene);
+        primaryClass.attentiveness= parseInt(req.body.attentiveness);
+        primaryClass.honesty= parseInt(req.body.honesty);
+        primaryClass.neatness=parseInt(req.body.neatness);
+        primaryClass.participation=parseInt(req.body.participation);
+        primaryClass.save(function(err, jss){  
+            if(err){
+                console.log("error durring saving",err);
+                return;
+                } else {                    
+                console.log("successfully save, redirecting now..........")
+                    res.redirect('/admin/home')
+                }
+        })   
+    // console.log("What was fucking sendt", staff_id, pupil_id, req.body)
+});
+
+
+
+router.get('/jss_class_report/:id', (req, res) => {
+    redirector(req, res);
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+    var all_subjects;
+    var staff_pupils_school_id;
+    var jss_id;
+    var jss_pupil;
+
+    JssClass.findOne({pupil_id: pupil_id}, function(err, pupils){
+        if(pupils != null){
+            console.log("There are pupils presents")
+            jss_pupil = pupils;
+
+            Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+                staff_pupils_school_id = staff_pupils.school_id;
+                console.log("this is the iddddd", jss_pupil)  
+                res.render('AdminBSBMaterialDesign-master/jss_class', {layout: 'layout/admin.hbs', jss_pupil: jss_pupil, user: req.user, pupil_id:pupil_id,  staff_id:staff_id, school_id:staff_pupils_school_id})
+            });
+        }
+        else{
+            let jssClass = new JssClass();
+                jssClass.pupil_id = pupil_id;  
+                jssClass.staff_id = staff_id;
+                jssClass.save(function(err, jss){       
+                    if(err){
+                        console.log("error durring saving",err);
+                        return;
+                    } else {                    
+                        console.log(jss, "successfully save, redirecting now..........")
+                        Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+                            staff_pupils_school_id = staff_pupils.school_id;
+                            console.log("this is the iddddd", staff_pupils_school_id)  
+                            let jss_pupil = jss;
+                            console.log("this are the fucning jss new students",jss_pupil)
+                            res.render('AdminBSBMaterialDesign-master/jss_class', {layout: 'layout/admin.hbs', jss_pupil: jss_pupil, user: req.user, pupil_id:pupil_id,  staff_id:staff_id, school_id:staff_pupils_school_id})
+                        });
+                        
+                    }
+                });
+                
+            }
+        })
+  
+
+   
+});
+
+router.get('/pupils_report/:id', (req, res) => {
+    redirector(req, res);
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+    //let get the pupils first, middle, lastname
+    User.findOne({_id: pupil_id}, function(err, staff_pupils){ 
+        let pupil = staff_pupils
+
+
+        console.log("this is the pupil_id",pupil_id)     
+        console.log("this is the pupil data",pupil)
+        res.render('AdminBSBMaterialDesign-master/report', {layout: 'layout/admin.hbs', user: req.user, pupil: pupil,  staff_id:staff_id})
+    });
+
+});
+
+
+
+router.get('/senior_class_report/:id', (req, res) => {
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+    var all_subjects;
+    var staff_pupils_school_id;
+  
+
+    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+        staff_pupils_school_id = staff_pupils.school_id;
+        console.log("this is the iddddd", staff_pupils_school_id)
+
+    Subject.find({school_id:staff_pupils_school_id}, function(err, subjects){
+        console.log("all_subjects", subjects)
+
+    ReportCard.find({staff_id:staff_id}, function(err, reportCards){
+        console.log("all_subjects", reportCards)    
+    res.render('AdminBSBMaterialDesign-master/ss_class', {layout: 'layout/admin.hbs', user: req.user, pupil_id:pupil_id,  staff_id:staff_id, subjects:subjects, school_id:staff_pupils_school_id, reportCards:reportCards})
+});
+});
+  });
+});
+
+router.get('/primary_report/:id', (req, res) => {
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+    var all_subjects;
+    var staff_pupils_school_id;
+  
+
+    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+        staff_pupils_school_id = staff_pupils.school_id;
+        console.log("this is the iddddd", staff_pupils_school_id)
+
+    Subject.find({school_id:staff_pupils_school_id}, function(err, subjects){
+        console.log("all_subjects", subjects)
+
+    ReportCard.find({staff_id:staff_id}, function(err, reportCards){
+        console.log("all_subjects", reportCards)    
+    res.render('AdminBSBMaterialDesign-master/pri_class', {layout: 'layout/admin.hbs', user: req.user, pupil_id:pupil_id,  staff_id:staff_id, subjects:subjects, school_id:staff_pupils_school_id, reportCards:reportCards})
+});
+});
+  });
+});
+
+router.get('/decision_page/:id', (req, res) => {
+    redirector(req, res)
+    let pupil_id = req.params.id;
+    let staff_id = req.user._id;
+    res.render('AdminBSBMaterialDesign-master/decision_page', {layout: 'layout/admin.hbs', user: req.user, pupil_id:pupil_id,  staff_id:staff_id})
 });
 
 
