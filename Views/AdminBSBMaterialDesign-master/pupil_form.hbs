@@ -21,7 +21,7 @@
                         </div>
 
                 <div class="body">
-                    <form id="form_advanced_validation" action="/admin/create_pupil" method="POST">
+                    <form id="form_advanced_validation" action="/admin/create_pupil"  enctype="multipart/form-data" method="POST">
 
 
                         <div class="form-group form-float">
@@ -44,6 +44,10 @@
                                 <label class="form-label">Middle Name</label>
                             </div>
                             <div class="help-info">Middle Name is not mandatory</div>
+                        </div>
+                         <div class="form-line">
+                            <input type="file" required name="passport" class="form-control" placeholder="Passport Image" >
+                            <label class="form-label">Passport Image</label>
                         </div>
                           <div class="form-group">
                                     <input type="radio" value="Male" name="sex" id="male" class="with-gap">
@@ -170,9 +174,10 @@ function sync(){
                         <p>Current Class</p>
                             {{#each myClass}}
                                        
-                            <input type="radio" value={{this.name}} name="current_class" id={{this._id}} class="with-gap">
+                             <input type="radio" value={{this._id}} name="class" id={{this._id}} class="with-gap">
                             <label for={{this._id}}>{{this.name}}</label>
                             {{/each}}
+                             <div class="help-info">Class, Created in the Dashboard</div>
                              
                         </div>    
 

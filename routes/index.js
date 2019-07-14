@@ -6,6 +6,8 @@ import User from '../models/user'
 import Category from '../models/category';
 import Product from '../models/product';
 
+import MessageSchool from '../models/messageSchool';
+
 import School from '../models/school';
 
 const router = express.Router();
@@ -32,6 +34,26 @@ router.get('/:school_name', (req, res) => {
 });
 });
 //this is the shop details 5b3dcf81de387222e4110915
+
+router.post('/send_message/:school_id', (req, res, next) => {
+let school_id = req.params.school_id;
+
+let messageSchool = new MessageSchool();   
+    sender_name =req.body.sender_name;
+    sender_email = req.body.sender_email;
+    sender_location = req.body.sender_location;
+    sender_school_id = school_id;
+
+messageSchool.save(function(err, doc){       
+                        if(err){
+                            console.log("error durring saving",err);
+                            return;
+                        } else {                    
+                            console.log(doc, "successfully save, redirecting now..........")
+                      
+                        }
+                    });
+})
 
 export default router;
 

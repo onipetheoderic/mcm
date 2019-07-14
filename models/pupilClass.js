@@ -7,6 +7,7 @@ autoIncrement.initialize(connection);
 
 var PupilClass = new mongoose.Schema({
 	pupil_name: String,
+	pupil_class: String,
 	pic: String,
 	pupil_id: String,
 	staff_id: String,

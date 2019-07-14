@@ -1,15 +1,9 @@
 import express from 'express';
 import passport from 'passport';
 import crypto from 'crypto';
-import path from 'path';
-import fileExtension from 'file-extension';
-import fs from 'fs';
-import multer from 'multer';
-// 5d1e2e3b344ba144a107aae1
-// 5d1e2e3b344ba144a107aae1',
-
-
-var imageName;
+const path = require("path");
+var fileExtension = require('file-extension'); 
+import DataLog from '../models/dataLog'
 import User from '../models/user';
 import Parent from '../models/parent';
 import PupilClass from '../models/pupilClass';
@@ -318,11 +312,57 @@ router.get('/register', (req, res) => {
 });
 
 
-router.get('/edit_school', (req, res) => {    
-    res.render('AdminBSBMaterialDesign-master/school_form', {layout: 'layout/admin.hbs', user: req.user})
+router.get('/edit_school/:id', (req, res) => {  
+    redirector(req, res)  
+    let school_id = req.params.id;
+    //lets find the school by its id
+    School.findOne({_id:school_id}, function(err, school){
+    let singleSchool = school
+    res.render('AdminBSBMaterialDesign-master/school_form', {layout: 'layout/admin.hbs', singleSchool:singleSchool})
+    })
 });
 
-router.get('/create_school', (req, res) => {    
+router.get('/edit_pupil/:id', (req, res) => {  
+    redirector(req, res)  
+    let myClassess;
+    let pupil_id = req.params.id;
+    //lets find the school by its id
+    Pupil.findOne({user_id:pupil_id}, function(err, pupil){
+    let singlePupil = pupil
+    Class.find({school_id: req.user._id}, function(err, myClass){ 
+                myClassess = myClass;
+    res.render('AdminBSBMaterialDesign-master/edit_pupil_page', {layout: 'layout/admin.hbs', myClassess:myClassess, state:state, singlePupil: singlePupil})
+    })
+});
+});
+
+
+router.get('/edit_staff/:id', (req, res) => {  
+    redirector(req, res) 
+    let myClassess; 
+    let pupil_id = req.params.id;
+    //lets find the school by its id
+    Staff.findOne({_id: pupil_id}, function(err, pupil){
+    let singlePupil = pupil
+    Class.find({school_id: req.user._id}, function(err, myClass){ 
+                myClassess = myClass;
+    res.render('AdminBSBMaterialDesign-master/edit_staff_page', {layout: 'layout/admin.hbs', myClassess:myClassess, singlePupil:singlePupil})
+    })
+});
+});
+
+router.get('/edit_parent/:id', (req, res) => {  
+    redirector(req, res)  
+    let parent_id = req.params.id;
+    //lets find the school by its id
+    Parent.findOne({_id:parent_id}, function(err, school){
+    let singleSchool = school
+    res.render('AdminBSBMaterialDesign-master/edit_parent_page', {layout: 'layout/admin.hbs', singleSchool:singleSchool})
+    })
+});
+
+router.get('/create_school', (req, res) => {   
+redirector(req, res) 
     res.render('AdminBSBMaterialDesign-master/create_school', {layout: 'layout/admin.hbs', user: req.user})
 });
 
@@ -367,6 +407,8 @@ router.get('/create_report_c', (req, res) => {
                 let staff_pupils_school_id = staff_pupils.school_id    
             Class.find({school_id: staff_pupils_school_id}, function(err, myClass){ 
                 myClassess = myClass;
+
+            // Class.findOne({}) todo
               
          
             Pupil.find({school_id: staff_pupils_school_id}, function(err, pupils){ 
@@ -398,7 +440,25 @@ function additioner(param1, param2, param3, param4){
     let total = parseInt(param1) + parseInt(param2) + parseInt(param3) + parseInt(param4)
     return total;
 }
+// this is a function to get the name from the model using the ID gotten from the form
+//pre-requisites, the model must have a name field/attribute
+function getNameFromModelUsingId(modelName, id){
+    let current_id = id
+    let modelInstance;
+    if(modelName=="School"){
+    School.findOne({schoolID: current_id}, function(err, values){
+        modelInstance = values.name
+    
+    })    
+    }
+    else if(modelName=="Class"){
+        Class.findOne({_id: current_id}, function(err, values){
+        modelInstance = values.name    
+    })   
+    }
 
+    return modelInstance;
+}
 
 
 
@@ -410,16 +470,19 @@ router.get('/register_staff', (req, res) => {
     Subject.find({school_id: req.user._id}, function(err, subject){      
         console.log("this is the categories",subject)
         if (err) throw err; 
-    
+    School.findOne({schoolID: req.user._id}, function(err, school){
+        let singleSchool = school
+        console.log("this is the single school vals", singleSchool)
+       
     Class.find({school_id: req.user._id}, function(err, myClass){      
         console.log("this is the categories",myClass)
         if (err) throw err;  
-        res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin.hbs', user: req.user, staffType:staffType, subject:subject, myClass:myClass})
+        res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin.hbs', singleSchool:singleSchool, user: req.user, staffType:staffType, subject:subject, myClass:myClass})
 });
 });
 });
 });
-
+  }) 
 
 
 
@@ -442,6 +505,19 @@ router.get('/create_class', (req, res, next) => {
  console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_class', {layout: 'layout/admin.hbs', user: req.user})
 })
+
+// router.get('/edit_class', (req, res, next) => {
+//     redirector(req, res)
+//     Class.find({}, function(err, all_class) {
+//         let all_classess = all_class
+//         res.render('AdminBSBMaterialDesign-master/edit_class', {layout: 'layout/admin.hbs', all_classess})  
+//     });
+   
+// })
+
+
+
+
 router.get('/create_subject', (req, res, next) => {
     redirector(req, res)
  console.log("this is the user id that mad e", req.user._id)
@@ -732,9 +808,217 @@ router.post('/new_report_subject', (req, res, next) => {
     });
 
 });
+// in this function we pass in the whole image, then we extract its name from it
+//then save the image as the extracted name in the uploads directory and db
+
+function imagePlacerAndNamer(req, res, the_file){
+    let file_name = Date.now()+ the_file.name
+    the_file.mv('Views/public/uploads/' + file_name, function(err) {
+
+        // console.log("this si thhe uploaded image",file_name)
+   });
+    return file_name
+}
+router.get('/view_all_schools', (req, res) => {
+    redirector(req, res)
+    School.find({}, function(err, schools) {
+        let all_schools = schools
+        res.render('AdminBSBMaterialDesign-master/view_all_schools', {layout: 'layout/admin', all_schools:all_schools} )
+    });    
+})
+
+router.post('/update_school/:id', (req, res) => {
+    redirector(req, res)
+    let result_id = req.params.id;
+    console.log(req.body)
+    let bigImage = req.files.bigImage;
+    let mediumImage = req.files.mediumImage;
+    let mediumImage2 = req.files.mediumImage2;
+    let logo = req.files.logo;  
+    let logoMedium = req.files.logoMedium;
+    let staff_image = req.files.staff_image;
+    let staff_image2 = req.files.staff_image2;
+    let staff_image3 = req.files.staff_image3;
+    let staff_image4 = req.files.staff_image4;
 
 
-router.post('/create_school', (req, res, next) => {
+    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
+    let mediumImage2_name =imagePlacerAndNamer(req, res, mediumImage2);
+    let mediumImage_name = imagePlacerAndNamer(req, res, mediumImage);   
+    let logo_name = imagePlacerAndNamer(req, res, logo);
+    let logoMedium_name =imagePlacerAndNamer(req, res, logoMedium);     
+    let staff_image_name =imagePlacerAndNamer(req, res, staff_image);
+    let staff_image2_name =imagePlacerAndNamer(req, res, staff_image2);
+    let staff_image3_name =imagePlacerAndNamer(req, res, staff_image3);
+    let staff_image4_name =imagePlacerAndNamer(req, res, staff_image4);
+    School.findByIdAndUpdate(result_id,
+    { 
+        "name": req.body.name,
+        "majorColor" :req.body.majorColor,
+        "minorColor" :req.body.minorColor,
+        "thirdColor" :req.body.thirdColor,
+        "fourthColor" :req.body.fourthColor,
+        "latitude" :req.body.latitude,
+        "longitude" :req.body.longitude,
+        "schoolDescription" :req.body.schoolDescription,
+        "proprietorName" :req.body.proprietorName,
+        "schoolType" :req.body.schoolType,
+        "hmName" :req.body.hmName,
+        "bigSlogan" :req.body.bigSlogan,
+        "bigImage" :bigImage_name,               
+        "logo" :logo_name,                
+        "logoMedium" :logoMedium_name,                
+        "mediumImage":mediumImage_name,
+        "mediumImage2":mediumImage2_name,
+        "facebook": req.body.facebook,
+        "twitter": req.body.twitter,
+        "staff_image" :staff_image_name,
+        "staff_image2" :staff_image2_name,
+        "staff_image3" :staff_image3_name,
+        "staff_image4" :staff_image4_name,
+        "visionStatement" :req.body.visionStatement,
+        "missionStatement" :req.body.missionStatement,
+        "staff_fullname" :req.body.staff_fullname,
+        "staff_fullname2" :req.body.staff_fullname2,
+        "staff_fullname3" :req.body.staff_fullname3,
+        "staff_fullname4" :req.body.staff_fullname4,
+        "staff_position" :req.body.staff_position,
+        "staff_position2" :req.body.staff_position2,
+        "staff_position3" :req.body.staff_position3,
+        "staff_position4" :req.body.staff_position4,
+        "staff_comment" :req.body.staff_comment,
+        "staff_comment2" :req.body.staff_comment2,
+        "staff_comment3" :req.body.staff_comment3,
+        "staff_comment4" :req.body.staff_comment4,
+
+    }).exec(function(err, updated_pupil){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        
+        res.redirect("/admin/view_all_schools")
+    }
+    });
+})
+
+router.post('/update_pupil/:id', (req, res) => {
+    redirector(req, res)
+    let result_id = req.params.id;
+    console.log(req.body)
+    let bigImage = req.files.passport_name;
+    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
+    Pupil.findByIdAndUpdate(result_id,
+    { 
+       
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "middle_name": req.body.middle_name,
+        "phone": req.body.phone,
+        "dob": req.body.dob,
+        "sex": req.body.sex,
+        "state_of_origin": req.body.state_of_origin,
+        "class_name": req.body.class_name,
+        "class_id": req.body.class_id,
+        "church_attended":req.body.church_attended,
+        "expelled":req.body.expelled,
+        "place_of_birth": req.body.place_of_birth,
+        "suspended":req.body.suspended,
+        "expelled": req.body.expelled,
+        "church_attended" :req.body.church_attended,
+        "school_fees_paid" :req.body.school_fees_paid,
+        "religion":req.body.religion,
+        "passport_name": bigImage_name,               
+        
+    }).exec(function(err, updated_pupil){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        
+        res.redirect("/admin/all_pupils")
+    }
+    });
+})
+
+router.post('/update_staff/:id', (req, res) => {
+   
+    let school_name;
+    let class_name;
+   
+    Class.findOne({_id: req.body.class}, function(err, values){
+        console.log("all schools", values)
+        class_name = values.name
+    }) 
+
+    let staff = new Staff();     
+    
+    redirector(req, res)
+    let result_id = req.params.id;
+    console.log(req.body)
+    let bigImage = req.files.passport_name;
+    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
+    Staff.findByIdAndUpdate(result_id,
+    { 
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "middle_name": req.body.middle_name,
+        "phone": req.body.phone,
+        "dob": req.body.dob,
+        "sex": req.body.sex,
+        "state_of_origin": req.body.state_of_origin,
+        "class_name": class_name,
+        "class_id": req.body.class,
+        "address": req.body.address,
+        "staffType_id": req.body.staffType_id,
+        "address": req.body.address,
+        "church_attended":req.body.church_attended,
+        "expelled":req.body.expelled,
+        "place_of_birth": req.body.place_of_birth,
+        "suspended":req.body.suspended,
+        "fired": req.body.fired,
+        "church_attended" :req.body.church_attended,
+        "school_fees_paid" :req.body.school_fees_paid,
+        "religion":req.body.religion,
+        "passport_name": bigImage_name,               
+        
+    }).exec(function(err, updated_pupil){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        
+        res.redirect("/admin/all_staffs")
+    }
+    });
+})
+
+
+router.post('/create_school', (req, res) => {
+
+   let bigImage = req.files.bigImage;
+   let mediumImage = req.files.mediumImage;
+   let mediumImage2 = req.files.mediumImage2;
+   let logo = req.files.logo;  
+   let logoMedium = req.files.logoMedium;
+   let staff_image = req.files.staff_image;
+   let staff_image2 = req.files.staff_image2;
+   let staff_image3 = req.files.staff_image3;
+   let staff_image4 = req.files.staff_image4;
+
+
+    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
+    let mediumImage2_name =imagePlacerAndNamer(req, res, mediumImage2);
+    let mediumImage_name = imagePlacerAndNamer(req, res, mediumImage);   
+    let logo_name = imagePlacerAndNamer(req, res, logo);
+    let logoMedium_name =imagePlacerAndNamer(req, res, logoMedium);     
+    let staff_image_name =imagePlacerAndNamer(req, res, staff_image);
+    let staff_image2_name =imagePlacerAndNamer(req, res, staff_image2);
+    let staff_image3_name =imagePlacerAndNamer(req, res, staff_image3);
+    let staff_image4_name =imagePlacerAndNamer(req, res, staff_image4);
+    console.log("this is the image name:")   
+
+
     let school = new School();  
     User.register(new User({ username: req.body.username,
        user_name: req.body.user_name,
@@ -763,9 +1047,7 @@ router.post('/create_school', (req, res, next) => {
                 if(err){
                     console.log(err);
                     return;
-                } 
-                // rd goes here
-               
+                }                
                 else {     
                     school.creator_id = req.user._id; 
                     school.schoolID = req.user._id;
@@ -773,7 +1055,6 @@ router.post('/create_school', (req, res, next) => {
                     school.majorColor = req.body.majorColor;
                     school.minorColor = req.body.minorColor;
                     school.thirdColor = req.body.thirdColor;
-
                     school.fourthColor = req.body.fourthColor;
                     school.latitude = req.body.latitude;
                     school.longitude = req.body.longitude
@@ -781,47 +1062,78 @@ router.post('/create_school', (req, res, next) => {
                     school.proprietorName = req.body.proprietorName;
                     school.schoolType = req.body.schoolType;
                     school.hmName = req.body.hmName;
-                    school.bigSlogan = req.body.bigSlogan;
-                    school.bigImage = req.body.bigImage;
-                    school.mediumImage = req.body.mediumImage;
-                    school.visionStatement = req.body.visionStatement;
-                    school.missionStatement = req.body.missionStatement;
-                    school.save(function(err, doc){       
-                        if(err){
-                            console.log("error durring saving",err);
-                            return;
-                        } else {                    
-                            console.log(doc, "successfully save, redirecting now..........")
-                      
-                        }
-                    });
-    //rd ends here           
-                    console.log("successfully saved to the role db")
-                }
-            });
 
-                if (err) {
-                    return next(err);
-                }                
-                res.render('AdminBSBMaterialDesign-master/login', {layout: false, message:{success: "successfully registered, now login"}})
+                school.bigSlogan = req.body.bigSlogan;
+                school.bigImage = bigImage_name;               
+                school.logo = logo_name;                
+                school.logoMedium = logoMedium_name;                
+                school.mediumImage = mediumImage_name;
+                school.mediumImage2 = mediumImage2_name;
+                school.staff_image = staff_image_name;
+                school.staff_image2 = staff_image2_name;
+                school.staff_image3 = staff_image3_name;
+                school.staff_image4 = staff_image4_name;
+                school.visionStatement = req.body.visionStatement;
+                school.missionStatement = req.body.missionStatement;
+                school.facebook = req.body.facebook;
+                school.twitter = req.body.twitter;
+                school.staff_fullname = req.body.staff_fullname;
+                school.staff_fullname2= req.body.staff_fullname2;
+                school.staff_fullname3= req.body.staff_fullname3;
+                school.staff_fullname4= req.body.staff_fullname4;
+                school.staff_position= req.body.staff_position;
+                school.staff_position2= req.body.staff_position2;
+                school.staff_position3= req.body.staff_position3;
+                school.staff_position4= req.body.staff_position4;
+                school.staff_comment= req.body.staff_comment;
+                school.staff_comment2= req.body.staff_comment2;
+                school.staff_comment3= req.body.staff_comment3;
+                school.staff_comment4= req.body.staff_comment4;
+                school.save(function(err, doc){       
+                    if(err){
+                        console.log("error durring saving",err);
+                        return;
+                    } else {                    
+                        console.log(doc, "successfully save, redirecting now..........")
+                  
+                    }
                 });
+//rd ends here           
+                console.log("successfully saved to the role db")
+            }
+        });
+
+            if (err) {
+                return next(err);
+            }                
+            res.redirect('/admin/login')
             });
-     });
+        });
+ });
 
-     });
+});
 
-
-/**/
 
 
 router.post('/create_staff', (req, res, next) => {
     let current_id = req.user._id
+    let my_passport = req.files.passport;
+    let school_name;
+    let class_name;
+    let passport_name = imagePlacerAndNamer(req, res, my_passport);
+    School.findOne({schoolID: req.user._id}, function(err, values){
+        console.log("all schools", values)
+        school_name = values.name
+    })
+    Class.findOne({_id: req.body.class}, function(err, values){
+        console.log("all schools", values)
+        class_name = values.name
+    }) 
 
-    let staff = new Staff(); 
-      
+    let staff = new Staff();     
+    let dataLog = new DataLog();
      
     User.register(new User({ username: req.body.username,
-       user_name: req.body.user_name,
        isStaff: true,
        sex: req.body.sex,
        first_name: req.body.first_name,
@@ -833,11 +1145,11 @@ router.post('/create_staff', (req, res, next) => {
 
             if (err) {
                 console.log(err)                                             
-                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: false, message:{error:err}})
+                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin', message:{error:err}})
                 }
             let role = new Role();
             
-            passport.authenticate('local')(req, res, () => {                                             
+            passport.authenticate('local')(req, res, () => {                                              
                 req.session.save((err) => {
                 console.log("this is the current user_id", req.user._id)
                 const current_user_id = req.user._id
@@ -846,7 +1158,6 @@ router.post('/create_staff', (req, res, next) => {
                 role.save(function(err, doc){
                     console.log("successfully saved")
                     let current_school_id = doc._id;
-
                 
                 if(err){
                     console.log(err);
@@ -854,13 +1165,19 @@ router.post('/create_staff', (req, res, next) => {
                 } 
   
                 else {   
-                 console.log("this is the current user_id", current_id)  
+                 console.log("this is the current user_id", current_id, req.user._id)  
+                    // var schoolName = getNameFromModelUsingId("School", req.user._id)
+                    
+                    dataLog.message = "A new staff has been created by: "+ school_name+ " School"
+                    dataLog.school_id = current_id;
                     staff.user_id = current_user_id; 
+                    staff.passport_name = passport_name;
                     staff.role_id = current_school_id;
                     staff.sex = req.body.sex;
                     staff.dob = req.body.dob;
                     staff.salary = req.body.salary;
-                    staff.class_id = req.body.class_id;
+                    staff.class_id = req.body.class;
+                    staff.class_name = class_name;
                     staff.subject_id = req.body.subject_id;
                     staff.staffType_id = req.body.staffType_id;
                     staff.school_id = current_id;
@@ -868,9 +1185,18 @@ router.post('/create_staff', (req, res, next) => {
                     staff.first_name = req.body.first_name 
                     staff.middle_name = req.body.middle_name
                     staff.last_name = req.body.last_name;
-                    // staff.school_name = school_name;
+                    staff.school_name = school_name;
                     staff.phone = req.body.phone;
                     staff.save(function(err, doc){       
+                        if(err){
+                            console.log("error durring saving",err);
+                            return;
+                        } else {                    
+                            console.log(doc, "successfully save, redirecting now..........")
+                      
+                        }
+                    });
+                    dataLog.save(function(err, doc){       
                         if(err){
                             console.log("error durring saving",err);
                             return;
@@ -897,6 +1223,8 @@ router.post('/create_staff', (req, res, next) => {
 
 router.post('/create_parent', (req, res, next) => {
     let current_id = req.user._id
+    let my_passport = req.files.passport;
+    let passport_name = imagePlacerAndNamer(req, res, my_passport);
     let parent = new Parent();  
     User.register(new User({ username: req.body.username,
        user_name: req.body.user_name,
@@ -934,7 +1262,8 @@ router.post('/create_parent', (req, res, next) => {
                 else {   
                  console.log("this is the current user_id", current_id)         
                     parent.user_id = current_user_id; 
-                    parent.role_id = current_school_id;           
+                    parent.role_id = current_school_id;
+                    parent.passport_name = passport_name;           
                     parent.sex = req.body.sex;
                     parent.fullName = req.body.last_name + " " + req.body.first_name;
                     parent.state_of_origin = req.body.state_of_origin;
@@ -1018,6 +1347,26 @@ router.get('/pupils_report_view/:id', (req, res) => {
     })
 })
 
+/*all pupils sheet*/
+/*here we would be using the people's id for the selection*/
+router.get('/single_pupil_report_view/:id', (req, res) => {
+    PupilClass.find({pupil_id: req.params.id}, function(err, pupilClass){
+        // console.log("this is the pupils class",pupilClass)
+        let pupil_class = pupilClass
+        // lets calculate the class average
+    Pupil.findOne({user_id: req.params.id}, function(err, singlePupil){
+        let pupil_pix = singlePupil.passport_name;   
+        let sinPupil = singlePupil;
+        
+        res.render('AdminBSBMaterialDesign-master/view_single_pupil_reports', {layout: 'layout/admin', sinPupil:sinPupil, pupil_class: pupil_class, pupil_pix: pupil_pix})
+    })
+    })
+});
+
+
+
+
+
 router.get('/pupils_report_view/:id', (req, res) => {
     redirector(req, res)
     // let result_id = req.params.id;
@@ -1033,24 +1382,6 @@ router.get('/pupils_report_view/:id', (req, res) => {
 })
 })
 
-/* school.schoolID = req.user._id;
-                    school.name = req.body.name;
-                    school.majorColor = req.body.majorColor;
-                    school.minorColor = req.body.minorColor;
-                    school.thirdColor = req.body.thirdColor;
-
-                    school.fourthColor = req.body.fourthColor;
-                    school.latitude = req.body.latitude;
-                    school.longitude = req.body.longitude
-                    school.schoolDescription = req.body.schoolDescription;
-                    school.proprietorName = req.body.proprietorName;
-                    school.schoolType = req.body.schoolType;
-                    school.hmName = req.body.hmName;
-                    school.bigSlogan = req.body.bigSlogan;
-                    school.bigImage = req.body.bigImage;
-                    school.mediumImage = req.body.mediumImage;
-                    school.visionStatement = req.body.visionStatement;
-                    school.missionStatement = req.body.missionStatement;*/
 router.post('/pupils_report_edit/:id', (req, res, next) => {
     redirector(req, res)
     let result_id = req.params.id;
@@ -1208,15 +1539,36 @@ router.post('/pupils_report_edit/:id', (req, res, next) => {
 
 
 
+
 router.post('/edit_school/:id', (req, res, next) => {
     redirector(req, res)
     let result_id = req.params.id;
     console.log(req.body)
     School.findByIdAndUpdate(result_id,
     { 
-        "maths_test1": parseInt(req.body.maths_test1),
-        "neatness": parseInt(req.body.neatness),
-        "participation": parseInt(req.body.participation),
+  
+    majorColor: req.body.majorColor,
+    minorColor: req.body.minorColor,
+    thirdColor: req.body.thirdColor,
+    fourthColor: req.body.fourthColor,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    schoolDescription: req.body.schoolDescription,
+    proprietorName: req.body.proprietorName,
+    schoolType: req.body.schoolType,
+    hmName: req.body.hmName,
+    bigSlogan: req.body.bigSlogan,
+    bigImage: req.body.bigImage,
+    mediumImage: req.body.mediumImage,
+    smallSlogan: req.body.smallSlogan,
+    small_historic_quote: req.body.small_historic_quote,
+    advertisement_text_header: req.body.advertisement_text_header,
+    advertisement_text_description: req.body.advertisement_text_description,
+    advertisement_text_header1: req.body.advertisement_text_header1,
+    advertisement_text_description1: req.body.advertisement_text_description1,
+    logo: req.body.logo,
+    visionStatement: req.body.visionStatement,
+    missionStatement: req.body.missionStatement,
 
     }).exec(function(err, updated_pupil){
     if(err) {
@@ -1229,6 +1581,32 @@ router.post('/edit_school/:id', (req, res, next) => {
     });
 })
 
+
+/*
+creator_id: String,
+   
+    majorColor: String,
+    minorColor: String,
+    thirdColor: String,
+    fourthColor: String,
+    latitude: String,
+    longitude: String,
+    schoolDescription: String,
+    proprietorName: String,
+    schoolType: String,
+    hmName: String,
+    bigSlogan: {type: String, default: "We Are Ranked as the Best School in Nigeria"},
+    bigImage: String,
+    mediumImage: String,
+    smallSlogan: String,
+    small_historic_quote: {type: String, default: "In the history of modern school, there is probably no greater leap forward than building the future of your child with us"},
+    advertisement_text_header: {type: String, default: "Over 20 First-Class Graduates produced every year, are former students of "},
+    advertisement_text_description: {type: String, default: "Yearly more than 20 First-Class graduates in Universities across Nigeria and the Whole world, are former student/pupils of our Great School. So therefore the best asset you can give your Child is proper foundation, which is what we give our pupils/students"},
+    advertisement_text_header1: {type: String, default: "is not just a School, but an EDUCATION itself"},
+    advertisement_text_description1: {type: String, default: " Albert Einstein: Education is what remains after one has forgotten what one has learned in school. We believe Education is not just about going to school and getting a degree. It's about widening your knowledge and absorbing the truth about life."},
+    logo: {type: String, default: "logo.png"},
+    visionStatement: String,
+    missionStatement: String,*/
 
 router.post('/submitScore/:id', (req, res, next) => {
     redirector(req, res)
@@ -1540,7 +1918,24 @@ router.get('/decision_page/:id', (req, res) => {
 
 router.post('/create_pupil', (req, res, next) => {
     let current_id = req.user._id
+    let my_passport = req.files.passport;
+    
+    let school_name;
+    let class_name;
+    let passport_name = imagePlacerAndNamer(req, res, my_passport);
+    School.findOne({schoolID: req.user._id}, function(err, values){
+        console.log("all schools", values)
+        school_name = values.name
+    })
+    Class.findOne({_id: req.body.class}, function(err, values){
+        console.log("all schools", values)
+        class_name = values.name
+    }) 
+
+    
+    let dataLog = new DataLog();
     let pupil = new Pupil();  
+    
     User.register(new User({ username: req.body.username,
        user_name: req.body.user_name,
        isPupil: true,
@@ -1570,9 +1965,13 @@ router.post('/create_pupil', (req, res, next) => {
                     console.log(err);
                     return;
                 }                            
+        
                 else {   
                  console.log("this is the current user_id", current_id) 
+                    dataLog.message = "A new staff has been created by: "+ school_name+ " School"
+                    dataLog.school_id = current_id;
                     pupil.user_id = current_user_id; 
+                    pupil.passport_name = passport_name;
                     pupil.role_id = current_school_id;      
                     pupil.parent_id = req.body.parent_id;
                     pupil.sex = req.body.sex;
@@ -1581,7 +1980,8 @@ router.post('/create_pupil', (req, res, next) => {
                     pupil.religion = req.body.religion;
                     pupil.church_attended = req.body.church_attended;
                     pupil.school_id = current_id;
-                    pupil.current_class = req.body.current_class;
+                    pupil.class_id = req.body.class;
+                    pupil.class_name = class_name;
                     pupil.phone = req.body.phone
                     pupil.lga_of_origin = req.body.lga_of_origin;
                     pupil.place_of_birth = req.body.place_of_birth;
@@ -1593,6 +1993,15 @@ router.post('/create_pupil', (req, res, next) => {
                     // pupil.school_name = school_name;
                     pupil.phone = req.body.phone;
                     pupil.save(function(err, doc){       
+                        if(err){
+                            console.log("error durring saving",err);
+                            return;
+                        } else {                    
+                            console.log(doc, "successfully save, redirecting now..........")
+                      
+                        }
+                    });
+                    dataLog.save(function(err, doc){       
                         if(err){
                             console.log("error durring saving",err);
                             return;
@@ -1652,9 +2061,9 @@ router.get('/all_staffs', (req, res, next) => {
 
 router.get('/all_pupils', (req, res, next) => {
     redirector(req, res);
-    Pupil.find({school_id: req.user._id}, function(err, all_staffs) {
-   
-         res.render('AdminBSBMaterialDesign-master/all_pupils', {layout: 'layout/admin.hbs', user: req.user, all_staffs: all_staffs})
+    Pupil.find({school_id: req.user._id}, function(err, all_pupils) {
+   console.log(all_pupils)
+        res.render('AdminBSBMaterialDesign-master/all_pupils', {layout: 'layout/admin.hbs', user: req.user, all_pupils: all_pupils})
     });
 })
 
@@ -1662,7 +2071,7 @@ router.get('/all_parents', (req, res, next) => {
     redirector(req, res);
     Parent.find({school_id: req.user._id}, function(err, all_staffs) {
    
-         res.render('AdminBSBMaterialDesign-master/all_parents', {layout: 'layout/admin.hbs', user: req.user, all_staffs: all_staffs})
+         res.render('AdminBSBMaterialDesign-master/all_parents', {layout: 'layout/admin.hbs', user: req.user, all_parent: all_parent})
     });
 })
 

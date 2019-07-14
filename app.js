@@ -13,6 +13,7 @@ import mongoose from 'mongoose';
 import { Strategy } from 'passport-local';
 import flash from 'connect-flash';
 import hbs from 'hbs';
+const fileUpload = require('express-fileupload');
 
 // routes are imported here, note any auth or init middleware are to be placed
 // above this line.
@@ -29,7 +30,7 @@ import user from './routes/user';
 // import nurse from './routes/nurse';
 
 const app = express();
-
+app.use(fileUpload());
 var debug = require('debug');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);

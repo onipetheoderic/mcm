@@ -6,6 +6,10 @@ autoIncrement.initialize(connection);
 
 
 var Parent = new mongoose.Schema({
+	passport_name: String,
+	first_name: String,
+	middle_name: String,
+	last_name: String,
 	user_id: String,
 	role_id: String,
 	fullName: String,
@@ -20,8 +24,8 @@ var Parent = new mongoose.Schema({
 	religion: String,
 	church_attended: String,
 	marital_status: String,
-	suspended: {type: Boolean, default: false},
 	fired: {type: Boolean, default: false},
+	suspended: {type: Boolean, default: false},
 },
 {
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us

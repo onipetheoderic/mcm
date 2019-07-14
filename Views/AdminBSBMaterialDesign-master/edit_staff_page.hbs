@@ -1,0 +1,133 @@
+        <div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Edit Staff</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="body">
+                            <form id="form_advanced_validation" action="/admin/update_staff/{{singlePupil._id}}" method="POST" enctype="multipart/form-data">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input value="{{singlePupil.first_name}}" type="text" class="form-control" name="first_name" min="6" max="20" >
+                                        <label class="form-label">First name</label>
+                                    </div>
+                                    <div class="help-info">Min. Value: 10, Max. Value: 200</div>
+                                </div>
+
+
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input value="{{singlePupil.last_name}}" type="text" class="form-control" name="last_name" min="6" max="20" >
+                                        <label class="form-label">Last Name</label>
+                                    </div>
+                                    <div class="help-info">Min. Value: 10, Max. Value: 200</div>
+                                </div>
+                                
+
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input value="{{singlePupil.middle_name}}" type="text" class="form-control" name="middle_name" min="6" max="20" >
+                                        <label class="form-label">Middle Name</label>
+                                    </div>
+                                    <div class="help-info">Min. Value: 10, Max. Value: 200</div>
+                                </div>
+                                
+                                <div class="form-group form-float">
+                            <div class="form-line">
+                             <br/>
+                            
+                                <input value="{{singlePupil.dob}}"  type="date" class="form-control" name="dob" required>
+
+                                <label class="form-label">Date of Birth</label>
+                            </div>
+
+                            <div class="help-info">MM-DD-YYYY format</div>
+                        </div>
+
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input value="{{singlePupil.address}}"  type="text" class="form-control" name="address" maxlength="194" minlength="3" required>
+                                <label class="form-label">Home Address</label>
+                            </div>
+                            <div class="help-info">example: Number 12 ilorin street</div>
+                        </div>
+
+                         <div class="form-group form-float">
+                            <div class="form-line">
+                                <input value="{{singlePupil.church_attended}}" type="text" class="form-control" name="church_attended" maxlength="194" minlength="1" required>
+                                <label class="form-label">Church Attended</label>
+                            </div>
+                            <div class="help-info">example: Catholic Cathedral, pentecostal, others</div>
+                        </div>
+                        <div class="form-group">
+                            {{#each staffType}}
+                                       
+                            <input type="radio" value={{this.name}} name="staffType_id" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             <div class="help-info">Staff Type, created in the dashboard page</div>
+                        </div>       
+                        
+                        <div class="form-group">
+                            {{#each myClassess}}                                       
+                            <input required type="radio" value={{this._id}} name="class" id={{this._id}} class="with-gap">
+                            <label for={{this._id}}>{{this.name}}</label>
+                            {{/each}}
+                             <div class="help-info">Class, Created in the Dashboard</div>
+                        </div>     
+
+                        <div class="form-group">
+                            <input type="radio" id="christain" name="religion"  value="christain" class="with-gap">
+                            <label for="christain">Christainity</label>
+
+                            <input type="radio" id="muslim" name="religion" value="muslim" class="with-gap">
+                            <label for="muslim" class="m-l-20">Muslim</label>
+
+                            <input type="radio" name="religion"  id="hinduism" value="hinduism" class="with-gap">
+                            <label for="hinduism" class="m-l-20">Hindu</label>
+                            <input type="radio" name="religion" value="atheist" class="with-gap">
+                            <label for="atheist" id="atheist"  class="m-l-20">Atheist</label>
+                            <div class="help-info">Christain, Muslim, Hinduism, Atheist</div>
+                        </div>
+
+                        
+                               
+                       <div class="form-group">
+                                    <input type="radio" value="Male" name="sex" id="male" class="with-gap">
+                                    <label for="male">Male</label>
+
+                                    <input type="radio" value="Female" name="sex" id="female" class="with-gap">
+                                    <label for="female" class="m-l-20">Female</label>
+                        </div>
+                        <div class="form-line">
+                            <input value="{{singlePupil.passport_name}}" type="file" required name="passport_name" class="form-control" placeholder="Passport" >
+                            <label class="form-label">Passaport sized photograph</label>
+                              <br>
+                           <br>
+                        </div>
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
+

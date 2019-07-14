@@ -6,6 +6,7 @@ autoIncrement.initialize(connection);
 
 
 var Staff = new mongoose.Schema({
+	passport_name: String,
 	address: String,
 	first_name: String,
 	middle_name: String,
@@ -22,6 +23,7 @@ var Staff = new mongoose.Schema({
 	teachers_remark: String,
 	subject_id: String,
 	class_id: String,
+	class_name: String,
 	hm_remark: String,
 	proprietor_remark: String,
 	suspended: {type: Boolean, default: false},

@@ -1,10 +1,10 @@
-
+<!-- Custom Content -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Parent List
+                                All Pupils Results
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -20,69 +20,37 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                                    <thead>
-                                        <tr>
-                                       
-  
-                                            <th>Full Name</th>
-                                            <th>State of Ilorin</th>
-                                            <th>sex</th>
-                                            <th>occupation</th>
-                                            <th>Office address</th>
-                                            <th>Phone Number</th>
-                                            <th>Home Address</th>
-                                            <th>Religion</th>
-                                            <th>Church Attended</th>
-                                            <th>Marital Status</th>
-                                            <th>Suspended</th>
-                                             <th>Complete Details</th>
-                                        </tr>
-                                    </thead>
-                                   
-
-                                  <tfoot>
-                                        <tr>
-                                          <th>Full Name</th>
-                                            <th>State of Ilorin</th>
-                                            <th>sex</th>
-                                            <th>occupation</th>
-                                            <th>Office address</th>
-                                            <th>Phone Number</th>
-                                            <th>Home Address</th>
-                                            <th>Religion</th>
-                                            <th>Church Attended</th>
-                                            <th>Marital Status</th>
-                                            <th>Suspended</th>
-                                          
-
-                                            <th>Complete Details</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        {{#each all_staffs}}
-                                        <tr>  
-
-                                            <td>{{this.fullName}}</td>
-                                            <td>{{this.state_of_origin}}</td>                         
-                                            <td>{{this.sex}}</td>
-                                             <td>{{this.occupation}}</td>
-                                            <td>{{this.office_address}}</td>
-                                            <td>{{this.phone}}</td>
-                                            <td>{{this.home_address}}</td>
-                                            <td>{{this.religion}}</td>
-                                            <td>{{this.church_attended}}</td>
-                                            <td>{{this.marital_status}}</td>
-                                            <td>{{this.suspended}}</td>
-                                            <td><a href="/get/{{this._id}}">View Full Profile</a></td>
-                                        </tr>
-                                        {{/each}}                                   
-                                    </tbody>
-                                </table>
+                            <div class="row">
+                                {{#each pupils}}
+                                 <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="/uploads/{{this.passport}}" alt=""/>
+                                        <div class="caption">
+                                            <center>
+                                            <h3>{{this.first_name}}{{this.middle_name}} {{this.last_name}}</h3>
+                                        </center>
+                                            <p>
+                                                <ul>
+                                                    <li>{{this.current_class}}</li>
+                                                    <li>{{this.state_of_origin}}</li>
+                                                     <li>{{this.address}}</li>
+                                                    <li>{{this.phone}}</li>
+                                                    <li>{{this.dob}}</li>
+                                                    <li>{{this.sex}}</li>
+                                                    <li>{{this.religion}}</li>
+                                                <ul>
+                                            </p>
+                                           
+                                        <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Edit Parent</a>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}     
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- #END# Exportable Table -->
+
+          
