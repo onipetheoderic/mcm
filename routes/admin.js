@@ -307,10 +307,13 @@ router.get('/login', (req, res) => {
     });
 });
 router.get('/register', (req, res) => {
-    
+    User.find({}).exec(function (err, skool){
+        if(skool.length>=2){
+            res.redirect('/admin/login')
+        }        
     res.render('AdminBSBMaterialDesign-master/register', {layout: false})
 });
-
+});
 
 router.get('/edit_school/:id', (req, res) => {  
     redirector(req, res)  
@@ -876,8 +879,9 @@ router.post('/update_school/:id', (req, res) => {
         "staff_image2" :staff_image2_name,
         "staff_image3" :staff_image3_name,
         "staff_image4" :staff_image4_name,
-        "visionStatement" :req.body.visionStatement,
-        "missionStatement" :req.body.missionStatement,
+        "visionStatement":req.body.visionStatement,
+        "missionStatement":req.body.missionStatement,
+        "small_historic_quote": req.body.small_historic_quote,
         "staff_fullname" :req.body.staff_fullname,
         "staff_fullname2" :req.body.staff_fullname2,
         "staff_fullname3" :req.body.staff_fullname3,
@@ -1033,7 +1037,7 @@ router.post('/create_school', (req, res) => {
 
             if (err) {
                 console.log(err)                                             
-                res.render('AdminBSBMaterialDesign-master/school_form', {layout: false, message:{error:err}})
+                res.render('AdminBSBMaterialDesign-master/school_form', {layout: 'layout/admin', message:{error:err}})
                 }
             let role = new Role();
             passport.authenticate('local')(req, res, () => {                                             
@@ -1073,8 +1077,6 @@ router.post('/create_school', (req, res) => {
                 school.staff_image2 = staff_image2_name;
                 school.staff_image3 = staff_image3_name;
                 school.staff_image4 = staff_image4_name;
-                school.visionStatement = req.body.visionStatement;
-                school.missionStatement = req.body.missionStatement;
                 school.facebook = req.body.facebook;
                 school.twitter = req.body.twitter;
                 school.staff_fullname = req.body.staff_fullname;
@@ -1089,6 +1091,8 @@ router.post('/create_school', (req, res) => {
                 school.staff_comment2= req.body.staff_comment2;
                 school.staff_comment3= req.body.staff_comment3;
                 school.staff_comment4= req.body.staff_comment4;
+                school.visionStatement =req.body.visionStatement;
+                school.missionStatement = req.body.missionStatement;
                 school.save(function(err, doc){       
                     if(err){
                         console.log("error durring saving",err);
@@ -2134,5 +2138,7 @@ router.get('/all_schools', (req, res, next) => {
     });
 })
 
-
+router.get('*', function(req, res){
+  res.send('what???', 404);
+});
 export default router;
