@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
-var MessageSchoolSchema = new mongoose.Schema({
+var NewsletterSchema = new mongoose.Schema({
     email: String,
-    message: String,
     reciever_viewed: {type: Boolean, default: false},
     school_id: String,
     	
@@ -9,5 +8,5 @@ var MessageSchoolSchema = new mongoose.Schema({
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
 });
 
-module.exports = mongoose.model('MessageSchool', MessageSchoolSchema);
+module.exports = mongoose.model('Newsletter', NewsletterSchema);
 

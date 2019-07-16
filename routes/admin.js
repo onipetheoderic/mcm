@@ -17,6 +17,9 @@ import Setting from '../models/setting';
 import Carousel from '../models/carousel';
 import School from '../models/school';
 import Stafftype from '../models/staffType';
+import Newsletter from '../models/newsletter';
+import MessageSchool from '../models/messageSchool';
+import Message from '../models/message';
 import Staff from '../models/staff';
 import Subject from '../models/subject';
 import Category from '../models/category';
@@ -36,14 +39,29 @@ router.get('/home', (req, res) => {
             console.log(err)
         }
         var subject_count = subjects.length;
-        console.log("this is the carousel count", subject_count);
+        console.log("this is the subject count", subject_count);
+
+    MessageSchool.find({school_id: req.user._id}).exec(function (err, message){
+        if(err) {
+            console.log(err)
+        }
+        var message_count = message.length;
+        console.log("this is the message count", message_count);
+
+    Newsletter.find({school_id: req.user._id}).exec(function (err, newsletter){
+        if(err) {
+            console.log(err)
+        }
+        var newsletter_count = newsletter.length;
+        console.log("this is the message count", newsletter_count);
+
     
     Parent.find({school_id: req.user._id}).exec(function (err, parents){
         if(err) {
             console.log(err)
         }
         var parent_count = parents.length;
-        console.log("this is the carousel count", parent_count);
+        console.log("this is the parent count", parent_count);
 
     Pupil.find({school_id: req.user._id}).exec(function (err, pupils){
 
@@ -51,7 +69,7 @@ router.get('/home', (req, res) => {
             console.log(err)
         }
         var pupil_count = pupils.length;
-        console.log("this is the carousel count", pupil_count);
+        console.log("this is the pupil count", pupil_count);
 
 
     Stafftype.find({school_id: req.user._id}).exec(function (err, staffType){
@@ -59,7 +77,7 @@ router.get('/home', (req, res) => {
             console.log(err)
         }
         var stafftype_count = staffType.length;
-        console.log("this is the carousel count", stafftype_count);
+        console.log("this is the staffType count", stafftype_count);
 
     Staff.find({user_id: req.user._id}).exec(function (err, staff_zone){
          if(err) {
@@ -70,6 +88,7 @@ router.get('/home', (req, res) => {
     
     Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
         var staff_pupilss_count;
+        var staff_image_name;
         var pupilss_count;
         var subs_count;
         var class_counters;
@@ -82,6 +101,7 @@ router.get('/home', (req, res) => {
                 console.log("staff_pupils", staff_pupils.school_id)
         //to get a the staff from the staff table using its user_id
         let staff_pupils_school_id = staff_pupils.school_id
+        staff_image_name = staff_pupils.passport_name;
 
         Staff.find({school_id: staff_pupils_school_id}).exec(function (err, staff_pupilss){
             if(err) {
@@ -90,7 +110,7 @@ router.get('/home', (req, res) => {
         staff_pupilss_count = staff_pupilss.length;            
         })
 
-        Pupil.find({school_id: staff_pupils_school_id}).exec(function (err, pupilss){
+        Pupil.find({class_id: staff_pupils.class_id}).exec(function (err, pupilss){
             if(err) {
                 console.log(err)
             }
@@ -153,6 +173,13 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
         var p_subs_count;
         var p_class_counters;
         var p_parent_counters;
+        var pupilz;
+
+
+         // Pupil.find({class_id: pupilz}).exec(function (err, all_pupils_in_class){
+         //        let all_pupils_in_class_count =  all_pupils_in_class.length;
+                   
+   
 
         User.findOne({_id: req.user._id}, function(err, user){
             if(user.isPupil === true){
@@ -173,6 +200,8 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
             }
         p_pupilss_count = pupilss.length;            
         })
+
+
         Subject.find({school_id: staff_pupils_school_id}).exec(function (err, subs){
             if(err) {
                 console.log(err)
@@ -232,11 +261,13 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
         }
         var class_count = my_class.length;
         console.log("this is the carousel count", class_count);
+
+    School.findOne({schoolID: req.user._id}, function(err, schoolx){    
     
-    
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', user: req.user, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
         });
         });
+    });
     });
     });
 });
@@ -248,6 +279,8 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 });
 });
 });
+});
+ });
 });
 
 
@@ -369,13 +402,23 @@ redirector(req, res)
     res.render('AdminBSBMaterialDesign-master/create_school', {layout: 'layout/admin.hbs', user: req.user})
 });
 
+router.get('/all_my_class_pupils', (req, res) => {
+    redirector(req, res);
+    Pupil.findOne({user_id: req.user._id}, function(err, pupil){
+        let pupil_class_id = pupil.class_id
+    Pupil.find({class_id: pupil_class_id}, function(err, all_pupils_in_class){ 
+                all_pupils_in_class =  all_pupils_in_class;
+                    res.render('AdminBSBMaterialDesign-master/all_my_class_pupils', {layout: 'layout/admin.hbs', all_pupils_in_class: all_pupils_in_class})
+    });
+    })
+})
 
-
-router.get('/create_report_card', (req, res) => {  
+router.get('/teacher_pupils', (req, res) => {  
     // to get the school id using the staff_id
     redirector(req, res);
     Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
         var staff_id = req.user._id;
+        var staff_class_id = staff_pupils.class_id
         var staff_pupilss_count;
         var myClassess;
         User.findOne({_id: req.user._id}, function(err, user){
@@ -387,14 +430,32 @@ router.get('/create_report_card', (req, res) => {
                 myClassess = myClass;
               
          
-            Pupil.find({school_id: staff_pupils_school_id}, function(err, pupils){ 
-                res.render('AdminBSBMaterialDesign-master/report_card', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
+            Pupil.find({class_id: staff_class_id}, function(err, pupils){ 
+                res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
             })
                })
             }
         });
     });
 });
+
+router.get('/all_school_messages', (req, res) => {
+    MessageSchool.find({school_id: req.user._id}, function(err, schoolmsgs){
+        let school_msgs = schoolmsgs;
+        res.render('AdminBSBMaterialDesign-master/all_school_messages', {layout: 'layout/admin.hbs', school_msgs: school_msgs})
+    })
+})
+router.get('/all_school_newsletters', (req, res) => {
+    Newsletter.find({school_id: req.user._id}, function(err, newsletter){
+        let newsletters = newsletter;
+        res.render('AdminBSBMaterialDesign-master/all_school_newsletters', {layout: 'layout/admin.hbs', newsletters: newsletters})
+    })
+})
+
+// router.get('/messages', (req, res) => {
+//     let current_user_id = req.user._id;
+    
+// })
 
 router.get('/create_report_c', (req, res) => {  
     // to get the school id using the staff_id

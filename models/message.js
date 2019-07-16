@@ -4,8 +4,8 @@ var MessageSchema = new mongoose.Schema({
     sender_name: String,
     reciever_id: String,
     reciever_name: String,
-    sender_viewed: {type: Boolean, default: false}
-    reciever_viewed: {type: Boolean, default: false}
+    // sender_viewed: {type: Boolean, default: false}
+    reciever_viewed: {type: Boolean, default: false},
     school_id: String,
     	
 },{

@@ -21,10 +21,10 @@
                         </div>
                         <div class="body">
                             <div class="row">
-                                {{#each all_pupils}}
-                                 <div class="col-sm-6 col-md-3">
+                                {{#each pupils}}
+                                 <div class="col-sm-6 col-md-4">
                                     <div class="thumbnail">
-                                        <img height="250" width="250" src="/uploads/{{this.passport_name}}" alt=""/>
+                                        <img src="/uploads/{{this.passport_name}}">
                                         <div class="caption">
                                             <center>
                                             <h3>{{this.first_name}}{{this.middle_name}} {{this.last_name}}</h3>
@@ -41,10 +41,7 @@
                                                 <ul>
                                             </p>
                                            
-                                        <a href="/admin/single_pupil_report_view/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Report Sheets</a>
-                                        <br>
-                                        <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">View Pupil Details</a>
-                                        <a href="/admin/edit_pupil/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Edit Pupil Details</a>
+                                        <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Create Report</a>
                                            
                                         </div>
                                     </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
    {{#if user}}
-    <title>Welcome to {{user.company_name}} School management system</title>
+    <title>Welcome to {{user.first_name}} School management system</title>
     {{else}}
     <title>Welcome to mcsm school management system</title>
     {{/if}}
@@ -76,7 +76,21 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">{{user.company_name}}</a>
+                {{#if user.isSchool}}
+                <a class="navbar-brand" href="index.html">{{schoolx.name}} {{schoolx.schoolType}}</a>
+                 {{/if}}
+
+                 {{#if user.isSuperAdmin}}
+                <a class="navbar-brand" href="index.html">{{user.company_name}} {{user.first_name}}</a>
+                 {{/if}}
+
+                 {{#if user.isStaff}}
+                <a class="navbar-brand" href="index.html">{{staff_pupils.first_name}} {{staff_pupils.last_name}}</a>
+                 {{/if}}
+
+                {{#if user.isPupil}}
+                <a class="navbar-brand" href="index.html">{{pupilss.first_name}} {{pupilss.last_name}}</a>
+                 {{/if}}
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -282,11 +296,21 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="/images/user.png" width="48" height="48" alt="User" />
+                    {{#if user.isStaff}}
+                    <img src="/uploads/{{staff_image_name}}" width="48" height="48" alt="User" />
+                    {{/if}}
+                    {{#if user.isPupil}}
+                    <img src="/uploads/{{pupilss.passport_name}}" width="48" height="48" alt="Pupils" />
+                    {{/if}}
+                    {{#if user.isSchool}}
+                    <img src="/uploads/{{schoolx.logo}}" width="48" height="48" alt="User" />
+                    {{/if}}
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.company_name}}</div>
-                    <div class="email">{{user.email}}</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.first_name}}</div>
+                     {{#if user.isSchool}}
+                    <div class="email">{{schoolx.name}} {{schoolx.schoolType}}</div>
+                     {{/if}}
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">

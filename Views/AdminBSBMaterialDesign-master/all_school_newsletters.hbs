@@ -4,7 +4,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                All Pupils Results
+                                All Newsletters subscribers
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -21,30 +21,15 @@
                         </div>
                         <div class="body">
                             <div class="row">
-                                {{#each all_pupils}}
-                                 <div class="col-sm-6 col-md-3">
+                                {{#each newsletters}}
+                                 <div class="col-sm-6 col-md-6">
                                     <div class="thumbnail">
-                                        <img height="250" width="250" src="/uploads/{{this.passport_name}}" alt=""/>
+                                        
                                         <div class="caption">
                                             <center>
-                                            <h3>{{this.first_name}}{{this.middle_name}} {{this.last_name}}</h3>
+                                            <h3>{{this.email}}</h3>
                                         </center>
-                                            <p>
-                                                <ul>
-                                                    <li>{{this.class_name}}</li>
-                                                    <li>{{this.state_of_origin}}</li>
-                                                     <li>{{this.address}}</li>
-                                                    <li>{{this.phone}}</li>
-                                                    <li>{{this.dob}}</li>
-                                                    <li>{{this.sex}}</li>
-                                                    <li>{{this.religion}}</li>
-                                                <ul>
-                                            </p>
-                                           
-                                        <a href="/admin/single_pupil_report_view/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Report Sheets</a>
-                                        <br>
-                                        <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">View Pupil Details</a>
-                                        <a href="/admin/edit_pupil/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Edit Pupil Details</a>
+                                                                          
                                            
                                         </div>
                                     </div>
