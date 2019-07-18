@@ -176,16 +176,16 @@ hbs.registerHelper('uppercase', function (str) {
 });
 
 hbs.registerHelper('grader', function (val) {
-
-  if(val && parseInt(val) < 40) {
+  if(val == 0){
+    return "-"
+  }
+  else if(val && parseInt(val) < 40) {
     return "V.Poor"
   }
-  if(parseInt(val)>60) {
+  else if(parseInt(val)>60) {
     return "V.Good"
   } 
-  if(parseInt(val)>=70) {
-    return "Excellent"
-  } 
+  
   else if(val && parseInt(val) <= 20) {
     return "V.Poor"
   }

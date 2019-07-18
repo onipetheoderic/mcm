@@ -413,31 +413,44 @@ router.get('/all_my_class_pupils', (req, res) => {
     })
 })
 
+// router.get('/teacher_pupils', (req, res) => {  
+//     // to get the school id using the staff_id
+//     redirector(req, res);
+//     Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+//         var staff_id = req.user._id;
+//         var staff_class_id = staff_pupils.class_id
+//         var staff_pupilss_count;
+//         var myClassess;
+//         User.findOne({_id: req.user._id}, function(err, user){
+//             if(user.isStaff === true){
+//                 console.log("staff_pupils", staff_pupils.school_id)
+//                 //to get a the staff from the staff table using its user_id
+//                 let staff_pupils_school_id = staff_pupils.school_id    
+//             Class.find({school_id: staff_pupils_school_id}, function(err, myClass){ 
+//                 myClassess = myClass;
+              
+         
+//             Pupil.find({class_id: staff_class_id}, function(err, pupils){ 
+//                 res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
+//             })
+//                })
+//             }
+//         });
+//     });
+// });
+
 router.get('/teacher_pupils', (req, res) => {  
     // to get the school id using the staff_id
     redirector(req, res);
-    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
-        var staff_id = req.user._id;
-        var staff_class_id = staff_pupils.class_id
-        var staff_pupilss_count;
-        var myClassess;
-        User.findOne({_id: req.user._id}, function(err, user){
-            if(user.isStaff === true){
-                console.log("staff_pupils", staff_pupils.school_id)
-                //to get a the staff from the staff table using its user_id
-                let staff_pupils_school_id = staff_pupils.school_id    
-            Class.find({school_id: staff_pupils_school_id}, function(err, myClass){ 
-                myClassess = myClass;
-              
-         
-            Pupil.find({class_id: staff_class_id}, function(err, pupils){ 
-                res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
-            })
-               })
-            }
-        });
-    });
-});
+    Staff.findOne({user_id: req.user._id}, function(err, staff){
+        let staff_class_id = staff.class_id
+        let staff_class_name = staff.class_name
+
+    Pupil.find({class_id: staff_class_id}, function(err, all_pupils){
+         res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+    })
+    })
+})
 
 router.get('/all_school_messages', (req, res) => {
     MessageSchool.find({school_id: req.user._id}, function(err, schoolmsgs){
@@ -1595,7 +1608,7 @@ router.post('/pupils_report_edit/:id', (req, res, next) => {
         "verbal_total": parseInt( additioner(req.body.verbal_test1, req.body.verbal_test2, req.body.verbal_test3, req.body.verbal_exam)),
         
         "teachers_remark": req.body.teachers_remark,
-        "head_master_remark": req.body.head_master_remark,
+        "head_master_remark": req.body.headmaster_remark,
         "handwritting": parseInt(req.body.handwritting),
         "drawing": parseInt(req.body.drawing),
         "games_sport": parseInt(req.body.games_sport),
@@ -1855,7 +1868,7 @@ router.post('/submitScore/:id', (req, res, next) => {
         primaryClass.verbal_total = additioner(req.body.verbal_test1, req.body.verbal_test2, req.body.verbal_test3, req.body.verbal_exam) 
         }
         primaryClass.teachers_remark = req.body.teachers_remark;
-        primaryClass.head_master_remark = req.body.head_master_remark;
+        primaryClass.head_master_remark = req.body.headmaster_remark;
         primaryClass.handwritting= parseInt(req.body.handwritting);
         primaryClass.drawing= parseInt(req.body.drawing);
         primaryClass.games_sport= parseInt(req.body.games_sport);
@@ -1934,13 +1947,13 @@ router.get('/pupils_report/:id', (req, res) => {
     let pupil_id = req.params.id;
     let staff_id = req.user._id;
     //let get the pupils first, middle, lastname
-    User.findOne({_id: pupil_id}, function(err, staff_pupils){ 
+    Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
         let pupil = staff_pupils
 
-
+        let full_name = pupil.first_name + " " + pupil.middle_name + " " + pupil.last_name
         console.log("this is the pupil_id",pupil_id)     
         console.log("this is the pupil data",pupil)
-        res.render('AdminBSBMaterialDesign-master/report', {layout: 'layout/admin.hbs', user: req.user, pupil: pupil,  staff_id:staff_id})
+        res.render('AdminBSBMaterialDesign-master/report', {layout: 'layout/admin.hbs', full_name:full_name, user: req.user, pupil: pupil,  staff_id:staff_id})
     });
 
 });

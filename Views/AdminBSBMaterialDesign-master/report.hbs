@@ -35,8 +35,8 @@ function allowNumbersOnly(e) {
                             <div class="demo-masked-input">
                                 <div class="row clearfix">
 <form id="form_advanced_validation" action="/admin/submitScore/{{pupil._id}}"method="POST">
-    <input type="hidden" name="pupil_name" value={{pupil.first_name}} {{pupil.middle_name}} {{pupil.last_name}}>
-    <input type="hidden" name="pupil_pic" value={{pupil.pic}}>
+    <input type="hidden" name="pupil_name" value={{full_name}}>
+  
     
     <div class="form-group">
        
@@ -45,10 +45,10 @@ function allowNumbersOnly(e) {
         <label for="first_term">First Term</label>
 
         <input type="radio" value="second_term" name="result_type" id="second_term" class="with-gap">
-        <label for="first_term">Second Term</label>
+        <label for="second_term">Second Term</label>
 
         <input type="radio" value="third_term" name="result_type" id="third_term" class="with-gap">
-        <label for="first_term">Third Term</label>
+        <label for="third_term">Third Term</label>
         
         
     </div>
@@ -1199,7 +1199,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input type="text"name="teachers_remark" class="form-control datetime" >
+                    <input type="text" name="teachers_remark" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1210,7 +1210,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input type="text"name="teachers_remark" class="form-control datetime" >
+                    <input type="text" name="headmaster_remark" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1221,7 +1221,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="handwritting_remark" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="handwritting" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1232,7 +1232,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input  onkeypress="allowNumbersOnly(event)"  type="text"name="drawing_remark" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="drawing" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1243,7 +1243,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="games_sport" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="games_sport" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1254,7 +1254,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="punctuality" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="punctuality" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1266,7 +1266,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="attendance" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="attendance" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1277,7 +1277,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="hygiene" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="hygiene" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1288,7 +1288,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="attentiveness" class="form-control datetime" >
+                    <input value="3" onkeypress="allowNumbersOnly(event)"  type="text"name="attentiveness" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1299,7 +1299,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input  onkeypress="allowNumbersOnly(event)"  type="text"name="honesty" class="form-control datetime" >
+                    <input value="3"  onkeypress="allowNumbersOnly(event)"  type="text"name="honesty" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1310,7 +1310,7 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input  onkeypress="allowNumbersOnly(event)"  type="text"name="neatness" class="form-control datetime" >
+                    <input  onkeypress="allowNumbersOnly(event)" value="3"  type="text"name="neatness" class="form-control datetime" >
                 </div>
             </div>
         </div>
@@ -1321,12 +1321,28 @@ function allowNumbersOnly(e) {
                     <i class="material-icons">book</i>
                 </span>
                 <div class="form-line">
-                    <input onkeypress="allowNumbersOnly(event)"  type="text"name="participation" class="form-control datetime" >
+                    <input onkeypress="allowNumbersOnly(event)" value="3" type="text"name="participation" class="form-control datetime" >
                 </div>
             </div>
         </div>
 
-        <button class="btn btn-primary waves-effect" type="submit">Submit Scores</button>
+          <div class="col-md-2">
+            <b>Reading</b>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="material-icons">book</i>
+                </span>
+                <div class="form-line">
+                    <input onkeypress="allowNumbersOnly(event)" value="3" type="text"name="reading" class="form-control datetime" >
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+<button class="btn btn-primary waves-effect" type="submit">Submit Scores</button>
+        </div>
+
+        
 
                                 </form>
 
