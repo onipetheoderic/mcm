@@ -1,0 +1,15 @@
+<h4>All Pupils/Students of {{single_class.name}}</h4>
+{{#each all_pupils}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="cursor: pointer;">
+        <a href="/admin/all_pupils_in_single_class/{{this.id}}" style="text-decoration: none; cursor: pointer;">
+        <div class="info-box bg-pink hover-expand-effect">
+
+           
+            <div class="content">
+              <div class="text" style="font-size:14px; padding-left: 20px">{{this.first_name}} {{this.middle_name}} {{this.last_name}} <p>{{this.class_name}}</p></div>  
+                
+            </div>
+        </div>
+        </a>
+    </div>
+{{/each}}

@@ -1,221 +1,148 @@
-        <div class="container-fluid">
-           
-            <!-- Advanced Validation -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>Create A New Pupil/Student</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                <div class="body">
-                    <form id="form_advanced_validation" action="/admin/create_pupil"  enctype="multipart/form-data" method="POST">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            console.log("I am what I am")
+var current_loc = window.location.href
+var parts = current_loc.split('/');
+var answer = parts[parts.length - 1];
+console.log(answer)
 
 
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" id="n1" class="form-control" name="first_name" maxlength="121" minlength="3" required>
-                                <label class="form-label">First Name</label>
-                            </div>
-                            <div class="help-info">First name required</div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" id="n2" onkeyup="sync()" class="form-control" name="last_name" maxlength="121" minlength="3" required>
-                                <label class="form-label">Last Name</label>
-                            </div>
-                            <div class="help-info">Last Name required</div>
-                        </div>
-                         <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" id="n2" onkeyup="sync()" class="form-control" name="middle_name" maxlength="121" minlength="3" >
-                                <label class="form-label">Middle Name</label>
-                            </div>
-                            <div class="help-info">Middle Name is not mandatory</div>
-                        </div>
-                         <div class="form-line">
-                            <input type="file" required name="passport" class="form-control" placeholder="Passport Image" >
-                            <label class="form-label">Passport Image</label>
-                        </div>
-                          <div class="form-group">
-                                    <input type="radio" value="Male" name="sex" id="male" class="with-gap">
-                                    <label for="male">Male</label>
+            // $('td').dblclick(function(){
+            //     $(this).replaceWith("input[type='text']")
+            // })
+        });
+</script>
 
-                                    <input type="radio" value="Female" name="sex" id="female" class="with-gap">
-                                    <label for="female" class="m-l-20">Female</label>
-                        </div>
-                            <select id="selectParent" name="parent_id">
-                                <option> All School Parents</option>
-                            </select>
-                                    
-                            <select id="selectNumber" name="state_of_origin" onchange="myFunction()">
-                                <option>State of Origin</option>
-                            </select>
-                         
-                  
-                            <script>
+<div class="container-fluid">
+    <input type="text" placeholder="Number of rows to generate" name="val_to_generate" id="val_to_generate">
+    <button  class="btn btn-primary waves-effect" onclick="myFunction()">Add More Rows</button>
 
-function sync(){
-    var n1 = document.getElementById('n1');
-    var n2 = document.getElementById('n2');
-    var n3 = document.getElementById('n3')
-    var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
-    n3.value = n2.value + "_" + n1.value + seq;
 
-   console.log("typing", n2.value)
+
+<style type="text/css">
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th, td {
+  padding: 10px;
 }
 
-                            var state_list = {{{json state}}}
-                            var parentList = {{{json parent}}}
 
-                           console.log(parentList);
-                           var select = document.getElementById("selectParent");
-                           for(var i = 0; i < parentList.length; i++) {
-                                    var opt = parentList[i];
-                                    var state = opt.fullName;
-                                    var parent_id = opt._id
-                                    var pel = document.createElement("option");
-                                    pel.textContent = state;
-                                    pel.value = parent_id;
-                                    select.appendChild(pel);
-                                }
-                            console.log(state_list)
-                                var select = document.getElementById("selectNumber");
-                                    
-                                    for(var i = 0; i < state_list.length; i++) {
-                                    var opt = state_list[i];
-                                    var state = opt.state;
-                                    var lgas = opt.lgas
-                                    var el = document.createElement("option");
-                                    el.textContent = state;
-                                    el.value = state;
-                                    var stata = {stateName:state, lgas:lgas};
-                                    select.appendChild(el);
-                                }
+</style>
+<br>
+<br>
+<table id="myTable" width="900">
+    <thead>
+        <tr>
 
-                            </script>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Middle Name</th>
+        <th>Sex</th>
+        <th>School Fees Paid</th>
+        <th style="display:none;">School_id</th>
+        <th style="display:none;">class_id</th>
+        <th style="display:none;">class Name</th>
 
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="email" class="form-control" name="email" maxlength="100" minlength="3" required>
-                                <label class="form-label">Email Address</label>
-                            </div>
-                            <div class="help-info">example: theoderic@gmail.com</div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control" name="phone" maxlength="149" minlength="11" required>
-                                <label class="form-label">Phone Number</label>
-                            </div>
-                            <div class="help-info">A Valid phone number 07039148866</div>
-                        </div>
-                        
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                             <br/>
-                            
-                                <input type="date" class="form-control" name="dob" required>
 
-                                <label class="form-label">Date of Birth</label>
-                            </div>
+        </tr>
+    </thead>
+    {{!-- <tbody> --}}
+  <tr id="table_format">
+    <td contenteditable='true'></td>
+    <td contenteditable='true'></td>
+    <td contenteditable='true'></td>
+    <td contenteditable='true'></td>
+    <td contenteditable='true'></td>
+    <td style="display:none;">{{school_id}}</td>
+    <td style="display:none;">{{myClass._id}}</td>
+    <td style="display:none;">{{myClass.name}}</td>
+  </tr>
+{{!-- </tbody> --}}
+  
+  
+</table>
+<br>
 
-                            <div class="help-info">MM-DD-YYYY format</div>
-                        </div>
+<button class="btn btn-primary waves-effect" onclick="mySubmit2()">Submit</button>
+<br>
+<script>
 
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control" name="address" maxlength="194" minlength="3" required>
-                                <label class="form-label">Home Address</label>
-                            </div>
-                            <div class="help-info">example: Number 12 ilorin street</div>
-                        </div>
-                         <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control" name="place_of_birth" maxlength="194" minlength="3" required>
-                                <label class="form-label">Place of Birth</label>
-                            </div>
-                            <div class="help-info">Place of Birth</div>
-                        </div>
+function myFunction() {
+    var values = document.getElementById("val_to_generate").value;
+    console.log(values)
+    var intifiedValue = parseInt(values)-1;
+    var itm = document.getElementById("table_format");
+    var  divClone;
+for(var i=0;i<intifiedValue;i++)
+ {
+   divClone = itm.cloneNode(true); // the true is for deep cloning
+   // document.body.appendChild(divClone);
+   document.getElementById("myTable").appendChild(divClone)
+ }
 
-                         <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control" name="church_attended" maxlength="194" minlength="1" required>
-                                <label class="form-label">Church Attended</label>
-                            </div>
-                            <div class="help-info">example: Catholic Cathedral, pentecostal, others</div>
-                        </div>
+}
+var myTab = document.getElementById("myTable")
+function mySubmit() {
+     console.log(tableToJSON(document.getElementById('myTable')));
+    // var current_location = window.location.href
+    // console.log(current_location)
+    // alert(current_location)
+}
 
-                         
-                        <div class="form-group">
-                        <p>Favourite Subject</p>
-                            {{#each subject}}
-                            <br/>                                       
-                            <input type="radio" value={{this.name}} name="favourite_subject" id={{this._id}} class="with-gap">
-                            <label for={{this._id}}>{{this.name}}</label>
-                            {{/each}}
-                             
-                        </div>  
+function mySubmit2(){   
+var table = document.getElementById("myTable");
+var tableArr = [];
+for ( var i = 1; i < table.rows.length; i++ ) {
+    var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+    var combina = table.rows[i].cells[0].textContent + table.rows[i].cells[1].textContent
+    var stripped_combina = combina.replace(/\s/g,''); 
+    tableArr.push({
+        first_name: table.rows[i].cells[0].textContent,
+        last_name: table.rows[i].cells[1].textContent,
+        middle_name: table.rows[i].cells[2].textContent,
+        sex: table.rows[i].cells[3].textContent,
+        school_fees_paid: table.rows[i].cells[4].textContent,
+        school_id: table.rows[i].cells[5].textContent,
+        class_id: table.rows[i].cells[6].textContent,  
+        class_name: table.rows[i].cells[7].textContent, 
+        generated_result_key: stripped_combina+seq,
+        generated_password_key: seq
+    });
+}
+// First Name   Last Name   Middle Name     Sex     School Fees Paid
+console.log(tableArr)
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      alert("successfully saved to the db")
+      location.replace("/admin/create_pupil_page")
+    }
+ };
+xhttp.open("POST", "/admin/create_pupil", true);
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
 
-      
-                        
-                        <div class="form-group">
-                        <p>Current Class</p>
-                            {{#each myClass}}
-                                       
-                             <input type="radio" value={{this._id}} name="class" id={{this._id}} class="with-gap">
-                            <label for={{this._id}}>{{this.name}}</label>
-                            {{/each}}
-                             <div class="help-info">Class, Created in the Dashboard</div>
-                             
-                        </div>    
+function tableToJSON(table) {
+      var obj = {};
+      var row, rows = table.rows;
+      for (var i=0, iLen=rows.length; i<iLen; i++) {
+        row = rows[i];
+       console.log(row.textContent)
+      }
+     return JSON.stringify(obj);
+}
 
-                        <div class="form-group">
-                            <input type="radio" id="christain" name="religion"  value="christain" class="with-gap">
-                            <label for="christain">Christainity</label>
 
-                            <input type="radio" id="muslim" name="religion" value="muslim" class="with-gap">
-                            <label for="muslim" class="m-l-20">Muslim</label>
+</script>       
+           
 
-                            <input type="radio" name="religion"  id="hinduism" value="hinduism" class="with-gap">
-                            <label for="hinduism" class="m-l-20">Hindu</label>
-                            <input type="radio" name="religion" value="atheist" class="with-gap">
-                            <label for="atheist" id="atheist"  class="m-l-20">Atheist</label>
-                            <div class="help-info">Christain, Muslim, Hinduism, Atheist</div>
-                        </div>
-
-                         <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" id="n3" class="form-control" name="username" min="6" max="20" required>
-                                <label class="form-label">Desired Username</label>
-                            </div>
-                            <div class="help-info">Min. Value: 10, Max. Value: 200</div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="password" class="form-control" name="password" min="6" max="20" required>
-                                <label class="form-label">Desired Password</label>
-                            </div>
-                            <div class="help-info">Alpha-numeric characters should be embeded</div>
-                        </div>
-                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Advanced Validation -->
-
-        </div>
+</div>
 

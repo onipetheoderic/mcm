@@ -1,0 +1,40 @@
+ <input type="text" placeholder="Number of Pupils You want to generate for class" name="val_to_generate" id="val_to_generate">
+
+<style type="text/css">
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+</style>
+<div class="container-fluid">
+    <div class="header">
+<h2>Select the class for pupils</h2>
+
+</div>
+
+{{#each all_class}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="cursor: pointer;">
+        <a href="/admin/create_pupil/{{this.id}}" style="text-decoration: none; cursor: pointer;">
+        <div class="info-box bg-cyan hover-expand-effect">
+
+           
+            <div class="content">
+              <div class="text" style="font-size:28px; padding-left: 20px">{{this.name}}</div>  
+                
+            </div>
+        </div>
+        </a>
+    </div>
+{{/each}}
+</div>

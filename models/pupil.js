@@ -7,34 +7,24 @@ autoIncrement.initialize(connection);
 
 var Pupil = new mongoose.Schema({
 	passport_name: String,
-	user_id: String,
-	role_id: String,
+	user_id: Number,
 	parent_id: String,
-	school_id: String,
-	address: String,
+	school_id: String,	
 	first_name: String,
 	middle_name: String,
 	last_name: String,
-	phone: String,
-	dob: String,	
-	state_of_origin: String,
-	sex: String,
-	favourite_subject: String,
+	sex: String,	
 	class_name: String,
 	class_id: String,
-	school_fees_paid: {type: Boolean, default: false},
-	home_address: String,
-	lga_of_origin: String,
-	place_of_birth: String,
-	religion: String,
-	church_attended: String,
-	phone: String,
+	school_fees_paid: String,	
 	suspended: {type: Boolean, default: false},
 	expelled: {type: Boolean, default: false},
+	generated_result_key: String,
+	generated_password_key: String,
 },
 {
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
 });
 
-// School.plugin(autoIncrement.plugin, { model: 'School', field: 'school_id' });
+Pupil.plugin(autoIncrement.plugin, { model: 'Pupil', field: 'user_id' });
 module.exports = mongoose.model('Pupil', Pupil);

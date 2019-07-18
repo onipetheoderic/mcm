@@ -563,12 +563,17 @@ router.get('/register_new_subject', (req, res) => {
     console.log("this is the user id that mad e", req.user._id)
     res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', user: req.user})
 })
-
+/**/
 router.get('/create_class', (req, res, next) => {
     redirector(req, res)
- console.log("this is the user id that mad e", req.user._id)
-    res.render('AdminBSBMaterialDesign-master/register_new_class', {layout: 'layout/admin.hbs', user: req.user})
+    let school_id = req.user._id
+    console.log("this is the user id that mad e", req.user._id)
+    Class.find({}, function(err, all_class){
+
+    res.render('AdminBSBMaterialDesign-master/register_new_class', {layout: 'layout/admin.hbs', school_id: 
+        school_id, all_class: all_class, user: req.user})
 })
+ })
 
 // router.get('/edit_class', (req, res, next) => {
 //     redirector(req, res)
@@ -594,22 +599,32 @@ router.get('/create_parent', (req, res, next) => {
     res.render('AdminBSBMaterialDesign-master/parent_form', {layout: 'layout/admin.hbs', user: req.user, state:state})
 })
 
-router.get('/create_pupil', (req, res, next) => {
+router.get('/create_pupil/:class_id', (req, res, next) => {
     redirector(req, res)
-    Subject.find({school_id: req.user._id}, function(err, subject){      
-        console.log("this is the categories",subject)
-        if (err) throw err; 
-    Parent.find({school_id: req.user._id}, function(err, parent){      
-        console.log("this is the categories",parent)
-        if (err) throw err; 
-    
-    Class.find({school_id: req.user._id}, function(err, myClass){      
+    let school_id = req.user._id
+    Class.findOne({_id: req.params.class_id}, function(err, myClass){      
         console.log("this is the categories",myClass)
         if (err) throw err;  
-        console.log("this is the user id that mad e", state)
-    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, state:state, myClass:myClass, subject:subject, parent:parent})
+        // console.log("this is the user id that mad e", state)
+        
+    res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, myClass:myClass, school_id:school_id})
 });
 });
+
+
+
+
+
+
+
+router.get('/create_pupil_page', (req, res, next) => {
+    redirector(req, res)   
+   
+    Class.find({school_id: req.user._id}, function(err, all_class){      
+        console.log("this is the categories",all_class)
+        if (err) throw err;  
+        // console.log("this is the user id that mad e", state)
+    res.render('AdminBSBMaterialDesign-master/pupil_class_page', {layout: 'layout/admin.hbs', user: req.user, all_class:all_class})
 });
 });
 
@@ -763,6 +778,12 @@ router.get('/get_all_schools', (req, res, next) => {
     });
 
 })
+router.get('/get_all_pupils', (req, res, next) => {
+    Pupil.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
 
 
 
@@ -840,7 +861,7 @@ router.post('/register_new_class', (req, res, next) => {
             return;
         } else {                    
             console.log(doc, "successfully save, redirecting now..........")
-            res.redirect('/admin/home')
+            res.redirect('/admin/create_class')
       
         }
     });
@@ -1982,112 +2003,36 @@ router.get('/decision_page/:id', (req, res) => {
 
 
 router.post('/create_pupil', (req, res, next) => {
-    let current_id = req.user._id
-    let my_passport = req.files.passport;
-    
-    let school_name;
-    let class_name;
-    let passport_name = imagePlacerAndNamer(req, res, my_passport);
-    School.findOne({schoolID: req.user._id}, function(err, values){
-        console.log("all schools", values)
-        school_name = values.name
-    })
-    Class.findOne({_id: req.body.class}, function(err, values){
-        console.log("all schools", values)
-        class_name = values.name
-    }) 
+    let all_pupils = req.body;
+    redirector(req, res)
+    console.log(all_pupils)
+    Pupil.insertMany(all_pupils, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
 
-    
-    let dataLog = new DataLog();
-    let pupil = new Pupil();  
-    
-    User.register(new User({ username: req.body.username,
-       user_name: req.body.user_name,
-       isPupil: true,
-       sex: req.body.sex,
-       first_name: req.body.first_name,
-       last_name: req.body.last_name,
-       sex: req.body.sex,
-       phone: req.body.phone,
-       email: req.body.email,      
-   }), req.body.password, (err, user) => {
 
-            if (err) {
-                console.log(err)                                             
-                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: false, message:{error:err}})
-                }
-            let role = new Role();
-            passport.authenticate('local')(req, res, () => {                                             
-                req.session.save((err) => {
-                console.log("this is the current user_id", req.user._id)
-                const current_user_id = req.user._id
-                role.user_id = req.user._id//session comes from d db
-                 console.log("this is the current user_id", req.user._id)
-                role.save(function(err, doc){
-                    console.log("successfully saved")
-                    let current_school_id = doc._id;                
-                if(err){
-                    console.log(err);
-                    return;
-                }                            
-        
-                else {   
-                 console.log("this is the current user_id", current_id) 
-                    dataLog.message = "A new staff has been created by: "+ school_name+ " School"
-                    dataLog.school_id = current_id;
-                    pupil.user_id = current_user_id; 
-                    pupil.passport_name = passport_name;
-                    pupil.role_id = current_school_id;      
-                    pupil.parent_id = req.body.parent_id;
-                    pupil.sex = req.body.sex;
-                    pupil.favourite_subject = req.body.favourite_subject;
-                    pupil.state_of_origin = req.body.state_of_origin;
-                    pupil.religion = req.body.religion;
-                    pupil.church_attended = req.body.church_attended;
-                    pupil.school_id = current_id;
-                    pupil.class_id = req.body.class;
-                    pupil.class_name = class_name;
-                    pupil.phone = req.body.phone
-                    pupil.lga_of_origin = req.body.lga_of_origin;
-                    pupil.place_of_birth = req.body.place_of_birth;
-                    pupil.dob = req.body.dob;
-                    pupil.address = req.body.address;
-                    pupil.first_name = req.body.first_name 
-                    pupil.middle_name = req.body.middle_name
-                    pupil.last_name = req.body.last_name;
-                    // pupil.school_name = school_name;
-                    pupil.phone = req.body.phone;
-                    pupil.save(function(err, doc){       
-                        if(err){
-                            console.log("error durring saving",err);
-                            return;
-                        } else {                    
-                            console.log(doc, "successfully save, redirecting now..........")
-                      
-                        }
-                    });
-                    dataLog.save(function(err, doc){       
-                        if(err){
-                            console.log("error durring saving",err);
-                            return;
-                        } else {                    
-                            console.log(doc, "successfully save, redirecting now..........")
-                      
-                        }
-                    });
-    //rd ends here           
-                    console.log("successfully saved to the role db")
-                }
-            });
-
-                if (err) {
-                    return next(err);
-                }                
-               res.redirect('/admin/login')
-                });
-            });
-     });
-
+router.post('/create_class', (req, res, next) => {
+    let all_class = req.body;
+    redirector(req, res)
+    console.log(all_class)
+    Class.insertMany(all_class, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
 });
 
 
@@ -2123,13 +2068,31 @@ router.get('/all_staffs', (req, res, next) => {
          res.render('AdminBSBMaterialDesign-master/all_staffs', {layout: 'layout/admin.hbs', user: req.user, all_staffs: all_staffs})
     });
 })
-
+//heredity
 router.get('/all_pupils', (req, res, next) => {
     redirector(req, res);
-    Pupil.find({school_id: req.user._id}, function(err, all_pupils) {
-   console.log(all_pupils)
-        res.render('AdminBSBMaterialDesign-master/all_pupils', {layout: 'layout/admin.hbs', user: req.user, all_pupils: all_pupils})
-    });
+    Class.find({school_id: req.user._id}, function(err, all_class){      
+        console.log("this is the categories",all_class)
+        if (err) throw err;  
+        // console.log("this is the user id that mad e", state)
+    res.render('AdminBSBMaterialDesign-master/all_pupils', {layout: 'layout/admin.hbs', user: req.user, all_class:all_class})
+    })
+});
+router.get('/all_pupils_in_single_class/:id', (req, res, next) => {
+    let classid = req.params.id;
+    console.log("This is the motherfucking class id",classid);
+    redirector(req, res);
+    Pupil.find({class_id:classid}, function(err, all_pupils){
+        console.log(all_pupils)
+        if (err) throw err;  
+        // console.log("this is the user id that mad e", state)
+    Class.findOne({_id: req.params.id}, function(err, single_class){      
+        console.log("this is the categories",single_class)
+        if (err) throw err;  
+        // console.log("this is the user id that mad e", state)
+        res.render('AdminBSBMaterialDesign-master/all_pupils_in_single_class', {layout: 'layout/admin.hbs', single_class:single_class, user: req.user, all_pupils:all_pupils})
+    })
+})
 })
 
 router.get('/all_parents', (req, res, next) => {
