@@ -47,6 +47,12 @@ router.get('/home', (req, res) => {
         }
         var message_count = message.length;
         console.log("this is the message count", message_count);
+    MessageSchool.find({}).exec(function(err, all_msgs){
+        if(err){
+            console.log(err)
+        }
+        var all_msg_count = all_msgs.length;
+  
 
     Newsletter.find({school_id: req.user._id}).exec(function (err, newsletter){
         if(err) {
@@ -264,7 +270,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 
     School.findOne({schoolID: req.user._id}, function(err, schoolx){    
     
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', all_msg_count: all_msg_count, newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
         });
         });
     });
@@ -282,7 +288,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 });
  });
 });
-
+  });
 
 router.get('/admin/add', (req, res) => {
     if(!req.user){
@@ -456,6 +462,14 @@ router.get('/all_school_messages', (req, res) => {
     MessageSchool.find({school_id: req.user._id}, function(err, schoolmsgs){
         let school_msgs = schoolmsgs;
         res.render('AdminBSBMaterialDesign-master/all_school_messages', {layout: 'layout/admin.hbs', school_msgs: school_msgs})
+    })
+})
+
+// all_school_msgs
+router.get('/all_school_msgs', (req, res) => {
+    MessageSchool.find({}, function(err, schoolmsgs){
+        let school_msgs = schoolmsgs;
+        res.render('AdminBSBMaterialDesign-master/all_school_msgs', {layout: 'layout/admin.hbs', school_msgs: school_msgs})
     })
 })
 router.get('/all_school_newsletters', (req, res) => {

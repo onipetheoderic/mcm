@@ -18,6 +18,11 @@ router.get('/:school_name', (req, res) => {
 
  School.findOne({name: name}, function(err, school_data){
     console.log(school_data)
+    if (school_data==null) {
+    // handle error
+    res.redirect('/school')
+  }
+  else if(school_data !=null){
     let schoolData = school_data;
     var name = school_data.name;
     var bigSlogan = school_data.bigSlogan;
@@ -33,6 +38,7 @@ router.get('/:school_name', (req, res) => {
     let missionStatement = school_data.missionStatement
 
     res.render('clientFrontEnds/index', {layout: false, schoolData:schoolData, name: name, missionStatement:missionStatement, visionStatement: visionStatement, advertisement_text_description1: advertisement_text_description1, advertisement_text_header1: advertisement_text_header1, advertisement_text_description: advertisement_text_description, advertisement_text_header: advertisement_text_header, mediumImage:mediumImage, bigImage: bigImage, bigSlogan: bigSlogan, small_historic_quote: small_historic_quote})
+    }
 });
 });
 //this is the shop details 5b3dcf81de387222e4110915
