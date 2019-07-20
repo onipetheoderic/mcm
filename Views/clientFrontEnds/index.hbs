@@ -1,584 +1,687 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>{{schoolData.schoolDescription}}</title>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {{!-- 
-Best school in ilorin, best primary school in ilorin, best school in the world, best school in the entire universe, first primary school in kwara state, most advanced school in kwara state, best school in offa, best school in ilorin, best school in GRA, behind kwara hotel, behind governors office, largest school in kwara state, biggest school in kwara state, best 5 schools in ilorin, top 5 school in ilorin, top 10 school in ilorin, top 20 school in ilorin, oldest school in kwara state, oldest school in  ilorin
-     --}}
-{{!--  --}}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-{{!--  --}}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/genius/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/genius/css/animate.css">
-    
-    <link rel="stylesheet" href="/genius/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/genius/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/genius/css/magnific-popup.css">
+    <title>{{schoolData.title}}</title>
 
-    <link rel="stylesheet" href="/genius/css/aos.css">
+    <meta name="description" content="stJoseph Catholic is the best school in ilorin from the first church in the world">
+    <meta name="keywords" content="Best school in ilorin, best primary school in ilorin, best school in the world, best school in the entire universe, first primary school in kwara state, most advanced school in kwara state, best school in offa, best school in ilorin, best school in GRA, behind kwara hotel, behind governors office, largest school in kwara state, biggest school in kwara state, best 5 schools in ilorin, top 5 school in ilorin, top 10 school in ilorin, top 20 school in ilorin, oldest school in kwara state, oldest school in  ilorin">
 
-    <link rel="stylesheet" href="/genius/css/ionicons.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/TOPBuilder/images/favicon.png" type="image/x-icon" />
+    <!-- Bootstrap CSS -->
+    <link href="/TOPBuilder/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate CSS -->
+    <link href="/TOPBuilder/vendors/animate/animate.css" rel="stylesheet">
+    <!-- Icon CSS-->
+	<link rel="stylesheet" href="/TOPBuilder/vendors/font-awesome/css/font-awesome.min.css">
+    <!-- Camera Slider -->
+    <link rel="stylesheet" href="/TOPBuilder/vendors/camera-slider/camera.css">
+    <!-- Owlcarousel CSS-->
+	<link rel="stylesheet" type="text/css" href="/TOPBuilder/vendors/owl_carousel/owl.carousel.css" media="all">
 
-    <link rel="stylesheet" href="/genius/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/genius/css/jquery.timepicker.css">
+    <!--Theme Styles CSS-->
+	<link rel="stylesheet" type="text/css" href="/TOPBuilder/css/style.css" media="all" />
 
-    
-    <link rel="stylesheet" href="/genius/css/flaticon.css">
-    <link rel="stylesheet" href="/genius/css/icomoon.css">
-    <link rel="stylesheet" href="/genius/css/style.css">
-  </head>
-  <body>
-    
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>{{schoolData.name}} <br><small>{{schoolData.schoolType}}</small></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Preloader -->
+   {{!--  <div class="preloader"></div> --}}
 
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Courses</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Teacher</a></li>      
-          <li class="nav-item"><a href="#" class="nav-link">Events</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Our History</a></li>
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
+	<!-- Top Header_Area -->
+	<section class="top_header_area">
+	    <div class="container">
+            <ul class="nav navbar-nav top_nav">
+                <li><a href="#"><i class="fa fa-phone"></i>{{schoolData.phone}}</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i>{{schoolData.email}}</a></li>
+                <li><a href="#"><i class="fa fa-clock-o"></i>Mon - Fri 8:00 - 4:00</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right social_nav">
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            </ul>
+	    </div>
+	</section>
+	<!-- End Top Header_Area -->
 
-
-    <div class="hero-wrap" style="background-image: url('/uploads/{{bigImage}}'); background-attachment:fixed;">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-          <div class="col-md-8 ftco-animate text-center">
-            <h1 class="mb-4">{{schoolData.bigSlogan}} </h1>
-            {{!-- <p><a href="#" class="btn btn-primary px-4 py-3">Apply Now</a> <a href="#" class="btn btn-secondary px-4 py-3">Our Teachers</a></p> --}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <section class="ftco-search-course">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="courseSearch-wrap d-md-flex flex-column-reverse">
-    					<div class="full-wrap d-flex ftco-animate">
-    						<div class="one-third order-last p-5">
-    							<span>Are you are Parent?</span>
-    							<h3>send us a message</h3>
-    							<form action="/school/send_message/{{schoolData.schoolID}}" method="POST" class="course-search-form">
-		                <div class="form-group d-flex">
-                      <input type="hidden" value="{{schoolData.name}}" name="name">
-                      <input type="email" required name="email" class="form-control" placeholder="Your valid email Address">
-		                  <input type="text" required name="message" class="form-control" placeholder="Type your message here">
-		                  <input type="submit" value="Submit" class="submit">
-		                </div>
-		              </form>
-		             
-    						</div>
-
-    						<div class="one-forth order-first img" style="background-image: url(/genius/images/image_1.jpg);"></div>
-    					</div>
-    					<div class="full-wrap ftco-animate">
-    						<div class="one-half">
-    							<div class="featured-blog d-md-flex">
-    								
-                    <div class="image d-flex order-last">
-    									<a href="#" class="img"  style="background-image: url('/uploads/{{schoolData.logo}}');"></a>
-    								</div>
-    								<div class="text order-first">
-    									<span class="date">Aug 20, 2018</span>
-    									<h3><a href="#">2018 best Kwara State School Award</a></h3>
-											<p>We were awarded the best Nursery and Primary school in Ilorin for 2018</p>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row">
-          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services p-3 py-4 d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-exam"></span></div>
-              <div class="media-body px-3">
-                <h3 class="heading">School starting at age three</h3>
-                <p>We believe that school should start early, so we are creating a seamless educational experience from preschool to middle school.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services p-3 py-4 d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-blackboard"></span></div>
-              <div class="media-body px-3">
-                <h3 class="heading">Online Result Checking</h3>
-                <p>Results of Pupils are Uploaded Online to be viewed from anypart of the world by the parents or the pupils themselves</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services p-3 py-4 d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-books"></span></div>
-              <div class="media-body px-3">
-                <h3 class="heading">Our Library</h3>
-                <p>Our Library brings together quality, locally relevant books and educational materials from various sources into one simple, searchable platform. </p>
-              </div>
-            </div>    
-          </div>
-        </div>
-    	</div>
-    </section>
-
-
-    <section class="ftco-section-3 img" style="background-image: url(/genius//genius/images/bg_3.jpg);">
-    	<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row d-md-flex justify-content-center">
-    			<div class="col-md-9 about-video text-center">
-    				<h2 class="ftco-animate">{{schoolData.name}} {{schoolData.schoolType}} is the leading and oldest school in Kwara State</h2>
-    				<div class="video d-flex justify-content-center">
-    					<a href="https://vimeo.com/45830194" class="button popup-vimeo d-flex justify-content-center align-items-center"><span class="ion-ios-play"></span></a>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-    <section class="ftco-counter bg-light" id="section-counter">
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="27000">0</strong>
-		                <span>Satisfied Parents</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="80896">0</strong>
-		                <span>Satisfied Pupils</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="2400">0</strong>
-		                <span>First Class</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="200">0</strong>
-		                <span>Awards</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
-
-    <section class="ftco-section testimony-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-4">What The Parents Says:</h2>
-          </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-12 ftco-animate">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap text-center">
-                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5">My daughter was very unhappy at her previous school, I decided to move her to {{schoolData.name}}. Immediately, she settled in very quickly, everybody at the school making her feel very welcome. She now has a lot of good friends. </p>
-                    <p class="name">Mr Juwon</p>
-                    <span class="position">Software Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center">
-                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_2.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5">{{schoolData.name}} School is so much more than just a school, though our son has made excellent progress. There is a real sense of happiness and friendliness displayed between the children, and also between the parents and staff.</p>
-                    <p class="name">Mrs Okonkwo</p>
-                    <span class="position">Banker</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center">
-                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_3.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5"> I don’t need to worry about my child being unhappy, lonely or bullied at school. I know the children care for each other and the staff care for the pupils, not because of ‘a policy’, but because that’s how they live out their values and faith</p>
-                    <p class="name">Mr John</p>
-                    <span class="position">Lecturer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap text-center">
-                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_4.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5">"{{schoolData.name}} – wow!! We are 'newbies' to the school but it has honestly felt more like being welcomed home into an extended family than joining a new school. The children are all loving it and they are more motivated to learn new Ideas.</p>
-                    <p class="name">Mrs Abiodun</p>
-                    <span class="position">Marketer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ftco-section bg-light">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-4">What our Pupils say about Us</h2>
-          </div>
-        </div>
-        <div class="row">
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/genius/images/person_11.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="#">Paul Jacobs</a></h3>
-        					<span class="position">Primary 6</span>
-        					
-        				</div>
-        			</div>
-        			<div class="text">
-        				<p>I love my school, I love my friends, I love my parents for bringing me to {{schoolData.name}}{{schoolData.schoolType}}. I also love my teachers because they are wonderful</p>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/genius/images/person_12.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Yemisi O.</a></h3>
-        					<span class="position">Primary 5</span>
-        					
-        				</div>
-        			</div>
-        			<div class="text">
-        				<p>I have made alot of friends since attending {{schoolData.name}} {{schoolData.schoolType}}, I have the best teachers, I love my teacher and they love me too</p>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(/genius/images/person_13.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Richard Favour</a></h3>
-        					<span class="position">Primary 5</span>
-        					
-        				</div>
-        			</div>
-        			<div class="text">
-        				<p>We have so many equipments in my school, the field is very wide and my friends are awesome. I love our sporting day very much, because I get to meet other kids</p>
-        			</div>
-        		</div>
-        	</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ftco-freeTrial">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="d-flex align-items-center">
-			    		<div class="free-trial ftco-animate">
-			    			<h3>What are you waiting for?</h3>
-			    			<p>Every Kid deserves a chance to have a brighter future. So hurry up and enroll you kids with us today.</p>
-			    		</div>
-			    		<div class="btn-join ftco-animate">
-			    			<p><a href="#" class="btn btn-primary py-3 px-4">Join now!</a></p>
-			    		</div>
-			    	</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-4">Why we are the best</h2>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="course align-self-stretch">
-    					<a href="#" class="img" style="background-image: url(/genius/images/course-1.jpg)"></a>
-    					<div class="text p-4">
-    						<p class="category"><span>Happy Kids</span></p>
-    						<h3 class="mb-3"><a href="#">Our Kids are always Happy</a></h3>
-    						<p>With the presence of Good accomodating pupils and teachers, our kids are always happy to come to school and learn new ideas.</p>
-    						
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="course align-self-stretch">
-    					<a href="#" class="img" style="background-image: url(/genius/images/course-2.jpg)"></a>
-    					<div class="text p-4">
-    						<p class="category"><span>Science</span></p>
-    						<h3 class="mb-3"><a href="#">Best Computer School</a></h3>
-    						<p>Our computer Lab is first-grade, As we start to teach our kids how to use computer and its components at a very early stage</p>
-    						
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="course align-self-stretch">
-    					<a href="#" class="img" style="background-image: url(/genius/images/course-3.jpg)"></a>
-    					<div class="text p-4">
-    						<p class="category"><span>Environment</span></p>
-    						<h3 class="mb-3"><a href="#">Clean and Serene Environment</a></h3>
-    						<p>The school environment, classrooms, toilets and all other places in the shool are always neat and well maintained. </p>
-    						
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    		<div class="row justify-content-center mt-5">
-        	<div class="col-md-10 ftco-animate">
-        <p><strong>{{schoolData.name}} {{schoolData.advertisement_text_header1}}</strong></p>
-        		<p>{{schoolData.advertisement_text_description1}}</p>
-        		
-        	</div>
-        </div>
-    	</div>
-    </section>
-
- <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h2 class="mb-4">Our Latest Events</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-1.jpg');">
-              </a>
-              <div class="text p-4 d-block">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 10, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
-                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry d-flex align-self-stretch flex-column-reverse">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-2.jpg');">
-              </a>
-              <div class="text p-4 d-block">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 10, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
-                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-            <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-3.jpg');">
-              </a>
-              <div class="text p-4 d-block">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 10, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
-                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-		<section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
+	<!-- Header_Area -->
+    <nav class="navbar navbar-default header_aera" id="main_navbar">
         <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2>Subcribe to our Newsletter</h2>
-              <p>subscribing to our newletter gives you the priviledge to monitor our daily activites and we promise never to share your email address</p>
-              <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-8">
-
-        <form action="/school/send_newsletter/{{schoolData.schoolID}}" method="POST" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" name="email" placeholder="Enter email address">
-                      <input type="hidden" value="{{schoolData.name}}" name="name">
-                      <input type="submit" value="Subscribe" class="submit px-3">
+            <!-- searchForm -->
+            <div class="searchForm">
+                <form action="#" class="row m0">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="search" name="search" class="form-control" placeholder="Type & Hit Enter">
+                        <span class="input-group-addon form_hide"><i class="fa fa-times"></i></span>
                     </div>
-        </form>
+                </form>
+            </div><!-- End searchForm -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-md-2 p0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#min_navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="/TOPBuilder/images/logo.png" alt=""></a>
                 </div>
-              </div>
             </div>
-          </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="col-md-10 p0">
+                <div class="collapse navbar-collapse" id="min_navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html">Our Vision</a></li>
+                                <li><a href="index-2.html">Our Mission</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us</a>
+                            <ul class="dropdown-menu other_dropdwn">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="about-2.html">Our History</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events</a>
+                            <ul class="dropdown-menu other_dropdwn">
+                                <li><a href="services.html">Latest Event</a></li>
+                                <li><a href="services-2.html">Upcomming Event</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Gallery</a></li>
+                       
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#" class="nav_searchFrom"><i class="fa fa-search"></i></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </div><!-- /.container -->
+    </nav>
+	<!-- End Header_Area -->
+
+    <!-- Slider area -->
+    <section class="slider_area row m0">
+        <div class="slider_inner">
+            <div data-thumb="/TOPBuilder/images/slider-1.jpg" data-src="/TOPBuilder/images/slider-1.jpg">
+                <div class="camera_caption">
+                   <div class="container">
+                        
+                        <h1 style="padding-left: 150px; width: 300px"class=" wow fadeInUp animated" data-wow-delay="0.5s">Welcome to </h1>
+                        <h1 style="padding-left: 150px; width: 300px">{{schoolData.name}} {{schoolData.schoolType}}</h1>
+            {{!-- .half-black {
+  background: rgba(0, 0, 0, 0.5);
+} --}}            
+                      
+                   </div>
+                </div>
+            </div>
+            <div data-thumb="/TOPBuilder/images/slider-2.jpg" data-src="/TOPBuilder/images/slider-2.jpg">
+                <div class="camera_caption">
+                   <div class="container">
+                        
+                        <h1 style="padding-left: 50px; width: 200px" class=" wow fadeInUp animated" data-wow-delay="0.5s">{{schoolData.name}} Achieved 100% score in the National JET competition.</h1>
+                       
+                   </div>
+                </div>
+            </div>
+            <div data-thumb="/TOPBuilder/images/slider_3.jpg" data-src="/TOPBuilder/images/slider_3.jpg">
+                <div class="camera_caption">
+                   <div class="container">
+                        
+                        <h1 style="padding-left: 50px; width: 200px" class=" wow fadeInUp animated" data-wow-delay="0.5s">First position in the NTA Quiz competition.</h1>
+              
+                   </div>
+                </div>
+            </div>
+            <div data-thumb="/TOPBuilder/images/slider_4.jpg" data-src="/TOPBuilder/images/slider_4.jpg">
+                <div class="camera_caption">
+                   <div class="container">
+                        <h1 class=" wow fadeInUp animated" data-wow-delay="0.5s">First in National Turkish Mathematics Exams.</h1>
+
+                       
+                   </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
+    <!-- End Slider area -->
 
-    <footer class="ftco-footer ftco-bg-dark ftco-section img" style="background-image: url(/genius/images/bg_2.jpg); background-attachment:fixed;">
-    	<div class="overlay"></div>
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-3">
-            <div class="ftco-footer-widget mb-4">
-              <h2><a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>{{schoolData.name}} <br><small>{{schoolData.schoolType}}</small></a></h2>
-              <p>{{schoolData.visionStatement}}</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="ftco-footer-widget mb-4">
-            {{!--   <h2 class="ftco-heading-2">Recent Blog</h2> --}}
-             <div style="padding-left:100px"> 
-              <img src="/uploads/{{schoolData.logo}}" height="200" width="200">
-            </div>
-            </div>
-          </div>
-          <div class="col-md-2">
-             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Site Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Home</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Courses</a></li>
-                <li><a href="#" class="py-2 d-block">Students</a></li>
-                <li><a href="#" class="py-2 d-block">Video</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">{{schoolData.address}}</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">{{schoolData.phone}}</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{schoolData.email}}</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
+    <!-- Professional Builde -->
+    <section class="professional_builder row">
+        <div class="container">
+           <div class="row builder_all">
+                <div class="col-md-3 col-sm-6 builder">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <h4>School starting at age three</h4>
+                    <p>We believe that school should start early, so we are creating a seamless educational experience from preschool to middle school.</p>
+                </div>
+                <div class="col-md-3 col-sm-6 builder">
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                    <h4>Online Result Checking</h4>
+                    <p>Results of Pupils are Uploaded Online to be viewed from anypart of the world by the parents or the pupils themselves. We strongly believe in I.T</p>
+                </div>
+                <div class="col-md-3 col-sm-6 builder">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <h4>Our Library</h4>
+                    <p>Our Library brings together quality, locally relevant books and educational materials from various sources into one simple, searchable platform. </p>
+                </div>
+                <div class="col-md-3 col-sm-6 builder">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <h4>Passionate Teachers</h4>
+                    <p>Our teachers are always very passionate about their roles and they are always ready to deliver intellectual ideas to the pupil. We are very friendly </p>
+                </div>
+           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
+    </section>
+    <!-- End Professional Builde -->
 
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="https://socratewebs.com" target="_blank">Socratewebs</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
+    <!-- About Us Area -->
+    <section class="about_us_area row">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>ABOUT US</h2>
+                <h4>St.Joseph's the school of virtue, Founded and built on a solid rock. With Jesus and Mary, we form one, greate family of God</h4>
+            </div>
+            <div class="row about_row">
+                <div class="who_we_area col-md-7 col-sm-6">
+                    <div class="subtittle">
+                        <h2>Our Mission</h2>
+                    </div>
+                    <p>To Establish a foremost Educational centre where the tenets of Catholic Faith is the foundation and the individual child is Developed spiritually, Morally and Intellectually to Become a functional member of a Dynamic society.</p>
+                   
+                    <div class="subtittle">
+                        <h2>Our Vision</h2>
+                    </div>
+                    <p>To Develop the God-Given potentials in every child optimally both in character and intellect, with a view to Attaining national Development</p>
+                    
+                </div>
+
+                <div class="col-md-5 col-sm-6 about_client">
+                    <img src="/TOPBuilder/images/about_client.jpg" alt="">
+                </div>
+            </div>
         </div>
-      </div>
-    </footer>
+    </section>
+    <!-- End About Us Area -->
+{{!-- <section class="what_we_area row" style="background: {{schoolData.minorColor}}"> --}}
+    <!-- What ew offer Area -->
+    <section class="what_we_area row">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>WHAT WE OFFER</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="row construction_iner">
+                <div class="col-md-4 col-sm-6 construction">
+                   <div class="cns-img">
+                        <img src="/TOPBuilder/images/cns-1.jpg" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <a href="#">BUILDING CONSTRUCTION</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+                <div class="col-md-4 col-sm-6 construction">
+                   <div class="cns-img">
+                        <img src="/TOPBuilder/images/cns-2.jpg" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                        <a href="#">PROJECT PLANNING</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+                <div class="col-md-4 col-sm-6 construction">
+                   <div class="cns-img">
+                        <img src="/TOPBuilder/images/cns-3.jpg" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-gavel" aria-hidden="true"></i>
+                        <a href="#">HOUSE RENOVATION</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End What ew offer Area -->
+
+    <!-- Our Features Area -->
+    <section class="our_feature_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Our Features</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="feature_row row">
+                <div class="col-md-6 feature_img">
+                    <img src="/TOPBuilder/images/feature-man.jpg" alt="">
+                </div>
+                <div class="col-md-6 feature_content">
+                    <div class="subtittle">
+                        <h2>WHY CHOOSE US</h2>
+                        <h5>There are many variations of passages of Lorem Ipsum available.</h5>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">30+ YEARS OF EXPERIENCE</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">QUALIFIED EXPERTS</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">Best Customer Services</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Features Area -->
+{{!--  --}}
+    <!-- Our Services Area -->
+    <section class="our_services_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Our Services</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="portfolio_inner_area">
+                    <div class="portfolio_item">
+                   <div class="grid-sizer"></div>
+                    <div class="single_facilities col-xs-4 p0 painting photography adversting">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-1.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_facilities col-xs-4 p0 webdesign">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-2.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_facilities col-xs-4 painting p0 photography branding">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-3.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_facilities col-xs-4 p0 adversting webdesign adversting">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-4.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_facilities col-xs-4 p0 painting adversting branding">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-5.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_facilities col-xs-4 p0 webdesign photography magazine adversting">
+                       <div class="single_facilities_inner">
+                          	<img src="/TOPBuilder/images/gallery/sv-6.jpg" alt="">
+                            <div class="gallery_hover">
+                                <h4>Construction</h4>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-link" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Services Area -->
+
+    <!-- Our Team Area -->
+    <section class="our_team_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Our Team</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="row team_row">
+                <div class="col-md-3 col-sm-6 wow fadeInUp">
+                   <div class="team_membar">
+                        <img src="/TOPBuilder/images/team/tm-1.jpg" alt="">
+                        <div class="team_content">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <a href="#" class="name">Prodip Ghosh</a>
+                            <h6>Founder &amp; CEO</h6>
+                        </div>
+                   </div>
+                </div>
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
+                   <div class="team_membar">
+                        <img src="/TOPBuilder/images/team/tm-2.jpg" alt="">
+                        <div class="team_content">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <a href="#" class="name">Emran Khan</a>
+                            <h6>Web-Developer</h6>
+                        </div>
+                   </div>
+                </div>
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                   <div class="team_membar">
+                        <img src="/TOPBuilder/images/team/tm-3.jpg" alt="">
+                        <div class="team_content">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <a href="#" class="name">Prodip Ghosh</a>
+                            <h6>Founder &amp; CEO</h6>
+                        </div>
+                   </div>
+                </div>
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
+                   <div class="team_membar">
+                        <img src="/TOPBuilder/images/team/tm-4.jpg" alt="">
+                        <div class="team_content">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <a href="#" class="name">Jakaria Khan</a>
+                            <h6>Founder &amp; CEO</h6>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Team Area -->
+
+    <!-- Our Achievments Area -->
+    <section class="our_achievments_area" data-stellar-background-ratio="0.3">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Our Achievments</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="achievments_row row">
+                <div class="col-md-3 col-sm-6 p0 completed">
+                    <i class="fa fa-connectdevelop" aria-hidden="true"></i>
+                    <span class="counter">800</span>
+                    <h6>PROJECT COMPLETED</h6>
+                </div>
+                <div class="col-md-3 col-sm-6 p0 completed">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span class="counter">230</span>
+                    <h6>HOUSE RENOVATIONS</h6>
+                </div>
+                <div class="col-md-3 col-sm-6 p0 completed">
+                    <i class="fa fa-child" aria-hidden="true"></i>
+                    <span class="counter">1390</span>
+                    <h6>WORKERS EMPLOYED</h6>
+                </div>
+                <div class="col-md-3 col-sm-6 p0 completed">
+                    <i class="fa fa-trophy" aria-hidden="true"></i>
+                    <span class="counter">125</span>
+                    <h6>AWARDS WON</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Achievments Area -->
+
+
+
+    <!-- Our Featured Works Area -->
+    <section class="featured_works row" data-stellar-background-ratio="0.3">
+        <div class="tittle wow fadeInUp">
+            <h2>Our Featured Works</h2>
+            <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+        </div>
+        <div class="featured_gallery">
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-1.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-2.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-3.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-4.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-5.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-6.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-7.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
+                <img src="/TOPBuilder/images/gallery/gl-8.jpg" alt="">
+                <div class="gallery_hover">
+                    <h4>Bolt Apartments</h4>
+                    <a href="#">VIEW PROJECT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Featured Works Area -->
+
+    <!-- Our Latest Blog Area -->
+    <section class="latest_blog_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Our Latest Blog</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="row latest_blog">
+                <div class="col-md-4 col-sm-6 blog_content">
+                    <img src="/TOPBuilder/images/blog/lb-1.jpg" alt="">
+                    <a href="#" class="blog_heading">Our Latest Project</a>
+                    <h4><small>by  </small><a href="#">Emran Khan</a><span>/</span><small>ON </small> October 15, 2016</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis iaculis velit in tristique. Curabitur ac urna urna. Sed sollicitudin at nisi sed accumsan... <a href="#">Read More</a></p>
+                </div>
+                <div class="col-md-4 col-sm-6 blog_content">
+                    <img src="/TOPBuilder/images/blog/lb-2.jpg" alt="">
+                    <a href="#" class="blog_heading">Our Latest Project</a>
+                    <h4><small>by  </small><a href="#">Prodip Ghosh</a><span>/</span><small>ON </small> October 15, 2016</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis iaculis velit in tristique. Curabitur ac urna urna. Sed sollicitudin at nisi sed accumsan... <a href="#">Read More</a></p>
+                </div>
+                <div class="col-md-4 col-sm-6 blog_content">
+                    <img src="/TOPBuilder/images/blog/lb-3.jpg" alt="">
+                    <a href="#" class="blog_heading">Our Latest Project</a>
+                    <h4><small>by  </small><a href="#">Prodip Ghosh</a><span>/</span><small>ON </small> October 15, 2016</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis iaculis velit in tristique. Curabitur ac urna urna. Sed sollicitudin at nisi sed accumsan... <a href="#">Read More</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Latest Blog Area -->
+
     
-  
+    <!-- Footer Area -->
+    <footer class="footer_area">
+        <div class="container">
+            <div class="footer_row row">
+                <div class="col-md-3 col-sm-6 footer_about">
+                    <h2>ABOUT OUR COMPANY</h2>
+                    <img src="/TOPBuilder/images/footer-logo.png" alt="">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <ul class="socail_icon">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 footer_about quick">
+                    <h2>Quick links</h2>
+                    <ul class="quick_link">
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Building Construction</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Home Renovation</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Hardwood Flooring</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Repairing Of Roof</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Commercial Construction</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Concreate Transport</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 footer_about">
+                    <h2>Twitter Feed</h2>
+                    <a href="#" class="twitter">@colorlib: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</a>
+                    <a href="#" class="twitter">@colorlib: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</a>
+                </div>
+                <div class="col-md-3 col-sm-6 footer_about">
+                    <h2>CONTACT US</h2>
+                    <address>
+                        <p>Have questions, comments or just want to say hello:</p>
+                        <ul class="my_address">
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>info@thethemspro.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+880 123 456 789</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Sector # 10, Road # 05, Plot # 31, Uttara, Dhaka 1230 </span></a></li>
+                        </ul>
+                    </address>
+                </div>
+            </div>
+        </div>
+        <div class="copyright_area">
+            Copyright 2017 All rights reserved. Designed by <a href="https://colorlib.com">Colorlib.</a>
+        </div>
+    </footer>
+    <!-- End Footer Area -->
 
-  <!-- loader -->
-{{!--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}
-
-
-  <script src="/genius/js/jquery.min.js"></script>
-  <script src="/genius/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/genius/js/popper.min.js"></script>
-  <script src="/genius/js/bootstrap.min.js"></script>
-  <script src="/genius/js/jquery.easing.1.3.js"></script>
-  <script src="/genius/js/jquery.waypoints.min.js"></script>
-  <script src="/genius/js/jquery.stellar.min.js"></script>
-  <script src="/genius/js/owl.carousel.min.js"></script>
-  <script src="/genius/js/jquery.magnific-popup.min.js"></script>
-  <script src="/genius/js/aos.js"></script>
-  <script src="/genius/js/jquery.animateNumber.min.js"></script>
-  <script src="/genius/js/bootstrap-datepicker.js"></script>
-  <script src="/genius/js/jquery.timepicker.min.js"></script>
-  <script src="/genius/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="/genius/js/google-map.js"></script>
-  <script src="/genius/js/main.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-     
-      $("#owl-example").owlCarousel();
-     
-    });
-    </script>
-  </body>
+    <!-- jQuery JS -->
+    <script src="/TOPBuilder/js/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/TOPBuilder/js/bootstrap.min.js"></script>
+    <!-- Animate JS -->
+    <script src="/TOPBuilder/vendors/animate/wow.min.js"></script>
+    <!-- Camera Slider -->
+    <script src="/TOPBuilder/vendors/camera-slider/jquery.easing.1.3.js"></script>
+    <script src="/TOPBuilder/vendors/camera-slider/camera.min.js"></script>
+    <!-- Isotope JS -->
+    <script src="/TOPBuilder/vendors/isotope//TOPBuilder/imagesloaded.pkgd.min.js"></script>
+    <script src="/TOPBuilder/vendors/isotope/isotope.pkgd.min.js"></script>
+    <!-- Progress JS -->
+    <script src="/TOPBuilder/vendors/Counter-Up/jquery.counterup.min.js"></script>
+    <script src="/TOPBuilder/vendors/Counter-Up/waypoints.min.js"></script>
+    <!-- Owlcarousel JS -->
+    <script src="/TOPBuilder/vendors/owl_carousel/owl.carousel.min.js"></script>
+    <!-- Stellar JS -->
+    <script src="vendors/stellar/jquery.stellar.js"></script>
+    <!-- Theme JS -->
+    <script src="/TOPBuilder/js/theme.js"></script>
+</body>
 </html>

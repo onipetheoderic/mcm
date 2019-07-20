@@ -1,0 +1,77 @@
+        <div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Upload Carousel</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+{{#each carousels}}
+<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    <a href="/admin/all_pupils_in_single_class/{{this.id}}" style="text-decoration: none; cursor: pointer;">
+        <img src="/uploads/{{this.image}}" height="100" width="150">    
+    </a>
+    <p>{{this.header}}</p>
+    <p>{{this.secondheader}}</p>
+  
+    </div>  
+</div>
+{{/each}}
+            
+                <div class="body">
+<form id="form_advanced_validation" action="/admin/create_carousel/" method="POST" enctype="multipart/form-data">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="header">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="help-info">Header Text</div>
+                    </div> 
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="secondheader">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="help-info">Second Header Text</div>
+                    </div> 
+                     <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="description">
+                            <label class="form-label"></label>
+                        </div>
+                        <div class="help-info">Description Text</div>
+                    </div> 
+                    <input type="hidden" value={{singleSchool_id}} class="form-control" name="school_id">
+
+            
+                        <div class="form-line">
+                            <input type="file" required name="carousel" class="form-control" placeholder="Big Image" >
+                            <label class="form-label">Big Image 1920 by 800px</label>
+                              <br>
+                           <br>
+                        </div>
+            <button class="btn btn-primary waves-effect" type="submit">Upload Image</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
+

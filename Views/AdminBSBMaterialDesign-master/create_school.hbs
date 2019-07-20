@@ -24,10 +24,17 @@
                             <form id="form_advanced_validation" action="/admin/create_school" method="POST" enctype="multipart/form-data">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="name" min="6" max="20" >
+                                        <input type="text" required class="form-control" name="name" min="6" max="20" >
                                         <label class="form-label">Desired School Name</label>
                                     </div>
                                     <div class="help-info">Min. Value: 10, Max. Value: 200</div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" required class="form-control" name="schoolType" maxlength="103" minlength="3" >
+                                        <label class="form-label">School Type</label>
+                                    </div>
+                                    <div class="help-info">School Type(Nursery, primary, Nursery & Primary, Secondary, Comprehensive High School)</div>
                                 </div>
                                 
                                 <div class="form-group form-float">
@@ -53,17 +60,17 @@
                                 </div>    
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="email" min="6" max="20" >
+                                        <input type="email" class="form-control" name="email" min="6" max="20" >
                                         <label class="form-label">Email Address</label>
                                     </div>
                                     <div class="help-info">should be a valid email</div>
                                 </div>  
-                                  <div class="form-group form-float">
+                              <div class="form-group form-float">
                                     <div class="form-line">
-                                        <textarea name="schoolDescription" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                        <input type="text" class="form-control" name="schoolDescription"  >
                                         <label class="form-label">School Description</label>
                                     </div>
-                                    <div class="help-info">School Description that would be placed in the About us page</div>
+                                    <div class="help-info">School Description for better SEO</div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -73,20 +80,8 @@
                                     <div class="help-info">Proprietor's fullName</div>
                                 </div>
 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="schoolType" maxlength="103" minlength="3" >
-                                        <label class="form-label">School Type</label>
-                                    </div>
-                                    <div class="help-info">School Type(Nursery, primary, Nursery & Primary, Secondary, Comprehensive High School)</div>
-                                </div>
-                                 <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="bigSlogan" >
-                                        <label class="form-label">Big Slogan</label>
-                                    </div>
-                                    <div class="help-info">big Slogan</div>
-                                </div>
+                                
+
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" class="form-control" name="hmName" maxlength="103" minlength="3" >
@@ -124,215 +119,14 @@
                                     </div>
                                     <div class="help-info">desired second conspicous Color</div>
                                 </div>
+
                                  <div class="form-group form-float">
                                     <div class="form-line">
                                       <input type="color" class="form-control" name="thirdColor" value="#ff0000">
                                         <label class="form-label">Third Color</label>
                                     </div>
                                     <div class="help-info">Desired least conspicous Color</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="latitude" min="10" max="200" >
-                                        <label class="form-label">Latitude</label>
-                                    </div>
-                                    <div class="help-info">Latitude position</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="longitude" >
-                                        <label class="form-label">Longitude</label>
-                                    </div>
-                                    <div class="help-info">Longitude position</div>
-                                </div>
-                                
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="facebook"  >
-                                        <label class="form-label">facebook</label>
-                                    </div>
-                                    <div class="help-info">Facebook Link</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="twitter" min="10" max="200" >
-                                        <label class="form-label">twitter</label>
-                                    </div>
-                                    <div class="help-info">Twitter Link</div>
-                                </div>
-                               
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_fullname" >
-                                        <label class="form-label">Staff 1 fullname</label>
-                                    </div>
-                                    <div class="help-info">1st Staff fullname</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_position" >
-                                        <label class="form-label">Staff 1 Position</label>
-                                    </div>
-                                    <div class="help-info">1st Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_comment" >
-                                        <label class="form-label">Staff 1 Comment</label>
-                                    </div>
-                                    <div class="help-info">1st Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input type="file" required name="staff_image" class="form-control" placeholder="Staff 1 image" >
-                                     <label class="form-label">First Staff image, Size: 163px * 163px</label>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_fullname2" >
-                                        <label class="form-label">Staff 2 fullname</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff fullname</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_position2" >
-                                        <label class="form-label">Staff 2 Position</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_comment2" >
-                                        <label class="form-label">Staff 2 Comment</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input type="file" required name="staff_image2" class="form-control" placeholder="Staff 2 image" >
-                                     <label class="form-label">2nd Staff image, Size: 163px * 163px</label>
-                                </div>
-
-                                {{!-- continue --}}
-                                
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_fullname3" >
-                                        <label class="form-label">Staff 3 fullname</label>
-                                    </div>
-                                    <div class="help-info"> 3rd Staff fullname</div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_position3" >
-                                        <label class="form-label">Staff 3 Position</label>
-                                    </div>
-                                    <div class="help-info">3rd Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_comment3" >
-                                        <label class="form-label">Staff 3 Comment</label>
-                                    </div>
-                                    <div class="help-info">3rd Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input type="file" required name="staff_image3" class="form-control" placeholder="Staff 3 image" >
-                                     <label class="form-label">3rd Staff image, Size: 163px * 163px</label>
-                                </div>
-                                
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_fullname4" >
-                                        <label class="form-label">4th Staff fullname</label>
-                                    </div>
-                                    <div class="help-info">4th Staff fullname</div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_position4" >
-                                        <label class="form-label">Staff 4 Position</label>
-                                    </div>
-                                    <div class="help-info">4th Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="staff_comment4" >
-                                        <label class="form-label">Staff 4 Comment</label>
-                                    </div>
-                                    <div class="help-info">4th Staff Comment</div>
-                                </div>
-                                 <br>
-                           <br>
-                                <div class="form-line">
-                                    <input required type="file" name="staff_image4" class="form-control" placeholder="Staff 3 image" >
-                                     <label class="form-label">4th Staff image, Size: 163px * 163px</label>
-                                      <br>
-                           <br>
-                                </div>
-
-
-                                
-                             
-                   
-                        <div class="form-line">
-                            <input type="file" required name="bigImage" class="form-control" placeholder="Big header Image" >
-                            <label class="form-label">Big Header Image, Size: 1920px * 903px</label>
-                           <br>
-                           <br>
-                        </div>
-    
-
-                       
-                        <div class="form-line">
-                            <input type="file" required name="mediumImage" class="form-control" placeholder="medium side image" >
-                             <label class="form-label">Medium Header Image, Size: 555px *580px</label>
-                             <br>
-                           <br>
-                        </div>
-                    
-
-                   
-                        <div class="form-line">
-                            <input type="file" required name="mediumImage2" class="form-control" placeholder="medium side image 2" >
-                             <label class="form-label">Medium Side Image, Size: 555px *580px</label>
-                              <br>
-                           <br>
-                        </div>
-
-                        <div class="form-line">
-                            <input type="file" required name="logo" class="form-control" placeholder="logo" >
-                            <label class="form-label">Logo Image, Size: 152px * 40px</label>
-                              <br>
-                           <br>
-                        </div>
-    
-                        <div class="form-line">
-                            <input type="file" required name="logoMedium" class="form-control" placeholder="medium logo" >
-                             <label class="form-label">Medium Logo Image, Size: 402px * 400px</label>
-                               <br>
-                           <br>
-                        </div>
-      
-                     {{!-- 
-                        <div class="form-line">
-                            <input type="file" required name="favicon" class="form-control" placeholder="favicon" >
-                            <label class="form-label">Favicon Image, Size: 30px * 40px</label>
-                              <br>
-                           <br>
-                        </div>
-
-                        <div class="form-line">
-                            <input type="file" required name="rocket" class="form-control" placeholder="rocket" >
-                             <label class="form-label">Rocket Image, Size: 67px * 135px</label>
-                               <br>
-                           <br>
-                        </div>
- --}}
-                                
+                                </div>                              
 
       
                                  <div class="form-group form-float">

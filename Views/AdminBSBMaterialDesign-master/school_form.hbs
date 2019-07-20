@@ -24,7 +24,7 @@
                             <form id="form_advanced_validation" action="/admin/update_school/{{singleSchool._id}}" method="POST" enctype="multipart/form-data">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input value="{{singleSchool.name}}" type="text" class="form-control" name="name" min="6" max="20" >
+                                        <input value="{{singleSchool.name}}" type="text" class="form-control" name="name" >
                                         <label class="form-label">Desired School Name</label>
                                     </div>
                                     <div class="help-info">Min. Value: 10, Max. Value: 200</div>
@@ -33,31 +33,25 @@
                                
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input value="{{singleSchool.phone}}" type="text" class="form-control" name="phone" min="6" max="24" >
+                                        <input value="{{singleSchool.phone}}" type="text" class="form-control" name="phone" >
                                         <label class="form-label">Phone Number</label>
                                     </div>
                                     <div class="help-info">Min. Value: 10, Max. Value: 200</div>
                                 </div> 
-                                 <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.small_historic_quote}}" type="text" class="form-control" name="small_historic_quote" min="6" max="24" >
-                                        <label class="form-label">small historic quote</label>
-                                    </div>
-                                    <div class="help-info">small historic quote beneath the big Slogan</div>
-                                </div>    
+                                 
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input value="{{singleSchool.email}}" type="text" class="form-control" name="email" min="6" max="20" >
+                                        <input value="{{singleSchool.email}}" type="text" class="form-control" name="email">
                                         <label class="form-label">Email Address</label>
                                     </div>
                                     <div class="help-info">should be a valid email</div>
                                 </div>  
-                                  <div class="form-group form-float">
+                          <div class="form-group form-float">
                                     <div class="form-line">
-                                        <textarea value="{{singleSchool.schoolDescription}}" name="description" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                        <input value="{{singleSchool.schoolDescription}}" type="text" class="form-control" name="schoolDescription"  >
                                         <label class="form-label">School Description</label>
                                     </div>
-                                    <div class="help-info">School Description that would be placed in the About us page</div>
+                                    <div class="help-info">School Description for better SEO</div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -82,19 +76,21 @@
                                     <div class="help-info">Headmaster/Headmistress's Name</div>
                                 </div>
 
-                                 <div class="form-group form-float">
+                                <div class="form-group form-float">
                                     <div class="form-line">
-                                        <textarea value="{{singleSchool.visionStatement}}" name="visionStatement" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                        <input value="{{singleSchool.visionStatement}}" name="visionStatement" type="text" class="form-control">
                                         <label class="form-label">Vision Statement</label>
                                     </div>
+                                    <div class="help-info">Vision Statement</div>
                                 </div>
-                                 <div class="form-group form-float">
+                                <div class="form-group form-float">
                                     <div class="form-line">
-                                        <textarea value="{{singleSchool.missionStatement}}"name="missionStatement" cols="30" rows="5" class="form-control no-resize" ></textarea>
+                                        <input value="{{singleSchool.missionStatement}}"name="missionStatement" type="text" class="form-control">
                                         <label class="form-label">Mission Statement</label>
                                     </div>
+                                    <div class="help-info">Mission Statement</div>
                                 </div>
-                                
+                                         
                                  <div class="form-group form-float">
                                     <div class="form-line">
                                     <input value="{{singleSchool.majorColor}}" type="color" class="form-control" name="majorColor" value="#ff0000">
@@ -118,214 +114,7 @@
                                     </div>
                                     <div class="help-info">Desired least conspicous Color</div>
                                 </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" value="{{singleSchool.facebook}}"class="form-control" name="facebook" min="10" max="200" >
-                                        <label class="form-label">Facebook</label>
-                                    </div>
-                                    <div class="help-info">facebook Page Link</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" value="{{singleSchool.twitter}}"class="form-control" name="twitter" min="10" max="200" >
-                                        <label class="form-label">Twitter</label>
-                                    </div>
-                                    <div class="help-info">Twitter</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.longitude}}" type="text" class="form-control" name="longitude" min="10" max="200" >
-                                        <label class="form-label">Longitude</label>
-                                    </div>
-                                    <div class="help-info">Longitude position</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.longitude}}" type="text" class="form-control" name="latitude" min="10" max="200" >
-                                        <label class="form-label">Latitude</label>
-                                    </div>
-                                    <div class="help-info">Latitude position</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.bigSlogan}}" type="text" class="form-control" name="bigSlogan" min="10" max="200" >
-                                        <label class="form-label">Big Slogan</label>
-                                    </div>
-                                    <div class="help-info">big Slogan</div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_fullname}}" type="text" class="form-control" name="staff_fullname" >
-                                        <label class="form-label">Staff 1 fullname</label>
-                                    </div>
-                                    <div class="help-info">1st Staff fullname</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_position}}" type="text" class="form-control" name="staff_position" >
-                                        <label class="form-label">Staff 1 Position</label>
-                                    </div>
-                                    <div class="help-info">1st Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_comment}}" type="text" class="form-control" name="staff_comment" >
-                                        <label class="form-label">Staff 1 Comment</label>
-                                    </div>
-                                    <div class="help-info">1st Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input value="{{singleSchool.staff_image}}" type="file" required name="staff_image" class="form-control" placeholder="Staff 1 image" >
-                                     <label class="form-label">First Staff image, Size: 163px * 163px</label>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input <input value="{{singleSchool.staff_fullname2}}" type="text" class="form-control" name="staff_fullname2" >
-                                        <label class="form-label">Staff 2 fullname</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff fullname</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input type="text" value="{{singleSchool.staff_position2}}" class="form-control" name="staff_position2" >
-                                        <label class="form-label">Staff 2 Position</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_comment2}}" type="text" class="form-control" name="staff_comment2" >
-                                        <label class="form-label">Staff 2 Comment</label>
-                                    </div>
-                                    <div class="help-info">2nd Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input type="file" value="{{singleSchool.staff_image2}}"required name="staff_image2" class="form-control" placeholder="Staff 2 image" >
-                                     <label class="form-label">2nd Staff image, Size: 163px * 163px</label>
-                                </div>
-
-                                {{!-- continue --}}
                                 
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_fullname3}}" type="text" class="form-control" name="staff_fullname3" >
-                                        <label class="form-label">Staff 3 fullname</label>
-                                    </div>
-                                    <div class="help-info"> 3rd Staff fullname</div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_position3}}" type="text" class="form-control" name="staff_position3" >
-                                        <label class="form-label">Staff 3 Position</label>
-                                    </div>
-                                    <div class="help-info">3rd Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_comment3}}" type="text" class="form-control" name="staff_comment3" >
-                                        <label class="form-label">Staff 3 Comment</label>
-                                    </div>
-                                    <div class="help-info">3rd Staff Comment</div>
-                                </div>
-                                <div class="form-line">
-                                    <input value="{{singleSchool.staff_image3}}" type="file" required name="staff_image3" class="form-control" placeholder="Staff 3 image" >
-                                     <label class="form-label">3rd Staff image, Size: 163px * 163px</label>
-                                </div>
-                                
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_fullname4}}" type="text" class="form-control" name="staff_fullname4" >
-                                        <label class="form-label">4th Staff fullname</label>
-                                    </div>
-                                    <div class="help-info">4th Staff fullname</div>
-                                </div>
-
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_position4}}" type="text" class="form-control" name="staff_position4" >
-                                        <label class="form-label">Staff 4 Position</label>
-                                    </div>
-                                    <div class="help-info">4th Staff position and certification</div>
-                                </div>
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        <input value="{{singleSchool.staff_comment4}}" type="text" class="form-control" name="staff_comment4" >
-                                        <label class="form-label">Staff 4 Comment</label>
-                                    </div>
-                                    <div class="help-info">4th Staff Comment</div>
-                                </div>
-                                 <br>
-                           <br>
-                                <div class="form-line">
-                                    <input value="{{singleSchool.staff_image4}}" required type="file" name="staff_image4" class="form-control" placeholder="Staff 3 image" >
-                                     <label class="form-label">4th Staff image, Size: 163px * 163px</label>
-                                      <br>
-                           <br>
-                                </div>
-
-
-                                
-                             
-                   
-                        <div class="form-line">
-                            <input value="{{singleSchool.bigImage}}" type="file" required name="bigImage" class="form-control" placeholder="Big header Image" >
-                            <label class="form-label">Big Header Image, Size: 1920px * 903px</label>
-                           <br>
-                           <br>
-                        </div>
-    
-
-                       
-                        <div class="form-line">
-                            <input value="{{singleSchool.mediumImage}}"  type="file" required name="mediumImage" class="form-control" placeholder="medium side image" >
-                             <label class="form-label">Medium Header Image, Size: 555px *580px</label>
-                             <br>
-                           <br>
-                        </div>
-                    
-
-                   
-                        <div class="form-line">
-                            <input value="{{singleSchool.mediumImage2}}" type="file" required name="mediumImage2" class="form-control" placeholder="medium side image 2" >
-                             <label class="form-label">Medium Side Image, Size: 555px *580px</label>
-                              <br>
-                           <br>
-                        </div>
-
-                        <div class="form-line">
-                            <input value="{{singleSchool.logo}}" type="file" required name="logo" class="form-control" placeholder="logo" >
-                            <label class="form-label">Logo Image, Size: 152px * 40px</label>
-                              <br>
-                           <br>
-                        </div>
-    
-                        <div class="form-line">
-                            <input value="{{singleSchool.logoMedium}}" type="file" required name="logoMedium" class="form-control" placeholder="medium logo" >
-                             <label class="form-label">Medium Logo Image, Size: 402px * 400px</label>
-                               <br>
-                           <br>
-                        </div>
-      
-                     {{!-- 
-                        <div class="form-line">
-                            <input type="file" required name="favicon" class="form-control" placeholder="favicon" >
-                            <label class="form-label">Favicon Image, Size: 30px * 40px</label>
-                              <br>
-                           <br>
-                        </div>
-
-                        <div class="form-line">
-                            <input type="file" required name="rocket" class="form-control" placeholder="rocket" >
-                             <label class="form-label">Rocket Image, Size: 67px * 135px</label>
-                               <br>
-                           <br>
-                        </div>
- --}}
-                                
-
       
                                 <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
                             </form>

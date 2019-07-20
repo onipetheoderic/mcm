@@ -3,18 +3,19 @@ import passport from 'passport';
 import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
+import AboutUs from '../models/aboutUs'
 import DataLog from '../models/dataLog'
 import User from '../models/user';
 import Parent from '../models/parent';
 import PupilClass from '../models/pupilClass';
 import Pupil from '../models/pupil';
+import Carousel from '../models/carousel'
 import Role from '../models/role';
 import ReportCard from '../models/reportCard';
 import JssClass from '../models/jssClass';
 import ReportSubject from '../models/reportSubject';
 import Product from '../models/product';
 import Setting from '../models/setting';
-import Carousel from '../models/carousel';
 import School from '../models/school';
 import Stafftype from '../models/staffType';
 import Newsletter from '../models/newsletter';
@@ -34,6 +35,7 @@ router.get('/home', (req, res) => {
         // res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Please Login"}})                
         res.redirect('/admin/login');
     }
+
     Subject.find({school_id: req.user._id}).exec(function (err, subjects){
         if(err) {
             console.log(err)
@@ -270,7 +272,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 
     School.findOne({schoolID: req.user._id}, function(err, schoolx){    
     
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', all_msg_count: all_msg_count, newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', my_id: req.user._id, all_msg_count: all_msg_count, newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
         });
         });
     });
@@ -302,14 +304,7 @@ router.get('/admin/add', (req, res) => {
 });
 });
 
-router.get('/admin/add_carousel', (req, res) => {
-    if(!req.user){
-        res.redirect('/admin/login');
-    }
-     
-    res.render('AdminBSBMaterialDesign-master/pages/add_carousel', {layout: 'layout/admin.hbs'})
 
-});
 
 
 router.get('/admin/add_category', (req, res) => {
@@ -364,6 +359,134 @@ router.get('/edit_school/:id', (req, res) => {
     })
 });
 
+router.get('/edit_school_school/:id', (req, res) => {  
+    redirector(req, res)  
+    let user_id = req.params.id;
+    //lets find the school by its id
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool = school
+        res.render('AdminBSBMaterialDesign-master/school_form', {layout: 'layout/admin.hbs', singleSchool:singleSchool})
+    })
+});
+
+router.get('/carousels/:id', (req, res) => {
+    redirector(req, res)  
+    let user_id = req.params.id;
+    // let carouselImage = req.files.carousel;
+    // let carouselImage_name = imagePlacerAndNamer(req, res, carouselImage);
+
+    
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool_id = school._id;
+        Carousel.find({school_id:singleSchool_id}, function(err, carousels){
+
+        res.render('AdminBSBMaterialDesign-master/carousel_form', {layout: 'layout/admin.hbs', carousels:carousels, singleSchool_id:singleSchool_id})
+        })
+    })
+
+})
+
+
+router.get('/create_edit_about_us/:id', (req, res) => {  
+    redirector(req, res)  
+    let user_id = req.params.id;
+    //lets find the school by its id
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool = school
+        let school_id = school._id;
+
+    AboutUs.find({school_id: school_id}, function(err, abouts){
+        let about_length = abouts.length;
+        if(about_length>0){
+            AboutUs.findOne({school_id: school_id}, function(err, about){
+                res.render('AdminBSBMaterialDesign-master/create_edit_about_us', {layout: 'layout/admin.hbs', about:about, school_id:school_id})        
+            })
+        }
+        else{
+            res.render('AdminBSBMaterialDesign-master/create_about_us', {layout: 'layout/admin.hbs', school_id:school_id})        
+        }
+        
+    })
+    });
+})
+/*    school_id: {type:String, required: true},
+    introductory_text: { type: String, required: true },//TODO--> later change it to required 
+    description: { type: String, required: true },//TODO--> later change it to required 
+    secondheader: { type: String, required:true },//TODO--> later change it to required 
+    show: {type:Boolean, default: false},*/
+
+router.post('/create_about_us', (req, res, next) => {
+   
+
+    let aboutus = new AboutUs(); 
+   
+    aboutus.introductory_text = req.body.introductory_text;
+    aboutus.description = req.body.description;
+    aboutus.secondheader = req.body.secondheader;
+    aboutus.school_id = req.body.school_id;
+
+    aboutus.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+/*PupilClass.findByIdAndUpdate(result_id,
+    { */
+
+router.post('/create_edit_about_us/:about_id', (req, res, next) => {
+
+    AboutUs.findByIdAndUpdate(req.params.about_id,
+        {
+            "introductory_text": req.body.introductory_text,
+            "description": req.body.description,
+            "secondheader": req.body.secondheader
+        }).exec(function(err, updated_about){
+    if(err) {
+       console.log(err);
+       
+    } else {
+       console.log(updated_about) 
+        res.redirect("/admin/home")
+    }
+    });
+
+});
+
+
+
+
+router.post('/create_carousel', (req, res, next) => {
+    let carouselImage = req.files.carousel;
+    let carouselImage_name = imagePlacerAndNamer(req, res, carouselImage);
+
+    let carousel = new Carousel(); 
+    carousel.image = carouselImage_name;
+    // carousel.link = req.body.link;
+    carousel.header = req.body.header;
+    carousel.secondheader = req.body.secondheader;
+    carousel.description = req.body.description;
+    carousel.school_id = req.body.school_id;
+
+    carousel.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+
 router.get('/edit_pupil/:id', (req, res) => {  
     redirector(req, res)  
     let myClassess;
@@ -392,6 +515,8 @@ router.get('/edit_staff/:id', (req, res) => {
     })
 });
 });
+
+
 
 router.get('/edit_parent/:id', (req, res) => {  
     redirector(req, res)  
@@ -757,6 +882,13 @@ router.get('/get_all_stafftypes', (req, res, next) => {
     });
 
 })
+
+router.get('/get_all_aboutus', (req, res, next) => {
+    AboutUs.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
 router.get('/get_all_results', (req, res, next) => {
     PupilClass.find({}, function(err, users) {
      console.log(users)
@@ -942,75 +1074,27 @@ router.get('/view_all_schools', (req, res) => {
 router.post('/update_school/:id', (req, res) => {
     redirector(req, res)
     let result_id = req.params.id;
-    console.log(req.body)
-    let bigImage = req.files.bigImage;
-    let mediumImage = req.files.mediumImage;
-    let mediumImage2 = req.files.mediumImage2;
-    let logo = req.files.logo;  
-    let logoMedium = req.files.logoMedium;
-    let staff_image = req.files.staff_image;
-    let staff_image2 = req.files.staff_image2;
-    let staff_image3 = req.files.staff_image3;
-    let staff_image4 = req.files.staff_image4;
-
-
-    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
-    let mediumImage2_name =imagePlacerAndNamer(req, res, mediumImage2);
-    let mediumImage_name = imagePlacerAndNamer(req, res, mediumImage);   
-    let logo_name = imagePlacerAndNamer(req, res, logo);
-    let logoMedium_name =imagePlacerAndNamer(req, res, logoMedium);     
-    let staff_image_name =imagePlacerAndNamer(req, res, staff_image);
-    let staff_image2_name =imagePlacerAndNamer(req, res, staff_image2);
-    let staff_image3_name =imagePlacerAndNamer(req, res, staff_image3);
-    let staff_image4_name =imagePlacerAndNamer(req, res, staff_image4);
+    
     School.findByIdAndUpdate(result_id,
     { 
         "name": req.body.name,
         "majorColor" :req.body.majorColor,
         "minorColor" :req.body.minorColor,
         "thirdColor" :req.body.thirdColor,
-        "fourthColor" :req.body.fourthColor,
-        "latitude" :req.body.latitude,
-        "longitude" :req.body.longitude,
         "schoolDescription" :req.body.schoolDescription,
         "proprietorName" :req.body.proprietorName,
         "schoolType" :req.body.schoolType,
-        "hmName" :req.body.hmName,
-        "bigSlogan" :req.body.bigSlogan,
-        "bigImage" :bigImage_name,               
-        "logo" :logo_name,                
-        "logoMedium" :logoMedium_name,                
-        "mediumImage":mediumImage_name,
-        "mediumImage2":mediumImage2_name,
-        "facebook": req.body.facebook,
-        "twitter": req.body.twitter,
-        "staff_image" :staff_image_name,
-        "staff_image2" :staff_image2_name,
-        "staff_image3" :staff_image3_name,
-        "staff_image4" :staff_image4_name,
+        "hmName" :req.body.hmName,          
         "visionStatement":req.body.visionStatement,
         "missionStatement":req.body.missionStatement,
-        "small_historic_quote": req.body.small_historic_quote,
-        "staff_fullname" :req.body.staff_fullname,
-        "staff_fullname2" :req.body.staff_fullname2,
-        "staff_fullname3" :req.body.staff_fullname3,
-        "staff_fullname4" :req.body.staff_fullname4,
-        "staff_position" :req.body.staff_position,
-        "staff_position2" :req.body.staff_position2,
-        "staff_position3" :req.body.staff_position3,
-        "staff_position4" :req.body.staff_position4,
-        "staff_comment" :req.body.staff_comment,
-        "staff_comment2" :req.body.staff_comment2,
-        "staff_comment3" :req.body.staff_comment3,
-        "staff_comment4" :req.body.staff_comment4,
-
-    }).exec(function(err, updated_pupil){
+    }).exec(function(err, updated_school){
     if(err) {
        console.log(err);
        
     } else {
+        console.log(updated_school)
         
-        res.redirect("/admin/view_all_schools")
+        res.redirect("/admin/home")
     }
     });
 })
@@ -1108,30 +1192,6 @@ router.post('/update_staff/:id', (req, res) => {
 
 
 router.post('/create_school', (req, res) => {
-
-   let bigImage = req.files.bigImage;
-   let mediumImage = req.files.mediumImage;
-   let mediumImage2 = req.files.mediumImage2;
-   let logo = req.files.logo;  
-   let logoMedium = req.files.logoMedium;
-   let staff_image = req.files.staff_image;
-   let staff_image2 = req.files.staff_image2;
-   let staff_image3 = req.files.staff_image3;
-   let staff_image4 = req.files.staff_image4;
-
-
-    let bigImage_name = imagePlacerAndNamer(req, res, bigImage);
-    let mediumImage2_name =imagePlacerAndNamer(req, res, mediumImage2);
-    let mediumImage_name = imagePlacerAndNamer(req, res, mediumImage);   
-    let logo_name = imagePlacerAndNamer(req, res, logo);
-    let logoMedium_name =imagePlacerAndNamer(req, res, logoMedium);     
-    let staff_image_name =imagePlacerAndNamer(req, res, staff_image);
-    let staff_image2_name =imagePlacerAndNamer(req, res, staff_image2);
-    let staff_image3_name =imagePlacerAndNamer(req, res, staff_image3);
-    let staff_image4_name =imagePlacerAndNamer(req, res, staff_image4);
-    console.log("this is the image name:")   
-
-
     let school = new School();  
     User.register(new User({ username: req.body.username,
        user_name: req.body.user_name,
@@ -1169,40 +1229,14 @@ router.post('/create_school', (req, res) => {
                     school.minorColor = req.body.minorColor;
                     school.thirdColor = req.body.thirdColor;
                     school.fourthColor = req.body.fourthColor;
-                    school.latitude = req.body.latitude;
-                    school.longitude = req.body.longitude
                     school.schoolDescription = req.body.schoolDescription;
                     school.proprietorName = req.body.proprietorName;
                     school.schoolType = req.body.schoolType;
-                    school.hmName = req.body.hmName;
-
-                school.bigSlogan = req.body.bigSlogan;
-                school.bigImage = bigImage_name;               
-                school.logo = logo_name;                
-                school.logoMedium = logoMedium_name;                
-                school.mediumImage = mediumImage_name;
-                school.mediumImage2 = mediumImage2_name;
-                school.staff_image = staff_image_name;
-                school.staff_image2 = staff_image2_name;
-                school.staff_image3 = staff_image3_name;
-                school.staff_image4 = staff_image4_name;
-                school.facebook = req.body.facebook;
-                school.twitter = req.body.twitter;
-                school.staff_fullname = req.body.staff_fullname;
-                school.staff_fullname2= req.body.staff_fullname2;
-                school.staff_fullname3= req.body.staff_fullname3;
-                school.staff_fullname4= req.body.staff_fullname4;
-                school.staff_position= req.body.staff_position;
-                school.staff_position2= req.body.staff_position2;
-                school.staff_position3= req.body.staff_position3;
-                school.staff_position4= req.body.staff_position4;
-                school.staff_comment= req.body.staff_comment;
-                school.staff_comment2= req.body.staff_comment2;
-                school.staff_comment3= req.body.staff_comment3;
-                school.staff_comment4= req.body.staff_comment4;
-                school.visionStatement =req.body.visionStatement;
-                school.missionStatement = req.body.missionStatement;
-                school.save(function(err, doc){       
+                    school.hmName = req.body.hmName;                       
+                    school.visionStatement =req.body.visionStatement;
+                    school.missionStatement = req.body.missionStatement;
+                    
+                    school.save(function(err, doc){       
                     if(err){
                         console.log("error durring saving",err);
                         return;

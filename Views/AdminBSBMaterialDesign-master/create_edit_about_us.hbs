@@ -1,0 +1,54 @@
+<div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Create A new About Us page</h2>
+                            
+                        </div>
+                        
+    
+                        <div class="body">
+                            <form id="form_advanced_validation" action="/admin/create_edit_about_us/{{about._id}}" method="POST" enctype="multipart/form-data">
+                                
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input value="{{about.introductory_text}}" type="text" required class="form-control" name="introductory_text">
+                                        <label class="form-label">Introductory text</label>
+                                    </div>
+                                    <div class="help-info">Introductory text</div>
+                                </div>
+
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input value="{{about.secondheader}}" type="text"class="form-control" name="secondheader">
+                                        <label class="form-label">Second Header</label>
+                                    </div>
+                                    <div class="help-info">Second header</div>
+                                </div>
+  <input type="hidden" value="{{about._id}}" name="about_id" >
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input id="data" onkeyup="countChars('data','charcount');" onkeydown="countChars('data','charcount');" onmouseout="countChars('data','charcount');" value="{{about.description}}" type="text"  class="form-control" name="description">
+                                        <label class="form-label">Description</label>
+                                    </div>
+                    <script type="text/javascript">
+function countChars(countfrom,displayto) {
+  var len = document.getElementById(countfrom).value.length;
+  document.getElementById(displayto).innerHTML = len;
+}
+</script>
+
+<span id="charcount">0</span> characters entered.
+                                </div>           
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>

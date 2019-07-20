@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{schoolData.schoolDescription}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{!-- 
+Best school in ilorin, best primary school in ilorin, best school in the world, best school in the entire universe, first primary school in kwara state, most advanced school in kwara state, best school in offa, best school in ilorin, best school in GRA, behind kwara hotel, behind governors office, largest school in kwara state, biggest school in kwara state, best 5 schools in ilorin, top 5 school in ilorin, top 10 school in ilorin, top 20 school in ilorin, oldest school in kwara state, oldest school in  ilorin
+     --}}
+{{!--  --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+{{!--  --}}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/genius/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/genius/css/animate.css">
+    
+    <link rel="stylesheet" href="/genius/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/genius/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/genius/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/genius/css/aos.css">
+
+    <link rel="stylesheet" href="/genius/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/genius/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/genius/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="/genius/css/flaticon.css">
+    <link rel="stylesheet" href="/genius/css/icomoon.css">
+    <link rel="stylesheet" href="/genius/css/style.css">
+  </head>
+  <body>
+    
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>{{schoolData.name}} <br><small>{{schoolData.schoolType}}</small></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Courses</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Teacher</a></li>      
+          <li class="nav-item"><a href="#" class="nav-link">Events</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Our History</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+    <div class="hero-wrap" style="background-image: url('/uploads/{{bigImage}}'); background-attachment:fixed;">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+          <div class="col-md-8 ftco-animate text-center">
+            <h1 class="mb-4">{{schoolData.bigSlogan}} </h1>
+            {{!-- <p><a href="#" class="btn btn-primary px-4 py-3">Apply Now</a> <a href="#" class="btn btn-secondary px-4 py-3">Our Teachers</a></p> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="ftco-search-course">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-md-12">
+    				<div class="courseSearch-wrap d-md-flex flex-column-reverse">
+    					<div class="full-wrap d-flex ftco-animate">
+    						<div class="one-third order-last p-5">
+    							<span>Are you are Parent?</span>
+    							<h3>send us a message</h3>
+    							<form action="/school/send_message/{{schoolData.schoolID}}" method="POST" class="course-search-form">
+		                <div class="form-group d-flex">
+                      <input type="hidden" value="{{schoolData.name}}" name="name">
+                      <input type="email" required name="email" class="form-control" placeholder="Your valid email Address">
+		                  <input type="text" required name="message" class="form-control" placeholder="Type your message here">
+		                  <input type="submit" value="Submit" class="submit">
+		                </div>
+		              </form>
+		             
+    						</div>
+
+    						<div class="one-forth order-first img" style="background-image: url(/genius/images/image_1.jpg);"></div>
+    					</div>
+    					<div class="full-wrap ftco-animate">
+    						<div class="one-half">
+    							<div class="featured-blog d-md-flex">
+    								
+                    <div class="image d-flex order-last">
+    									<a href="#" class="img"  style="background-image: url('/uploads/{{schoolData.logo}}');"></a>
+    								</div>
+    								<div class="text order-first">
+    									<span class="date">Aug 20, 2018</span>
+    									<h3><a href="#">2018 best Kwara State School Award</a></h3>
+											<p>We were awarded the best Nursery and Primary school in Ilorin for 2018</p>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row">
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-3 py-4 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-exam"></span></div>
+              <div class="media-body px-3">
+                <h3 class="heading">School starting at age three</h3>
+                <p>We believe that school should start early, so we are creating a seamless educational experience from preschool to middle school.</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-3 py-4 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-blackboard"></span></div>
+              <div class="media-body px-3">
+                <h3 class="heading">Online Result Checking</h3>
+                <p>Results of Pupils are Uploaded Online to be viewed from anypart of the world by the parents or the pupils themselves</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-3 py-4 d-block text-center">
+              <div class="icon d-flex justify-content-center align-items-center mb-3"><span class="flaticon-books"></span></div>
+              <div class="media-body px-3">
+                <h3 class="heading">Our Library</h3>
+                <p>Our Library brings together quality, locally relevant books and educational materials from various sources into one simple, searchable platform. </p>
+              </div>
+            </div>    
+          </div>
+        </div>
+    	</div>
+    </section>
+
+
+    <section class="ftco-section-3 img" style="background-image: url(/genius//genius/images/bg_3.jpg);">
+    	<div class="overlay"></div>
+    	<div class="container">
+    		<div class="row d-md-flex justify-content-center">
+    			<div class="col-md-9 about-video text-center">
+    				<h2 class="ftco-animate">{{schoolData.name}} {{schoolData.schoolType}} is the leading and oldest school in Kwara State</h2>
+    				<div class="video d-flex justify-content-center">
+    					<a href="https://vimeo.com/45830194" class="button popup-vimeo d-flex justify-content-center align-items-center"><span class="ion-ios-play"></span></a>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+    <section class="ftco-counter bg-light" id="section-counter">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-10">
+		    		<div class="row">
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="27000">0</strong>
+		                <span>Satisfied Parents</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="80896">0</strong>
+		                <span>Satisfied Pupils</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="2400">0</strong>
+		                <span>First Class</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18 text-center">
+		              <div class="text">
+		                <strong class="number" data-number="200">0</strong>
+		                <span>Awards</span>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+    <section class="ftco-section testimony-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">What The Parents Says:</h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-12 ftco-animate">
+            <div class="carousel-testimony owl-carousel">
+              <div class="item">
+                <div class="testimony-wrap text-center">
+                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_1.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5">My daughter was very unhappy at her previous school, I decided to move her to {{schoolData.name}}. Immediately, she settled in very quickly, everybody at the school making her feel very welcome. She now has a lot of good friends. </p>
+                    <p class="name">Mr Juwon</p>
+                    <span class="position">Software Developer</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap text-center">
+                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_2.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5">{{schoolData.name}} School is so much more than just a school, though our son has made excellent progress. There is a real sense of happiness and friendliness displayed between the children, and also between the parents and staff.</p>
+                    <p class="name">Mrs Okonkwo</p>
+                    <span class="position">Banker</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap text-center">
+                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_3.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5"> I don’t need to worry about my child being unhappy, lonely or bullied at school. I know the children care for each other and the staff care for the pupils, not because of ‘a policy’, but because that’s how they live out their values and faith</p>
+                    <p class="name">Mr John</p>
+                    <span class="position">Lecturer</span>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap text-center">
+                  <div class="user-img mb-5" style="background-image: url(/genius/images/person_4.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5">"{{schoolData.name}} – wow!! We are 'newbies' to the school but it has honestly felt more like being welcomed home into an extended family than joining a new school. The children are all loving it and they are more motivated to learn new Ideas.</p>
+                    <p class="name">Mrs Abiodun</p>
+                    <span class="position">Marketer</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">What our Pupils say about Us</h2>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-lg-4 mb-sm-4 ftco-animate">
+        		<div class="staff">
+        			<div class="d-flex mb-4">
+        				<div class="img" style="background-image: url(/genius/images/person_11.jpg);"></div>
+        				<div class="info ml-4">
+        					<h3><a href="#">Paul Jacobs</a></h3>
+        					<span class="position">Primary 6</span>
+        					
+        				</div>
+        			</div>
+        			<div class="text">
+        				<p>I love my school, I love my friends, I love my parents for bringing me to {{schoolData.name}}{{schoolData.schoolType}}. I also love my teachers because they are wonderful</p>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-lg-4 mb-sm-4 ftco-animate">
+        		<div class="staff">
+        			<div class="d-flex mb-4">
+        				<div class="img" style="background-image: url(/genius/images/person_12.jpg);"></div>
+        				<div class="info ml-4">
+        					<h3><a href="teacher-single.html">Yemisi O.</a></h3>
+        					<span class="position">Primary 5</span>
+        					
+        				</div>
+        			</div>
+        			<div class="text">
+        				<p>I have made alot of friends since attending {{schoolData.name}} {{schoolData.schoolType}}, I have the best teachers, I love my teacher and they love me too</p>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-lg-4 mb-sm-4 ftco-animate">
+        		<div class="staff">
+        			<div class="d-flex mb-4">
+        				<div class="img" style="background-image: url(/genius/images/person_13.jpg);"></div>
+        				<div class="info ml-4">
+        					<h3><a href="teacher-single.html">Richard Favour</a></h3>
+        					<span class="position">Primary 5</span>
+        					
+        				</div>
+        			</div>
+        			<div class="text">
+        				<p>We have so many equipments in my school, the field is very wide and my friends are awesome. I love our sporting day very much, because I get to meet other kids</p>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-freeTrial">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-md-12">
+    				<div class="d-flex align-items-center">
+			    		<div class="free-trial ftco-animate">
+			    			<h3>What are you waiting for?</h3>
+			    			<p>Every Kid deserves a chance to have a brighter future. So hurry up and enroll you kids with us today.</p>
+			    		</div>
+			    		<div class="btn-join ftco-animate">
+			    			<p><a href="#" class="btn btn-primary py-3 px-4">Join now!</a></p>
+			    		</div>
+			    	</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Why we are the best</h2>
+          </div>
+        </div>
+    		<div class="row">
+    			<div class="col-md-4 d-flex ftco-animate">
+    				<div class="course align-self-stretch">
+    					<a href="#" class="img" style="background-image: url(/genius/images/course-1.jpg)"></a>
+    					<div class="text p-4">
+    						<p class="category"><span>Happy Kids</span></p>
+    						<h3 class="mb-3"><a href="#">Our Kids are always Happy</a></h3>
+    						<p>With the presence of Good accomodating pupils and teachers, our kids are always happy to come to school and learn new ideas.</p>
+    						
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4 d-flex ftco-animate">
+    				<div class="course align-self-stretch">
+    					<a href="#" class="img" style="background-image: url(/genius/images/course-2.jpg)"></a>
+    					<div class="text p-4">
+    						<p class="category"><span>Science</span></p>
+    						<h3 class="mb-3"><a href="#">Best Computer School</a></h3>
+    						<p>Our computer Lab is first-grade, As we start to teach our kids how to use computer and its components at a very early stage</p>
+    						
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4 d-flex ftco-animate">
+    				<div class="course align-self-stretch">
+    					<a href="#" class="img" style="background-image: url(/genius/images/course-3.jpg)"></a>
+    					<div class="text p-4">
+    						<p class="category"><span>Environment</span></p>
+    						<h3 class="mb-3"><a href="#">Clean and Serene Environment</a></h3>
+    						<p>The school environment, classrooms, toilets and all other places in the shool are always neat and well maintained. </p>
+    						
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="row justify-content-center mt-5">
+        	<div class="col-md-10 ftco-animate">
+        <p><strong>{{schoolData.name}} {{schoolData.advertisement_text_header1}}</strong></p>
+        		<p>{{schoolData.advertisement_text_description1}}</p>
+        		
+        	</div>
+        </div>
+    	</div>
+    </section>
+
+ <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Our Latest Events</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-1.jpg');">
+              </a>
+              <div class="text p-4 d-block">
+                <div class="meta mb-3">
+                  <div><a href="#">Sep. 10, 2018</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
+                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry d-flex align-self-stretch flex-column-reverse">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-2.jpg');">
+              </a>
+              <div class="text p-4 d-block">
+                <div class="meta mb-3">
+                  <div><a href="#">Sep. 10, 2018</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
+                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <a href="blog-single.html" class="block-20" style="background-image: url('images/event-3.jpg');">
+              </a>
+              <div class="text p-4 d-block">
+                <div class="meta mb-3">
+                  <div><a href="#">Sep. 10, 2018</a></div>
+                  <div><a href="#">Admin</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <h3 class="heading mb-4"><a href="#">Intern Bootcamp Meetup 2018</a></h3>
+                <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <p><a href="event.html">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+		<section class="ftco-section-parallax">
+      <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+              <h2>Subcribe to our Newsletter</h2>
+              <p>subscribing to our newletter gives you the priviledge to monitor our daily activites and we promise never to share your email address</p>
+              <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-8">
+
+        <form action="/school/send_newsletter/{{schoolData.schoolID}}" method="POST" class="subscribe-form">
+                    <div class="form-group d-flex">
+                      <input type="text" class="form-control" name="email" placeholder="Enter email address">
+                      <input type="hidden" value="{{schoolData.name}}" name="name">
+                      <input type="submit" value="Subscribe" class="submit px-3">
+                    </div>
+        </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section img" style="background-image: url(/genius/images/bg_2.jpg); background-attachment:fixed;">
+    	<div class="overlay"></div>
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+              <h2><a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>{{schoolData.name}} <br><small>{{schoolData.schoolType}}</small></a></h2>
+              <p>{{schoolData.visionStatement}}</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="ftco-footer-widget mb-4">
+            {{!--   <h2 class="ftco-heading-2">Recent Blog</h2> --}}
+             <div style="padding-left:100px"> 
+              <img src="/uploads/{{schoolData.logo}}" height="200" width="200">
+            </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+             <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Site Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">Home</a></li>
+                <li><a href="#" class="py-2 d-block">About</a></li>
+                <li><a href="#" class="py-2 d-block">Courses</a></li>
+                <li><a href="#" class="py-2 d-block">Students</a></li>
+                <li><a href="#" class="py-2 d-block">Video</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">{{schoolData.address}}</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">{{schoolData.phone}}</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{schoolData.email}}</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="https://socratewebs.com" target="_blank">Socratewebs</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+{{!--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}
+
+
+  <script src="/genius/js/jquery.min.js"></script>
+  <script src="/genius/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/genius/js/popper.min.js"></script>
+  <script src="/genius/js/bootstrap.min.js"></script>
+  <script src="/genius/js/jquery.easing.1.3.js"></script>
+  <script src="/genius/js/jquery.waypoints.min.js"></script>
+  <script src="/genius/js/jquery.stellar.min.js"></script>
+  <script src="/genius/js/owl.carousel.min.js"></script>
+  <script src="/genius/js/jquery.magnific-popup.min.js"></script>
+  <script src="/genius/js/aos.js"></script>
+  <script src="/genius/js/jquery.animateNumber.min.js"></script>
+  <script src="/genius/js/bootstrap-datepicker.js"></script>
+  <script src="/genius/js/jquery.timepicker.min.js"></script>
+  <script src="/genius/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/genius/js/google-map.js"></script>
+  <script src="/genius/js/main.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+     
+      $("#owl-example").owlCarousel();
+     
+    });
+    </script>
+  </body>
+</html>

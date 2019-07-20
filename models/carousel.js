@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
 var carouselSchema = new mongoose.Schema({
-    creator_id: {type:String, required: true},
+    school_id: {type:String, required: true},
 //image should be in the resolutin of 700 by 438
     image: { type: String, required: true },//TODO--> later change it to required 
-    link: { type: String, required: true },//TODO--> later change it to required 
+    // link: { type: String, required: true },//TODO--> later change it to required 
     header: { type: String, required: true },//TODO--> later change it to required 
     secondheader: { type: String, required:true },//TODO--> later change it to required 
     description: { type: String, required: true },//TODO--> later change it to required
+    show: {type:Boolean, default: true},
 
     	
 },{
