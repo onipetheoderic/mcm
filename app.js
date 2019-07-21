@@ -18,10 +18,10 @@ const fileUpload = require('express-fileupload');
 // routes are imported here, note any auth or init middleware are to be placed
 // above this line.
 import index from './routes/index';
+import home from './routes/home';
 import admin from './routes/admin';
 import category from './routes/category';
 import product from './routes/product';
-import carousel from './routes/carousel';
 import user from './routes/user';
 // import add from './routes/add';
 // import getters from './routes/getters';
@@ -99,7 +99,7 @@ app.use(expressValidator({
 app.use('/admin', admin);
 app.use('/school', index);
 app.use('/user', user);
-
+app.use('/', home);
 // passport account auth
 
 import User from './models/user';
