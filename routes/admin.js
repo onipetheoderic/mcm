@@ -4,6 +4,7 @@ import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs'
+import Service from '../models/service'
 import DataLog from '../models/dataLog'
 import User from '../models/user';
 import Parent from '../models/parent';
@@ -385,6 +386,52 @@ router.get('/carousels/:id', (req, res) => {
     })
 
 })
+
+router.get('/services/:id', (req, res) => {
+    redirector(req, res)  
+    let user_id = req.params.id;
+    // let carouselImage = req.files.carousel;
+    // let carouselImage_name = imagePlacerAndNamer(req, res, carouselImage);
+
+    
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool_id = school._id;
+        Service.find({school_id:singleSchool_id}, function(err, services){
+
+        res.render('AdminBSBMaterialDesign-master/services_form', {layout: 'layout/admin.hbs', services:services, singleSchool_id:singleSchool_id})
+        })
+    })
+
+})
+/*school_id: {type:String, required: true},
+//image should be in the resolutin of 700 by 438
+    icon_name: { type: String, required: true },//TODO--> later change it to required 
+    title: { type: String, required: true },//TODO--> later change it to required 
+    description: { type: String, required: true },//TODO--> later change it to required
+    show: {type:Boolean, default: true},*/
+router.post('/create_service', (req, res, next) => {
+       let service = new Service(); 
+    service.icon_name = req.body.icon_name;
+    // carousel.link = req.body.link;
+    service.title = req.body.title;
+    service.description = req.body.description;
+    service.school_id = req.body.school_id;
+
+    service.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+
+
+// router.get('/create_event')
 
 
 router.get('/create_edit_about_us/:id', (req, res) => {  
