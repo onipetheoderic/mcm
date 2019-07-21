@@ -122,10 +122,10 @@ app.use((req, res, next) => {
   next(err);
 });
 //this is to set a global variable for the user, to know if the user is logged in or not
-app.get('*', function(req, res, next){
-	res.locals.user = req.user || null;
-	next();
-});
+// app.get('*', function(req, res, next){
+// 	res.locals.user = req.user || null;
+// 	next();
+// });
 
 
 // // error handler
