@@ -96,10 +96,11 @@ app.use(expressValidator({
     };
   }
 }));
+app.use('/', home);
 app.use('/admin', admin);
 app.use('/school', index);
 app.use('/user', user);
-app.use('/', home);
+
 // passport account auth
 
 import User from './models/user';
