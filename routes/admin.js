@@ -1125,13 +1125,14 @@ router.post('/update_school/:id', (req, res) => {
     School.findByIdAndUpdate(result_id,
     { 
         "name": req.body.name,
-        "majorColor" :req.body.majorColor,
-        "minorColor" :req.body.minorColor,
-        "thirdColor" :req.body.thirdColor,
-        "schoolDescription" :req.body.schoolDescription,
-        "proprietorName" :req.body.proprietorName,
-        "schoolType" :req.body.schoolType,
-        "hmName" :req.body.hmName,          
+        "majorColor":req.body.majorColor,
+        "minorColor":req.body.minorColor,
+        "thirdColor":req.body.thirdColor,
+        "schoolDescription":req.body.schoolDescription,
+        "proprietorName":req.body.proprietorName,
+        "schoolType":req.body.schoolType,
+        "hmName":req.body.hmName,    
+        "phone":req.body.phone     
         "visionStatement":req.body.visionStatement,
         "missionStatement":req.body.missionStatement,
     }).exec(function(err, updated_school){
