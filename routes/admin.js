@@ -2270,7 +2270,7 @@ router.get('/all_schools', (req, res, next) => {
     });
 })
 
-router.get('*', function(req, res){
-  res.send('what???', 404);
-});
+// router.get('*', function(req, res){
+//   res.send('what???', 404);
+// });
 export default router;

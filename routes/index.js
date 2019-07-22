@@ -20,7 +20,7 @@ router.get('/:school_name', (req, res) => {
     console.log(school_data)
     if (school_data==null) {
     // handle error
-    res.redirect('/school')
+    res.redirect('/')
   }
   else if(school_data !=null){
     let schoolData = school_data;

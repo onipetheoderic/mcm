@@ -116,6 +116,11 @@ passport.deserializeUser(User.deserializeUser());
 mongoose.connect('mongodb://localhost/mcsm');
 
 // catch 404 and forward to error handler
+
+app.get('/', function(req, res, next){
+ res.render('socrateweb/index', {layout: false, error_code: 404})
+});
+
 app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
