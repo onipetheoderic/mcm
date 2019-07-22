@@ -1132,7 +1132,7 @@ router.post('/update_school/:id', (req, res) => {
         "proprietorName":req.body.proprietorName,
         "schoolType":req.body.schoolType,
         "hmName":req.body.hmName,    
-        "phone":req.body.phone     
+        "phone":req.body.phone,     
         "visionStatement":req.body.visionStatement,
         "missionStatement":req.body.missionStatement,
     }).exec(function(err, updated_school){
