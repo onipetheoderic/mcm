@@ -144,6 +144,7 @@ app.use((err, req, res, next) => {
   // res.send('what???', 404);
   res.render('errorpage/index', {layout: false, error_code: 404})
 });
+
 // EXPRESS MESSAGES MIDDLEWARE copied from https://github.com/expressjs/express-messages
 app.use(flash());
 app.use(function (req, res, next) {
