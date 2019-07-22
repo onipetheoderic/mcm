@@ -19,7 +19,7 @@ var School = new mongoose.Schema({
 	logo: String,
 	visionStatement: String,
 	missionStatement: String,
-	phone: {type: String, default: "+234 803 517 4511"},
+	phone: String,
 	address: {type: String, default: "Beside state police headquarters, G.R.A, ILorin. P.M.B 134, ilorin - Kwara State"},
 	email: {type: String, default: "stjosephnurseryprimaryschs@gmail.com"},
 
