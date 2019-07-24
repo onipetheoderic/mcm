@@ -1,0 +1,16 @@
+{{#each all_pupils}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="icon">
+                <a href="/admin/single_report_sheet/{{this._id}}"><i class="material-icons">https</i></a>
+            </div>
+           
+            <div class="content">
+              <div class="text" style="10px">{{this.term_name}}<br> {{this.pupil_name}} </div>  
+                
+            </div>
+        </div>
+    </div>
+{{/each}}
+          
+          {{!--            <a href="/admin/pupils_report/{{this.user_id}}" class="btn btn-primary waves-effect" role="button">Create Report</a> --}}

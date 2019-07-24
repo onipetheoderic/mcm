@@ -16,6 +16,24 @@ console.log(answer)
 </script>
 
 <div class="container-fluid">
+
+{{#each all_subject}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="icon">
+                <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
+            </div>
+           
+            <div class="content">
+              <div class="text">{{this.name}}</div>  
+                
+            </div>
+        </div>
+    </div>
+{{/each}}
+</div>
+<div class="container-fluid">
+
     <input type="text" placeholder="Number of rows to generate" name="val_to_generate" id="val_to_generate">
     <button  class="btn btn-primary waves-effect" onclick="myFunction()">Add More Rows</button>
 
@@ -36,32 +54,22 @@ th, td {
 </style>
 <br>
 <br>
-<table id="myTable" width="900">
+<table id="myTable" width="430">
     <thead>
         <tr>
 
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Middle Name</th>
-        <th>Sex</th>
-        <th>School Fees Paid</th>
+        <th>Add multiple B.Skills</th>   
+        
         <th style="display:none;">School_id</th>
-        <th style="display:none;">class_id</th>
-        <th style="display:none;">class Name</th>
-
 
         </tr>
     </thead>
     {{!-- <tbody> --}}
   <tr id="table_format">
     <td contenteditable='true'></td>
-    <td contenteditable='true'></td>
-    <td contenteditable='true'></td>
-    <td contenteditable='true'></td>
-    <td contenteditable='true'></td>
+    
     <td style="display:none;">{{school_id}}</td>
-    <td style="display:none;">{{myClass._id}}</td>
-    <td style="display:none;">{{myClass.name}}</td>
+   
   </tr>
 {{!-- </tbody> --}}
   
@@ -99,22 +107,14 @@ function mySubmit2(){
 var table = document.getElementById("myTable");
 var tableArr = [];
 for ( var i = 1; i < table.rows.length; i++ ) {
-    var seq = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
-    var combina = table.rows[i].cells[0].textContent + table.rows[i].cells[1].textContent
-    var stripped_combina = combina.replace(/\s/g,''); 
     if(table.rows[i].cells[0].textContent !=""){
-      tableArr.push({
-          first_name: table.rows[i].cells[0].textContent,
-          last_name: table.rows[i].cells[1].textContent,
-          middle_name: table.rows[i].cells[2].textContent,
-          sex: table.rows[i].cells[3].textContent,
-          school_fees_paid: table.rows[i].cells[4].textContent,
-          school_id: table.rows[i].cells[5].textContent,
-          class_id: table.rows[i].cells[6].textContent,  
-          class_name: table.rows[i].cells[7].textContent, 
-          generated_result_key: stripped_combina+seq,
-          generated_password_key: seq
-      });
+    tableArr.push({
+        name: table.rows[i].cells[0].textContent,
+        
+        school_id: table.rows[i].cells[1].textContent,
+       
+
+    });
     }
 }
 // First Name   Last Name   Middle Name     Sex     School Fees Paid
@@ -123,10 +123,10 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.status == 200) {
       alert("successfully saved to the db")
-      location.replace("/admin/create_pupil_page")
+      location.replace("/admin/home")
     }
  };
-xhttp.open("POST", "/admin/create_pupil", true);
+xhttp.open("POST", "/admin/create_bskill", true);
 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhttp.send(JSON.stringify(tableArr)); 
 // data: {cart:JSON.stringify(cart)},
@@ -147,4 +147,3 @@ function tableToJSON(table) {
            
 
 </div>
-

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V01</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/Table/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/Table/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<center><h3>1st Term Progress Report</h3></center>
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Subjects</th>
+								<th class="column2">1st CA(20%)</th>
+								<th class="column3">2nd CA(20%)</th>
+								<th class="column4">3rd CA(20%)</th>
+								<th class="column5">Exam(40%)</th>
+								<th class="column6">Total(100%)</th>
+							</tr>
+						</thead>
+						<tbody>
+							       {{#each all_reports}}
+
+								<tr>
+									<td class="column1">{{this.subject_name}}</td>
+									<td class="column2">{{this.test_score1}}</td>
+									<td class="column3">{{this.test_score2}}</td>
+									<td class="column4">{{this.test_score3}}</td>
+									<td class="column5">{{this.examScore}}</td>
+									<td class="column6">{{this.total}}</td>
+								</tr>
+								{{/each}}
+								
+						</tbody>
+					</table>
+<br>
+<br>
+
+
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">B.SKILLS</th>
+								<th class="column2">5</th>
+								<th class="column3">4</th>
+								<th class="column4">3</th>
+								<th class="column5">2</th>
+								<th class="column6">1</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+									<td class="column1">Handwritting</td>
+									<td class="column2">0</td>
+									<td class="column3">0</td>
+									<td class="column4">0</td>
+									<td class="column5">0</td>
+									<td class="column6">0</td>
+							</tr>
+
+								
+								
+						</tbody>
+					</table>
+
+					<br>
+					<br>
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Behaviours</th>
+								<th class="column2">5</th>
+								<th class="column3">4</th>
+								<th class="column4">3</th>
+								<th class="column5">2</th>
+								<th class="column6">1</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+									<td class="column1">Punctuality</td>
+									<td class="column2">0</td>
+									<td class="column3">0</td>
+									<td class="column4">0</td>
+									<td class="column5">0</td>
+									<td class="column6">0</td>
+							</tr>
+							
+								
+								
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="/Table/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/vendor/bootstrap/js/popper.js"></script>
+	<script src="/Table/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/js/main.js"></script>
+
+</body>
+</html>

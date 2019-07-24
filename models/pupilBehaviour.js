@@ -5,22 +5,13 @@ var connection = mongoose.createConnection("mongodb://localhost/mcsm");
 autoIncrement.initialize(connection);
 
 
-var ReportCard = new mongoose.Schema({
-	full_name: String,
-	subject_name: String,
-	subject_id: String,
-	test_score1: Number,
-	test_score2: Number,
-	test_score3: Number,
-	examScore: Number,
-	total: Number,
-	term_name: String,
-	reportsheet_id: String,
-	class_name: String,
-	class_id: String,
-	staff_id: String,
+var pupilBehaviour = new mongoose.Schema({
+	name: String,
 	school_id: String,
+	score: String,
 	pupil_id: String,
+	staff_id: String,
+	reportsheet_id: String,
 
 },
 {
@@ -28,8 +19,5 @@ var ReportCard = new mongoose.Schema({
 });
 
 
-ReportCard.pre('save', function() {
-	console.log(this)
-});
 // School.plugin(autoIncrement.plugin, { model: 'School', field: 'school_id' });
-module.exports = mongoose.model('ReportCard', ReportCard);
+module.exports = mongoose.model('pupilBehaviour', pupilBehaviour);

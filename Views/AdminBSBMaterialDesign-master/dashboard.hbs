@@ -23,7 +23,7 @@
      
                     </div>
                 </div>
-
+{{!-- teacher_pupils_result --}}
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-cyan hover-expand-effect">
                         <div class="icon">
@@ -38,8 +38,11 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <a href="/admin/all_pupils_scores"><i class="material-icons">create</i></a>
+                      {{!--   <div class="icon">
+                            <a href="/admin/created_reports"><i class="material-icons">create</i></a>
+                        </div> --}}
+                          <div class="icon">
+                            <a href="/admin/teacher_pupils_result"><i class="material-icons">create</i></a>
                         </div>
                         <div class="content">
                             <div class="text">My Report Sheet</div>
@@ -50,11 +53,11 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-orange hover-expand-effect">
                         <div class="icon">
-                        <a href="/admin/all_class"> <i class="material-icons">add_shopping_cart</i></a>   
+                        <a href="/admin/create_results"> <i class="material-icons">add_shopping_cart</i></a>   
                         </div>
                          <div class="content">
-                            <div class="text">All Parents</div>
-                            <div class="number count-to" data-from="0" data-to={{class_counters}} data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="text" style="font-size:14px">Create Report Sheet</div>
+                            
                         </div>
                     </div>
                 </div>
@@ -111,7 +114,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-orange hover-expand-effect">
                         <div class="icon">
-                        <a href="/admin/register_new_subject"> <i class="material-icons">add_shopping_cart</i></a>   
+                        <a href="/admin/create_subject"> <i class="material-icons">add_shopping_cart</i></a>   
                         </div>
                          <div class="content">
                             <div class="text">Message To School</div>
@@ -452,6 +455,57 @@
                 </div>
             </div>
             <!-- #END# Widgets -->
+            <div class="row clearfix">
+             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                          <a href="/admin/all_staffs"><i class="material-icons">person_add</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">Check Pupil Status</div>
+                              
+                        </div>
+     
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_comment_type"><i class="material-icons">https</i></a>
+                        </div>
+                       
+                        <div class="content">
+                          <div class="text">Create Comment Types</div>  
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <a href="/admin/create_behaviour"><i class="material-icons">create</i></a>
+                        </div>
+                        <div class="content">
+                            <div class="text">NEW BEHAVIOURS</div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                        <a href="/admin/create_bskills"> <i class="material-icons">add_shopping_cart</i></a>   
+                        </div>
+                         <div class="content">
+                            <div class="text">New BSKILLS</div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
 
         <!-- Widgets for the school environment -->
 

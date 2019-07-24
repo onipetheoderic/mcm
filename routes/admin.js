@@ -4,6 +4,12 @@ import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs'
+import BSkill from '../models/bSkill'
+import PupilBasic from '../models/pupilBasic'
+import PupilBehaviour from '../models/pupilBehaviour'
+import CommentType from '../models/commentType'
+import Behaviour from '../models/behaviour'
+import ReportSheet from '../models/reportSheet'
 import Service from '../models/service'
 import DataLog from '../models/dataLog'
 import User from '../models/user';
@@ -630,6 +636,31 @@ router.get('/teacher_pupils', (req, res) => {
     })
 })
 
+router.get('/teacher_pupils_result', (req, res) => {  
+    // to get the school id using the staff_id
+    redirector(req, res);
+    Staff.findOne({user_id: req.user._id}, function(err, staff){
+        let staff_class_id = staff.class_id
+        let staff_class_name = staff.class_name
+// ReportCard.find({staff_id: staff_id}, function(err, reports){
+    ReportSheet.find({staff_id: req.user._id}, function(err, all_pupils){
+         res.render('AdminBSBMaterialDesign-master/teacher_pupils_results', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+    })
+    })
+})
+
+router.get('/single_report_sheet/:id', (req, res) => {
+    let reportsheet_id = req.params.id;
+    //lets now query the reportCard collections using reportsheet_ID
+   ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
+        let all_reports = reports
+        console.log(all_reports)
+        res.render('result/index', {layout: false, all_reports:all_reports})     
+  // console.log("route reached")
+})
+})
+
+
 router.get('/all_school_messages', (req, res) => {
     MessageSchool.find({school_id: req.user._id}, function(err, schoolmsgs){
         let school_msgs = schoolmsgs;
@@ -759,15 +790,18 @@ router.get('/register_new_staff_type', (req, res) => {
 
 router.get('/register_new_subject', (req, res) => {
     redirector(req, res)
+    let school_id = req.user._id
     console.log("this is the user id that mad e", req.user._id)
-    res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', user: req.user})
+    Subject.find({school_id:school_id}, function(err, all_subject){
+    res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', all_subject:all_subject, school_id:school_id})
+})
 })
 /**/
 router.get('/create_class', (req, res, next) => {
     redirector(req, res)
     let school_id = req.user._id
     console.log("this is the user id that mad e", req.user._id)
-    Class.find({}, function(err, all_class){
+    Class.find({school_id:school_id}, function(err, all_class){
 
     res.render('AdminBSBMaterialDesign-master/register_new_class', {layout: 'layout/admin.hbs', school_id: 
         school_id, all_class: all_class, user: req.user})
@@ -783,13 +817,63 @@ router.get('/create_class', (req, res, next) => {
    
 // })
 
-
+router.get('/create_results', (req, res, next) => {
+    redirector(req, res)
+     // let staff_id = req.user._id
+     let bskills;
+     let behaviours;
+     Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+    let school_id = staff_pupils.school_id
+    console.log("this is the shcool id", school_id)
+    //  console.log("this is the user id that mad e", req.user._id, school_id)
+    // BSkill.find({school_id:school_id})
+    Subject.find({school_id: school_id}, function(err, all_subject){
+        res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', all_subject:all_subject})
+    })
+    })
+})
 
 
 router.get('/create_subject', (req, res, next) => {
     redirector(req, res)
+     let school_id = req.user._id
  console.log("this is the user id that mad e", req.user._id)
-    res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', user: req.user})
+ Subject.find({school_id:school_id}, function(err, all_subject){
+    res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', all_subject:all_subject})
+})
+})
+
+/*  reportsheet_id: String,
+    class_name: String,
+    class_id: String,
+    staff_id: String,
+    school_id: String,
+    pupil_id: String,*/
+
+router.get('/create_bskills', (req, res, next) => {
+    redirector(req, res)
+    let school_id = req.user._id
+        console.log("this is the user id that mad e", req.user._id)
+    BSkill.find({school_id:school_id}, function(err, all_subject){
+        res.render('AdminBSBMaterialDesign-master/create_bskill', {layout: 'layout/admin.hbs', all_subject:all_subject, school_id:school_id})
+    })
+})
+router.get('/create_behaviour', (req, res, next) => {
+    redirector(req, res)
+    let school_id = req.user._id
+        console.log("this is the user id that mad e", req.user._id)
+    BSkill.find({school_id:school_id}, function(err, all_subject){
+        res.render('AdminBSBMaterialDesign-master/create_behaviour', {layout: 'layout/admin.hbs', all_subject:all_subject, school_id:school_id})
+    })
+})
+
+router.get('/create_comment_type', (req, res, next) => {
+    redirector(req, res)
+    let school_id = req.user._id
+        console.log("this is the user id that mad e", req.user._id)
+    CommentType.find({school_id:school_id}, function(err, all_subject){
+        res.render('AdminBSBMaterialDesign-master/create_comment_type', {layout: 'layout/admin.hbs', all_subject:all_subject, school_id:school_id})
+    })
 })
 
 router.get('/create_parent', (req, res, next) => {
@@ -925,6 +1009,40 @@ router.post('/registration', (req, res, next) => {
 // debugging Codes
 router.get('/get_all_stafftypes', (req, res, next) => {
     Stafftype.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_commenttypes', (req, res, next) => {
+    CommentType.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_reportcards', (req, res, next) => {
+    ReportCard.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_bskills', (req, res, next) => {
+    BSkill.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+router.get('/get_all_behaviours', (req, res, next) => {
+    Behaviour.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_reportsheets', (req, res, next) => {
+    ReportSheet.find({}, function(err, users) {
      console.log(users)
     });
 
@@ -1506,21 +1624,23 @@ router.post('/create_parent', (req, res, next) => {
     subject_test2: {type: Number, default: 0},
     subject_test3: {type: Number, default: 0},
     subject_test4: {type: Number, default: 0}, */
-router.get('/all_pupils_scores', (req, res, next) => {
-     redirector(req, res)
-    let current_staff_id = req.user._id
-    PupilClass.find({staff_id: current_staff_id}).exec(function (err, pupil_class){
-        if(err) {
-            console.log(err)
-        }
+// router.get('/all_pupils_scores', (req, res, next) => {
+//      redirector(req, res)
+//     let current_staff_id = req.user._id
+//     PupilClass.find({staff_id: current_staff_id}).exec(function (err, pupil_class){
+//         if(err) {
+//             console.log(err)
+//         }
 
-        let pupil_class_results = pupil_class
-        console.log("these are the user details: ",pupil_class_results)
-    // lets use pupil's id within the db to get the pupils details 
-    // Pupils.findOne({user_id: pupil_class_results.})
-        res.render('AdminBSBMaterialDesign-master/pupils_result', {layout: 'layout/admin.hbs', pupil_class_results: pupil_class})
-    });
-})
+//         let pupil_class_results = pupil_class
+//         console.log("these are the user details: ",pupil_class_results)
+//     // lets use pupil's id within the db to get the pupils details 
+//     // Pupils.findOne({user_id: pupil_class_results.})
+//         res.render('AdminBSBMaterialDesign-master/pupils_result', {layout: 'layout/admin.hbs', pupil_class_results: pupil_class})
+//     });
+// })
+
+
 
 router.get('/pupils_report_edit/:id', (req, res) => {
     redirector(req, res)
@@ -1537,8 +1657,8 @@ router.get('/pupils_report_view/:id', (req, res) => {
         // console.log("this is the pupils class",pupilClass)
         let pupil_class = pupilClass
         // lets calculate the class average
-        
-        res.render('AdminBSBMaterialDesign-master/view_pupil_result', {layout: false, pupil_class: pupil_class})
+//         res.render('AdminBSBMaterialDesign-master/view_pupil_result', {layout: false, pupil_class: pupil_class})
+        res.render('result/index', {layout: false, pupil_class: pupil_class})
     })
 })
 
@@ -2037,24 +2157,104 @@ router.get('/jss_class_report/:id', (req, res) => {
 
    
 });
+/* Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+    let school_id = staff_pupils.school_id
+    console.log("this is the shcool id", school_id)
+    //  console.log("this is the user id that mad e", req.user._id, school_id)
+    Subject.find({school_id: school_id}, function(err, all_subject){
+        res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', all_subject:all_subject})
+    })
+    })*/
+
 
 router.get('/pupils_report/:id', (req, res) => {
     redirector(req, res);
     let pupil_id = req.params.id;
     let staff_id = req.user._id;
+    let school_id;
+    let pupil;
+    let full_name;
+    let class_name;
+    let class_id;
+    let bSkill;
+    let behaviours;
     //let get the pupils first, middle, lastname
-    Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
-        let pupil = staff_pupils
-
-        let full_name = pupil.first_name + " " + pupil.middle_name + " " + pupil.last_name
-        console.log("this is the pupil_id",pupil_id)     
-        console.log("this is the pupil data",pupil)
-        res.render('AdminBSBMaterialDesign-master/report', {layout: 'layout/admin.hbs', full_name:full_name, user: req.user, pupil: pupil,  staff_id:staff_id})
+    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
+        school_id = staff_pupils.school_id
+    BSkill.find({school_id:school_id}, function(err, users) {
+     // console.log(users)
+     bSkill = users
     });
+    Behaviour.find({school_id:school_id}, function(err, users) {
+     // console.log(users)
+     behaviours = users
+    });
+   
+    Subject.find({school_id: school_id}, function(err, all_subject){
+        Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
+        pupil = staff_pupils
+        console.log("all pupils", pupil)
 
+        full_name = pupil.first_name + " " + pupil.middle_name + " " + pupil.last_name
+        class_name = pupil.class_name;
+        class_id = pupil.class_id
+        console.log("these are the bskills",bSkill)
+        res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', behaviours:behaviours, bSkill:bSkill, pupil_id:pupil_id, full_name:full_name, class_name: class_name, class_id:class_id, staff_id:staff_id, school_id:school_id, all_subject:all_subject})
+  
+    });
+})
+});
 });
 
+router.get('/created_reports', (req, res)=> {
+    redirector(req, res);
 
+    let staff_id = req.user._id;
+    ReportCard.find({staff_id: staff_id}, function(err, reports){
+        let all_reports = reports
+        console.log(all_reports)
+       res.render('AdminBSBMaterialDesign-master/my_result', {layout: 'layout/admin.hbs', all_reports:reports}) 
+    })
+})
+
+router.get('/created/:id', (req, res) => {
+    redirector(req, res);
+    let pupils_id = req.params.id
+    console.log(pupils_id)
+
+    ReportCard.find({pupil_id:pupils_id}, function(err, reports){
+        let all_reports = reports
+        console.log(all_reports)
+        res.render('result/index', {layout: false, all_reports:all_reports})     
+  // console.log("route reached")
+})
+})
+/*  pupil_id: String,
+    staff_id: String,
+    term_name: String,
+    pupil_name: String,*/
+
+router.post('/create_report_sheet',(req, res) => {
+    let pupil_id = req.body.pupil_id
+    let staff_id = req.body.staff_id
+    let term_name = req.body.term_name
+    let pupil_name = req.body.pupil_name
+    console.log(pupil_id, staff_id, term_name, pupil_name)
+
+    let reportSheet = new ReportSheet();
+        reportSheet.pupil_id = pupil_id;  
+        reportSheet.staff_id = staff_id;
+        reportSheet.term_name = term_name;
+        reportSheet.pupil_name = pupil_name
+            reportSheet.save(function(err, jss){       
+                if(err){
+                    console.log("error durring saving",err);
+                    return;
+                } else {                    
+                    res.status(200).json(jss);                        
+                }
+    });
+});
 
 router.get('/senior_class_report/:id', (req, res) => {
     let pupil_id = req.params.id;
@@ -2109,6 +2309,37 @@ router.get('/decision_page/:id', (req, res) => {
 
 
 
+router.post('/create_pupil_basic', (req, res, next) => {
+    let all_pupils = req.body;
+    redirector(req, res)
+    console.log(all_pupils)
+    PupilBasic.insertMany(all_pupils, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
+
+router.post('/create_pupil_behaviour', (req, res, next) => {
+    let all_pupils = req.body;
+    redirector(req, res)
+    console.log(all_pupils)
+    PupilBehaviour.insertMany(all_pupils, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
 
 
 router.post('/create_pupil', (req, res, next) => {
@@ -2127,6 +2358,25 @@ router.post('/create_pupil', (req, res, next) => {
     }); 
 });
 
+router.post('/create_result', (req, res, next) => {
+    let all_pupils = req.body;
+    redirector(req, res)
+    console.log(all_pupils)
+    ReportCard.insertMany(all_pupils, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
+
+
+
+
 
 router.post('/create_class', (req, res, next) => {
     let all_class = req.body;
@@ -2144,7 +2394,69 @@ router.post('/create_class', (req, res, next) => {
     }); 
 });
 
+router.post('/create_subject', (req, res, next) => {
+    let all_subjects = req.body;
+    redirector(req, res)
+    console.log(all_subjects)
+    Subject.insertMany(all_subjects, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
 
+router.post('/create_bskill', (req, res, next) => {
+    let all_subjects = req.body;
+    redirector(req, res)
+    console.log(all_subjects)
+    BSkill.insertMany(all_subjects, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
+
+router.post('/create_behaviour', (req, res, next) => {
+    let all_subjects = req.body;
+    redirector(req, res)
+    console.log(all_subjects)
+    Behaviour.insertMany(all_subjects, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
+
+router.post('/create_comment_type', (req, res, next) => {
+    let all_subjects = req.body;
+    redirector(req, res)
+    console.log(all_subjects)
+    CommentType.insertMany(all_subjects, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
 
 router.post('/login', passport.authenticate('local',
         { failureRedirect: 'login',

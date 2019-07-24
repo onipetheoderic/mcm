@@ -108,7 +108,7 @@ function mySubmit2(){
 var table = document.getElementById("myTable");
 var tableArr = [];
 for ( var i = 1; i < table.rows.length; i++ ) {
-    
+   if(table.rows[i].cells[0].textContent !=""){
     tableArr.push({
         name: table.rows[i].cells[0].textContent,
         desired_color: table.rows[i].cells[1].textContent,
@@ -117,6 +117,7 @@ for ( var i = 1; i < table.rows.length; i++ ) {
        
 
     });
+  }
 }
 // First Name   Last Name   Middle Name     Sex     School Fees Paid
 console.log(tableArr)

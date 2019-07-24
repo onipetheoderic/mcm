@@ -1,0 +1,496 @@
+<div class="container-fluid" id="selectors">
+   <style type="text/css">
+   .myButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 26px;
+}
+
+</style>
+    <!-- Advanced Validation -->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header"><h2>Pupils Reports</h2> </div>
+                        <div class="body">
+      <button onclick="create_report()" class="myButton"> First Term Report Sheet</button>
+      <button onclick="create_report2()" class="myButton">Second Term Report Sheet</button>
+      <button onclick="create_report3()" class="myButton">Third Term Report Sheet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Advanced Validation -->
+</div>
+
+
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            console.log("I am what I am")
+var current_loc = window.location.href
+var parts = current_loc.split('/');
+var answer = parts[parts.length - 1];
+console.log(answer)
+
+
+            // $('td').dblclick(function(){
+            //     $(this).replaceWith("input[type='text']")
+            // })
+        });
+</script>
+{{!-- <div class="container-fluid"> --}}
+
+<div class="container-fluid" style="display:none;" id="create_reports">
+
+    <input type="text" placeholder="Number of rows to generate" name="val_to_generate" id="val_to_generate">
+    <button  class="btn btn-primary waves-effect" onclick="myFunction()">Add More Rows</button>
+
+
+
+<style type="text/css">
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th, td {
+  padding: 10px;
+}
+
+
+</style>
+<br>
+
+<br>
+
+<p id="pupil_id" style="display:none;">{{pupil_id}}</p>
+<p id="class_id" style="display:none;">{{class_id}}</p>
+<p id="class_name" style="display:none;">{{class_name}}</p>
+
+<p id="staff_id" style="display:none;">{{staff_id}}</p>
+<p id="school_id" style="display:none;">{{school_id}}</p>
+<p id="full_name" style="display:none;">{{full_name}}</p>
+<p id="report_id" style="display:none;"></p>
+
+
+
+<table id="myTable" width="630">
+    <thead>
+        <tr>
+
+        <th>Subject Names</th>   
+        <th>test 1</th>
+        <th>test 2</th>
+        <th>test 3</th>
+        <th>exam</th>
+
+
+        </tr>
+    </thead>
+    {{!-- <tbody> --}}
+{{#each all_subject}}
+  <tr id="table_format">
+    <td>{{this.name}}</td>
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+    <td style="display:none;">{{this._id}}</td> 
+   
+
+   
+  </tr>
+{{!-- </tbody> --}}
+  
+  {{/each}}
+</table>
+<br>
+
+<button class="btn btn-primary waves-effect" onclick="mySubmit2()">Submit</button>
+<br>
+<script>
+
+
+
+function testCharacter(event) {
+  if ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode === 13) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+function myFunction() {
+    var values = document.getElementById("val_to_generate").value;
+    console.log(values)
+    var intifiedValue = parseInt(values)-1;
+    var itm = document.getElementById("table_format");
+    var  divClone;
+for(var i=0;i<intifiedValue;i++)
+ {
+   divClone = itm.cloneNode(true); // the true is for deep cloning
+   // document.body.appendChild(divClone);
+   document.getElementById("myTable").appendChild(divClone)
+ }
+
+}
+var myTab = document.getElementById("myTable")
+function mySubmit() {
+     console.log(tableToJSON(document.getElementById('myTable')));
+    // var current_location = window.location.href
+    // console.log(current_location)
+    // alert(current_location)
+}
+
+
+function mySubmit3(){   
+var table = document.getElementById("bskills_table");
+var tableArr = [];
+var pupil_id = document.getElementById("pupil_id").textContent;
+var staff_id = document.getElementById("staff_id").textContent;
+var school_id = document.getElementById("school_id").textContent;
+var selected = document.getElementById("report_id").textContent;
+// var selected = document.querySelector('input[name="term"]:checked').value;
+// console.log(selected)
+for ( var i = 1; i < table.rows.length; i++ ) {
+    if(table.rows[i].cells[0].textContent !=""){
+
+    tableArr.push({
+      name: table.rows[i].cells[0].textContent,  
+      score: table.rows[i].cells[1].textContent,
+      staff_id: staff_id,
+      school_id: school_id,
+      pupil_id: pupil_id,
+      reportsheet_id: selected
+
+    });
+    }
+}
+// First Name   Last Name   Middle Name     Sex     School Fees Paid
+console.log(tableArr)
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      alert("successfully saved to the db")
+      var y = document.getElementById("b_skills");
+      var x = document.getElementById("behaviours");
+      x.style.display = "block";
+      y.style.display = "none";
+      // location.replace("/admin/home")
+    }
+ };
+xhttp.open("POST", "/admin/create_pupil_basic", true);
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+
+
+function mySubmit4(){   
+var table = document.getElementById("behaviour_table");
+var tableArr = [];
+var pupil_id = document.getElementById("pupil_id").textContent;
+var staff_id = document.getElementById("staff_id").textContent;
+var school_id = document.getElementById("school_id").textContent;
+var selected = document.getElementById("report_id").textContent;
+// var selected = document.querySelector('input[name="term"]:checked').value;
+// console.log(selected)
+for ( var i = 1; i < table.rows.length; i++ ) {
+    if(table.rows[i].cells[0].textContent !=""){
+
+    tableArr.push({
+      name: table.rows[i].cells[0].textContent,  
+      score: table.rows[i].cells[1].textContent,
+      staff_id: staff_id,
+      school_id: school_id,
+      pupil_id: pupil_id,
+      reportsheet_id: selected
+
+    });
+    }
+}
+// First Name   Last Name   Middle Name     Sex     School Fees Paid
+console.log(tableArr)
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      alert("successfully saved to the db")
+      location.replace("/admin/home")
+      // var y = document.getElementById("b_skills");
+      // var x = document.getElementById("behaviours");
+      // x.style.display = "block";
+      // y.style.display = "none";
+
+    }
+ };
+xhttp.open("POST", "/admin/create_pupil_behaviour", true);
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+
+
+function mySubmit2(){   
+var table = document.getElementById("myTable");
+var tableArr = [];
+var pupil_id = document.getElementById("pupil_id").textContent;
+var class_id = document.getElementById("class_id").textContent;
+var class_name = document.getElementById("class_name").textContent;
+var staff_id = document.getElementById("staff_id").textContent;
+var school_id = document.getElementById("school_id").textContent;
+var full_name = document.getElementById("full_name").textContent;
+var selected = document.getElementById("report_id").textContent;
+// var selected = document.querySelector('input[name="term"]:checked').value;
+// console.log(selected)
+for ( var i = 1; i < table.rows.length; i++ ) {
+    if(table.rows[i].cells[0].textContent !=""){
+      var all_total = parseInt(table.rows[i].cells[1].textContent)+parseInt(table.rows[i].cells[2].textContent) + parseInt(table.rows[i].cells[3].textContent) +parseInt(table.rows[i].cells[4].textContent)
+    tableArr.push({
+      subject_name: table.rows[i].cells[0].textContent,  
+      test_score1: table.rows[i].cells[1].textContent,
+      test_score2: table.rows[i].cells[2].textContent,
+      test_score3: table.rows[i].cells[3].textContent,
+      examScore: table.rows[i].cells[4].textContent,
+      subject_id: table.rows[i].cells[5].textContent,
+      total: all_total,
+      pupil_id: pupil_id,
+      class_id: class_id,
+      class_name: class_name,
+      staff_id: staff_id,
+      school_id: school_id,
+      full_name: full_name,
+      reportsheet_id: selected
+
+    });
+    }
+}
+// First Name   Last Name   Middle Name     Sex     School Fees Paid
+console.log(tableArr)
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      alert("successfully saved to the db")
+      // location.replace("/admin/home")
+       var x = document.getElementById("b_skills");
+        // var y = document.getElementById("behaviours");
+       var y= document.getElementById("create_reports");
+        
+       x.style.display = "block";
+       y.style.display = "none"
+    }
+ };
+xhttp.open("POST", "/admin/create_result", true);
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+function tableToJSON(table) {
+      var obj = {};
+      var row, rows = table.rows;
+      for (var i=0, iLen=rows.length; i<iLen; i++) {
+        row = rows[i];
+       console.log(row.textContent)
+      }
+     return JSON.stringify(obj);
+}
+
+
+function create_report(){
+  var pupil_id = document.getElementById("pupil_id").textContent;
+  var class_id = document.getElementById("class_id").textContent;
+  var class_name = document.getElementById("class_name").textContent;
+  var staff_id = document.getElementById("staff_id").textContent;
+  var school_id = document.getElementById("school_id").textContent;
+  var full_name = document.getElementById("full_name").textContent;
+
+  var tableArr = {
+    "pupil_id": pupil_id,
+    "staff_id": staff_id,
+    "pupil_name": full_name,
+    "term_name": "first_term"
+  }
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      // alert("successfully saved to the db")
+      var response = this.responseText
+      var jsonresponse = JSON.parse(response)
+      var report_id = jsonresponse._id;
+      console.log(report_id)
+      document.getElementById("report_id").textContent = report_id
+        var x = document.getElementById("create_reports");
+        var y = document.getElementById("selectors");
+        x.style.display = "block";
+        y.style.display = "none"
+
+
+      // location.replace("/admin/home")
+
+    }
+ };
+  xhttp.open("POST", "/admin/create_report_sheet", true);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+
+
+function create_report2(){
+  var pupil_id = document.getElementById("pupil_id").textContent;
+  var class_id = document.getElementById("class_id").textContent;
+  var class_name = document.getElementById("class_name").textContent;
+  var staff_id = document.getElementById("staff_id").textContent;
+  var school_id = document.getElementById("school_id").textContent;
+  var full_name = document.getElementById("full_name").textContent;
+
+  var tableArr = {
+    "pupil_id": pupil_id,
+    "staff_id": staff_id,
+    "pupil_name": full_name,
+    "term_name": "second_term"
+  }
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      // alert("successfully saved to the db")
+      var response = this.responseText
+      var jsonresponse = JSON.parse(response)
+      var report_id = jsonresponse._id;
+      console.log(report_id)
+      document.getElementById("report_id").textContent = report_id
+        var x = document.getElementById("create_reports");
+        var y = document.getElementById("selectors");
+        x.style.display = "block";
+        y.style.display = "none"
+
+
+      // location.replace("/admin/home")
+
+    }
+ };
+  xhttp.open("POST", "/admin/create_report_sheet", true);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+function create_report3(){
+  var pupil_id = document.getElementById("pupil_id").textContent;
+  var class_id = document.getElementById("class_id").textContent;
+  var class_name = document.getElementById("class_name").textContent;
+  var staff_id = document.getElementById("staff_id").textContent;
+  var school_id = document.getElementById("school_id").textContent;
+  var full_name = document.getElementById("full_name").textContent;
+
+  var tableArr = {
+    "pupil_id": pupil_id,
+    "staff_id": staff_id,
+    "pupil_name": full_name,
+    "term_name": "third_term"
+  }
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
+      // alert("successfully saved to the db")
+      var response = this.responseText
+      var jsonresponse = JSON.parse(response)
+      var report_id = jsonresponse._id;
+      console.log(report_id)
+      document.getElementById("report_id").textContent = report_id
+        var x = document.getElementById("create_reports");
+        var y = document.getElementById("selectors");
+        x.style.display = "block";
+        y.style.display = "none"
+
+
+      // location.replace("/admin/home")
+
+    }
+ };
+  xhttp.open("POST", "/admin/create_report_sheet", true);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+</script>       
+           
+
+</div>
+<br>
+<br>
+
+<div class="container-fluid" id="b_skills" style="display:none;">
+
+
+<table id="bskills_table" width="630">
+    <thead>
+        <tr>
+          <th>B.Skills Created by Admin</th>   
+           <th>Score</th>  
+        </tr>
+    </thead>
+    {{#each bSkill}}
+  <tr id="table_format">
+    <td>{{this.name}}</td>      
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+  </tr>
+{{!-- </tbody> --}}
+{{/each}}
+</table>
+<br>
+<button class="btn btn-primary waves-effect" onclick="mySubmit3()">Submit</button>
+
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid" id="behaviours" style="display:none;">
+<table id="behaviour_table" width="630">
+    <thead>
+        <tr>
+          <th>Behaviours Created by Admin</th>   
+           <th>Score</th>  
+        </tr>
+    </thead>
+    {{#each behaviours}}
+  <tr id="table_format">
+    <td>{{this.name}}</td>      
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+  </tr>
+{{!-- </tbody> --}}
+{{/each}}
+</table>
+<br>
+<button class="btn btn-primary waves-effect" onclick="mySubmit4()">Submit</button>
+<br>
+<br>
+
+</div>
