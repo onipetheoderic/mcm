@@ -7,7 +7,6 @@ autoIncrement.initialize(connection);
 
 var Pupil = new mongoose.Schema({
 	passport_name: String,
-	user_id: Number,
 	parent_id: String,
 	school_id: String,	
 	first_name: String,
