@@ -22,7 +22,34 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	   
+	<div class="card">
+  <div class="card-header">
+    <center>{{uppercase schoolName}}</center>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+     
+      
+       	<div class="row clearfix">
+         	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
+    		<p style="font-size: 15px">Name: {{uppercase pupils_name}}</p>
+    		<p style="font-size: 15px">Class teacher: {{uppercase class_teacher_name}}</p>         
+            <p style="font-size: 15px">Current Class: {{uppercase current_class}}</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
+    		<img class="rounded float-right" src="/uploads/{{school_logo}}" alt="{{alternate_text}}" height="100px" width="100px">
+            </div>
+
+          
+
+          
+                
+        </div>
+    
+    </blockquote>
+  </div>
+</div>
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -43,7 +70,7 @@
 							       {{#each all_reports}}
 
 								<tr>
-									<td class="column1">{{this.subject_name}}</td>
+									<td class="column1">{{uppercase this.subject_name}}</td>
 									<td class="column2">{{this.test_score1}}</td>
 									<td class="column3">{{this.test_score2}}</td>
 									<td class="column4">{{this.test_score3}}</td>
@@ -73,7 +100,7 @@
 							{{#each all_bskill}}
 
 							<tr>
-									<td class="column1">{{this.name}}</td>
+									<td class="column1">{{uppercase this.name}}</td>
 									<td class="column2">{{fives this.score}}</td>
 									<td class="column3">{{fours this.score}}</td>
 									<td class="column4">{{thress this.score}}</td>
@@ -103,7 +130,7 @@
 							{{#each all_behaviour}}
 							<tr>
 
-									<td class="column1">{{this.name}}</td>
+									<td class="column1">{{uppercase this.name}}</td>
 									<td class="column2">{{fives this.score}}</td>
 									<td class="column3">{{fours this.score}}</td>
 									<td class="column4">{{thress this.score}}</td>
