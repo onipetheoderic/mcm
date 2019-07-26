@@ -25,5 +25,5 @@ var Pupil = new mongoose.Schema({
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us
 });
 
-Pupil.plugin(autoIncrement.plugin, { model: 'Pupil', field: 'user_id' });
+
 module.exports = mongoose.model('Pupil', Pupil);
