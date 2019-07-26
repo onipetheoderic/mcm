@@ -2484,7 +2484,7 @@ router.post('/create_pupil', (req, res, next) => {
     let all_pupils = req.body;
     redirector(req, res)
     console.log(all_pupils)
-    Pupil.insertMany(all_pupils, function (err, docs) {
+    Pupil.insertMany(all_pupils, { ordered: false }, function (err, docs) {
       if (err){ 
           return console.error(err);
           res.status(400).json(err);
