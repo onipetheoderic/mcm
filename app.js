@@ -226,9 +226,45 @@ hbs.registerHelper('grader', function (val) {
   
 });
 
-hbs.registerHelper('remark', function(val){
-  if(val && val === 5){
+hbs.registerHelper('fives', function(val){
+  if(val && val >=5){
     return "✓"
+  }
+  else{
+    return "-"
+  }
+});
+
+hbs.registerHelper('fours', function(val){
+  if(val && val == 4){
+    return "✓"
+  }
+  else{
+    return "-"
+  }
+});
+hbs.registerHelper('thress', function(val){
+  if(val && val == 3){
+    return "✓"
+  }
+  else{
+    return "-"
+  }
+});
+hbs.registerHelper('twos', function(val){
+  if(val && val == 2){
+    return "✓"
+  }
+  else{
+    return "-"
+  }
+});
+hbs.registerHelper('ones', function(val){
+  if(val && val == 1){
+    return "✓"
+  }
+  else{
+    return "-"
   }
 });
 

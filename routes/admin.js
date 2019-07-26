@@ -4,6 +4,7 @@ import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs'
+import Logo from '../models/logo'
 import BSkill from '../models/bSkill'
 import PupilBasic from '../models/pupilBasic'
 import PupilBehaviour from '../models/pupilBehaviour'
@@ -438,6 +439,76 @@ router.post('/create_service', (req, res, next) => {
 
 
 // router.get('/create_event')
+router.get('/create_edit_logo/:id', (req, res) => {  
+    redirector(req, res)  
+    let user_id = req.params.id;
+    //lets find the school by its id
+
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool = school
+        let school_id = school._id;
+
+    Logo.find({school_id: school_id}, function(err, abouts){
+        let about_length = abouts.length;
+        if(about_length>0){
+            Logo.findOne({school_id: school_id}, function(err, logo){
+                res.render('AdminBSBMaterialDesign-master/create_edit_logo', {layout: 'layout/admin.hbs', logo:logo, school_id:school_id})        
+            })
+        }
+        else{
+            res.render('AdminBSBMaterialDesign-master/create_logo', {layout: 'layout/admin.hbs', school_id:school_id})        
+        }
+        
+    })
+    });
+})
+
+router.post('/create_logo', (req, res, next) => {
+   redirector(req, res)
+
+    let logo = new Logo(); 
+
+    let my_passport = req.files.passport;
+    
+    let passport_name = imagePlacerAndNamer(req, res, my_passport);
+
+    logo.image = passport_name;
+    logo.school_id = req.body.school_id;
+
+    logo.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+
+router.post('/create_edit_logo/:logo_id', (req, res, next) => {
+    redirector(req, res)
+    let my_passport = req.files.passport;
+    let school_id = req.body.school_id;
+    let passport_name = imagePlacerAndNamer(req, res, my_passport);
+    Logo.findByIdAndUpdate(req.params.logo_id,
+        {
+            "image": passport_name,
+            "alternate_text": req.body.alternate_text            
+        }).exec(function(err, updated_logo){
+    if(err) {
+       console.log(err);
+       
+    } else {
+       console.log(updated_logo) 
+        res.redirect(`/admin/create_edit_logo/${req.user._id}`)
+    }
+    });
+
+});
+
 
 
 router.get('/create_edit_about_us/:id', (req, res) => {  
@@ -468,6 +539,8 @@ router.get('/create_edit_about_us/:id', (req, res) => {
     secondheader: { type: String, required:true },//TODO--> later change it to required 
     show: {type:Boolean, default: false},*/
 
+
+
 router.post('/create_about_us', (req, res, next) => {
    
 
@@ -490,6 +563,7 @@ router.post('/create_about_us', (req, res, next) => {
     });
 
 });
+
 /*PupilClass.findByIdAndUpdate(result_id,
     { */
 
@@ -652,10 +726,25 @@ router.get('/teacher_pupils_result', (req, res) => {
 router.get('/single_report_sheet/:id', (req, res) => {
     let reportsheet_id = req.params.id;
     //lets now query the reportCard collections using reportsheet_ID
-   ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
+    let all_bskill;
+    let all_behaviour;
+    let term_name;
+    ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
+        term_name = single_report.term_name
+        console.log(single_report)
+    })
+    PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
+        all_behaviour = behaviour;
+        console.log(all_behaviour)
+    })
+    PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
+        all_bskill = bskill;
+        console.log(all_bskill)
+    })
+    ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
         let all_reports = reports
-        console.log(all_reports)
-        res.render('result/index', {layout: false, all_reports:all_reports})     
+        console.log("these are all the reports",all_reports)
+        res.render('result/index', {layout: false, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports})     
   // console.log("route reached")
 })
 })

@@ -26,7 +26,7 @@
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
-				<center><h3>1st Term Progress Report</h3></center>
+				<center><h3>{{term_name}} Progress Report</h3></center>
 				<div class="table100">
 					<table>
 						<thead>
@@ -70,15 +70,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-									<td class="column1">Handwritting</td>
-									<td class="column2">0</td>
-									<td class="column3">0</td>
-									<td class="column4">0</td>
-									<td class="column5">0</td>
-									<td class="column6">0</td>
-							</tr>
+							{{#each all_bskill}}
 
+							<tr>
+									<td class="column1">{{this.name}}</td>
+									<td class="column2">{{fives this.score}}</td>
+									<td class="column3">{{fours this.score}}</td>
+									<td class="column4">{{thress this.score}}</td>
+									<td class="column5">{{twos this.score}}</td>
+									<td class="column6">{{ones this.score}}</td>
+							</tr>
+							{{/each}}
 								
 								
 						</tbody>
@@ -98,14 +100,17 @@
 							</tr>
 						</thead>
 						<tbody>
+							{{#each all_behaviour}}
 							<tr>
-									<td class="column1">Punctuality</td>
-									<td class="column2">0</td>
-									<td class="column3">0</td>
-									<td class="column4">0</td>
-									<td class="column5">0</td>
-									<td class="column6">0</td>
+
+									<td class="column1">{{this.name}}</td>
+									<td class="column2">{{fives this.score}}</td>
+									<td class="column3">{{fours this.score}}</td>
+									<td class="column4">{{thress this.score}}</td>
+									<td class="column5">{{twos this.score}}</td>
+									<td class="column6">{{ones this.score}}</td>
 							</tr>
+							{{/each}}
 							
 								
 								

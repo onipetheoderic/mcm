@@ -1,0 +1,39 @@
+<div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2> Edit Already Existing Logo, by uploading a new one</h2>
+                               <img src="/uploads/{{logo.image}}" height="100" width="150">   
+                        </div>
+                        
+    
+                        <div class="body">
+                            <form id="form_advanced_validation" action="/admin/create_edit_logo/{{logo._id}}" method="POST" enctype="multipart/form-data">
+                                
+                            
+  <input type="hidden" value="{{logo._id}}" name="logo_id" >
+  <input type="hidden" value="{{school_id}}" name="school_id" >
+        <div class="form-group form-float">
+            <div class="form-line">
+               <input type="file" required name="passport" class="form-control" placeholder="Passport Image" >
+
+               <input type="text" required name="alternate_text" class="form-control" value="{{logo.alternate_text}}" >
+      
+         </div>
+        <div class="help-info">Select a Logo with text</div>
+            </div>
+  
+
+                                </div>           
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
