@@ -123,7 +123,12 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.status == 200) {
       alert("successfully saved to the db")
+      console.log(this.responseText)
       location.replace("/admin/create_pupil_page")
+    }
+    else{
+         console.log(this.responseText)
+         console.log(this.statusText)
     }
  };
 xhttp.open("POST", "/admin/create_pupil", true);
