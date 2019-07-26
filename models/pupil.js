@@ -1,10 +1,4 @@
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
-var autoIncrement = require('mongoose-auto-increment');
-var connection = mongoose.createConnection("mongodb://localhost/mcsm");
-autoIncrement.initialize(connection);
-
-
 var Pupil = new mongoose.Schema({
 	passport_name: String,
 	parent_id: String,
