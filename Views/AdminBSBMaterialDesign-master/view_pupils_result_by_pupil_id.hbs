@@ -1,0 +1,18 @@
+<h4>Pupils's Report Sheet</h4>
+{{#each all_report_sheets}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="cursor: pointer;">
+        <a href="/admin/single_report_sheet/{{this.id}}" style="text-decoration: none; cursor: pointer;">
+        <div class="info-box bg-blue hover-expand-effect">
+{{!-- pupil_id: String,
+	staff_id: String,
+	term_name: String,
+	pupil_name: String, --}}
+           
+            <div class="content">
+              <div class="text" style="font-size:14px; padding-left: 20px">{{this.pupil_name}} <p>{{this.term_name}}</p></div>  
+                
+            </div>
+        </div>
+        </a>
+    </div>
+{{/each}}
