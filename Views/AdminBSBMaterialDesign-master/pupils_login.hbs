@@ -48,21 +48,14 @@
 		<div class="wrapper">
 			<h2>socratewebs</h2>
 			<div class="w3ls-form">
-				<form id="myform" action="/admin/login" method="post" >
+				<form id="myform" action="/admin/pupils_login" method="post" >
 					<label>Username</label>
 					<input type="text" name="username" placeholder="Username" id="username" required/>
 					<label>Password</label>
 					<input type="password" name="password" placeholder="Password" id="password" required />
 					<a href="#" class="pass">Forgot Password ?</a>					
 					<input type="submit" value="Log In" />
-					{{#if all_users_count}}
-					<a href="/admin/register">
-						<input type="button" value="Register" />
-					</a>
-					{{/if}}
-					<a href="/admin/pupils_login">
-						<input type="button" value="Pupils Login" />
-					</a>
+					
 				</form>
 			</div>
 

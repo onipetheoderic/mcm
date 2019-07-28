@@ -35,7 +35,28 @@ import Category from '../models/category';
 import Class from '../models/class';
 const state = require('../models/state.json');
 
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+
 const router = express.Router();
+
+function encrypt(text) {
+ let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
+ let encrypted = cipher.update(text);
+ encrypted = Buffer.concat([encrypted, cipher.final()]);
+ return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+}
+
+function decrypt(text) {
+ let iv = Buffer.from(text.iv, 'hex');
+ let encryptedText = Buffer.from(text.encryptedData, 'hex');
+ let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+ let decrypted = decipher.update(encryptedText);
+ decrypted = Buffer.concat([decrypted, decipher.final()]);
+ return decrypted.toString();
+}
 
 
 router.get('/home', (req, res) => {
@@ -356,6 +377,57 @@ router.get('/register', (req, res) => {
     res.render('AdminBSBMaterialDesign-master/register', {layout: false})
 });
 });
+
+router.get('/pupils_login', (req, res) => {    
+    res.render('AdminBSBMaterialDesign-master/pupils_login', {layout: false, message:{error:"Pupils Login here"} })
+});
+
+router.get('/pupil_dashboard', (req, res) => {     
+    //lets find the school by its id
+    // let pupil_id = decrypt(req.session.pupil_id)
+    Pupil.findOne({_id: decrypt(req.session.pupil_id)}, function(err, pupil){
+        res.render('AdminBSBMaterialDesign-master/pupil_dashboard', {layout: 'layout/admin.hbs', pupil:pupil})
+    })
+});
+
+router.post('/pupils_login', (req, res) => {
+   
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log(username, password)
+    Pupil.findOne({generated_result_key: username}).then(function(user) {
+       if(user){
+            console.log(user)
+            console.log("User with the gen result keuy is")
+            let pupil_id = user.id
+            if (user.generated_password_key == password){
+                  console.log('User connected');
+                  // let encUsername = encrypt(username)
+                  // let encPassword = encrypt(password)
+                  // console.log(encUsername, encPassword)
+                  let encId = encrypt(pupil_id)
+                  
+                  // req.session.username = username;
+                  // req.session.password = password;
+                  req.session.pupil_id = encId;
+                  console.log(req.session);
+                  console.log("from the fucking session", decrypt(req.session.pupil_id))
+                  // console.log(decrypt(encPassword))
+                  // console.log(decrypt(encUsername))
+                  // res.status(200).send('User Authentified');
+                  res.redirect('/admin/pupil_dashboard')
+            }else{
+                  // res.status(401).send('Invalid Password Key');
+                  res.render('AdminBSBMaterialDesign-master/register', {layout: false, message:{error: "invalid generated_result_key and password"}})
+            }
+        }
+
+    })
+
+})
+
+
+
 
 router.get('/edit_school/:id', (req, res) => {  
     redirector(req, res)  
@@ -1029,11 +1101,15 @@ router.get('/create_pupil/:class_id', (req, res, next) => {
 
 // lets create a route for the admin to view peoples result 
 router.get('/view_pupils_result_by_pupil_id/:pupil_id', (req, res, next) =>{
-    redirector(req, res)
-    ReportSheet.find({pupil_id: req.params.pupil_id}, function(err, all_report_sheets){
-        console.log("this is the pupils report sheets", all_report_sheets)
-        res.render('AdminBSBMaterialDesign-master/view_pupils_result_by_pupil_id', {layout: 'layout/admin.hbs', all_report_sheets: all_report_sheets})
-    })
+    if(req.session.pupil_id || req.user){    
+        ReportSheet.find({pupil_id: req.params.pupil_id}, function(err, all_report_sheets){
+            console.log("this is the pupils report sheets", all_report_sheets)
+            res.render('AdminBSBMaterialDesign-master/view_pupils_result_by_pupil_id', {layout: 'layout/admin.hbs', all_report_sheets: all_report_sheets})
+        })
+    }
+    else{
+        redirector(req, res)
+    }
 })
 
 
@@ -1409,14 +1485,9 @@ router.post('/update_school/:id', (req, res) => {
     }
     });
 })
-router.post('pupils_login', (req, res) => {
-    redirector(req, res)
-    let user_name = req.body.user_name;
-    let password = req.body.password;
-    console.log(user_name, password)
-    /*generated_result_key: String,
-    generated_password_key: String,*/
-})
+// login
+
+
 
 router.post('/update_pupil/:id', (req, res) => {
     redirector(req, res)
@@ -2597,19 +2668,54 @@ router.post('/create_comment_type', (req, res, next) => {
     }); 
 });
 
-router.post('/login', passport.authenticate('local',
-        { failureRedirect: 'login',
-            failureFlash: true,
-            failureMessage: "Invalid username or password" }),
-    (req, res, next) => {
-        req.session.save((err) => {
-        if (err) {                 
+// router.post('/login', passport.authenticate('local',
+//         { failureRedirect: 'login',
+//             failureFlash: true,
+//             failureMessage: "Invalid username or password" }),
+//     (req, res, next) => {
+//         req.session.save((err) => {
+//         if (err) {                 
+//             res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Invalid Username or passsword"}})                
+//         }     
+//         console.log(req.user);//to get the current session saved
+//         res.redirect('/admin/home');
+//         });
+// });
+router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+    if(err){                 
+        res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Invalid Username or passsword"}})                
+    }
+    if (!user) {
+      // *** Display message without using flash option
+      // re-render the login form with a message
+      return res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Invalid Username or passsword"}})
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/admin/home');
+    });
+  })(req, res, next);
+})
+
+/*if (err) {                 
             res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Invalid Username or passsword"}})                
-        }     
-        console.log(req.user);//to get the current session saved
-        res.redirect('/admin/home');
-        });
-});
+        }*/
+
+/*app.get('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      // *** Display message without using flash option
+      // re-render the login form with a message
+      return res.render('login', { message: info.message })
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/users/' + user.username);
+    });
+  })(req, res, next);
+});*/
 
 router.get('/logout', (req, res, next) => {
   req.logout();
