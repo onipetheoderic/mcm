@@ -143,6 +143,19 @@
 								
 						</tbody>
 					</table>
+					<br>
+					<br>
+					<div style="background: white; border-radius: 5px;">   
+						<ul class="list-group">
+						{{#each all_comment}}
+						<li class="list-group-item">
+
+								{{uppercase this.name}}: {{this.score}}
+								
+						<li>
+						{{/each}}
+					</ul>
+				</div>
 				</div>
 			</div>
 		</div>

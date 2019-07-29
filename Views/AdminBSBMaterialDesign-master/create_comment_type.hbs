@@ -19,15 +19,16 @@ console.log(answer)
 
 {{#each all_subject}}
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-cyan hover-expand-effect">
+        <div class="info-box bg-cyan">
             <div class="icon">
                 <a href="/admin/register_new_staff_type"><i class="material-icons">https</i></a>
             </div>
            
             <div class="content">
-              <div class="text">{{this.name}}</div>  
+              <div class="text">{{mini-truncator this.name}}</div>  
                 
             </div>
+             <a href="/admin/delete_comment_type/{{this.id}}"><i class="material-icons">delete</i></a>
         </div>
     </div>
 {{/each}}

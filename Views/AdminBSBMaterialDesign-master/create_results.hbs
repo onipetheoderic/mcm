@@ -185,7 +185,7 @@ console.log(tableArr)
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.status == 200) {
-      alert("successfully saved to the db")
+      // alert("successfully saved to the db")
       var y = document.getElementById("b_skills");
       var x = document.getElementById("behaviours");
       x.style.display = "block";
@@ -232,6 +232,54 @@ console.log(tableArr)
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.status == 200) {
+      // alert("successfully saved to the db")
+      // location.replace("/admin/staffs_dashboard")
+      var y = document.getElementById("behaviours");
+      var x = document.getElementById("comment_type");
+      x.style.display = "block";
+      y.style.display = "none";
+
+    }
+ };
+xhttp.open("POST", "/admin/create_pupil_behaviour", true);
+xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhttp.send(JSON.stringify(tableArr)); 
+// data: {cart:JSON.stringify(cart)},
+}
+
+
+
+function mySubmit5(){   
+var table = document.getElementById("comment_type_table");
+var tableArr = [];
+var pupil_id = document.getElementById("pupil_id").textContent;
+var staff_id = document.getElementById("staff_id").textContent;
+var school_id = document.getElementById("school_id").textContent;
+var selected = document.getElementById("report_id").textContent;
+// var selected = document.querySelector('input[name="term"]:checked').value;
+// console.log(selected)
+for ( var i = 1; i < table.rows.length; i++ ) {
+    if(table.rows[i].cells[0].textContent !=""){
+
+    tableArr.push({
+      name: table.rows[i].cells[0].textContent,  
+      score: table.rows[i].cells[1].textContent,
+      staff_id: staff_id,
+      school_id: school_id,
+      pupil_id: pupil_id,
+      reportsheet_id: selected
+
+    });
+    }
+}
+// First Name   Last Name   Middle Name     Sex     School Fees Paid
+console.log(tableArr)
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200) {
       alert("successfully saved to the db")
       location.replace("/admin/staffs_dashboard")
       // var y = document.getElementById("b_skills");
@@ -241,7 +289,7 @@ xhttp.onreadystatechange = function() {
 
     }
  };
-xhttp.open("POST", "/admin/create_pupil_behaviour", true);
+xhttp.open("POST", "/admin/create_comment_type", true);
 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhttp.send(JSON.stringify(tableArr)); 
 // data: {cart:JSON.stringify(cart)},
@@ -490,6 +538,30 @@ function create_report3(){
 </table>
 <br>
 <button class="btn btn-primary waves-effect" onclick="mySubmit4()">Submit</button>
+<br>
+<br>
+
+</div>
+
+
+<div class="container-fluid" id="comment_type" style="display:none;" >
+<table id="comment_type_table" width="630">
+    <thead>
+        <tr>
+          <th>Comment Types Created by Admin</th>   
+           <th>Score</th>  
+        </tr>
+    </thead>
+    {{#each commentType}}
+  <tr id="table_format">
+    <td>{{this.name}}</td>      
+    <td contenteditable='true'>Very good Student</td>
+  </tr>
+{{!-- </tbody> --}}
+{{/each}}
+</table>
+<br>
+<button class="btn btn-primary waves-effect" onclick="mySubmit5()">Submit</button>
 <br>
 <br>
 

@@ -3,7 +3,8 @@ import passport from 'passport';
 import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
-import AboutUs from '../models/aboutUs'
+import AboutUs from '../models/aboutUs';
+import PupilContent from '../models/pupilContent';
 import Auth from '../models/auth';
 import Logo from '../models/logo'
 import BSkill from '../models/bSkill'
@@ -896,6 +897,8 @@ router.get('/single_report_sheet/:id', (req, res) => {
     let current_class;//found
     let school_logo;
     let alternate_text;
+    let all_comment;
+
     ReportCard.findOne({reportsheet_id: reportsheet_id}, function(err, report){
       let singleData = report;
          // console.log("this is the single data",singleData)
@@ -935,13 +938,17 @@ router.get('/single_report_sheet/:id', (req, res) => {
         all_bskill = bskill;
         // console.log(all_bskill)
     })
+    PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
+        all_comment = comment;
+         console.log("these Are all the comment###₦₦₦₦₦", all_comment)
+    })
     
     ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
         let all_reports = reports
         // console.log("these are all the reports",all_reports)
 
         console.log("this is the shcool name", schoolName)
-        res.render('result/index', {layout: false, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
+        res.render('result/index', {layout: false, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
   // console.log("route reached")
 })
 })
@@ -2478,6 +2485,7 @@ router.get('/pupils_report/:id', (req, res) => {
     let class_id;
     let bSkill;
     let behaviours;
+    let commentType;
     //let get the pupils first, middle, lastname
      
 
@@ -2491,6 +2499,9 @@ router.get('/pupils_report/:id', (req, res) => {
              // console.log(users)
              behaviours = users
             });
+            CommentType.find({school_id:school_id}, function(err, comments){
+                commentType = comments
+            })
            
             Subject.find({school_id: school_id}, function(err, all_subject){
                 Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
@@ -2501,7 +2512,7 @@ router.get('/pupils_report/:id', (req, res) => {
                 class_name = pupil.class_name;
                 class_id = pupil.class_id
                 console.log("these are the bskills",bSkill)
-                res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', behaviours:behaviours, bSkill:bSkill, pupil_id:pupil_id, full_name:full_name, class_name: class_name, class_id:class_id, staff_id:staff_id, school_id:school_id, all_subject:all_subject})
+                res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', behaviours:behaviours, bSkill:bSkill, pupil_id:pupil_id, full_name:full_name, class_name: class_name, class_id:class_id, staff_id:staff_id, school_id:school_id, all_subject:all_subject, commentType:commentType})
           
             });
 
@@ -2573,6 +2584,17 @@ router.get('/delete_class/:id', (req, res) => {
  
 })
 
+router.get('/delete_comment_type/:id', (req, res) => {
+    let class_id = req.params.id;
+    CommentType.findByIdAndRemove({_id: req.params.id}, 
+       function(err, docs){
+        if(err) res.json(err);
+        else res.redirect('/admin/create_comment_type');
+    });
+ 
+})
+
+
 router.get('/delete_pupil/:id', (req, res) => {
     let class_id = req.params.id;
     Pupil.findByIdAndRemove({_id: req.params.id}, 
@@ -2582,6 +2604,7 @@ router.get('/delete_pupil/:id', (req, res) => {
     });
  
 })
+
 router.get('/delete_subject/:id', (req, res) => {
     let class_id = req.params.id;
     Subject.findByIdAndRemove({_id: req.params.id}, 
@@ -2773,6 +2796,22 @@ router.post('/create_pupil_behaviour', (req, res, next) => {
     }); 
 });
 
+router.post('/create_pupil_content', (req, res, next) => {
+    let all_pupils = req.body;
+    // redirector(req, res)
+    console.log(all_pupils)
+    PupilContent.insertMany(all_pupils, function (err, docs) {
+      if (err){ 
+          return console.error(err);
+          res.status(400).json(err);
+      } else {
+        // console.log("Multiple documents inserted to Collection", docs);
+        // res.redirect('/admin/create_pupil_page')
+        res.status(200).json(docs);
+      }
+    }); 
+});
+
 
 router.post('/create_pupil', (req, res, next) => {
     let all_pupils = req.body;
@@ -2876,9 +2915,9 @@ router.post('/create_behaviour', (req, res, next) => {
 
 router.post('/create_comment_type', (req, res, next) => {
     let all_subjects = req.body;
-    redirector(req, res)
+    // redirector(req, res)
     console.log(all_subjects)
-    CommentType.insertMany(all_subjects, function (err, docs) {
+    PupilContent.insertMany(all_subjects, function (err, docs) {
       if (err){ 
           return console.error(err);
           res.status(400).json(err);
