@@ -2573,6 +2573,25 @@ router.get('/delete_class/:id', (req, res) => {
  
 })
 
+router.get('/delete_pupil/:id', (req, res) => {
+    let class_id = req.params.id;
+    Pupil.findByIdAndRemove({_id: req.params.id}, 
+       function(err, docs){
+        if(err) res.json(err);
+        else res.redirect('/admin/all_pupils_edit');
+    });
+ 
+})
+router.get('/delete_subject/:id', (req, res) => {
+    let class_id = req.params.id;
+    Subject.findByIdAndRemove({_id: req.params.id}, 
+       function(err, docs){
+        if(err) res.json(err);
+        else res.redirect('/admin/register_new_subject');
+    });
+ 
+})
+
 
 /*username: {type:String, required: true},
     password: { type: String, required: true },//TODO--> later change it to required 
