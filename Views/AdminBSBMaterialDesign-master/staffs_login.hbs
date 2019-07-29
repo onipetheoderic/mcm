@@ -1,0 +1,70 @@
+<!--
+	Author: W3layouts
+	Author URL: http://w3layouts.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta tags -->
+	<title>{{loginToolbarText}}</title>
+	<meta name="keywords" content={{loginToolbarText}}, socratesweb, best school management application, online school manager" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="/css/font-awesome.css">
+	<link rel="stylesheet" href="/css/stylez.css">
+	<!-- google fonts  -->
+	<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			setTimeout(function(){
+    	$('.notice_wrapper').slideUp('slow', function(){
+        	$(this).remove();
+          })
+        }, 2000);
+	
+});
+</script>
+	
+</head>
+<body>	{{#if message.success}}
+   <div class="notice_wrapper">		  	
+	<p class="alert">{{message.success}}</p>				
+	</div>
+	{{else if message.error}}
+	<div class="notice_wrapper_error">			
+		<p class="alert">{{message.error}}</p>
+	</div>
+    {{/if}}
+   
+	<div class="agile-login">
+
+		<h1>{{title}} </h1>
+		<div class="wrapper">
+			<h2>socratewebs</h2>
+			<div class="w3ls-form">
+				<form id="myform" action="/admin/staffs_login" method="post" >
+					<label>Username</label>
+					<input type="text" name="username" placeholder="Username" id="username" required/>
+					<label>Password</label>
+					<input type="password" name="password" placeholder="Password" id="password" required />
+					<a href="#" class="pass">Forgot Password ?</a>					
+					<input type="submit" value="Log In" />
+					
+				</form>
+			</div>
+
+		</div>
+		<br>
+		<div class="copyright">
+		<p>© 2017 Socrate webs | Design by <a href="https://www.socratewebs.com/">Socrate webs</a></p> 
+	</div>
+	</div>
+	
+</body>
+</html>

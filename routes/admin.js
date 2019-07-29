@@ -4,6 +4,7 @@ import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs'
+import Auth from '../models/auth';
 import Logo from '../models/logo'
 import BSkill from '../models/bSkill'
 import PupilBasic from '../models/pupilBasic'
@@ -33,6 +34,9 @@ import Staff from '../models/staff';
 import Subject from '../models/subject';
 import Category from '../models/category';
 import Class from '../models/class';
+
+import sha512 from 'sha512';
+
 const state = require('../models/state.json');
 
 const algorithm = 'aes-256-cbc';
@@ -382,6 +386,10 @@ router.get('/pupils_login', (req, res) => {
     res.render('AdminBSBMaterialDesign-master/pupils_login', {layout: false, message:{error:"Pupils Login here"} })
 });
 
+router.get('/staffs_login', (req, res) => {    
+    res.render('AdminBSBMaterialDesign-master/staffs_login', {layout: false, message:{error:"Staffs Login here"} })
+});
+
 router.get('/pupil_dashboard', (req, res) => {     
     //lets find the school by its id
     // let pupil_id = decrypt(req.session.pupil_id)
@@ -389,6 +397,25 @@ router.get('/pupil_dashboard', (req, res) => {
         res.render('AdminBSBMaterialDesign-master/pupil_dashboard', {layout: 'layout/admin.hbs', pupil:pupil})
     })
 });
+router.get('/staffs_dashboard', (req, res) => {     
+    let myCollegues;
+    let myreportSheets;
+    let mypupils;
+    let myself_class;
+    let staff_details;
+    Auth.findOne({_id: decrypt(req.session.pupil_id)}, function(err, user){
+        Staff.findOne({user_id: user._id}, function(err, myself){
+           staff_details = myself
+      
+        Pupil.find({class_id: staff_details.class_id}, function(err, all_pupils){
+            mypupils = all_pupils.length;   
+      
+        console.log("teachers pupils",mypupils, staff_details)
+        res.render('AdminBSBMaterialDesign-master/staffs_dashboard', {layout: 'layout/admin.hbs', staff_details:staff_details, mypupils:mypupils, staff_details:staff_details})
+    })
+});
+})
+})
 
 router.post('/pupils_login', (req, res) => {
    
@@ -426,6 +453,52 @@ router.post('/pupils_login', (req, res) => {
 
 })
 
+
+router.post('/staffs_login', (req, res) => {
+   
+    let username = req.body.username;
+    let password = req.body.password;
+    let passwordhash = sha512(req.body.password)
+    console.log(username, password)
+    Auth.findOne({username: username}).then(function(user) {
+        if(!user) {
+            res.render('AdminBSBMaterialDesign-master/staffs_login', {layout: false, message:{error: "Username does not Exist"}})  
+        }
+       else if(user){
+            console.log(user)
+           
+            let pupil_id = user.id
+            if (user.password == passwordhash){
+                  console.log('User connected');
+                  // let encUsername = encrypt(username)
+                  // let encPassword = encrypt(password)
+                  // console.log(encUsername, encPassword)
+                  let encId = encrypt(pupil_id)
+                  
+                  // req.session.username = username;
+                  // req.session.password = password;
+                  req.session.pupil_id = encId;
+                  console.log(req.session);
+                  console.log("from the fucking session", decrypt(req.session.pupil_id))
+                  // console.log(decrypt(encPassword))
+                  // console.log(decrypt(encUsername))
+                  // res.status(200).send('User Authentified');
+                  res.redirect('/admin/staffs_dashboard')
+            }else{
+                  // res.status(401).send('Invalid Password Key');
+                  res.render('AdminBSBMaterialDesign-master/staffs_login', {layout: false, message:{error: "invalid password"}})
+            }
+        }
+          
+
+    })
+
+})
+/*Auth.findOne({username: req.body.username}, function(err, vals){
+        if (vals==null) {
+            // 
+            console.log("username not taken")
+            var passwordhash = sha512(req.body.password)*/
 
 
 
@@ -771,28 +844,40 @@ router.get('/all_my_class_pupils', (req, res) => {
 
 router.get('/teacher_pupils', (req, res) => {  
     // to get the school id using the staff_id
-    redirector(req, res);
-    Staff.findOne({user_id: req.user._id}, function(err, staff){
-        let staff_class_id = staff.class_id
-        let staff_class_name = staff.class_name
+    
+    if(req.session.pupil_id || req.user){   
+    var user_id = req.user ? req.user._id : decrypt(req.session.pupil_id); 
+        Staff.findOne({user_id: user_id}, function(err, staff){
+            let staff_class_id = staff.class_id
+            let staff_class_name = staff.class_name
 
-    Pupil.find({class_id: staff_class_id}, function(err, all_pupils){
-         res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
-    })
-    })
+        Pupil.find({class_id: staff_class_id}, function(err, all_pupils){
+             res.render('AdminBSBMaterialDesign-master/teacher_pupils', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+        })
+        })
+        // console.log("teacher_ user_ id",user_id)
+    }
+    else {
+        redirector(req, res);
+    }
 })
 
 router.get('/teacher_pupils_result', (req, res) => {  
     // to get the school id using the staff_id
-    redirector(req, res);
-    Staff.findOne({user_id: req.user._id}, function(err, staff){
-        let staff_class_id = staff.class_id
-        let staff_class_name = staff.class_name
-// ReportCard.find({staff_id: staff_id}, function(err, reports){
-    ReportSheet.find({staff_id: req.user._id}, function(err, all_pupils){
-         res.render('AdminBSBMaterialDesign-master/teacher_pupils_results', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
-    })
-    })
+    if(req.session.pupil_id || req.user){  
+         var user_id = req.user ? req.user._id : decrypt(req.session.pupil_id);  
+        Staff.findOne({user_id: user_id}, function(err, staff){
+            let staff_class_id = staff.class_id
+            let staff_class_name = staff.class_name
+    // ReportCard.find({staff_id: staff_id}, function(err, reports){
+            ReportSheet.find({staff_id: user_id}, function(err, all_pupils){
+                 res.render('AdminBSBMaterialDesign-master/teacher_pupils_results', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+            })
+        })
+    }
+    else {
+        redirector(req, res)
+    }
 })
 
 router.get('/single_report_sheet/:id', (req, res) => {
@@ -1235,6 +1320,13 @@ router.get('/get_all_logo', (req, res, next) => {
 
 })
 
+router.get('/get_all_auths', (req, res, next) => {
+    Auth.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
 router.get('/get_all_commenttypes', (req, res, next) => {
     CommentType.find({}, function(err, users) {
      console.log(users)
@@ -1638,108 +1730,108 @@ router.post('/create_school', (req, res) => {
 
 
 
-router.post('/create_staff', (req, res, next) => {
-    let current_id = req.user._id
-    let my_passport = req.files.passport;
-    let school_name;
-    let class_name;
-    let passport_name = imagePlacerAndNamer(req, res, my_passport);
-    School.findOne({schoolID: req.user._id}, function(err, values){
-        console.log("all schools", values)
-        school_name = values.name
-    })
-    Class.findOne({_id: req.body.class}, function(err, values){
-        console.log("all schools", values)
-        class_name = values.name
-    }) 
+// router.post('/create_staff', (req, res, next) => {
+//     let current_id = req.user._id
+//     let my_passport = req.files.passport;
+//     let school_name;
+//     let class_name;
+//     let passport_name = imagePlacerAndNamer(req, res, my_passport);
+//     School.findOne({schoolID: req.user._id}, function(err, values){
+//         console.log("all schools", values)
+//         school_name = values.name
+//     })
+//     Class.findOne({_id: req.body.class}, function(err, values){
+//         console.log("all schools", values)
+//         class_name = values.name
+//     }) 
 
-    let staff = new Staff();     
-    let dataLog = new DataLog();
+//     let staff = new Staff();     
+//     let dataLog = new DataLog();
      
-    User.register(new User({ username: req.body.username,
-       isStaff: true,
-       sex: req.body.sex,
-       first_name: req.body.first_name,
-       last_name: req.body.last_name,
-       sex: req.body.sex,
-       phone: req.body.phone,
-       email: req.body.email,      
-   }), req.body.password, (err, user) => {
+//     User.register(new User({ username: req.body.username,
+//        isStaff: true,
+//        sex: req.body.sex,
+//        first_name: req.body.first_name,
+//        last_name: req.body.last_name,
+//        sex: req.body.sex,
+//        phone: req.body.phone,
+//        email: req.body.email,      
+//    }), req.body.password, (err, user) => {
 
-            if (err) {
-                console.log(err)                                             
-                res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin', message:{error:err}})
-                }
-            let role = new Role();
+//             if (err) {
+//                 console.log(err)                                             
+//                 res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin', message:{error:err}})
+//                 }
+//             let role = new Role();
             
-            passport.authenticate('local')(req, res, () => {                                              
-                req.session.save((err) => {
-                console.log("this is the current user_id", req.user._id)
-                const current_user_id = req.user._id
-                role.user_id = req.user._id//session comes from d db
-                 console.log("this is the current user_id", req.user._id)
-                role.save(function(err, doc){
-                    console.log("successfully saved")
-                    let current_school_id = doc._id;
+//             passport.authenticate('local')(req, res, () => {                                              
+//                 req.session.save((err) => {
+//                 console.log("this is the current user_id", req.user._id)
+//                 const current_user_id = req.user._id
+//                 role.user_id = req.user._id//session comes from d db
+//                  console.log("this is the current user_id", req.user._id)
+//                 role.save(function(err, doc){
+//                     console.log("successfully saved")
+//                     let current_school_id = doc._id;
                 
-                if(err){
-                    console.log(err);
-                    return;
-                } 
+//                 if(err){
+//                     console.log(err);
+//                     return;
+//                 } 
   
-                else {   
-                 console.log("this is the current user_id", current_id, req.user._id)  
-                    // var schoolName = getNameFromModelUsingId("School", req.user._id)
+//                 else {   
+//                  console.log("this is the current user_id", current_id, req.user._id)  
+//                     // var schoolName = getNameFromModelUsingId("School", req.user._id)
                     
-                    dataLog.message = "A new staff has been created by: "+ school_name+ " School"
-                    dataLog.school_id = current_id;
-                    staff.user_id = current_user_id; 
-                    staff.passport_name = passport_name;
-                    staff.role_id = current_school_id;
-                    staff.sex = req.body.sex;                  
-                    staff.class_id = req.body.class;
-                    staff.class_name = class_name;
-                    staff.subject_id = req.body.subject_id;
-                    staff.staffType_id = req.body.staffType_id;
-                    staff.school_id = current_id;
-                    staff.first_name = req.body.first_name 
-                    staff.middle_name = req.body.middle_name
-                    staff.last_name = req.body.last_name;
-                    staff.school_name = school_name;
-                    staff.phone = req.body.phone;
-                    staff.save(function(err, doc){       
-                        if(err){
-                            console.log("error durring saving",err);
-                            return;
-                        } else {                    
-                            console.log(doc, "successfully save, redirecting now..........")
+//                     dataLog.message = "A new staff has been created by: "+ school_name+ " School"
+//                     dataLog.school_id = current_id;
+//                     staff.user_id = current_user_id; 
+//                     staff.passport_name = passport_name;
+//                     staff.role_id = current_school_id;
+//                     staff.sex = req.body.sex;                  
+//                     staff.class_id = req.body.class;
+//                     staff.class_name = class_name;
+//                     staff.subject_id = req.body.subject_id;
+//                     staff.staffType_id = req.body.staffType_id;
+//                     staff.school_id = current_id;
+//                     staff.first_name = req.body.first_name 
+//                     staff.middle_name = req.body.middle_name
+//                     staff.last_name = req.body.last_name;
+//                     staff.school_name = school_name;
+//                     staff.phone = req.body.phone;
+//                     staff.save(function(err, doc){       
+//                         if(err){
+//                             console.log("error durring saving",err);
+//                             return;
+//                         } else {                    
+//                             console.log(doc, "successfully save, redirecting now..........")
                       
-                        }
-                    });
-                    dataLog.save(function(err, doc){       
-                        if(err){
-                            console.log("error durring saving",err);
-                            return;
-                        } else {                    
-                            console.log(doc, "successfully save, redirecting now..........")
+//                         }
+//                     });
+//                     dataLog.save(function(err, doc){       
+//                         if(err){
+//                             console.log("error durring saving",err);
+//                             return;
+//                         } else {                    
+//                             console.log(doc, "successfully save, redirecting now..........")
                       
-                        }
-                    });
-    //rd ends here           
-                    console.log("successfully saved to the role db")
-                }
-            });
+//                         }
+//                     });
+//     //rd ends here           
+//                     console.log("successfully saved to the role db")
+//                 }
+//             });
 
-                if (err) {
-                    return next(err);
-                }      
+//                 if (err) {
+//                     return next(err);
+//                 }      
 
-               res.redirect('/admin/login')
-                });
-            });
-     });
+//                res.redirect('/admin/login')
+//                 });
+//             });
+//      });
 
-});
+// });
 
 router.post('/create_parent', (req, res, next) => {
     let current_id = req.user._id
@@ -2375,9 +2467,10 @@ router.get('/jss_class_report/:id', (req, res) => {
 
 
 router.get('/pupils_report/:id', (req, res) => {
-    redirector(req, res);
+    if(req.session.pupil_id || req.user){   
+        var user_id = req.user ? req.user._id : decrypt(req.session.pupil_id); 
     let pupil_id = req.params.id;
-    let staff_id = req.user._id;
+    let staff_id = user_id
     let school_id;
     let pupil;
     let full_name;
@@ -2386,31 +2479,38 @@ router.get('/pupils_report/:id', (req, res) => {
     let bSkill;
     let behaviours;
     //let get the pupils first, middle, lastname
-    Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
-        school_id = staff_pupils.school_id
-    BSkill.find({school_id:school_id}, function(err, users) {
-     // console.log(users)
-     bSkill = users
-    });
-    Behaviour.find({school_id:school_id}, function(err, users) {
-     // console.log(users)
-     behaviours = users
-    });
-   
-    Subject.find({school_id: school_id}, function(err, all_subject){
-        Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
-        pupil = staff_pupils
-        console.log("all pupils", pupil)
+     
 
-        full_name = pupil.first_name + " " + pupil.middle_name + " " + pupil.last_name
-        class_name = pupil.class_name;
-        class_id = pupil.class_id
-        console.log("these are the bskills",bSkill)
-        res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', behaviours:behaviours, bSkill:bSkill, pupil_id:pupil_id, full_name:full_name, class_name: class_name, class_id:class_id, staff_id:staff_id, school_id:school_id, all_subject:all_subject})
-  
-    });
-})
-});
+            Staff.findOne({user_id: user_id}, function(err, staff_pupils){
+                school_id = staff_pupils.school_id
+            BSkill.find({school_id:school_id}, function(err, users) {
+             // console.log(users)
+             bSkill = users
+            });
+            Behaviour.find({school_id:school_id}, function(err, users) {
+             // console.log(users)
+             behaviours = users
+            });
+           
+            Subject.find({school_id: school_id}, function(err, all_subject){
+                Pupil.findOne({_id: pupil_id}, function(err, staff_pupils){ 
+                pupil = staff_pupils
+                console.log("all pupils", pupil)
+
+                full_name = pupil.first_name + " " + pupil.middle_name + " " + pupil.last_name
+                class_name = pupil.class_name;
+                class_id = pupil.class_id
+                console.log("these are the bskills",bSkill)
+                res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', behaviours:behaviours, bSkill:bSkill, pupil_id:pupil_id, full_name:full_name, class_name: class_name, class_id:class_id, staff_id:staff_id, school_id:school_id, all_subject:all_subject})
+          
+            });
+
+            })
+            });
+    }
+    else {
+        redirector(req, res)
+    }
 });
 
 router.get('/created_reports', (req, res)=> {
@@ -2462,6 +2562,112 @@ router.post('/create_report_sheet',(req, res) => {
                 }
     });
 });
+
+router.get('/delete_class/:id', (req, res) => {
+    let class_id = req.params.id;
+    Class.findByIdAndRemove({_id: req.params.id}, 
+       function(err, docs){
+        if(err) res.json(err);
+        else res.redirect('/admin/create_class');
+    });
+ 
+})
+
+
+/*username: {type:String, required: true},
+    password: { type: String, required: true },//TODO--> later change it to required 
+    isBishop: {type: Boolean, default:false },  
+    isStaff: {type: Boolean, default: false},
+    isSchool: {type: Boolean, default: false},
+    isTeacher: {type: Boolean, default: false},
+    isPupil: {type: Boolean, default: false},
+    isParent: {type: Boolean, default: false}, 
+    token: String,
+    suspended: String,*/
+router.post('/create_staff',(req, res) => {
+    let class_name;
+    let school_name;
+    School.findOne({schoolID: req.user._id}, function(err, values){
+        console.log("all schools", values)
+        school_name = values.name
+    })
+    Class.findOne({_id: req.body.class}, function(err, values){
+        console.log("single class", values)
+        class_name = values.name
+    });
+    Auth.findOne({username: req.body.username}, function(err, vals){
+        if (vals==null) {
+            // 
+            console.log("username not taken")
+            var passwordhash = sha512(req.body.password)
+            let auth = new Auth();
+                auth.username = req.body.username;
+                auth.password = passwordhash;
+                auth.isStaff = true;        
+                auth.save(function(err, auth_details){       
+                    if(err){
+                        console.log("error durring saving",err);
+                        return;
+                    } else {                    
+                        // lets get the auth_details
+                        let submitted_id = auth_details.id;
+                        let staff = new Staff();
+                            staff.user_id = submitted_id; 
+                            staff.sex = req.body.sex;                  
+                            staff.class_id = req.body.class;
+                            staff.class_name = class_name;
+                            staff.subject_id = req.body.subject_id;
+                            staff.staffType_id = req.body.staffType_id;
+                            staff.school_id = req.user._id
+                            staff.first_name = req.body.first_name 
+                            staff.middle_name = req.body.middle_name
+                            staff.last_name = req.body.last_name;
+                            staff.school_name = school_name;
+                            staff.phone = req.body.phone;
+                            staff.save(function(err, doc){       
+                                if(err){
+                                    console.log("error durring saving",err);
+                                    return;
+                                } else {                    
+                                    console.log(doc, "successfully save, redirecting now..........")
+                                    res.redirect('/admin/home');
+                                }
+                            });
+
+                    }
+                });
+        }
+        else if(vals !=null){
+            //http://localhost:3000/admin/register_staff
+            console.log("username taken")
+
+            Stafftype.find({school_id: req.user._id}, function(err, staffType){      
+                console.log("this is the categories",staffType)
+                if (err) throw err;
+            Subject.find({school_id: req.user._id}, function(err, subject){      
+                console.log("this is the categories",subject)
+                if (err) throw err; 
+            School.findOne({schoolID: req.user._id}, function(err, school){
+                let singleSchool = school
+                console.log("this is the single school vals", singleSchool)
+
+            Class.find({school_id: req.user._id}, function(err, myClass){      
+                console.log("this is the categories",myClass)
+                if (err) throw err;  
+            res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin.hbs', singleSchool:singleSchool, user: req.user, staffType:staffType, subject:subject, myClass:myClass, reg_message: "username taken already"})
+                
+            })
+        })
+        })
+
+    });
+            }
+        })
+   
+
+});
+
+
 
 router.get('/senior_class_report/:id', (req, res) => {
     let pupil_id = req.params.id;
@@ -2518,7 +2724,7 @@ router.get('/decision_page/:id', (req, res) => {
 
 router.post('/create_pupil_basic', (req, res, next) => {
     let all_pupils = req.body;
-    redirector(req, res)
+    // redirector(req, res)
     console.log(all_pupils)
     PupilBasic.insertMany(all_pupils, function (err, docs) {
       if (err){ 
@@ -2534,7 +2740,7 @@ router.post('/create_pupil_basic', (req, res, next) => {
 
 router.post('/create_pupil_behaviour', (req, res, next) => {
     let all_pupils = req.body;
-    redirector(req, res)
+    // redirector(req, res)
     console.log(all_pupils)
     PupilBehaviour.insertMany(all_pupils, function (err, docs) {
       if (err){ 
@@ -2567,15 +2773,15 @@ router.post('/create_pupil', (req, res, next) => {
 
 router.post('/create_result', (req, res, next) => {
     let all_pupils = req.body;
-    redirector(req, res)
-    console.log(all_pupils)
+    // redirector(req, res)
+    // console.log(all_pupils)
     ReportCard.insertMany(all_pupils, function (err, docs) {
       if (err){ 
           return console.error(err);
           res.status(400).json(err);
       } else {
         // console.log("Multiple documents inserted to Collection", docs);
-        // res.redirect('/admin/create_pupil_page')
+        // res.redirect('/admin/create_upil_page')
         res.status(200).json(docs);
       }
     }); 
