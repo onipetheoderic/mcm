@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V01</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/Table/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/Table/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/Table/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	   
+	<div class="card">
+  <div class="card-header">
+    <center>{{uppercase schoolName}}</center>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+     
+      
+       	<div class="row clearfix">
+         	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
+    		<p style="font-size: 15px">Name: {{uppercase pupils_name}}</p>
+    		<p style="font-size: 15px">Class teacher: {{uppercase class_teacher_name}}</p>         
+            <p style="font-size: 15px">Current Class: {{uppercase current_class}}</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
+    		<img class="rounded float-right" src="/uploads/{{school_logo}}" alt="{{alternate_text}}" height="100px" width="100px">
+            </div>
+
+          
+
+          
+                
+        </div>
+    
+    </blockquote>
+  </div>
+</div>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<center><h3>{{term_name}} Progress Report</h3></center>
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Subjects</th>
+								<th class="column2">1st CA(20%)</th>
+								<th class="column3">2nd CA(20%)</th>
+								<th class="column4" style="text-align: left;">3rd CA(20%)</th>
+								<th class="column5" style="text-align: left;">Exam(40%)</th>
+								<th class="column6">Total(100%)</th>
+								<th class="column6">Confirm Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							       {{#each all_reports}}
+
+								<tr style="height: 60px;">
+							<form id="form_advanced_validation" action="/admin/edit_reportcard_scores/{{this._id}}" method="POST">
+
+									<td class="column1">{{uppercase this.subject_name}}</td>
+									<td class="column2"><input type="text" name="test_score1" value="{{this.test_score1}}"></td>
+									<td class="column3"><input type="text" name="test_score2" value="{{this.test_score2}}"></td>
+									<td class="column4"><input type="text" name="test_score3" value="{{this.test_score3}}"></td>
+									<td class="column5"><input type="text" name="examScore" value="{{this.examScore}}"></td>
+									<td class="column6" style="text-align: left;">{{this.total}}<input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}"></td>
+									<td class="column6"><button type="submit" class="btn-primary">Submit edited subject</button></td>
+							</form>
+								</tr>
+								{{/each}}
+								
+						</tbody>
+					</table>
+<br>
+<br>
+
+
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">B.SKILLS</th>
+								<th class="column2">Score</th>
+								<th class="column3">Submit</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							{{#each all_bskill}}
+
+							<tr>
+
+								<form id="form_advanced_validation" action="/admin/edit_bskill_scores/{{this._id}}" method="POST">
+	<td class="column1">{{uppercase this.name}}</td>
+	
+<td class="column6"><input type="text" name="score" value="{{this.score}}"><input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}"></td>
+	<td class="column6"><button type="submit" class="btn-primary">Submit edited subject</button></td>
+</form>
+
+							</tr>
+							{{/each}}
+								
+								
+						</tbody>
+					</table>
+
+					<br>
+					<br>
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Behaviours</th>
+									<th class="column1">Score</th>
+								<th class="column2">Submit</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							{{#each all_behaviour}}
+							<tr>
+<form id="form_advanced_validation" action="/admin/edit_behaviour_scores/{{this._id}}" method="POST">
+	<td class="column1">{{uppercase this.name}}</td>
+	
+<td class="column6"><input type="text" name="score" value="{{this.score}}"><input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}"></td>
+	<td class="column6"><button type="submit" class="btn-primary">Submit edited subject</button></td>
+</form>
+							</tr>
+							{{/each}}
+							
+								
+								
+						</tbody>
+					</table>
+					<br>
+					<br>
+					<div style="background: white; border-radius: 5px;">   
+						<ul class="list-group">
+						{{#each all_comment}}
+						<li class="list-group-item">
+				<form id="form_advanced_validation" action="/admin/edit_teachers_remark_scores/{{this._id}}" method="POST">
+
+				{{uppercase this.name}}: <input type="text" name="score" value="{{this.score}}" style="width: 1000px;">
+				<input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}" width="300"></td>
+				<td class="column6"><button type="submit" class="btn-primary">Submit edited remark</button></td>
+				</form>
+								
+						<li>
+						{{/each}}
+					</ul>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="/Table/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/vendor/bootstrap/js/popper.js"></script>
+	<script src="/Table/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/Table/js/main.js"></script>
+
+</body>
+</html>

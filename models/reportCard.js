@@ -22,6 +22,7 @@ var ReportCard = new mongoose.Schema({
 	school_id: String,
 	pupil_id: String,
 
+
 },
 {
     timestamps: true//this will automatically add the createdAt and the updatedAt field for us

@@ -977,10 +977,221 @@ router.get('/all_school_newsletters', (req, res) => {
     })
 })
 
-// router.get('/messages', (req, res) => {
-//     let current_user_id = req.user._id;
+
+
+router.get('/all_editable_scores', (req, res) => {
+    if(req.session.pupil_id || req.user){  
+         var user_id = req.user ? req.user._id : decrypt(req.session.pupil_id);  
+        Staff.findOne({user_id: user_id}, function(err, staff){
+            let staff_class_id = staff.class_id
+            let staff_class_name = staff.class_name
+    // ReportCard.find({staff_id: staff_id}, function(err, reports){
+            ReportSheet.find({staff_id: user_id}, function(err, all_pupils){
+                 res.render('AdminBSBMaterialDesign-master/all_editable_scores', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+            })
+        })
+    }
+    else {
+        redirector(req, res)
+    }
+})
+
+
+
+router.get('/single_report_sheet_edit/:id', (req, res) => {
+    let reportsheet_id = req.params.id;
+    //lets now query the reportCard collections using reportsheet_ID
+    let all_bskill;
+    let all_behaviour;
+    let term_name;
+    // let singleData;
+    // report sheet variables
+    let schoolName;//found
+    let pupils_name;//found
+    let year_session;
+    let grading_period;
+    let class_teacher_name;//found
+    let current_class;//found
+    let school_logo;
+    let alternate_text;
+    let all_comment;
+
+    ReportCard.findOne({reportsheet_id: reportsheet_id}, function(err, report){
+      let singleData = report;
+         // console.log("this is the single data",singleData)
+    //     // Now lets get the pupils full name
+         pupils_name = singleData.full_name
+         console.log("this is the pupils name:", pupils_name)
+        //now we get the staff id which would be usefull for us later on
+        let staff_id = singleData.staff_id;
+        current_class = singleData.class_name;
+        // Now lets get the staff_name
+        // console.log("this is the current class", current_class)
+
+        Staff.findOne({user_id: staff_id}, function(err, staffData){
+            class_teacher_name = staffData.first_name + " " + staffData.middle_name + " " + staffData.last_name
+            // console.log("this is the classTeachers name", class_teacher_name)
+        })     
+    /*Now lets get the school name*/
+        School.findOne({schoolID:singleData.school_id}, function(err, schoolData){
+            schoolName = schoolData.name + " " + schoolData.schoolType
+            // console.log(schoolData.name, schoolData.schoolType)
+            // console.log("this is the school ", schoolName)
+       
+        Logo.findOne({school_id: schoolData._id}, function(err, logo){
+            school_logo = logo.image
+            alternate_text = logo.alternate_text
+            // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
+ 
+    ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
+        term_name = single_report.term_name
+        // console.log(single_report)
+    })
+    PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
+        all_behaviour = behaviour;
+        // console.log(all_behaviour)
+    })
+    PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
+        all_bskill = bskill;
+        // console.log(all_bskill)
+    })
+    PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
+        all_comment = comment;
+         console.log("these Are all the comment###₦₦₦₦₦", all_comment)
+    })
     
-// })
+    ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
+        let all_reports = reports
+        // console.log("these are all the reports",all_reports)
+
+        console.log("this is the shcool name", schoolName)
+        res.render('result/index_edit', {layout: false, reportsheet_id:reportsheet_id, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
+  // console.log("route reached")
+})
+})
+       })
+         })
+    });
+
+
+
+router.post('/edit_reportcard_scores/:id', (req, res) => {
+    // redirector(req, res)
+    if(req.session.pupil_id || req.user){ 
+    let report_id_instance = req.body.reportsheet_id
+    let result_id = req.params.id;
+    let total = parseInt(req.body.test_score1)+parseInt(req.body.test_score2)+parseInt(req.body.test_score3)+parseInt(req.body.examScore)
+    ReportCard.findByIdAndUpdate(result_id,
+    { 
+
+        "test_score1": parseInt(req.body.test_score1),
+        "test_score2": parseInt(req.body.test_score2),
+        "test_score3": parseInt(req.body.test_score3),
+        "thirdColor": parseInt(req.body.examScore),
+        "total": total,
+        
+    }).exec(function(err, updated_school){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        console.log(updated_school)
+        
+        res.redirect(`/admin/single_report_sheet_edit/${report_id_instance}`)
+    }
+    });
+}
+else {
+    redirector(req, res)
+}
+})
+
+
+router.post('/edit_teachers_remark_scores/:id', (req, res) => {
+    // redirector(req, res)
+    if(req.session.pupil_id || req.user){ 
+    let report_id_instance = req.body.reportsheet_id
+    let result_id = req.params.id;
+    
+    PupilContent.findByIdAndUpdate(result_id,
+    { 
+
+        "score": req.body.score,
+        
+        
+    }).exec(function(err, updated_school){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        console.log(updated_school)
+        
+        res.redirect(`/admin/single_report_sheet_edit/${report_id_instance}`)
+    }
+    });
+}
+else {
+    redirector(req, res)
+}
+})
+
+
+router.post('/edit_behaviour_scores/:id', (req, res) => {
+    // redirector(req, res)
+    if(req.session.pupil_id || req.user){ 
+    let report_id_instance = req.body.reportsheet_id
+    let result_id = req.params.id;
+    
+    PupilBehaviour.findByIdAndUpdate(result_id,
+    { 
+
+        "score": req.body.score,
+        
+        
+    }).exec(function(err, updated_school){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        console.log(updated_school)
+        
+        res.redirect(`/admin/single_report_sheet_edit/${report_id_instance}`)
+    }
+    });
+}
+else {
+    redirector(req, res)
+}
+})
+
+router.post('/edit_bskill_scores/:id', (req, res) => {
+    // redirector(req, res)
+    if(req.session.pupil_id || req.user){ 
+    let report_id_instance = req.body.reportsheet_id
+    let result_id = req.params.id;
+    
+    PupilBasic.findByIdAndUpdate(result_id,
+    { 
+
+        "score": req.body.score,
+        
+        
+    }).exec(function(err, updated_school){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        console.log(updated_school)
+        
+        res.redirect(`/admin/single_report_sheet_edit/${report_id_instance}`)
+    }
+    });
+}
+else {
+    redirector(req, res)
+}
+})
+
 
 router.get('/create_report_c', (req, res) => {  
     // to get the school id using the staff_id
