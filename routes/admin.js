@@ -426,7 +426,15 @@ router.get('/pupil_dashboard', (req, res) => {
     //lets find the school by its id
     // let pupil_id = decrypt(req.session.pupil_id)
     Pupil.findOne({_id: decrypt(req.session.pupil_id)}, function(err, pupil){
-        res.render('AdminBSBMaterialDesign-master/pupil_dashboard', {layout: 'layout/admin.hbs', pupil:pupil})
+        let school_fees_status = pupil.school_fees_paid.toLowerCase()
+        let paid;
+        if(school_fees_status !="paid"){
+            paid = false;
+        }
+        else {
+            paid = true;
+        }
+        res.render('AdminBSBMaterialDesign-master/pupil_dashboard', {layout: 'layout/admin.hbs', paid:paid, school_fees_status:school_fees_status, pupil:pupil})
     })
 });
 router.get('/staffs_dashboard', (req, res) => {     
