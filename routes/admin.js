@@ -375,9 +375,10 @@ router.get('/login', (req, res) => {
     });
 });
 
-router.get('/all_pupils_login_details', (req, res) => {
+router.get('/all_pupils_login_details/:id', (req, res) => {
+    let class_id = req.params.id
     if(req.session.pupil_id || req.user){  
-        Pupil.find({school_id: req.user._id}).exec(function (err, pupils){
+        Pupil.find({class_id: class_id}).exec(function (err, pupils){
 
         if(err) {
             console.log(err)
@@ -390,6 +391,17 @@ router.get('/all_pupils_login_details', (req, res) => {
     else{
         redirector(req, res)
     }
+
+})
+
+router.get('/all_pupils_login_details_class', (req, res) => {
+    redirector(req, res)
+    Class.find({school_id: req.user._id}, function(err, all_class){      
+        console.log("this is the categories",all_class)
+        if (err) throw err;  
+        // console.log("this is the user id that mad e", state)
+    res.render('AdminBSBMaterialDesign-master/all_pupils_details', {layout: 'layout/admin.hbs', user: req.user, all_class:all_class})
+    })
 
 })
 
