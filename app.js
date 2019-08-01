@@ -23,6 +23,8 @@ import admin from './routes/admin';
 import category from './routes/category';
 import product from './routes/product';
 import user from './routes/user';
+import hotel_admin from './routes/hotel/admin';
+import hotel_index from './routes/hotel/hotel_index';
 // import add from './routes/add';
 // import getters from './routes/getters';
 // import company from './routes/company';
@@ -100,6 +102,9 @@ app.use('/', home);
 app.use('/admin', admin);
 app.use('/school', index);
 app.use('/user', user);
+app.use('/hotels/', hotel_index);
+app.use('/hotel/admin', hotel_admin);
+
 
 // passport account auth
 

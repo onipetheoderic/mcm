@@ -374,6 +374,25 @@ router.get('/login', (req, res) => {
   
     });
 });
+
+router.get('/all_pupils_login_details', (req, res) => {
+    if(req.session.pupil_id || req.user){  
+        Pupil.find({school_id: req.user._id}).exec(function (err, pupils){
+
+        if(err) {
+            console.log(err)
+        }
+        else {
+           res.render('result/all_pupils_details', {layout: false, pupils:pupils})     
+        }
+       })
+    }
+    else{
+        redirector(req, res)
+    }
+
+})
+
 router.get('/register', (req, res) => {
     User.find({}).exec(function (err, skool){
         if(skool.length>=2){
