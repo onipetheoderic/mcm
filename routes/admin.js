@@ -1021,6 +1021,14 @@ router.get('/all_school_newsletters', (req, res) => {
 })
 
 
+router.get('/change_staff_password/:id', (req, res) => {
+
+})
+
+router.post('/change_staff_password/:id', (req, res) => {
+
+})
+
 
 router.get('/all_editable_scores', (req, res) => {
     if(req.session.pupil_id || req.user){  
