@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Table V01</title>
+	<title>Pupils login details</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="/Table/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/Table/vendor/bootstrap/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/Table/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -17,37 +19,28 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/Table/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/Table/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/Table/css/main.css">
 <!--===============================================================================================-->
 </head>
-<body>
+<body >
 
-<div class="limiter">
-		<div class="container-table100">
-			<div class="wrap-table100">
 				<center><h3>All Pupils Details</h3></center>
-				 <div class="row">
+				<br>
+				 <div>
 {{#each pupils}}
-<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="cursor: pointer;">
-<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-	<div class="card-header"></div>
-	<div class="card-body">
-    	<h5 class="card-title">{{this.first_name}} {{this.middle_name}} {{this.last_name}} </h5>
-	    <p class="card-text">generated_user_name: {{this.generated_result_key}}</p>
-	    <p class="card-text">generated_password: {{this.generated_password_key}}</p>
-	    <p class="card-text">School fees Status: {{this.school_fees_paid}}</p>
-	    <p class="card-text">Current class: {{this.class_name}}</p>
-	    <p class="card-text">Link: http://www.socrateweb.com/admin/pupils_login</p>
+
+	<div style="width:20%; float:left">
+    	<h5 style="font-size:14px"><strong>{{this.first_name}} {{this.middle_name}} {{this.last_name}}</strong> </h5>
+	    <p class="card-text"  style="font-size:12px">Username: <strong>{{this.generated_result_key}}</strong></p>
+	    <p class="card-text"  style="font-size:12px">password: <strong> {{this.generated_password_key}}</strong></p>
+	    <p class="card-text"  style="font-size:12px">School fees Status: {{this.school_fees_paid}}</p>
+	    <p class="card-text"  style="font-size:12px">Current class: {{this.class_name}}</p>
+	    <p class="card-text"  style="font-size:12px">Link: http://www.socrateweb.com/admin/pupils_login</p>
+	    <br>
   	</div>
-</div>
-</div>
+
 {{/each}}
 </div>
 
-			</div>
-		</div>
-</div>
 
 <!--===============================================================================================-->	
 	<script src="/Table/vendor/jquery/jquery-3.2.1.min.js"></script>
