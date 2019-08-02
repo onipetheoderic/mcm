@@ -421,6 +421,9 @@ router.get('/pupils_login', (req, res) => {
 router.get('/staffs_login', (req, res) => {    
     res.render('AdminBSBMaterialDesign-master/staffs_login', {layout: false, message:{error:"Staffs Login here"} })
 });
+/*"generated_result_key" : "PreciousGibah9997",
+    "generated_password_key" : "9997",
+*/
 
 router.get('/pupil_dashboard', (req, res) => {     
     //lets find the school by its id
@@ -923,9 +926,6 @@ router.get('/teacher_pupils_result', (req, res) => {
 router.get('/single_report_sheet/:id', (req, res) => {
     let reportsheet_id = req.params.id;
     //lets now query the reportCard collections using reportsheet_ID
-    let all_bskill;
-    let all_behaviour;
-    let term_name;
     // let singleData;
     // report sheet variables
     let schoolName;//found
@@ -936,7 +936,7 @@ router.get('/single_report_sheet/:id', (req, res) => {
     let current_class;//found
     let school_logo;
     let alternate_text;
-    let all_comment;
+    
 
     ReportCard.findOne({reportsheet_id: reportsheet_id}, function(err, report){
       let singleData = report;
@@ -966,22 +966,21 @@ router.get('/single_report_sheet/:id', (req, res) => {
             // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
  
     ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
-        term_name = single_report.term_name
+        let term_name = single_report.term_name
         // console.log(single_report)
-    })
-    PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
-        all_behaviour = behaviour;
-        // console.log(all_behaviour)
-    })
-    PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
-        all_bskill = bskill;
-        // console.log(all_bskill)
-    })
-    PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
-        all_comment = comment;
-         console.log("these Are all the comment###₦₦₦₦₦", all_comment)
-    })
     
+    PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
+       let all_behaviour = behaviour;
+        // console.log(all_behaviour)
+   
+    PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
+       let all_bskill = bskill;
+        // console.log(all_bskill)
+    
+    PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
+       let all_comment = comment;
+         console.log("these Are all the comment###₦₦₦₦₦", all_comment)
+   
     ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
         let all_reports = reports
         // console.log("these are all the reports",all_reports)
@@ -990,7 +989,12 @@ router.get('/single_report_sheet/:id', (req, res) => {
         res.render('result/index', {layout: false, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
   // console.log("route reached")
 })
+    })
 })
+     })
+    })
+     })
+    
        })
          })
     });

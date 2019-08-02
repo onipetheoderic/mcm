@@ -33,12 +33,12 @@
       
        	<div class="row clearfix">
          	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
-    		<p style="font-size: 15px">Name: {{uppercase pupils_name}}</p>
-    		<p style="font-size: 15px">Class teacher: {{uppercase class_teacher_name}}</p>         
-            <p style="font-size: 15px">Current Class: {{uppercase current_class}}</p>
+    		<p style="font-size: 12px">Name: {{uppercase pupils_name}}</p>
+    		<p style="font-size: 12px">Class teacher: {{uppercase class_teacher_name}}</p>         
+            <p style="font-size: 12px">Current Class: {{uppercase current_class}}</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">       
-    		<img class="rounded float-right" src="/uploads/{{school_logo}}" alt="{{alternate_text}}" height="100px" width="100px">
+    		<img class="rounded float-right" src="/uploads/{{school_logo}}" alt="{{alternate_text}}" height="80px" width="80px">
             </div>
 
           
@@ -54,7 +54,7 @@
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<center><h3>{{term_name}} Progress Report</h3></center>
-				<div class="table100">
+				<div class="table100" style="width: 50%; float: left; margin-right: 3%">
 					<table>
 						<thead>
 							<tr class="table100-head">
@@ -81,10 +81,11 @@
 								
 						</tbody>
 					</table>
+				</div>
 <br>
 <br>
 
-
+<div style="width:30%; float: left; margin-left: 10%">
 					<table>
 						<thead>
 							<tr class="table100-head">
@@ -115,9 +116,9 @@
 
 					<br>
 					<br>
-					<table>
+					<table style="font-size:12px">
 						<thead>
-							<tr class="table100-head">
+							<tr class="table100-head" >
 								<th class="column1">Behaviours</th>
 								<th class="column2">5</th>
 								<th class="column3">4</th>
@@ -143,10 +144,14 @@
 								
 						</tbody>
 					</table>
+</div>
 					<br>
 					<br>
-					<div style="background: white; border-radius: 5px;">   
-						<ul class="list-group">
+					
+				</div>
+			</div>
+			<div style="background: white; border-radius: 5px;">   
+						<ul class="list-group" style="font-size:12px">
 						{{#each all_comment}}
 						<li class="list-group-item">
 
@@ -156,8 +161,6 @@
 						{{/each}}
 					</ul>
 				</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
