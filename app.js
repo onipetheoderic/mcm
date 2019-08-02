@@ -289,6 +289,11 @@ hbs.registerHelper('ones', function(val){
   }
 });
 
+hbs.registerHelper('underscore_formatter', function(str){
+  let new_str = str.toUpperCase();
+  return new_str.replace(/_/g, ' ');
+})
+
 hbs.registerHelper('link', function(text, options) {
   var attrs = [];
 
