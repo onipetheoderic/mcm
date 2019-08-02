@@ -20,6 +20,12 @@
 	<link rel="stylesheet" type="text/css" href="/Table/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
 <!--===============================================================================================-->
+<style type="text/css">
+html,body{
+    height:297mm;
+    width:210mm;
+}
+</style>
 </head>
 <body >
 {{!-- <p class="card-text" style="font-size:12px;line-height: 0.1;">Current class: 5 green</p> --}}
@@ -28,7 +34,7 @@
 				 <div>
 {{#each pupils}}
 
-	<div style="width:30%; float:left; margin:20px;">
+	<div style="width:42%; float:left; margin:20px;">
     	<h5 style="font-size:14px; "><strong>{{this.first_name}} {{this.middle_name}} {{this.last_name}}</strong> </h5>
 	    <p class="card-text"  style="font-size:12px;">Username: <strong>{{this.generated_result_key}}</strong></p>
 	    <p class="card-text"  style="font-size:12px; line-height: 0.3;">password: <strong> {{this.generated_password_key}}</strong></p>
