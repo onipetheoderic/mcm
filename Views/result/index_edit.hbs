@@ -59,9 +59,7 @@
 						<thead>
 							<tr class="table100-head">
 								<th class="column1">Subjects</th>
-								<th class="column2">1st CA(20%)</th>
-								<th class="column3">2nd CA(20%)</th>
-								<th class="column4" style="text-align: left;">3rd CA(20%)</th>
+								<th class="column2">Total Test score(20%)</th>
 								<th class="column5" style="text-align: left;">Exam(40%)</th>
 								<th class="column6">Total(100%)</th>
 								<th class="column6">Confirm Edit</th>
@@ -73,13 +71,12 @@
 								<tr style="height: 60px;">
 							<form id="form_advanced_validation" action="/admin/edit_reportcard_scores/{{this._id}}" method="POST">
 
-									<td class="column1">{{uppercase this.subject_name}}</td>
-									<td class="column2"><input type="text" name="test_score1" value="{{this.test_score1}}"></td>
-									<td class="column3"><input type="text" name="test_score2" value="{{this.test_score2}}"></td>
-									<td class="column4"><input type="text" name="test_score3" value="{{this.test_score3}}"></td>
-									<td class="column5"><input type="text" name="examScore" value="{{this.examScore}}"></td>
-									<td class="column6" style="text-align: left;">{{this.total}}<input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}"></td>
-									<td class="column6"><button type="submit" class="btn-primary">Submit edited subject</button></td>
+								<td class="column1">{{uppercase this.subject_name}}</td>
+								<td class="column2"><input type="text" name="total_test_score" value="{{this.total_test_score}}"></td>
+								
+								<td class="column5"><input type="text" name="examScore" value="{{this.examScore}}"></td>
+								<td class="column6" style="text-align: left;">{{this.total}}<input type="hidden" name="reportsheet_id" value="{{reportsheet_id}}"></td>
+								<td class="column6"><button type="submit" class="btn-primary">Submit edited subject</button></td>
 							</form>
 								</tr>
 								{{/each}}

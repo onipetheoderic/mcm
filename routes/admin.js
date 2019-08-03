@@ -1131,14 +1131,11 @@ router.post('/edit_reportcard_scores/:id', (req, res) => {
     if(req.session.pupil_id || req.user){ 
     let report_id_instance = req.body.reportsheet_id
     let result_id = req.params.id;
-    let total = parseInt(req.body.test_score1)+parseInt(req.body.test_score2)+parseInt(req.body.test_score3)+parseInt(req.body.examScore)
+    let total = parseInt(req.body.total_test_score)+parseInt(req.body.examScore)
     ReportCard.findByIdAndUpdate(result_id,
-    { 
-
-        "test_score1": parseInt(req.body.test_score1),
-        "test_score2": parseInt(req.body.test_score2),
-        "test_score3": parseInt(req.body.test_score3),
-        "thirdColor": parseInt(req.body.examScore),
+    {         
+        "total_test_score": parseInt(req.body.total_test_score),
+        "examScore": parseInt(req.body.examScore),
         "total": total,
         
     }).exec(function(err, updated_school){

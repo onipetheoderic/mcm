@@ -32,7 +32,7 @@ function decrypt(text) {
 
 router.get('/login', (req, res) => {
     
-    res.render('hotel/login/index', {layout: 'layout/hotel', message:{error:"Please Login"}})
+    res.render('hotel/login/index', {layout: false, message:{error:"Please Login"}})
   
 });
 

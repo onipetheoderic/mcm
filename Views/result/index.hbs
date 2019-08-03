@@ -59,9 +59,9 @@
 						<thead>
 							<tr class="table100-head">
 								<th class="column1">Subjects</th>
-								<th class="column2">1st CA(20%)</th>
-								<th class="column3">2nd CA(20%)</th>
-								<th class="column4">3rd CA(20%)</th>
+								<th class="column2">Total Test Scores(60%)</th>
+		{{!-- 						<th class="column3">2nd CA(20%)</th>
+								<th class="column4">3rd CA(20%)</th> --}}
 								<th class="column5">Exam(40%)</th>
 								<th class="column6">Total(100%)</th>
 							</tr>
@@ -71,9 +71,9 @@
 
 								<tr>
 									<td class="column1">{{uppercase this.subject_name}}</td>
-									<td class="column2">{{this.test_score1}}</td>
-									<td class="column3">{{this.test_score2}}</td>
-									<td class="column4">{{this.test_score3}}</td>
+									<td class="column2">{{this.total_test_score}}</td>
+									{{!-- <td class="column3">{{this.test_score2}}</td>
+									<td class="column4">{{this.test_score3}}</td> --}}
 									<td class="column5">{{this.examScore}}</td>
 									<td class="column6">{{this.total}}</td>
 								</tr>

@@ -89,10 +89,10 @@ th, td {
         <tr>
 
         <th>Subject Names</th>   
-        <th>test 1</th>
-        <th>test 2</th>
-        <th>test 3</th>
-        <th>exam</th>
+        <th>total test score</th>
+        {{!-- <th>test 2</th>
+        <th>test 3</th> --}}
+        <th>exam Score</th>
 
 
         </tr>
@@ -103,8 +103,8 @@ th, td {
     <td>{{this.name}}</td>
     <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
     <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
-    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
-    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+{{!--     <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td>
+    <td onkeypress = "return testCharacter(event);" contenteditable='true'>0</td> --}}
     <td style="display:none;">{{this._id}}</td> 
    
 
@@ -311,14 +311,15 @@ var selected = document.getElementById("report_id").textContent;
 // console.log(selected)
 for ( var i = 1; i < table.rows.length; i++ ) {
     if(table.rows[i].cells[0].textContent !=""){
-      var all_total = parseInt(table.rows[i].cells[1].textContent)+parseInt(table.rows[i].cells[2].textContent) + parseInt(table.rows[i].cells[3].textContent) +parseInt(table.rows[i].cells[4].textContent)
+      // var all_total = parseInt(table.rows[i].cells[1].textContent)+parseInt(table.rows[i].cells[2].textContent) + parseInt(table.rows[i].cells[3].textContent) +parseInt(table.rows[i].cells[4].textContent)
+      var all_total = parseInt(table.rows[i].cells[1].textContent)+parseInt(table.rows[i].cells[2].textContent)
     tableArr.push({
       subject_name: table.rows[i].cells[0].textContent,  
-      test_score1: table.rows[i].cells[1].textContent,
-      test_score2: table.rows[i].cells[2].textContent,
-      test_score3: table.rows[i].cells[3].textContent,
-      examScore: table.rows[i].cells[4].textContent,
-      subject_id: table.rows[i].cells[5].textContent,
+      total_test_score: table.rows[i].cells[1].textContent,
+      // test_score2: table.rows[i].cells[2].textContent,
+      // test_score3: table.rows[i].cells[3].textContent,
+      examScore: table.rows[i].cells[2].textContent,
+      subject_id: table.rows[i].cells[3].textContent,
       total: all_total,
       pupil_id: pupil_id,
       class_id: class_id,
