@@ -54,6 +54,47 @@ router.get('/manage_category', (req, res) => {
   
 });
 
+router.get('/create_brand', (req, res) => {
+    
+    res.render('hotel/admin/create_brand', {layout: 'layout/hotel'})
+  
+});
+
+router.get('/create_brand', (req, res) => {
+    
+    res.render('hotel/admin/create_brand', {layout: 'layout/hotel'})
+  
+});
+router.get('/current_stock', (req, res) => {
+    
+    res.render('hotel/admin/current_stock', {layout: 'layout/hotel'})
+  
+});
+router.get('/check_in', (req, res) => {
+    
+    res.render('hotel/admin/check_in', {layout: 'layout/hotel'})
+  
+});
+
+router.get('/book_to_guest', (req, res) => {
+    
+    res.render('hotel/admin/book_to_guest', {layout: 'layout/hotel'})
+  
+});
+
+router.get('/print_reciept', (req, res) => {
+    
+    res.render('hotel/admin/print_reciept', {layout: 'layout/hotel'})
+  
+});
+
+
+router.get('/sales_summary', (req, res) => {
+    
+    res.render('hotel/admin/sales_summary', {layout: 'layout/hotel'})
+  
+});
+
 
 
 
