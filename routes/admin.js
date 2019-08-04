@@ -933,7 +933,7 @@ router.get('/single_report_sheet/:id', (req, res) => {
     let year_session;
     let grading_period;
     let class_teacher_name;//found
-    let current_class;//found
+    // let current_class;//found
     let school_logo;
     let alternate_text;
     
@@ -945,15 +945,12 @@ router.get('/single_report_sheet/:id', (req, res) => {
          // pupils_name = singleData.full_name
          // console.log("this is the pupils name:", pupils_name)
         //now we get the staff id which would be usefull for us later on
-        let staff_id = singleData.staff_id;
-        current_class = singleData.class_name;
+        // let staff_id = singleData.staff_id;
+        
         // Now lets get the staff_name
         // console.log("this is the current class", current_class)
 
-        Staff.findOne({user_id: staff_id}, function(err, staffData){
-            class_teacher_name = staffData.first_name + " " + staffData.middle_name + " " + staffData.last_name
-            // console.log("this is the classTeachers name", class_teacher_name)
-        })     
+          
     /*Now lets get the school name*/
         School.findOne({schoolID:singleData.school_id}, function(err, schoolData){
             schoolName = schoolData.name + " " + schoolData.schoolType
@@ -969,10 +966,16 @@ router.get('/single_report_sheet/:id', (req, res) => {
         let term_name = single_report.term_name
         // console.log(single_report)
         let report_sheet_pupil_id = single_report.pupil_id;
+        let staff_id = single_report.staff_id;
+
+    Staff.findOne({user_id: staff_id}, function(err, staffData){
+            class_teacher_name = staffData.first_name + " " + staffData.middle_name + " " + staffData.last_name
+            // console.log("this is the classTeachers name", class_teacher_name)
+       
         //lets now query the pupils db
     Pupil.findOne({_id:report_sheet_pupil_id}, function(err, s_pupil){
         let pupils_name = s_pupil.first_name + " " + s_pupil.middle_name + " " + s_pupil.last_name
-    
+        let current_class = s_pupil.class_name;
     
     PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
        let all_behaviour = behaviour;
@@ -994,6 +997,7 @@ router.get('/single_report_sheet/:id', (req, res) => {
         res.render('result/index', {layout: false, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
   // console.log("route reached")
 })
+    })
     })
 })
      })
