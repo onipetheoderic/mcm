@@ -952,16 +952,7 @@ router.get('/single_report_sheet/:id', (req, res) => {
 
           
     /*Now lets get the school name*/
-        School.findOne({schoolID:singleData.school_id}, function(err, schoolData){
-            schoolName = schoolData.name + " " + schoolData.schoolType
-            // console.log(schoolData.name, schoolData.schoolType)
-            // console.log("this is the school ", schoolName)
-       
-        Logo.findOne({school_id: schoolData._id}, function(err, logo){
-            school_logo = logo.image
-            alternate_text = logo.alternate_text
-            // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
- 
+        
     ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
         let term_name = single_report.term_name
         // console.log(single_report)
@@ -976,6 +967,18 @@ router.get('/single_report_sheet/:id', (req, res) => {
     Pupil.findOne({_id:report_sheet_pupil_id}, function(err, s_pupil){
         let pupils_name = s_pupil.first_name + " " + s_pupil.middle_name + " " + s_pupil.last_name
         let current_class = s_pupil.class_name;
+        let school_id = s_pupil.school_id;
+
+    School.findOne({schoolID:s_pupil.school_id}, function(err, schoolData){
+            schoolName = schoolData.name + " " + schoolData.schoolType
+            // console.log(schoolData.name, schoolData.schoolType)
+            // console.log("this is the school ", schoolName)
+       
+    Logo.findOne({school_id: schoolData._id}, function(err, logo){
+            school_logo = logo.image
+            alternate_text = logo.alternate_text
+            // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
+ 
     
     PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
        let all_behaviour = behaviour;
