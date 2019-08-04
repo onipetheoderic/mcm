@@ -48,6 +48,12 @@ router.get('/dashboard', (req, res) => {
   
 });
 
+router.get('/manage_category', (req, res) => {
+    
+    res.render('hotel/admin/manage_category', {layout: 'layout/hotel'})
+  
+});
+
 
 
 

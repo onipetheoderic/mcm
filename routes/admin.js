@@ -1020,13 +1020,42 @@ router.get('/all_school_newsletters', (req, res) => {
     })
 })
 
+// changee
+router.get('/all_staffs_change', (req, res) => {
+    redirector(req, res);
+    Staff.find({school_id: req.user._id}, function(err, all_staffs) {   
+         res.render('AdminBSBMaterialDesign-master/all_staffs_change', {layout: 'layout/admin.hbs', user: req.user, all_staffs: all_staffs})
+    });
+})
 
-router.get('/change_staff_password/:id', (req, res) => {
-
+router.get('/edit_staff_auth/:user_id', (req, res) => {
+    redirector(req, res);
+    let user_id = req.params.user_id;
+    Auth.findOne({_id:user_id}, function(err, staff){
+       res.render('AdminBSBMaterialDesign-master/single_staff_change', {layout: 'layout/admin.hbs', user: req.user, staff: staff}) 
+    })
 })
 
 router.post('/change_staff_password/:id', (req, res) => {
-
+    redirector(req, res);
+    
+    let desired_password =  sha512(req.body.password);
+    let user_id = req.params.id;
+    
+    Auth.findByIdAndUpdate(user_id,
+    {         
+        "password": desired_password
+        
+    }).exec(function(err, updated_staff){
+    if(err) {
+       console.log(err);
+       
+    } else {
+        console.log(updated_staff)
+        
+        res.redirect('/admin/home')
+    }
+    });
 })
 
 

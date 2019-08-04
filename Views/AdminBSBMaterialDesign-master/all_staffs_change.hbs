@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="header">
+        <h2>All Staffs</h2>
+    </div>
+
+{{#each all_staffs}}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="icon">
+                <a href="/admin/edit_staff_auth/{{this.user_id}}"><i class="material-icons">https</i></a>
+            </div>
+           
+            <div class="content">
+                <div class="text">{{this.first_name}}</div>
+                
+            </div>
+        </div>
+    </div>
+{{/each}}
+</div>
+
+          
