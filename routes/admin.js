@@ -1036,6 +1036,23 @@ router.get('/edit_staff_auth/:user_id', (req, res) => {
     })
 })
 
+router.get('/edit_school_user_password', (req, res) => {
+    redirector(req, res);    
+       res.render('AdminBSBMaterialDesign-master/edit_school_user_password', {layout: 'layout/admin.hbs', user: req.user,}) 
+})
+
+router.post('/update_school_user_password',(req, res) => {
+    User.findOne({ username: req.user.username })
+        .then((u) => {
+            u.setPassword(req.body.newPassword,(err, u) => {
+            if (err) return next(err);
+            u.save();
+            res.redirect('/admin/home')
+        });
+
+    })
+})
+
 router.post('/change_staff_password/:id', (req, res) => {
     redirector(req, res);
     
