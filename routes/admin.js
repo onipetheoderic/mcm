@@ -923,6 +923,44 @@ router.get('/teacher_pupils_result', (req, res) => {
     }
 })
 
+router.get('/delete_teachers_result', (req, res) => {  
+    // to get the school id using the staff_id
+    if(req.session.pupil_id || req.user){  
+         var user_id = req.user ? req.user._id : decrypt(req.session.pupil_id);  
+        Staff.findOne({user_id: user_id}, function(err, staff){
+            let staff_class_id = staff.class_id
+            let staff_class_name = staff.class_name
+    // ReportCard.find({staff_id: staff_id}, function(err, reports){
+            ReportSheet.find({staff_id: user_id}, function(err, all_pupils){
+                 res.render('AdminBSBMaterialDesign-master/delete_teachers_result', {layout: 'layout/admin.hbs', staff_class_id: staff_class_id, staff_class_name:staff_class_name, all_pupils:all_pupils})
+            })
+        })
+    }
+    else {
+        redirector(req, res)
+    }
+})
+
+router.get('/delete_report_sheet/:id', (req, res) => {
+    let report_id = req.params.id;
+    ReportSheet.findByIdAndRemove({_id: req.params.id}, 
+       function(err, docs){
+        if(err) res.json(err);
+        else {
+            ReportCard.deleteMany({ reportsheet_id: report_id }, function (err) {
+                if(err){
+                    console.log("Error in deleting",err)
+                }
+                else{
+                    res.redirect('/admin/delete_teachers_result')
+                }
+                });
+
+        }
+    });
+    
+})
+
 router.get('/single_report_sheet/:id', (req, res) => {
     let reportsheet_id = req.params.id;
     //lets now query the reportCard collections using reportsheet_ID
