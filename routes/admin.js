@@ -461,14 +461,17 @@ router.get('/staffs_dashboard', (req, res) => {
 })
 
 router.post('/pupils_login', (req, res) => {
-   
+   // Auth.findOne({username: req.body.username}, function(err, vals){
     let username = req.body.username;
     let password = req.body.password;
     console.log(username, password)
-    Pupil.findOne({generated_result_key: username}).then(function(user) {
-       if(user){
-            console.log(user)
-            console.log("User with the gen result keuy is")
+    Pupil.findOne({generated_result_key: username}, function(err, user) {
+       if(user == null)
+        {
+           res.render('AdminBSBMaterialDesign-master/pupils_login', {layout: false, message:{error: "invalid generated result key"}})
+        }
+        else{
+            console.log("this.is the user details",user)
             let pupil_id = user.id
             if (user.generated_password_key == password){
                   console.log('User connected');
@@ -481,16 +484,21 @@ router.post('/pupils_login', (req, res) => {
                   // req.session.password = password;
                   req.session.pupil_id = encId;
                   console.log(req.session);
-                  console.log("from the fucking session", decrypt(req.session.pupil_id))
+                  // console.log("from the session", decrypt(req.session.pupil_id))
                   // console.log(decrypt(encPassword))
                   // console.log(decrypt(encUsername))
                   // res.status(200).send('User Authentified');
                   res.redirect('/admin/pupil_dashboard')
             }else{
                   // res.status(401).send('Invalid Password Key');
-                  res.render('AdminBSBMaterialDesign-master/register', {layout: false, message:{error: "invalid generated_result_key and password"}})
+                  res.render('AdminBSBMaterialDesign-master/pupils_login', {layout: false, message:{error: "invalid generated_result_key and password"}})
             }
         }
+
+
+        // else {
+        //     res.render('AdminBSBMaterialDesign-master/register', {layout: false, message:{error: "invalid generated_result_key"}})
+        // }
 
     })
 
@@ -809,6 +817,7 @@ router.get('/edit_pupil/:id', (req, res) => {
     //lets find the school by its id
     Pupil.findOne({_id:pupil_id}, function(err, pupil){
     let singlePupil = pupil
+    console.log("this is the single pupil", singlePupil)
     Class.find({school_id:req.user._id}, function(err, all_class){
         console.log("all you class", all_class)
         res.render('AdminBSBMaterialDesign-master/edit_pupil_page', {layout: 'layout/admin.hbs', all_class:all_class, state:state, singlePupil: singlePupil})
