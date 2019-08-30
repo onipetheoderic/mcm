@@ -3,6 +3,7 @@ import passport from 'passport';
 
 import Carousel from '../models/carousel';
 import Logo from '../models/logo'
+import Special from '../models/special';
 import User from '../models/user'
 import Category from '../models/category';
 import Product from '../models/product';
@@ -29,10 +30,13 @@ router.get('/:school_name', (req, res) => {
     var school_id = school_data._id
     Logo.findOne({school_id: school_id}, function(err, school_logo){
      console.log(school_logo)
-  
 
-    res.render('clientFrontEnds/index', {layout: false, school_logo:school_logo, schoolData:schoolData, name: name})
+    Special.findOne({school_id: school_id}, function(err, school_special){
+     console.log(school_special)
+
+    res.render('clientFrontEnds/index', {layout: false, school_special:school_special, school_logo:school_logo, schoolData:schoolData, name: name})
      })
+})
     }
 });
 });

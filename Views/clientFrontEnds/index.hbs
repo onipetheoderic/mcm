@@ -286,8 +286,8 @@
                 </div>
                 <div class="col-md-6 feature_content">
                     <div class="subtittle">
-                        <h2>What makes Us Special</h2>
-                        <h5>There are many Unique featues that makes us very special in {{schoolData.name}} {{schoolData.schoolType}}</h5>
+                        <h2>{{school_special.header}}</h2>
+                        <h5>{{school_special.header2}} {{schoolData.name}} {{schoolData.schoolType}}</h5>
                     </div>
                     <div class="media">
                         <div class="media-left">
@@ -296,8 +296,8 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <a href="#">30+ YEARS OF EXPERIENCE</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            <a href="#">{{school_special.special1}}</a>
+                            <p>{{school_special.special1Description}}</p>
                         </div>
                     </div>
 
@@ -308,8 +308,8 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <a href="#">QUALIFIED EXPERTS</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            <a href="#">{{school_special.special2}}</a>
+                            <p>{{school_special.special2Description}}</p>
                         </div>
                     </div>
                     <div class="media">
@@ -318,9 +318,20 @@
                                 <i class="fa fa-users" aria-hidden="true"></i>
                             </a>
                         </div>
-                        <div class="media-body">
-                            <a href="#">Best Customer Services</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                       <div class="media-body">
+                            <a href="#">{{school_special.special3}}</a>
+                            <p>{{school_special.special3Description}}</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                       <div class="media-body">
+                            <a href="#">{{school_special.special4}}</a>
+                            <p>{{school_special.special4Description}}</p>
                         </div>
                     </div>
                 </div>
@@ -336,23 +347,23 @@
         <div class="container">
             <div class="tittle wow fadeInUp">
                 <h2>Our Achievments</h2>
-                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+                
             </div>
             <div class="achievments_row row">
                 <div class="col-md-3 col-sm-6 p0 completed">
                     <i class="fa fa-connectdevelop" aria-hidden="true"></i>
                     <span class="counter">800</span>
-                    <h6>PROJECT COMPLETED</h6>
+                    <h6>STAFFS EMPLOYED</h6>
                 </div>
                 <div class="col-md-3 col-sm-6 p0 completed">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span class="counter">230</span>
-                    <h6>HOUSE RENOVATIONS</h6>
+                    <h6>EXCURSIONS</h6>
                 </div>
                 <div class="col-md-3 col-sm-6 p0 completed">
                     <i class="fa fa-child" aria-hidden="true"></i>
                     <span class="counter">1390</span>
-                    <h6>WORKERS EMPLOYED</h6>
+                    <h6>SCHOLARSHIPS GIVEN</h6>
                 </div>
                 <div class="col-md-3 col-sm-6 p0 completed">
                     <i class="fa fa-trophy" aria-hidden="true"></i>
@@ -369,65 +380,65 @@
     <!-- Our Featured Works Area -->
     <section class="featured_works row" data-stellar-background-ratio="0.3">
         <div class="tittle wow fadeInUp">
-            <h2>Our Featured Works</h2>
-            <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            <h2>PICTURES OF JOSEPHITES EVENTS</h2>
+          
         </div>
         <div class="featured_gallery">
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-1.jpg" alt="">
-                <div class="gallery_hover">
+                {{!-- <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-2.jpg" alt="">
-                <div class="gallery_hover">
+               {{!--  <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-3.jpg" alt="">
-                <div class="gallery_hover">
+               {{!--  <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-4.jpg" alt="">
-                <div class="gallery_hover">
+               {{!--  <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-5.jpg" alt="">
-                <div class="gallery_hover">
+                {{!-- <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-6.jpg" alt="">
-                <div class="gallery_hover">
+                {{!-- <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-7.jpg" alt="">
-                <div class="gallery_hover">
+                {{!-- <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 gallery_iner p0">
                 <img src="/TOPBuilder/images/gallery/gl-8.jpg" alt="">
-                <div class="gallery_hover">
+                {{!-- <div class="gallery_hover">
                     <h4>Bolt Apartments</h4>
                     <a href="#">VIEW PROJECT</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -471,9 +482,9 @@
         <div class="container">
             <div class="footer_row row">
                 <div class="col-md-3 col-sm-6 footer_about">
-                    <h2>ABOUT OUR COMPANY</h2>
+                    <h2>ABOUT OUR SCHOOL</h2>
                     <img src="/TOPBuilder/images/footer-logo.png" alt="">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>{{medium-truncator schoolData.schoolDescription}}</p>
                     <ul class="socail_icon">
                         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -481,37 +492,38 @@
                         <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
+                      <div class="col-md-3 col-sm-6 footer_about">
+                    <h2>Vision Statement</h2>
+                    <a href="#" class="twitter">{{medium-truncator schoolData.visionStatement}}</a>
+                    
+                </div>
                 <div class="col-md-3 col-sm-6 footer_about quick">
                     <h2>Quick links</h2>
                     <ul class="quick_link">
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Building Construction</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Home Renovation</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Hardwood Flooring</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Repairing Of Roof</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Commercial Construction</a></li>
-                        <li><a href="#"><i class="fa fa-chevron-right"></i>Concreate Transport</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Home</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>About Us</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Events</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Gallery</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i>Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6 footer_about">
-                    <h2>Twitter Feed</h2>
-                    <a href="#" class="twitter">@colorlib: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</a>
-                    <a href="#" class="twitter">@colorlib: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.</a>
-                </div>
+          
                 <div class="col-md-3 col-sm-6 footer_about">
                     <h2>CONTACT US</h2>
                     <address>
                         <p>Have questions, comments or just want to say hello:</p>
                         <ul class="my_address">
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>info@thethemspro.com</a></li>
-                            <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+880 123 456 789</a></li>
-                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Sector # 10, Road # 05, Plot # 31, Uttara, Dhaka 1230 </span></a></li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>{{schoolData.email}}</a></li>
+                            <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>{{schoolData.phone}}</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i><span>{{schoolData.address}} </span></a></li>
                         </ul>
                     </address>
                 </div>
             </div>
         </div>
         <div class="copyright_area">
-            Copyright 2017 All rights reserved. Designed by <a href="https://colorlib.com">Colorlib.</a>
+            Copyright 2017 
+            socratewebs <a href="https://socratewebs.com">SocrateWebs</a>
         </div>
     </footer>
     <!-- End Footer Area -->

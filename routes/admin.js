@@ -4,6 +4,7 @@ import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs';
+import Special from '../models/special';
 import PupilContent from '../models/pupilContent';
 import Auth from '../models/auth';
 import Logo from '../models/logo'
@@ -729,12 +730,117 @@ router.get('/create_edit_about_us/:id', (req, res) => {
     })
     });
 })
-/*    school_id: {type:String, required: true},
-    introductory_text: { type: String, required: true },//TODO--> later change it to required 
-    description: { type: String, required: true },//TODO--> later change it to required 
-    secondheader: { type: String, required:true },//TODO--> later change it to required 
-    show: {type:Boolean, default: false},*/
 
+router.get('/create_edit_special/:id', (req, res) => {  
+    redirector(req, res)  
+    let user_id = req.params.id;
+    //lets find the school by its id
+    School.findOne({schoolID: user_id}, function(err, school){
+        let singleSchool = school
+        let school_id = school._id;
+
+    Special.find({school_id: school_id}, function(err, special){
+        let special_length = special.length;
+        if(special_length>0){
+            Special.findOne({school_id: school_id}, function(err, special){
+                res.render('AdminBSBMaterialDesign-master/create_edit_special', {layout: 'layout/admin.hbs', special:special, school_id:school_id})        
+            })
+        }
+        else{
+            res.render('AdminBSBMaterialDesign-master/create_special', {layout: 'layout/admin.hbs', school_id:school_id})        
+        }
+        
+    })
+    });
+})
+
+router.post('/create_special', (req, res, next) => {
+   
+    var special_data = {
+        school_id: req.body.school_id
+    };
+
+    if (req.body.header) {
+        special_data.header = req.body.header;
+    }    
+    if (req.body.header2) {
+        special_data.header2 = req.body.header2;
+    }
+    if (req.body.special1) {
+        special_data.special1 = req.body.special1;
+    }
+    if (req.body.special2) {
+        special_data.special2 = req.body.special2;
+    }
+    if (req.body.special3) {
+        special_data.special3 = req.body.special3;
+    }
+    if (req.body.special4) {
+        special_data.special4 = req.body.special4;
+    }
+    let special = new Special(special_data); 
+   
+    // special.header = req.body.header;
+    // special.header2 = req.body.header2;
+    // special.special1 = req.body.special1;
+    // special.special1Description = req.body.special1Description;
+    // special.special2Description = req.body.special2Description;
+    // special.special3Description = req.body.special3Description;
+    // special.special4Description = req.body.special4Description;
+    // special.special2 = req.body.special2;
+    // special.special3 = req.body.special3;
+    // special.special4 = req.body.special4;
+
+    // special.school_id = req.body.school_id;
+
+    special.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+/* header: { type: String, default: "What makes Us Special" },
+    header2: 
+    special1: {type:String, default: "50 years of Experience"},
+    special1Description:
+    special2: {type:String, default: "Spacious and serene learning environment"},
+    special2Description: 
+    special3: {type:String, default: "Excursions beyond the boundaries of Nigeria"},
+    special3Description:
+    special4: {type:String, default: "Hostel facilities available"},
+    special4Description: {type:String, default: "We have the best hostel facilities"}*/
+
+router.post('/create_edit_special/:special_id', (req, res, next) => {
+
+    Special.findByIdAndUpdate(req.params.special_id,
+        {
+            "header": req.body.header,
+            "header2": req.body.header2,
+            "special1": req.body.special1,
+            "special2": req.body.special2,
+            "special3": req.body.special3,
+            "special4": req.body.special4,
+            "special1Description": req.body.special1Description,
+            "special2Description": req.body.special2Description,
+            "special3Description": req.body.special3Description,
+            "special4Description": req.body.special4Description          
+        }).exec(function(err, updated_special){
+    if(err) {
+       console.log(err);
+       
+    } else {
+       console.log(updated_special) 
+        res.redirect("/admin/home")
+    }
+    });
+
+});
 
 
 router.post('/create_about_us', (req, res, next) => {
@@ -1454,7 +1560,7 @@ router.get('/register_new_subject', (req, res) => {
     console.log("this is the user id that mad e", req.user._id)
     Subject.find({school_id:school_id}, function(err, all_subject){
     res.render('AdminBSBMaterialDesign-master/register_new_subject', {layout: 'layout/admin.hbs', all_subject:all_subject, school_id:school_id})
-})
+    })
 })
 /**/
 router.get('/create_class', (req, res, next) => {
@@ -1680,6 +1786,13 @@ router.post('/registration', (req, res, next) => {
 // debugging Codes
 router.get('/get_all_stafftypes', (req, res, next) => {
     Stafftype.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_specials', (req, res, next) => {
+    Special.find({}, function(err, users) {
      console.log(users)
     });
 

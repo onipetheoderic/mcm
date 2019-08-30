@@ -219,6 +219,22 @@ hbs.registerHelper('mini-truncator', function (str) {
   }
 });
 
+hbs.registerHelper('medium-truncator', function (str) {
+  if(str.length>=160) {
+    var maxLength = 160 // maximum number of characters to extract
+
+//trim the string to the maximum length
+    var trimmedString = str.substr(0, maxLength);
+
+//re-trim if we are in the middle of a word
+    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf("")))
+    return trimmedString+"...";
+  }
+  else{
+    return str;
+  }
+});
+
 hbs.registerHelper('grader', function (val) {
   if(val == 0){
     return "-"

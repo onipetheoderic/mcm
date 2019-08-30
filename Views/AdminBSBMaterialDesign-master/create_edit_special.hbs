@@ -1,0 +1,103 @@
+<div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Edit Specials in the Special Section in the homepage</h2>
+                            
+                        </div>
+   
+        <div class="body">
+            <form id="form_advanced_validation" action="/admin/create_edit_special/{{special._id}}" method="POST" enctype="multipart/form-data">
+                
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.header}}" class="form-control" name="header">
+                        <label class="form-label">Header</label>
+                    </div>
+                    <div class="help-info">Header</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.header2}}" class="form-control" name="header2">
+                        <label class="form-label">Header2</label>
+                    </div>
+                    <div class="help-info">Header2</div>
+                </div>
+                 
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special1}}" class="form-control" name="special1">
+                        <label class="form-label">special 1</label>
+                    </div>
+                    <div class="help-info">Special 1</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text"  value="{{special.special1Description}}" class="form-control" name="special1Description">
+                        <label class="form-label">special 1 Description</label>
+                    </div>
+                    <div class="help-info">Special 1 Description</div>
+                </div>
+
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special2}}" class="form-control" name="special2">
+                        <label class="form-label">special 2</label>
+                    </div>
+                    <div class="help-info">Special 2</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special2Description}}" class="form-control" name="special2Description">
+                        <label class="form-label">special 2 Description</label>
+                    </div>
+                    <div class="help-info">Special 2 Description</div>
+                </div>
+
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special3}}" class="form-control" name="special3">
+                        <label class="form-label">special 3</label>
+                    </div>
+                    <div class="help-info">Special 3</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special3Description}}" class="form-control" name="special3Description">
+                        <label class="form-label">special 3 Description</label>
+                    </div>
+                    <div class="help-info">Special 3 Description</div>
+                </div>
+
+                 <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special4}}" class="form-control" name="special4">
+                        <label class="form-label">special 4</label>
+                    </div>
+                    <div class="help-info">Special 4</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{special.special4Description}}" class="form-control" name="special4Description">
+                        <label class="form-label">special 4 Description</label>
+                    </div>
+                    <div class="help-info">Special 4 Description</div>
+                </div>
+
+                                
+                <input type="hidden" value="{{school_id}}" name="school_id" >
+                                        
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
+
+
