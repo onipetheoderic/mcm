@@ -1,0 +1,53 @@
+<div class="container-fluid">
+           
+            <!-- Advanced Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Edit Comments Section in the Result section of report sheet</h2>
+                            
+                        </div>
+   
+        <div class="body">
+            <form id="form_advanced_validation" action="/admin/create_edit_comment/{{comment._id}}" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{comment.head_masters_remark}}" class="form-control" name="head_masters_remark">
+                        
+                    </div>
+                    <div class="help-info">Header masters remark</div>
+                </div>
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="text" value="{{comment.teachers_remark}}" class="form-control" name="teachers_remark">
+                        
+                    </div>
+                    <div class="help-info">Teacher's remark</div>
+                </div>
+                 
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input type="date" class="form-control" value="{{comment.next_term_begins}}" name="next_term_begins">
+                       
+                    </div>
+                    <div class="help-info">Next Term begins</div>
+                </div>
+                
+               
+
+                                
+                <input type="hidden" value="{{school_id}}" name="school_id" >
+                                        
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Validation -->
+
+        </div>
+
+

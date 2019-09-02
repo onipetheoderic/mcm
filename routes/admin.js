@@ -5,6 +5,7 @@ const path = require("path");
 var fileExtension = require('file-extension'); 
 import AboutUs from '../models/aboutUs';
 import Special from '../models/special';
+import Comment from '../models/comment';
 import PupilContent from '../models/pupilContent';
 import Auth from '../models/auth';
 import Logo from '../models/logo'
@@ -649,11 +650,11 @@ router.get('/create_edit_logo/:id', (req, res) => {
         let about_length = abouts.length;
         if(about_length>0){
             Logo.findOne({school_id: school_id}, function(err, logo){
-                res.render('AdminBSBMaterialDesign-master/create_edit_logo', {layout: 'layout/admin.hbs', logo:logo, school_id:school_id})        
+                res.render('AdminBSBMaterialDesign-master/logo/create_edit_logo', {layout: 'layout/admin.hbs', logo:logo, school_id:school_id})        
             })
         }
         else{
-            res.render('AdminBSBMaterialDesign-master/create_logo', {layout: 'layout/admin.hbs', school_id:school_id})        
+            res.render('AdminBSBMaterialDesign-master/logo/create_logo', {layout: 'layout/admin.hbs', school_id:school_id})        
         }
         
     })
@@ -720,16 +721,104 @@ router.get('/create_edit_about_us/:id', (req, res) => {
         let about_length = abouts.length;
         if(about_length>0){
             AboutUs.findOne({school_id: school_id}, function(err, about){
-                res.render('AdminBSBMaterialDesign-master/create_edit_about_us', {layout: 'layout/admin.hbs', about:about, school_id:school_id})        
+                res.render('AdminBSBMaterialDesign-master/about_us/create_edit_about_us', {layout: 'layout/admin.hbs', about:about, school_id:school_id})        
             })
         }
         else{
-            res.render('AdminBSBMaterialDesign-master/create_about_us', {layout: 'layout/admin.hbs', school_id:school_id})        
+            res.render('AdminBSBMaterialDesign-master/about_us/create_about_us', {layout: 'layout/admin.hbs', school_id:school_id})        
         }
         
     })
     });
 })
+
+
+router.get('/create_edit_comment/:id', (req, res) => {  
+    redirector(req, res)  
+    let user_id = req.params.id;
+    
+    //lets find the school by its id
+    Comment.findOne({school_id: user_id}, function(err, school){
+        let singleSchool = school        
+        if(school!=null){
+            let school_id = school.schoolID;
+            console.log("this is the user_idkkkk",singleSchool)
+                       
+                Comment.findOne({_id: school._id}, function(err, comment){
+                    res.render('AdminBSBMaterialDesign-master/comment/create_edit_comment', {layout: 'layout/admin.hbs', comment:comment, school_id:school_id})        
+                })
+            
+        }
+        else {
+            Comment.find({school_id: user_id}, function(err, comment){
+                let comment_length = comment.length;
+                if(comment_length>0){
+                    Comment.findOne({school_id: school_id}, function(err, comment){
+                        res.render('AdminBSBMaterialDesign-master/comment/create_edit_comment', {layout: 'layout/admin.hbs', comment:comment, school_id:school_id})        
+                    })
+                }
+                else{
+                    res.render('AdminBSBMaterialDesign-master/comment/create_comment', {layout: 'layout/admin.hbs', school_id:user_id})        
+                }
+                
+            })
+
+        }
+
+    });
+})
+
+router.post('/create_comment', (req, res, next) => {
+   
+    var comment_data = {
+        school_id: req.body.school_id
+    };
+
+    if (req.body.next_term_begins) {
+        comment_data.next_term_begins = req.body.next_term_begins;
+    }    
+    if (req.body.teachers_remark) {
+        comment_data.teachers_remark = req.body.teachers_remark;
+    }
+    if (req.body.head_masters_remark) {
+        comment_data.head_masters_remark = req.body.head_masters_remark;
+    }
+    let comment = new Comment(comment_data); 
+
+    comment.save(function(err, doc){       
+        if(err){
+            console.log("error durring saving",err);
+            return;
+        } else {                    
+            console.log(doc, "successfully save, redirecting now..........")
+            res.redirect('/admin/home')
+      
+        }
+    });
+
+});
+
+
+router.post('/create_edit_comment/:comment_id', (req, res, next) => {
+
+    Comment.findByIdAndUpdate(req.params.comment_id,
+        {
+            "head_masters_remark": req.body.head_masters_remark,
+            "teachers_remark": req.body.teachers_remark,
+            "next_term_begins": req.body.next_term_begins                     
+        }).exec(function(err, updated_comment){
+    if(err) {
+       console.log(err);
+       
+    } else {
+       console.log(updated_comment) 
+        res.redirect("/admin/home")
+    }
+    });
+
+});
+
+
 
 router.get('/create_edit_special/:id', (req, res) => {  
     redirector(req, res)  
@@ -743,11 +832,11 @@ router.get('/create_edit_special/:id', (req, res) => {
         let special_length = special.length;
         if(special_length>0){
             Special.findOne({school_id: school_id}, function(err, special){
-                res.render('AdminBSBMaterialDesign-master/create_edit_special', {layout: 'layout/admin.hbs', special:special, school_id:school_id})        
+                res.render('AdminBSBMaterialDesign-master/special/create_edit_special', {layout: 'layout/admin.hbs', special:special, school_id:school_id})        
             })
         }
         else{
-            res.render('AdminBSBMaterialDesign-master/create_special', {layout: 'layout/admin.hbs', school_id:school_id})        
+            res.render('AdminBSBMaterialDesign-master/special/create_special', {layout: 'layout/admin.hbs', school_id:school_id})        
         }
         
     })
@@ -780,19 +869,6 @@ router.post('/create_special', (req, res, next) => {
     }
     let special = new Special(special_data); 
    
-    // special.header = req.body.header;
-    // special.header2 = req.body.header2;
-    // special.special1 = req.body.special1;
-    // special.special1Description = req.body.special1Description;
-    // special.special2Description = req.body.special2Description;
-    // special.special3Description = req.body.special3Description;
-    // special.special4Description = req.body.special4Description;
-    // special.special2 = req.body.special2;
-    // special.special3 = req.body.special3;
-    // special.special4 = req.body.special4;
-
-    // special.school_id = req.body.school_id;
-
     special.save(function(err, doc){       
         if(err){
             console.log("error durring saving",err);
@@ -805,16 +881,7 @@ router.post('/create_special', (req, res, next) => {
     });
 
 });
-/* header: { type: String, default: "What makes Us Special" },
-    header2: 
-    special1: {type:String, default: "50 years of Experience"},
-    special1Description:
-    special2: {type:String, default: "Spacious and serene learning environment"},
-    special2Description: 
-    special3: {type:String, default: "Excursions beyond the boundaries of Nigeria"},
-    special3Description:
-    special4: {type:String, default: "Hostel facilities available"},
-    special4Description: {type:String, default: "We have the best hostel facilities"}*/
+
 
 router.post('/create_edit_special/:special_id', (req, res, next) => {
 
@@ -866,8 +933,6 @@ router.post('/create_about_us', (req, res, next) => {
 
 });
 
-/*PupilClass.findByIdAndUpdate(result_id,
-    { */
 
 router.post('/create_edit_about_us/:about_id', (req, res, next) => {
 
@@ -1093,30 +1158,16 @@ router.get('/single_report_sheet/:id', (req, res) => {
 
     ReportCard.findOne({reportsheet_id: reportsheet_id}, function(err, report){
       let singleData = report;
-         // console.log("this is the single data",singleData)
-    //     // Now lets get the pupils full name
-         // pupils_name = singleData.full_name
-         // console.log("this is the pupils name:", pupils_name)
-        //now we get the staff id which would be usefull for us later on
-        // let staff_id = singleData.staff_id;
-        
-        // Now lets get the staff_name
-        // console.log("this is the current class", current_class)
-
-          
-    /*Now lets get the school name*/
-        
+       
     ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
         let term_name = single_report.term_name
-        // console.log(single_report)
+      
         let report_sheet_pupil_id = single_report.pupil_id;
         let staff_id = single_report.staff_id;
 
     Staff.findOne({user_id: staff_id}, function(err, staffData){
             class_teacher_name = staffData.first_name + " " + staffData.middle_name + " " + staffData.last_name
-            // console.log("this is the classTeachers name", class_teacher_name)
-       
-        //lets now query the pupils db
+   
     Pupil.findOne({_id:report_sheet_pupil_id}, function(err, s_pupil){
         let pupils_name = s_pupil.first_name + " " + s_pupil.middle_name + " " + s_pupil.last_name
         let current_class = s_pupil.class_name;
@@ -1124,22 +1175,22 @@ router.get('/single_report_sheet/:id', (req, res) => {
 
     School.findOne({schoolID:s_pupil.school_id}, function(err, schoolData){
             schoolName = schoolData.name + " " + schoolData.schoolType
-            // console.log(schoolData.name, schoolData.schoolType)
-            // console.log("this is the school ", schoolName)
-       
+        
     Logo.findOne({school_id: schoolData._id}, function(err, logo){
             school_logo = logo.image
             alternate_text = logo.alternate_text
-            // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
- 
+        
+    
+    Comment.findOne({school_id:schoolData.schoolID}, function(err, comment){
+        let comment_data = comment   
     
     PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
        let all_behaviour = behaviour;
-        // console.log(all_behaviour)
+     
    
     PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
        let all_bskill = bskill;
-        // console.log(all_bskill)
+      
     
     PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
        let all_comment = comment;
@@ -1147,11 +1198,8 @@ router.get('/single_report_sheet/:id', (req, res) => {
    
     ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
         let all_reports = reports
-        // console.log("these are all the reports",all_reports)
-
-        console.log("this is the shcool name", schoolName)
-        res.render('result/index', {layout: false, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
-  // console.log("route reached")
+        res.render('result/index', {layout: false, comment_data:comment_data, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
+  
 })
     })
     })
@@ -1163,7 +1211,8 @@ router.get('/single_report_sheet/:id', (req, res) => {
        })
          })
     });
-    })
+    });
+    });
 
 router.get('/all_school_messages', (req, res) => {
     MessageSchool.find({school_id: req.user._id}, function(err, schoolmsgs){
@@ -1281,55 +1330,41 @@ router.get('/single_report_sheet_edit/:id', (req, res) => {
 
     ReportCard.findOne({reportsheet_id: reportsheet_id}, function(err, report){
       let singleData = report;
-         // console.log("this is the single data",singleData)
-    //     // Now lets get the pupils full name
+    
          pupils_name = singleData.full_name
-         console.log("this is the pupils name:", pupils_name)
-        //now we get the staff id which would be usefull for us later on
         let staff_id = singleData.staff_id;
         current_class = singleData.class_name;
-        // Now lets get the staff_name
-        // console.log("this is the current class", current_class)
 
         Staff.findOne({user_id: staff_id}, function(err, staffData){
             class_teacher_name = staffData.first_name + " " + staffData.middle_name + " " + staffData.last_name
-            // console.log("this is the classTeachers name", class_teacher_name)
-        })     
-    /*Now lets get the school name*/
+                })     
         School.findOne({schoolID:singleData.school_id}, function(err, schoolData){
             schoolName = schoolData.name + " " + schoolData.schoolType
-            // console.log(schoolData.name, schoolData.schoolType)
-            // console.log("this is the school ", schoolName)
+        
        
         Logo.findOne({school_id: schoolData._id}, function(err, logo){
             school_logo = logo.image
             alternate_text = logo.alternate_text
-            // console.log("this is the school logo ₦₦₦₦₦₦₦₦₦₦₦₦",school_logo, alternate_text);
- 
+            
     ReportSheet.findOne({_id:reportsheet_id}, function(err, single_report){
         term_name = single_report.term_name
-        // console.log(single_report)
+
     })
     PupilBehaviour.find({reportsheet_id: reportsheet_id}, function(err, behaviour){
         all_behaviour = behaviour;
-        // console.log(all_behaviour)
     })
     PupilBasic.find({reportsheet_id: reportsheet_id}, function(err, bskill){
         all_bskill = bskill;
-        // console.log(all_bskill)
     })
     PupilContent.find({reportsheet_id: reportsheet_id}, function(err, comment){
         all_comment = comment;
-         console.log("these Are all the comment###₦₦₦₦₦", all_comment)
+      
     })
     
     ReportCard.find({reportsheet_id: reportsheet_id}, function(err, reports){
         let all_reports = reports
-        // console.log("these are all the reports",all_reports)
-
-        console.log("this is the shcool name", schoolName)
+       
         res.render('result/index_edit', {layout: false, reportsheet_id:reportsheet_id, all_comment:all_comment, alternate_text:alternate_text, school_logo:school_logo, current_class:current_class, class_teacher_name:class_teacher_name, pupils_name:pupils_name, term_name: term_name, all_behaviour:all_behaviour, all_bskill:all_bskill, all_reports:all_reports, schoolName: schoolName})     
-  // console.log("route reached")
 })
 })
        })
@@ -1339,7 +1374,6 @@ router.get('/single_report_sheet_edit/:id', (req, res) => {
 
 
 router.post('/edit_reportcard_scores/:id', (req, res) => {
-    // redirector(req, res)
     if(req.session.pupil_id || req.user){ 
     let report_id_instance = req.body.reportsheet_id
     let result_id = req.params.id;
@@ -1425,7 +1459,7 @@ else {
 })
 
 router.post('/edit_bskill_scores/:id', (req, res) => {
-    // redirector(req, res)
+   
     if(req.session.pupil_id || req.user){ 
     let report_id_instance = req.body.reportsheet_id
     let result_id = req.params.id;
@@ -1462,14 +1496,11 @@ router.get('/create_report_c', (req, res) => {
         var myClassess;
         User.findOne({_id: req.user._id}, function(err, user){
             if(user.isStaff === true){
-                console.log("staff_pupils", staff_pupils.school_id)
-                //to get a the staff from the staff table using its user_id
+             
                 let staff_pupils_school_id = staff_pupils.school_id    
             Class.find({school_id: staff_pupils_school_id}, function(err, myClass){ 
                 myClassess = myClass;
-
-            // Class.findOne({}) todo
-              
+     
          
             Pupil.find({school_id: staff_pupils_school_id}, function(err, pupils){ 
                 res.render('AdminBSBMaterialDesign-master/create_report_card', {layout: 'layout/admin.hbs', staff_id: staff_id, staff_pupils_school_id: staff_pupils_school_id, myClass:myClass, pupils:pupils, myClassess: myClassess})
@@ -1491,7 +1522,6 @@ router.get('/register_parent', (req, res) => {
 
 function redirector(req, res){
  if(!req.user){
-        // res.render('AdminBSBMaterialDesign-master/index', {layout: false, message:{error: "Please Login"}})                
         res.redirect('/admin/login');
     }   
 }
@@ -1500,8 +1530,7 @@ function additioner(param1, param2, param3, param4){
     let total = parseInt(param1) + parseInt(param2) + parseInt(param3) + parseInt(param4)
     return total;
 }
-// this is a function to get the name from the model using the ID gotten from the form
-//pre-requisites, the model must have a name field/attribute
+
 function getNameFromModelUsingId(modelName, id){
     let current_id = id
     let modelInstance;
@@ -1538,11 +1567,11 @@ router.get('/register_staff', (req, res) => {
         console.log("this is the categories",myClass)
         if (err) throw err;  
         res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin.hbs', singleSchool:singleSchool, user: req.user, staffType:staffType, subject:subject, myClass:myClass})
-});
-});
-});
-});
-  }) 
+    });
+    });
+    });
+    });
+}) 
 
 
 
@@ -1574,15 +1603,6 @@ router.get('/create_class', (req, res, next) => {
 })
  })
 
-// router.get('/edit_class', (req, res, next) => {
-//     redirector(req, res)
-//     Class.find({}, function(err, all_class) {
-//         let all_classess = all_class
-//         res.render('AdminBSBMaterialDesign-master/edit_class', {layout: 'layout/admin.hbs', all_classess})  
-//     });
-   
-// })
-
 router.get('/create_results', (req, res, next) => {
     redirector(req, res)
      // let staff_id = req.user._id
@@ -1591,8 +1611,6 @@ router.get('/create_results', (req, res, next) => {
      Staff.findOne({user_id: req.user._id}, function(err, staff_pupils){
     let school_id = staff_pupils.school_id
     console.log("this is the shcool id", school_id)
-    //  console.log("this is the user id that mad e", req.user._id, school_id)
-    // BSkill.find({school_id:school_id})
     Subject.find({school_id: school_id}, function(err, all_subject){
         res.render('AdminBSBMaterialDesign-master/create_results', {layout: 'layout/admin.hbs', all_subject:all_subject})
     })
@@ -1609,12 +1627,6 @@ router.get('/create_subject', (req, res, next) => {
 })
 })
 
-/*  reportsheet_id: String,
-    class_name: String,
-    class_id: String,
-    staff_id: String,
-    school_id: String,
-    pupil_id: String,*/
 
 router.get('/create_bskills', (req, res, next) => {
     redirector(req, res)
@@ -1654,7 +1666,6 @@ router.get('/create_pupil/:class_id', (req, res, next) => {
     Class.findOne({_id: req.params.class_id}, function(err, myClass){      
         console.log("this is the categories",myClass)
         if (err) throw err;  
-        // console.log("this is the user id that mad e", state)
         
     res.render('AdminBSBMaterialDesign-master/pupil_form', {layout: 'layout/admin.hbs', user: req.user, myClass:myClass, school_id:school_id})
 });
@@ -1683,7 +1694,6 @@ router.get('/create_pupil_page', (req, res, next) => {
     Class.find({school_id: req.user._id}, function(err, all_class){      
         console.log("this is the categories",all_class)
         if (err) throw err;  
-        // console.log("this is the user id that mad e", state)
     res.render('AdminBSBMaterialDesign-master/pupil_class_page', {layout: 'layout/admin.hbs', user: req.user, all_class:all_class})
 });
 });
@@ -1793,6 +1803,13 @@ router.get('/get_all_stafftypes', (req, res, next) => {
 
 router.get('/get_all_specials', (req, res, next) => {
     Special.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_comment', (req, res, next) => {
+    Comment.find({}, function(err, users) {
      console.log(users)
     });
 
@@ -2021,8 +2038,6 @@ router.post('/new_report_subject', (req, res, next) => {
 function imagePlacerAndNamer(req, res, the_file){
     let file_name = Date.now()+ the_file.name
     the_file.mv('Views/public/uploads/' + file_name, function(err) {
-
-        // console.log("this si thhe uploaded image",file_name)
    });
     return file_name
 }

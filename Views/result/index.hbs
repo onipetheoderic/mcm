@@ -162,13 +162,17 @@
 			</div>
 			<div style="background: white; border-radius: 5px;">   
 						<ul class="list-group" style="font-size:12px">
-						{{#each all_comment}}
-						<li class="list-group-item">
-
-								{{uppercase this.name}}: {{this.score}}
-								
-						<li>
-						{{/each}}
+					
+	<li class="list-group-item">
+	Headmasters/Headmistress Remark: {{comment_data.head_masters_remark}}			
+	</li>
+	<li class="list-group-item">
+	Teachers Remark: {{comment_data.teachers_remark}}			
+	</li>
+	<li class="list-group-item">
+	Next Term begins: {{comment_data.next_term_begins}}			
+	</li>
+						
 					</ul>
 				</div>
 		</div>
