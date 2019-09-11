@@ -12,16 +12,23 @@ import School from '../models/school';
 
 const router = express.Router();
 // foo${n}bar`
+// router.get('/', (req, res) => {    
+
+//     res.render('socrateweb/index', {layout: 'layout/socrateweb'})
+
+// });
+
 router.get('/', (req, res) => {    
 
-    res.render('socrateweb/index', {layout: 'layout/socrateweb'})
+    res.render('clientside/index', {layout: false})
 
 });
-router.get('/contact', (req, res) => {    
 
-    res.render('socrateweb/contact', {layout: 'layout/socrateweb'})
+// router.get('/contact', (req, res) => {    
 
-});
+//     res.render('clientside/contact', {layout: 'layout/socrateweb'})
+
+// });
 //this is the shop details 5b3dcf81de387222e4110915
 
 

@@ -3,6 +3,9 @@ import passport from 'passport';
 import crypto from 'crypto';
 const path = require("path");
 var fileExtension = require('file-extension'); 
+
+import SchoolUtility from '../controller/school';
+
 import AboutUs from '../models/aboutUs';
 import Special from '../models/special';
 import Comment from '../models/comment';
@@ -1023,10 +1026,11 @@ router.get('/edit_parent/:id', (req, res) => {
     })
 });
 
-router.get('/create_school', (req, res) => {   
-redirector(req, res) 
-    res.render('AdminBSBMaterialDesign-master/create_school', {layout: 'layout/admin.hbs', user: req.user})
-});
+// router.get('/create_school', SchoolUtility.createSchool)
+
+router.route('/create_school')
+    .get(SchoolUtility.createSchool)
+    .post(SchoolUtility.createSchoolPost);
 
 router.get('/all_my_class_pupils', (req, res) => {
     redirector(req, res);
@@ -2158,180 +2162,6 @@ router.post('/update_staff/:id', (req, res) => {
     });
 })
 
-
-router.post('/create_school', (req, res) => {
-    let school = new School();  
-    User.register(new User({ username: req.body.username,
-       user_name: req.body.user_name,
-       isSchool: true,
-       first_name: req.body.first_name,
-       company_name: req.body.company_name,
-       last_name: req.body.last_name,
-       phone: req.body.phone,
-       email: req.body.email,
-      
-   }), req.body.password, (err, user) => {
-
-            if (err) {
-                console.log(err)                                             
-                res.render('AdminBSBMaterialDesign-master/school_form', {layout: 'layout/admin', message:{error:err}})
-                }
-            let role = new Role();
-            passport.authenticate('local')(req, res, () => {                                             
-                req.session.save((err) => {
-                
-                role.user_id = req.user._id//session comes from d db
-                
-                role.save(function(err, doc){
-                    console.log("successfully saved")
-                    let current_school_id = doc._id;
-                if(err){
-                    console.log(err);
-                    return;
-                }                
-                else {     
-                    school.creator_id = req.user._id; 
-                    school.schoolID = req.user._id;
-                    school.name = req.body.name;
-                    school.majorColor = req.body.majorColor;
-                    school.minorColor = req.body.minorColor;
-                    school.thirdColor = req.body.thirdColor;
-                    school.fourthColor = req.body.fourthColor;
-                    school.schoolDescription = req.body.schoolDescription;
-                    school.proprietorName = req.body.proprietorName;
-                    school.schoolType = req.body.schoolType;
-                    school.hmName = req.body.hmName;                       
-                    school.visionStatement =req.body.visionStatement;
-                    school.missionStatement = req.body.missionStatement;
-                    
-                    school.save(function(err, doc){       
-                    if(err){
-                        console.log("error durring saving",err);
-                        return;
-                    } else {                    
-                        console.log(doc, "successfully save, redirecting now..........")
-                  
-                    }
-                });
-//rd ends here           
-                console.log("successfully saved to the role db")
-            }
-        });
-
-            if (err) {
-                return next(err);
-            }                
-            res.redirect('/admin/login')
-            });
-        });
- });
-
-});
-
-
-
-// router.post('/create_staff', (req, res, next) => {
-//     let current_id = req.user._id
-//     let my_passport = req.files.passport;
-//     let school_name;
-//     let class_name;
-//     let passport_name = imagePlacerAndNamer(req, res, my_passport);
-//     School.findOne({schoolID: req.user._id}, function(err, values){
-//         console.log("all schools", values)
-//         school_name = values.name
-//     })
-//     Class.findOne({_id: req.body.class}, function(err, values){
-//         console.log("all schools", values)
-//         class_name = values.name
-//     }) 
-
-//     let staff = new Staff();     
-//     let dataLog = new DataLog();
-     
-//     User.register(new User({ username: req.body.username,
-//        isStaff: true,
-//        sex: req.body.sex,
-//        first_name: req.body.first_name,
-//        last_name: req.body.last_name,
-//        sex: req.body.sex,
-//        phone: req.body.phone,
-//        email: req.body.email,      
-//    }), req.body.password, (err, user) => {
-
-//             if (err) {
-//                 console.log(err)                                             
-//                 res.render('AdminBSBMaterialDesign-master/staff_form', {layout: 'layout/admin', message:{error:err}})
-//                 }
-//             let role = new Role();
-            
-//             passport.authenticate('local')(req, res, () => {                                              
-//                 req.session.save((err) => {
-//                 console.log("this is the current user_id", req.user._id)
-//                 const current_user_id = req.user._id
-//                 role.user_id = req.user._id//session comes from d db
-//                  console.log("this is the current user_id", req.user._id)
-//                 role.save(function(err, doc){
-//                     console.log("successfully saved")
-//                     let current_school_id = doc._id;
-                
-//                 if(err){
-//                     console.log(err);
-//                     return;
-//                 } 
-  
-//                 else {   
-//                  console.log("this is the current user_id", current_id, req.user._id)  
-//                     // var schoolName = getNameFromModelUsingId("School", req.user._id)
-                    
-//                     dataLog.message = "A new staff has been created by: "+ school_name+ " School"
-//                     dataLog.school_id = current_id;
-//                     staff.user_id = current_user_id; 
-//                     staff.passport_name = passport_name;
-//                     staff.role_id = current_school_id;
-//                     staff.sex = req.body.sex;                  
-//                     staff.class_id = req.body.class;
-//                     staff.class_name = class_name;
-//                     staff.subject_id = req.body.subject_id;
-//                     staff.staffType_id = req.body.staffType_id;
-//                     staff.school_id = current_id;
-//                     staff.first_name = req.body.first_name 
-//                     staff.middle_name = req.body.middle_name
-//                     staff.last_name = req.body.last_name;
-//                     staff.school_name = school_name;
-//                     staff.phone = req.body.phone;
-//                     staff.save(function(err, doc){       
-//                         if(err){
-//                             console.log("error durring saving",err);
-//                             return;
-//                         } else {                    
-//                             console.log(doc, "successfully save, redirecting now..........")
-                      
-//                         }
-//                     });
-//                     dataLog.save(function(err, doc){       
-//                         if(err){
-//                             console.log("error durring saving",err);
-//                             return;
-//                         } else {                    
-//                             console.log(doc, "successfully save, redirecting now..........")
-                      
-//                         }
-//                     });
-//     //rd ends here           
-//                     console.log("successfully saved to the role db")
-//                 }
-//             });
-
-//                 if (err) {
-//                     return next(err);
-//                 }      
-
-//                res.redirect('/admin/login')
-//                 });
-//             });
-//      });
-
-// });
 
 router.post('/create_parent', (req, res, next) => {
     let current_id = req.user._id
