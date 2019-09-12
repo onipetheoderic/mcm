@@ -5,6 +5,8 @@ const path = require("path");
 var fileExtension = require('file-extension'); 
 
 import SchoolUtility from '../controller/school';
+import QuoteController from '../controller/quote'
+import Quote from '../models/quote';
 
 import AboutUs from '../models/aboutUs';
 import Special from '../models/special';
@@ -93,6 +95,12 @@ router.get('/home', (req, res) => {
             console.log(err)
         }
         var all_msg_count = all_msgs.length;
+
+    Quote.find({}).exec(function(err, all_quotes){
+        if(err){
+            console.log(err)
+        }
+        var all_quotes_count = all_quotes.length;
   
 
     Newsletter.find({school_id: req.user._id}).exec(function (err, newsletter){
@@ -311,7 +319,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
 
     School.findOne({schoolID: req.user._id}, function(err, schoolx){    
     
-    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', my_id: req.user._id, all_msg_count: all_msg_count, newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter})
+    res.render('AdminBSBMaterialDesign-master/dashboard', {layout: 'layout/admin.hbs', my_id: req.user._id, all_msg_count: all_msg_count, newsletter_count:newsletter_count, message_count:message_count, staff_pupils:staff_pupils, schoolx:schoolx,user: req.user, staff_image_name:staff_image_name, stafftype_count: stafftype_count, subject_count: subject_count, staff_count: staff_count, class_count: class_count, subject_count: subject_count, parent_count: parent_count, pupil_count: pupil_count, skool_count: skool_count, staff_zone_count: staff_zone_count, staff_pupilss_count: staff_pupilss_count, p_staff_pupilss_count: p_staff_pupilss_count, pupilss:pupilss, pupilss_count:pupilss_count, p_pupilss_count: p_pupilss_count,  class_counters: class_counters, subs_count: subs_count, p_subs_count: p_subs_count, parent_counters: parent_counters, report_counter:report_counter, report_subjecter: report_subjecter, people_counter: people_counter, all_quotes_count:all_quotes_count})
         });
         });
     });
@@ -330,6 +338,7 @@ Pupil.findOne({user_id: req.user._id}, function(err, pupilss){
  });
 });
   });
+});
 
 router.get('/admin/add', (req, res) => {
     if(!req.user){
@@ -1225,6 +1234,9 @@ router.get('/all_school_messages', (req, res) => {
     })
 })
 
+router.route('/all_quotes')
+    .get(QuoteController.all_quotes)
+
 // all_school_msgs
 router.get('/all_school_msgs', (req, res) => {
     MessageSchool.find({}, function(err, schoolmsgs){
@@ -1800,6 +1812,13 @@ router.post('/registration', (req, res, next) => {
 // debugging Codes
 router.get('/get_all_stafftypes', (req, res, next) => {
     Stafftype.find({}, function(err, users) {
+     console.log(users)
+    });
+
+})
+
+router.get('/get_all_quotes', (req, res, next) => {
+    Quote.find({}, function(err, users) {
      console.log(users)
     });
 
